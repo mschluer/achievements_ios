@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		B328322D26D93F22007CAD2A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328322C26D93F22007CAD2A /* AppDelegate.swift */; };
 		B328322F26D93F22007CAD2A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328322E26D93F22007CAD2A /* SceneDelegate.swift */; };
-		B328323126D93F22007CAD2A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328323026D93F22007CAD2A /* ViewController.swift */; };
 		B328323426D93F22007CAD2A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B328323226D93F22007CAD2A /* Main.storyboard */; };
 		B328323626D93F23007CAD2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B328323526D93F23007CAD2A /* Assets.xcassets */; };
 		B328323926D93F23007CAD2A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B328323726D93F23007CAD2A /* LaunchScreen.storyboard */; };
 		B328324426D93F23007CAD2A /* achievementsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328324326D93F23007CAD2A /* achievementsTests.swift */; };
 		B328324F26D93F23007CAD2A /* achievementsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328324E26D93F23007CAD2A /* achievementsUITests.swift */; };
+		B328325D26D94909007CAD2A /* DashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328325C26D94909007CAD2A /* DashboardController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +38,6 @@
 		B328322926D93F22007CAD2A /* achievements.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = achievements.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B328322C26D93F22007CAD2A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B328322E26D93F22007CAD2A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B328323026D93F22007CAD2A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B328323326D93F22007CAD2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B328323526D93F23007CAD2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B328323826D93F23007CAD2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +48,7 @@
 		B328324A26D93F23007CAD2A /* achievementsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = achievementsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B328324E26D93F23007CAD2A /* achievementsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = achievementsUITests.swift; sourceTree = "<group>"; };
 		B328325026D93F23007CAD2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B328325C26D94909007CAD2A /* DashboardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,8 +101,8 @@
 			children = (
 				B328322C26D93F22007CAD2A /* AppDelegate.swift */,
 				B328322E26D93F22007CAD2A /* SceneDelegate.swift */,
-				B328323026D93F22007CAD2A /* ViewController.swift */,
 				B328323226D93F22007CAD2A /* Main.storyboard */,
+				B328325C26D94909007CAD2A /* DashboardController.swift */,
 				B328323526D93F23007CAD2A /* Assets.xcassets */,
 				B328323726D93F23007CAD2A /* LaunchScreen.storyboard */,
 				B328323A26D93F23007CAD2A /* Info.plist */,
@@ -258,8 +258,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B328323126D93F22007CAD2A /* ViewController.swift in Sources */,
 				B328322D26D93F22007CAD2A /* AppDelegate.swift in Sources */,
+				B328325D26D94909007CAD2A /* DashboardController.swift in Sources */,
 				B328322F26D93F22007CAD2A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

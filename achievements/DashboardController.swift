@@ -11,7 +11,16 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     
     private var balance: Float = 0 {
         didSet {
-            balanceLabel.text = "\(balance)"
+            if balance < 0 {
+                balanceLabel.text = "\(String (format: "%.2f", balance))"
+                balanceLabel.textColor = .systemRed
+            } else if balance == 0 {
+                balanceLabel.text = "+/- \(String (format: "%.2f", balance))"
+                balanceLabel.textColor = .none
+            } else {
+                balanceLabel.text = "+ \(String (format: "%.2f", balance))"
+                balanceLabel.textColor = .systemGreen
+            }
         }
     }
     private var recentTransactionsTableViewData: [Float] = []{
@@ -72,7 +81,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             }
             
             if let label = cell.textLabel {
-                label.text = "Transaction \(recentTransactionsTableViewData[indexPath.item])"
+                label.text = "Transaction \(String (format: "%.2f", recentTransactionsTableViewData[indexPath.item]))"
             }
             
             return cell

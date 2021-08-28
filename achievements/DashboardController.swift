@@ -23,7 +23,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             }
         }
     }
-    private var recentTransactionsTableViewData: [Float] = []{
+    private var recentTransactionsTableViewData: [AchievementTransaction] = []{
         didSet {
             recentTransactionsTableView.reloadData()
         }
@@ -51,7 +51,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             if let amount = (alert.textFields?.first?.text as NSString?)?.floatValue {
                 self.balance += amount
-                self.recentTransactionsTableViewData.append(amount)
+                self.recentTransactionsTableViewData.append(AchievementTransaction(amount: amount, text: "Transaction", time: NSDate()))
             }
         }))
         
@@ -74,14 +74,14 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "transactionCell") {
-            if recentTransactionsTableViewData[indexPath.item] < 0 {
+            if recentTransactionsTableViewData[indexPath.item].amount < 0 {
                 cell.backgroundColor = UIColor.systemRed
             } else {
                 cell.backgroundColor = UIColor.systemGreen
             }
             
             if let label = cell.textLabel {
-                label.text = "Transaction \(String (format: "%.2f", recentTransactionsTableViewData[indexPath.item]))"
+                label.text = (recentTransactionsTableViewData[indexPath.item].toString())
             }
             
             return cell

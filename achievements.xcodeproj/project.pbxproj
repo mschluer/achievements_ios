@@ -15,6 +15,7 @@
 		B328324426D93F23007CAD2A /* achievementsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328324326D93F23007CAD2A /* achievementsTests.swift */; };
 		B328324F26D93F23007CAD2A /* achievementsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328324E26D93F23007CAD2A /* achievementsUITests.swift */; };
 		B328325D26D94909007CAD2A /* DashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328325C26D94909007CAD2A /* DashboardController.swift */; };
+		B328325F26DA4982007CAD2A /* AchievementTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328325E26DA4982007CAD2A /* AchievementTransaction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		B328324E26D93F23007CAD2A /* achievementsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = achievementsUITests.swift; sourceTree = "<group>"; };
 		B328325026D93F23007CAD2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B328325C26D94909007CAD2A /* DashboardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardController.swift; sourceTree = "<group>"; };
+		B328325E26DA4982007CAD2A /* AchievementTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTransaction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				B328323526D93F23007CAD2A /* Assets.xcassets */,
 				B328323726D93F23007CAD2A /* LaunchScreen.storyboard */,
 				B328323A26D93F23007CAD2A /* Info.plist */,
+				B328325E26DA4982007CAD2A /* AchievementTransaction.swift */,
 			);
 			path = achievements;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 			files = (
 				B328322D26D93F22007CAD2A /* AppDelegate.swift in Sources */,
 				B328325D26D94909007CAD2A /* DashboardController.swift in Sources */,
+				B328325F26DA4982007CAD2A /* AchievementTransaction.swift in Sources */,
 				B328322F26D93F22007CAD2A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

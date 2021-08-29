@@ -42,15 +42,25 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var recentTransactionsTableView: UITableView!
+    @IBOutlet weak var menuButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        // Setup for TransactionsTable
         recentTransactionsTableViewData = achievementsTransactionsModel.achievementTransactions
-
         self.recentTransactionsTableView.dataSource = self
         self.recentTransactionsTableView.delegate = self
-        // Do any additional setup after loading the view.
+        
+        // Setup for MenuBott
+        let mainMenuDestruct = UIAction(title: "Reset", image: UIImage(systemName: "trash.circle"), attributes: .destructive) { _ in }
+        let mainMenuItems = UIMenu(title: "Main Menu", options: .displayInline, children: [
+            UIAction(title: "Transaktionen Verrechnen", image: UIImage(systemName: "arrow.left.arrow.right.circle"), handler: { _ in }),
+            UIAction(title: "Historie", image: UIImage(systemName: "clock.arrow.circlepath"), handler: { _ in }),
+            UIAction(title: "Statistiken", image: UIImage(systemName: "chart.bar"), handler: { _ in })
+        ])
+        menuButton.menu = UIMenu(title: "", children: [mainMenuItems, mainMenuDestruct])
     }
     
     @IBAction func addTransaction(_ sender: Any) {

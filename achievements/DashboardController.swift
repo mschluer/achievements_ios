@@ -8,7 +8,7 @@
 import UIKit
 
 class DashboardController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    // MARK: Persisting Models
+    // MARK: Persistence Models
     private let achievementsTransactionsModel = AchievementsTransactionsModel()
     
     // MARK: Variables
@@ -41,23 +41,26 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupTransactionTable()
         setupMainMenu()
     }
     
-    @IBAction func addTransaction(_ sender: Any) {
-        addButtonTapped()
+    override func viewWillAppear(_ animated: Bool) {
+        setupTransactionTable()
+        recalculateBalance()
     }
     
-    /*
+    
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "CreateTransactionFormSegue" {
+            let destination = segue.destination as! TransactionFormController
+            
+            destination.achievementTransaction = achievementsTransactionsModel.createAchievementTransaction()
+            destination.achievementsTransactionsModel = achievementsTransactionsModel
+        }
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    */
 
     // MARK: Table View Functionalities
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -82,33 +85,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         return UITableViewCell();
     }
     
-    // MARK: Actions
-    private func addButtonTapped() {
-        let alert = UIAlertController(title: "Amount", message: nil, preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alert.addTextField(configurationHandler: { textField in
-            textField.placeholder = "Please enter an amount"
-            textField.keyboardType = .decimalPad
-        })
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-            if let amount = (alert.textFields?.first?.text as NSString?)?.floatValue {
-                self.balance += amount
-                
-                let achievementsTransaction = self.achievementsTransactionsModel.createAchievementTransaction()
-                achievementsTransaction.amount = amount
-                achievementsTransaction.text = "Transaction"
-                achievementsTransaction.date = Date()
-                self.achievementsTransactionsModel.save()
-                
-                self.recentTransactionsTableViewData.append(achievementsTransaction)
-            }
-        }))
-        
-        self.present(alert, animated: true)
-    }
-    
-    private func mainMenuDeletionButtonTapped() {
+    private func mainMenuDeletionButtonPressed() {
         let deletionAlert = UIAlertController(title: "Are you sure?", message: "Reset deletes all your data including historical transactions, templates and settings. Only do this is you are entirely sure what you are doing!", preferredStyle: .actionSheet)
         deletionAlert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { _ in
             self.resetApplication()
@@ -127,7 +104,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     
     private func setupMainMenu() {
         let mainMenuDestruct = UIAction(title: "Reset", image: UIImage(systemName: "trash.circle"), attributes: .destructive) { _ in
-            self.mainMenuDeletionButtonTapped() }
+            self.mainMenuDeletionButtonPressed() }
             
         let mainMenuItems = UIMenu(title: "Main Menu", options: .displayInline, children: [
             UIAction(title: "Transaktionen Verrechnen", image: UIImage(systemName: "arrow.left.arrow.right.circle"), handler: { _ in }),

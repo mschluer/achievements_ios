@@ -8,6 +8,7 @@
 import UIKit
 
 class DashboardController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    private let achievementsTransactionsModel = AchievementsTransactionsModel()
     
     private var balance: Float = 0 {
         didSet {
@@ -23,8 +24,18 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             }
         }
     }
-    private var recentTransactionsTableViewData: [AchievementTransaction] = []{
+    private var recentTransactionsTableViewData: [AchievementTransaction] = [] {
         didSet {
+            // Recalculate Balance
+            var newBalance : Float = 0;
+            
+            for transaction in recentTransactionsTableViewData {
+                newBalance += transaction.amount
+            }
+            
+            balance = newBalance
+            
+            // Reload Data
             recentTransactionsTableView.reloadData()
         }
     }
@@ -34,6 +45,8 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        recentTransactionsTableViewData = achievementsTransactionsModel.achievementTransactions
 
         self.recentTransactionsTableView.dataSource = self
         self.recentTransactionsTableView.delegate = self
@@ -51,7 +64,14 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             if let amount = (alert.textFields?.first?.text as NSString?)?.floatValue {
                 self.balance += amount
-                self.recentTransactionsTableViewData.append(AchievementTransaction(amount: amount, text: "Transaction", time: NSDate()))
+                
+                let achievementsTransaction = self.achievementsTransactionsModel.createAchievementTransaction()
+                achievementsTransaction.amount = amount
+                achievementsTransaction.text = "Transaction"
+                achievementsTransaction.date = Date()
+                self.achievementsTransactionsModel.save()
+                
+                self.recentTransactionsTableViewData.append(achievementsTransaction)
             }
         }))
         

@@ -15,7 +15,10 @@
 		B328324426D93F23007CAD2A /* achievementsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328324326D93F23007CAD2A /* achievementsTests.swift */; };
 		B328324F26D93F23007CAD2A /* achievementsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328324E26D93F23007CAD2A /* achievementsUITests.swift */; };
 		B328325D26D94909007CAD2A /* DashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328325C26D94909007CAD2A /* DashboardController.swift */; };
-		B328325F26DA4982007CAD2A /* AchievementTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328325E26DA4982007CAD2A /* AchievementTransaction.swift */; };
+		B328326926DBD1A0007CAD2A /* AchievementsDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B328326726DBD1A0007CAD2A /* AchievementsDataModel.xcdatamodeld */; };
+		B328326C26DBD253007CAD2A /* AchievementTransaction+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328326A26DBD253007CAD2A /* AchievementTransaction+CoreDataClass.swift */; };
+		B328326D26DBD253007CAD2A /* AchievementTransaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328326B26DBD253007CAD2A /* AchievementTransaction+CoreDataProperties.swift */; };
+		B328326F26DBD379007CAD2A /* AchievementsTransactionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328326E26DBD379007CAD2A /* AchievementsTransactionsModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +53,10 @@
 		B328324E26D93F23007CAD2A /* achievementsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = achievementsUITests.swift; sourceTree = "<group>"; };
 		B328325026D93F23007CAD2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B328325C26D94909007CAD2A /* DashboardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardController.swift; sourceTree = "<group>"; };
-		B328325E26DA4982007CAD2A /* AchievementTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTransaction.swift; sourceTree = "<group>"; };
+		B328326826DBD1A0007CAD2A /* AchievementsDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AchievementsDataModel.xcdatamodel; sourceTree = "<group>"; };
+		B328326A26DBD253007CAD2A /* AchievementTransaction+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AchievementTransaction+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		B328326B26DBD253007CAD2A /* AchievementTransaction+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AchievementTransaction+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		B328326E26DBD379007CAD2A /* AchievementsTransactionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsTransactionsModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,14 +107,17 @@
 		B328322B26D93F22007CAD2A /* achievements */ = {
 			isa = PBXGroup;
 			children = (
+				B328326A26DBD253007CAD2A /* AchievementTransaction+CoreDataClass.swift */,
+				B328326B26DBD253007CAD2A /* AchievementTransaction+CoreDataProperties.swift */,
 				B328322C26D93F22007CAD2A /* AppDelegate.swift */,
 				B328322E26D93F22007CAD2A /* SceneDelegate.swift */,
 				B328323226D93F22007CAD2A /* Main.storyboard */,
 				B328325C26D94909007CAD2A /* DashboardController.swift */,
+				B328326726DBD1A0007CAD2A /* AchievementsDataModel.xcdatamodeld */,
 				B328323526D93F23007CAD2A /* Assets.xcassets */,
 				B328323726D93F23007CAD2A /* LaunchScreen.storyboard */,
 				B328323A26D93F23007CAD2A /* Info.plist */,
-				B328325E26DA4982007CAD2A /* AchievementTransaction.swift */,
+				B328326E26DBD379007CAD2A /* AchievementsTransactionsModel.swift */,
 			);
 			path = achievements;
 			sourceTree = "<group>";
@@ -261,10 +270,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B328326C26DBD253007CAD2A /* AchievementTransaction+CoreDataClass.swift in Sources */,
 				B328322D26D93F22007CAD2A /* AppDelegate.swift in Sources */,
+				B328326D26DBD253007CAD2A /* AchievementTransaction+CoreDataProperties.swift in Sources */,
 				B328325D26D94909007CAD2A /* DashboardController.swift in Sources */,
-				B328325F26DA4982007CAD2A /* AchievementTransaction.swift in Sources */,
 				B328322F26D93F22007CAD2A /* SceneDelegate.swift in Sources */,
+				B328326F26DBD379007CAD2A /* AchievementsTransactionsModel.swift in Sources */,
+				B328326926DBD1A0007CAD2A /* AchievementsDataModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -591,6 +603,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B328326726DBD1A0007CAD2A /* AchievementsDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B328326826DBD1A0007CAD2A /* AchievementsDataModel.xcdatamodel */,
+			);
+			currentVersion = B328326826DBD1A0007CAD2A /* AchievementsDataModel.xcdatamodel */;
+			path = AchievementsDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B328322126D93F22007CAD2A /* Project object */;
 }

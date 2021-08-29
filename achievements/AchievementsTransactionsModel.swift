@@ -33,6 +33,12 @@ class AchievementsTransactionsModel {
         return NSEntityDescription.insertNewObject(forEntityName: AchievementTransaction.entityName, into: self.viewContext) as! AchievementTransaction
     }
     
+    func clear() {
+        let request = NSBatchDeleteRequest(fetchRequest: AchievementTransaction.fetchRequest())
+        
+        try! viewContext.execute(request)
+    }
+    
     func save() {
         assert(Thread.isMainThread)
         do {

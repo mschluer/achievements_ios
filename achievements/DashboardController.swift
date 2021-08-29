@@ -53,8 +53,20 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         self.recentTransactionsTableView.dataSource = self
         self.recentTransactionsTableView.delegate = self
         
-        // Setup for MenuBott
-        let mainMenuDestruct = UIAction(title: "Reset", image: UIImage(systemName: "trash.circle"), attributes: .destructive) { _ in }
+        // Setup for MainMenu
+        let mainMenuDestruct = UIAction(title: "Reset", image: UIImage(systemName: "trash.circle"), attributes: .destructive) { _ in
+            // Ask the user
+            let deletionAlert = UIAlertController(title: "Are you sure?", message: "Reset deletes all your data including historical transactions, templates and settings. Only do this is you are entirely sure what you are doing!", preferredStyle: .actionSheet)
+            deletionAlert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { _ in
+                // Clear
+                self.achievementsTransactionsModel.clear()
+                self.recentTransactionsTableViewData = self.achievementsTransactionsModel.achievementTransactions
+            }))
+            deletionAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
+            self.present(deletionAlert, animated: true)
+            
+        }
         let mainMenuItems = UIMenu(title: "Main Menu", options: .displayInline, children: [
             UIAction(title: "Transaktionen Verrechnen", image: UIImage(systemName: "arrow.left.arrow.right.circle"), handler: { _ in }),
             UIAction(title: "Historie", image: UIImage(systemName: "clock.arrow.circlepath"), handler: { _ in }),

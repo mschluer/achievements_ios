@@ -19,7 +19,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
                 balanceLabel.text = "+/- \(String (format: "%.2f", balance))"
                 balanceLabel.textColor = .none
             } else {
-                balanceLabel.text = "+ \(String (format: "%.2f", balance))"
+                balanceLabel.text = "+\(String (format: "%.2f", balance))"
                 balanceLabel.textColor = .systemGreen
             }
         }

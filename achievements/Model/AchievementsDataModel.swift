@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class AchievementTransactionModel {
+class AchievementsDataModel {
     private let persistentContainer : NSPersistentContainer
     
     init() {

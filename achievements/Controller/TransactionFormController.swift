@@ -10,7 +10,7 @@ import UIKit
 class TransactionFormController: UIViewController, UITextFieldDelegate {
     // MARK: Variables
     public var achievementTransaction: AchievementTransaction?
-    public var achievementTransactionModel : AchievementTransactionModel?
+    public var achievementTransactionModel : AchievementsDataModel?
 
     // MARK: Outlets
     @IBOutlet weak var amountInputField: UITextField!

@@ -1,5 +1,5 @@
 //
-//  AchievementsTransactionsModel.swift
+//  AchievementTransactionsModel.swift
 //  achievements
 //
 //  Created by Maximilian Schluer on 29.08.21.
@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class AchievementsTransactionsModel {
+class AchievementTransactionModel {
     private let persistentContainer : NSPersistentContainer
     
     init() {

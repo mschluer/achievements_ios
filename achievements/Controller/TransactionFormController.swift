@@ -10,7 +10,7 @@ import UIKit
 class TransactionFormController: UIViewController, UITextFieldDelegate {
     // MARK: Variables
     public var achievementTransaction: AchievementTransaction?
-    public var achievementsTransactionsModel : AchievementsTransactionsModel?
+    public var achievementTransactionModel : AchievementTransactionModel?
 
     // MARK: Outlets
     @IBOutlet weak var amountInputField: UITextField!
@@ -64,7 +64,7 @@ class TransactionFormController: UIViewController, UITextFieldDelegate {
             achievementTransaction?.amount = (amountInputField.text as NSString?)?.floatValue ?? 0.0
             achievementTransaction?.text = titleInputField.text!
             achievementTransaction?.date = datePicker.date
-            achievementsTransactionsModel?.save()
+            achievementTransactionModel?.save()
             
             self.navigationController!.popViewController(animated: true)
         }

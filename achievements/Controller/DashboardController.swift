@@ -9,7 +9,7 @@ import UIKit
 
 class DashboardController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     // MARK: Persistence Models
-    private let achievementsTransactionsModel = AchievementsTransactionsModel()
+    private let achievementTransactionModel = AchievementTransactionModel()
     
     // MARK: Variables
     private var balance: Float = 0 {
@@ -26,11 +26,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             }
         }
     }
-    private var recentTransactionsTableViewData: [AchievementTransaction] = [] {
-        didSet {
-            recentTransactionsTableView.reloadData()
-        }
-    }
+    private var recentTransactionsTableViewData: [AchievementTransaction] = []
     
     // MARK: Outlets
     @IBOutlet weak var balanceLabel: UILabel!
@@ -54,8 +50,8 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         if segue.identifier == "CreateTransactionFormSegue" {
             let destination = segue.destination as! TransactionFormController
             
-            destination.achievementTransaction = achievementsTransactionsModel.createAchievementTransaction()
-            destination.achievementsTransactionsModel = achievementsTransactionsModel
+            destination.achievementTransaction = achievementTransactionModel.createAchievementTransaction()
+            destination.achievementTransactionModel = achievementTransactionModel
         }
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
@@ -97,9 +93,10 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     
     // MARK: Setup Steps
     private func setupTransactionTable() {
-        recentTransactionsTableViewData = achievementsTransactionsModel.achievementTransactions
         self.recentTransactionsTableView.dataSource = self
         self.recentTransactionsTableView.delegate = self
+        
+        recentTransactionsTableViewData = achievementTransactionModel.achievementTransactions
     }
     
     private func setupMainMenu() {
@@ -116,6 +113,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     
     // MARK: Private Functions
     private func updateViewFromModel() {
+        recentTransactionsTableViewData = self.achievementTransactionModel.achievementTransactions
         recentTransactionsTableView.reloadData()
         recalculateBalance()
     }
@@ -131,7 +129,9 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     private func resetApplication() {
-        self.achievementsTransactionsModel.clear()
-        self.recentTransactionsTableViewData = self.achievementsTransactionsModel.achievementTransactions
+        self.achievementTransactionModel.clear()
+        self.recentTransactionsTableViewData = self.achievementTransactionModel.achievementTransactions
+        
+        updateViewFromModel()
     }
 }

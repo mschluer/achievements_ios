@@ -55,8 +55,8 @@
 		B328325026D93F23007CAD2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B328325C26D94909007CAD2A /* DashboardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardController.swift; sourceTree = "<group>"; };
 		B328326826DBD1A0007CAD2A /* AchievementsDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AchievementsDataModel.xcdatamodel; sourceTree = "<group>"; };
-		B328326A26DBD253007CAD2A /* AchievementTransaction+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AchievementTransaction+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		B328326B26DBD253007CAD2A /* AchievementTransaction+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AchievementTransaction+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		B328326A26DBD253007CAD2A /* AchievementTransaction+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AchievementTransaction+CoreDataClass.swift"; path = "achievements/Model/AchievementTransaction/AchievementTransaction+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		B328326B26DBD253007CAD2A /* AchievementTransaction+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AchievementTransaction+CoreDataProperties.swift"; path = "achievements/Model/AchievementTransaction/AchievementTransaction+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		B328326E26DBD379007CAD2A /* AchievementsTransactionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsTransactionsModel.swift; sourceTree = "<group>"; };
 		B328327226DC2D02007CAD2A /* TransactionFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFormController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -109,18 +109,13 @@
 		B328322B26D93F22007CAD2A /* achievements */ = {
 			isa = PBXGroup;
 			children = (
-				B328326A26DBD253007CAD2A /* AchievementTransaction+CoreDataClass.swift */,
-				B328326B26DBD253007CAD2A /* AchievementTransaction+CoreDataProperties.swift */,
+				B328327726DF90B9007CAD2A /* Controller */,
+				B328327626DF90AB007CAD2A /* View */,
+				B328327426DF908C007CAD2A /* Model */,
 				B328322C26D93F22007CAD2A /* AppDelegate.swift */,
 				B328322E26D93F22007CAD2A /* SceneDelegate.swift */,
-				B328323226D93F22007CAD2A /* Main.storyboard */,
-				B328327226DC2D02007CAD2A /* TransactionFormController.swift */,
-				B328325C26D94909007CAD2A /* DashboardController.swift */,
-				B328326726DBD1A0007CAD2A /* AchievementsDataModel.xcdatamodeld */,
 				B328323526D93F23007CAD2A /* Assets.xcassets */,
-				B328323726D93F23007CAD2A /* LaunchScreen.storyboard */,
 				B328323A26D93F23007CAD2A /* Info.plist */,
-				B328326E26DBD379007CAD2A /* AchievementsTransactionsModel.swift */,
 			);
 			path = achievements;
 			sourceTree = "<group>";
@@ -141,6 +136,43 @@
 				B328325026D93F23007CAD2A /* Info.plist */,
 			);
 			path = achievementsUITests;
+			sourceTree = "<group>";
+		};
+		B328327426DF908C007CAD2A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B328326726DBD1A0007CAD2A /* AchievementsDataModel.xcdatamodeld */,
+				B328327526DF9094007CAD2A /* AchievementTransaction */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B328327526DF9094007CAD2A /* AchievementTransaction */ = {
+			isa = PBXGroup;
+			children = (
+				B328326A26DBD253007CAD2A /* AchievementTransaction+CoreDataClass.swift */,
+				B328326B26DBD253007CAD2A /* AchievementTransaction+CoreDataProperties.swift */,
+				B328326E26DBD379007CAD2A /* AchievementsTransactionsModel.swift */,
+			);
+			path = AchievementTransaction;
+			sourceTree = "<group>";
+		};
+		B328327626DF90AB007CAD2A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B328323226D93F22007CAD2A /* Main.storyboard */,
+				B328323726D93F23007CAD2A /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B328327726DF90B9007CAD2A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B328327226DC2D02007CAD2A /* TransactionFormController.swift */,
+				B328325C26D94909007CAD2A /* DashboardController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -42,13 +42,12 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         super.viewDidLoad()
         
         setupMainMenu()
+        setupTransactionTable()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        setupTransactionTable()
-        recalculateBalance()
+        updateViewFromModel()
     }
-    
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -85,6 +84,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         return UITableViewCell();
     }
     
+    // MARK: Action Handlers
     private func mainMenuDeletionButtonPressed() {
         let deletionAlert = UIAlertController(title: "Are you sure?", message: "Reset deletes all your data including historical transactions, templates and settings. Only do this is you are entirely sure what you are doing!", preferredStyle: .actionSheet)
         deletionAlert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { _ in
@@ -115,6 +115,11 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     // MARK: Private Functions
+    private func updateViewFromModel() {
+        recentTransactionsTableView.reloadData()
+        recalculateBalance()
+    }
+    
     private func recalculateBalance() {
         var newBalance : Float = 0;
         
@@ -128,6 +133,5 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     private func resetApplication() {
         self.achievementsTransactionsModel.clear()
         self.recentTransactionsTableViewData = self.achievementsTransactionsModel.achievementTransactions
-        self.recalculateBalance()
     }
 }

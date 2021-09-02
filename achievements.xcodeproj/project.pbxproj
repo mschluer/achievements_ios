@@ -22,6 +22,8 @@
 		B328326D26DBD253007CAD2A /* AchievementTransaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328326B26DBD253007CAD2A /* AchievementTransaction+CoreDataProperties.swift */; };
 		B328326F26DBD379007CAD2A /* AchievementsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328326E26DBD379007CAD2A /* AchievementsDataModel.swift */; };
 		B328327326DC2D02007CAD2A /* TransactionFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328327226DC2D02007CAD2A /* TransactionFormController.swift */; };
+		B381160426E10B130090029D /* HistoricalTransaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B381160226E10B130090029D /* HistoricalTransaction+CoreDataProperties.swift */; };
+		B381160526E10B130090029D /* HistoricalTransaction+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B381160326E10B130090029D /* HistoricalTransaction+CoreDataClass.swift */; };
 		BFD6C785F97405A1226BF454 /* Pods_achievements_achievementsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1A735B418EFC8B305903A53 /* Pods_achievements_achievementsUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +67,8 @@
 		B328326B26DBD253007CAD2A /* AchievementTransaction+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AchievementTransaction+CoreDataProperties.swift"; path = "achievements/Model/AchievementTransaction/AchievementTransaction+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		B328326E26DBD379007CAD2A /* AchievementsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsDataModel.swift; sourceTree = "<group>"; };
 		B328327226DC2D02007CAD2A /* TransactionFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFormController.swift; sourceTree = "<group>"; };
+		B381160226E10B130090029D /* HistoricalTransaction+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HistoricalTransaction+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B381160326E10B130090029D /* HistoricalTransaction+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HistoricalTransaction+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B91FC670CCE80E443AB4694D /* Pods_achievements.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_achievements.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1A735B418EFC8B305903A53 /* Pods_achievements_achievementsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_achievements_achievementsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C896202FB7D32745338C8FF5 /* Pods_achievementsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_achievementsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,6 +175,7 @@
 		B328327426DF908C007CAD2A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B381160126E10A200090029D /* HistoricalTransaction */,
 				B328326726DBD1A0007CAD2A /* AchievementsDataModel.xcdatamodeld */,
 				B328326E26DBD379007CAD2A /* AchievementsDataModel.swift */,
 				B328327526DF9094007CAD2A /* AchievementTransaction */,
@@ -203,6 +208,15 @@
 				B328325C26D94909007CAD2A /* DashboardController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		B381160126E10A200090029D /* HistoricalTransaction */ = {
+			isa = PBXGroup;
+			children = (
+				B381160326E10B130090029D /* HistoricalTransaction+CoreDataClass.swift */,
+				B381160226E10B130090029D /* HistoricalTransaction+CoreDataProperties.swift */,
+			);
+			path = HistoricalTransaction;
 			sourceTree = "<group>";
 		};
 		E04F7E163FA5D1D646D68CC9 /* Frameworks */ = {
@@ -417,10 +431,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B381160526E10B130090029D /* HistoricalTransaction+CoreDataClass.swift in Sources */,
 				B328327326DC2D02007CAD2A /* TransactionFormController.swift in Sources */,
 				B328326C26DBD253007CAD2A /* AchievementTransaction+CoreDataClass.swift in Sources */,
 				B328322D26D93F22007CAD2A /* AppDelegate.swift in Sources */,
 				B328326D26DBD253007CAD2A /* AchievementTransaction+CoreDataProperties.swift in Sources */,
+				B381160426E10B130090029D /* HistoricalTransaction+CoreDataProperties.swift in Sources */,
 				B328325D26D94909007CAD2A /* DashboardController.swift in Sources */,
 				B328322F26D93F22007CAD2A /* SceneDelegate.swift in Sources */,
 				B328326F26DBD379007CAD2A /* AchievementsDataModel.swift in Sources */,

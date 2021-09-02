@@ -1,5 +1,5 @@
 //
-//  HistoryControllerTableViewController.swift
+//  HistoryTableViewController.swift
 //  achievements
 //
 //  Created by Maximilian Schluer on 02.09.21.
@@ -7,8 +7,11 @@
 
 import UIKit
 
-class HistoryControllerTableViewController: UITableViewController {
-
+class HistoryTableViewController: UITableViewController {
+    public var historicalTransactions : [HistoricalTransaction] = []
+    
+    @IBOutlet var historyTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,26 +23,36 @@ class HistoryControllerTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return historicalTransactions.count
     }
-
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "historyItemCell") {
+            if historicalTransactions[indexPath.item].amount < 0 {
+                cell.backgroundColor = UIColor.systemRed
+            } else {
+                cell.backgroundColor = UIColor.systemGreen
+            }
+            
+            if let label = cell.textLabel {
+                label.text = (historicalTransactions[indexPath.item].toString())
+            }
+            
+            if let detailLabel = cell.detailTextLabel {
+                detailLabel.text = "(\(historicalTransactions[indexPath.item].balance))"
+            }
+            
+            return cell
+        }
+        
+        return UITableViewCell();
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -85,5 +98,7 @@ class HistoryControllerTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    private func updateViewFromModel() {
+        historyTableView.reloadData()
+    }
 }

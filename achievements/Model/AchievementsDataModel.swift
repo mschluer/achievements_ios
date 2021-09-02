@@ -11,6 +11,7 @@ import CoreData
 class AchievementsDataModel {
     private let persistentContainer : NSPersistentContainer
     
+    // MARK: Initializers
     init() {
         self.persistentContainer = NSPersistentContainer(name: "AchievementsDataModel")
         self.persistentContainer.loadPersistentStores { storeDescription, error in
@@ -20,6 +21,7 @@ class AchievementsDataModel {
         }
     }
     
+    // MARK: Variables
     var viewContext : NSManagedObjectContext {
         return self.persistentContainer.viewContext
     }
@@ -36,6 +38,7 @@ class AchievementsDataModel {
         return try! viewContext.fetch(request)
     }
     
+    // MARK: Insertions
     func createAchievementTransaction() -> AchievementTransaction {
         return NSEntityDescription.insertNewObject(forEntityName: AchievementTransaction.entityName, into: self.viewContext) as! AchievementTransaction
     }
@@ -69,6 +72,7 @@ class AchievementsDataModel {
         return transaction
     }
     
+    // MARK: Destructive Transactions
     func remove(achievementTransaction transaction: AchievementTransaction) {
         self.viewContext.delete(transaction)
     }
@@ -94,6 +98,7 @@ class AchievementsDataModel {
         try! viewContext.execute(request)
     }
     
+    // MARK: Save
     func save() {
         assert(Thread.isMainThread)
         do {
@@ -103,6 +108,7 @@ class AchievementsDataModel {
         }
     }
     
+    // MARK: Recalculation
     func recalculateHistoricalBalances(from element: HistoricalTransaction?) {
         if element != nil {
             recalculateHistoricalBalances(from: historicalTransactions.firstIndex(of: element!))

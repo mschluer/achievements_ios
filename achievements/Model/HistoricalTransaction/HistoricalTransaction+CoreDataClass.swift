@@ -12,4 +12,8 @@ import CoreData
 @objc(HistoricalTransaction)
 public class HistoricalTransaction: NSManagedObject {
     static let entityName = "HistoricalTransaction"
+    
+    @nonobjc func calculateHistoricalBalance(balanceBefore: Float) -> Float {
+        return balanceBefore + self.amount
+    }
 }

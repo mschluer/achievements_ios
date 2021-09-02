@@ -26,6 +26,13 @@ class AchievementsDataModel {
     
     var achievementTransactions : [AchievementTransaction] {
         let request : NSFetchRequest<AchievementTransaction> = AchievementTransaction.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        return try! viewContext.fetch(request)
+    }
+    
+    var historicalTransactions : [HistoricalTransaction] {
+        let request : NSFetchRequest<HistoricalTransaction> = HistoricalTransaction.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
         return try! viewContext.fetch(request)
     }
     
@@ -72,7 +79,13 @@ class AchievementsDataModel {
             self.viewContext.delete(recentTransaction)
         }
         
+        let index = historicalTransactions.firstIndex(of: transaction)
+        
         self.viewContext.delete(transaction)
+        
+        recalculateHistoricalBalances(from: index)
+        
+        self.save()
     }
     
     func clear() {
@@ -90,7 +103,33 @@ class AchievementsDataModel {
         }
     }
     
-    func recalculateHistoricalBalances(from element: HistoricalTransaction) {
-        // Recalculate from Element in Arrray ordered by.
+    func recalculateHistoricalBalances(from element: HistoricalTransaction?) {
+        if element != nil {
+            recalculateHistoricalBalances(from: historicalTransactions.firstIndex(of: element!))
+        } else {
+            recalculateHistoricalBalances(from: 0)
+        }
+    }
+    
+    func recalculateHistoricalBalances(from beginIndex: Int?) {
+        var i = 0
+        if beginIndex != nil {
+            i = beginIndex!
+            if i > 0 {
+                i -= 1
+            }
+        }
+        
+        var currentBalance : Float = 0
+        if i > 0 {
+            currentBalance = historicalTransactions[i].balance
+        }
+        
+        while i < historicalTransactions.count {
+            currentBalance = historicalTransactions[i].calculateHistoricalBalance(balanceBefore: currentBalance)
+            historicalTransactions[i].balance = currentBalance
+            
+            i += 1
+        }
     }
 }

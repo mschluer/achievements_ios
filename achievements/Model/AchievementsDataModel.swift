@@ -38,6 +38,12 @@ class AchievementsDataModel {
         return try! viewContext.fetch(request)
     }
     
+    var historicalTransactionsReverse: [HistoricalTransaction] {
+        let request : NSFetchRequest<HistoricalTransaction> = HistoricalTransaction.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+        return try! viewContext.fetch(request)
+    }
+    
     // MARK: Insertions
     func createAchievementTransaction() -> AchievementTransaction {
         return NSEntityDescription.insertNewObject(forEntityName: AchievementTransaction.entityName, into: self.viewContext) as! AchievementTransaction
@@ -128,8 +134,10 @@ class AchievementsDataModel {
     }
     
     func clear() {
-        let request = NSBatchDeleteRequest(fetchRequest: AchievementTransaction.fetchRequest())
+        var request = NSBatchDeleteRequest(fetchRequest: AchievementTransaction.fetchRequest())
+        try! viewContext.execute(request)
         
+        request = NSBatchDeleteRequest(fetchRequest: HistoricalTransaction.fetchRequest())
         try! viewContext.execute(request)
     }
     
@@ -146,7 +154,7 @@ class AchievementsDataModel {
     // MARK: Recalculation
     func recalculateHistoricalBalances(from element: HistoricalTransaction?) {
         if element != nil {
-            recalculateHistoricalBalances(from: historicalTransactions.firstIndex(of: element!))
+            recalculateHistoricalBalances(from: historicalTransactionsReverse.firstIndex(of: element!))
         } else {
             recalculateHistoricalBalances(from: 0)
         }
@@ -163,12 +171,12 @@ class AchievementsDataModel {
         
         var currentBalance : Float = 0
         if i > 0 {
-            currentBalance = historicalTransactions[i].balance
+            currentBalance = historicalTransactionsReverse[i].balance
         }
         
         while i < historicalTransactions.count {
-            currentBalance = historicalTransactions[i].calculateHistoricalBalance(balanceBefore: currentBalance)
-            historicalTransactions[i].balance = currentBalance
+            currentBalance = historicalTransactionsReverse[i].calculateHistoricalBalance(balanceBefore: currentBalance)
+            historicalTransactionsReverse[i].balance = currentBalance
             
             i += 1
         }

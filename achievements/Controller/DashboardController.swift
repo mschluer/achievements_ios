@@ -52,6 +52,10 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             
             destination.achievementTransaction = achievementsDataModel.createAchievementTransaction()
             destination.achievementTransactionModel = achievementsDataModel
+        } else if segue.identifier == "ShowHistorySegue" {
+            let destination = segue.destination as! HistoryTableViewController
+            
+            destination.historicalTransactions = achievementsDataModel.historicalTransactions
         }
     }
 
@@ -94,6 +98,10 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         updateViewFromModel()
     }
     
+    private func mainMenuHistoryButtonPressed() {
+        performSegue(withIdentifier: "ShowHistorySegue", sender: menuButton)
+    }
+    
     // MARK: Setup Steps
     private func setupTransactionTable() {
         self.recentTransactionsTableView.dataSource = self
@@ -110,7 +118,9 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             UIAction(title: "Transaktionen Verrechnen", image: UIImage(systemName: "arrow.left.arrow.right.circle"), handler: { _ in
                 self.mainMenuSettleButtonPressed()
             }),
-            UIAction(title: "Historie", image: UIImage(systemName: "clock.arrow.circlepath"), handler: { _ in }),
+            UIAction(title: "Historie", image: UIImage(systemName: "clock.arrow.circlepath"), handler: { _ in
+                self.mainMenuHistoryButtonPressed()
+            }),
             UIAction(title: "Statistiken", image: UIImage(systemName: "chart.bar"), handler: { _ in })
         ])
         menuButton.menu = UIMenu(title: "", children: [mainMenuItems, mainMenuDestruct])

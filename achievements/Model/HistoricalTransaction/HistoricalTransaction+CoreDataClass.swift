@@ -16,4 +16,14 @@ public class HistoricalTransaction: NSManagedObject {
     @nonobjc func calculateHistoricalBalance(balanceBefore: Float) -> Float {
         return balanceBefore + self.amount
     }
+    
+    @nonobjc func toString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+        
+        let dateString = formatter.string(for: date)
+        
+        return "\(dateString!): \(String (format: "%.2f", amount)) \(text ?? "n/a")"
+    }
 }

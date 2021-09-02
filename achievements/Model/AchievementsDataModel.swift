@@ -92,6 +92,41 @@ class AchievementsDataModel {
         self.save()
     }
     
+    func purgeRecent() {
+        let fetchRequest : NSFetchRequest<AchievementTransaction> = AchievementTransaction.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+        
+        fetchRequest.predicate = NSPredicate(format: "amount >= 0")
+        var recentIncomes = try! self.viewContext.fetch(fetchRequest)
+        var totalIncomes : Float = 0
+        for income in recentIncomes {
+            totalIncomes += income.amount
+        }
+        
+        fetchRequest.predicate = NSPredicate(format: "amount < 0")
+        var recentExpenses = try! self.viewContext.fetch(fetchRequest)
+        
+        while recentExpenses.count > 0 && -1 * recentExpenses[0].amount <= totalIncomes {
+            var remainingAmount = -1 * recentExpenses[0].amount
+            self.remove(achievementTransaction: recentExpenses[0])
+            recentExpenses.remove(at: 0)
+            
+            while remainingAmount > 0 {
+                totalIncomes -= recentIncomes[0].amount
+                remainingAmount -= recentIncomes[0].amount
+                
+                if remainingAmount < 0 {
+                    recentIncomes[0].amount = -1 * remainingAmount
+                } else {
+                    self.remove(achievementTransaction: recentIncomes[0])
+                    recentIncomes.remove(at: 0)
+                }
+            }
+        }
+        
+        self.save()
+    }
+    
     func clear() {
         let request = NSBatchDeleteRequest(fetchRequest: AchievementTransaction.fetchRequest())
         

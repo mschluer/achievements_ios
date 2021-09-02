@@ -9,7 +9,7 @@ import UIKit
 
 class DashboardController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     // MARK: Persistence Models
-    private let achievementsTransactionsModel = AchievementsTransactionsModel()
+    private let achievementsDataModel = AchievementsDataModel()
     
     // MARK: Variables
     private var balance: Float = 0 {
@@ -26,11 +26,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             }
         }
     }
-    private var recentTransactionsTableViewData: [AchievementTransaction] = [] {
-        didSet {
-            recentTransactionsTableView.reloadData()
-        }
-    }
+    private var recentTransactionsTableViewData: [AchievementTransaction] = []
     
     // MARK: Outlets
     @IBOutlet weak var balanceLabel: UILabel!
@@ -42,24 +38,21 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         super.viewDidLoad()
         
         setupMainMenu()
+        setupTransactionTable()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        setupTransactionTable()
-        recalculateBalance()
+        updateViewFromModel()
     }
-    
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CreateTransactionFormSegue" {
             let destination = segue.destination as! TransactionFormController
             
-            destination.achievementTransaction = achievementsTransactionsModel.createAchievementTransaction()
-            destination.achievementsTransactionsModel = achievementsTransactionsModel
+            destination.achievementTransaction = achievementsDataModel.createAchievementTransaction()
+            destination.achievementTransactionModel = achievementsDataModel
         }
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
     }
 
     // MARK: Table View Functionalities
@@ -85,6 +78,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         return UITableViewCell();
     }
     
+    // MARK: Action Handlers
     private func mainMenuDeletionButtonPressed() {
         let deletionAlert = UIAlertController(title: "Are you sure?", message: "Reset deletes all your data including historical transactions, templates and settings. Only do this is you are entirely sure what you are doing!", preferredStyle: .actionSheet)
         deletionAlert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { _ in
@@ -97,9 +91,10 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     
     // MARK: Setup Steps
     private func setupTransactionTable() {
-        recentTransactionsTableViewData = achievementsTransactionsModel.achievementTransactions
         self.recentTransactionsTableView.dataSource = self
         self.recentTransactionsTableView.delegate = self
+        
+        recentTransactionsTableViewData = achievementsDataModel.achievementTransactions
     }
     
     private func setupMainMenu() {
@@ -115,6 +110,12 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     // MARK: Private Functions
+    private func updateViewFromModel() {
+        recentTransactionsTableViewData = self.achievementsDataModel.achievementTransactions
+        recentTransactionsTableView.reloadData()
+        recalculateBalance()
+    }
+    
     private func recalculateBalance() {
         var newBalance : Float = 0;
         
@@ -126,8 +127,9 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     private func resetApplication() {
-        self.achievementsTransactionsModel.clear()
-        self.recentTransactionsTableViewData = self.achievementsTransactionsModel.achievementTransactions
-        self.recalculateBalance()
+        self.achievementsDataModel.clear()
+        self.recentTransactionsTableViewData = self.achievementsDataModel.achievementTransactions
+        
+        updateViewFromModel()
     }
 }

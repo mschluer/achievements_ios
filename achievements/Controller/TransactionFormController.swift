@@ -10,7 +10,7 @@ import UIKit
 class TransactionFormController: UIViewController, UITextFieldDelegate {
     // MARK: Variables
     public var achievementTransaction: AchievementTransaction?
-    public var achievementsTransactionsModel : AchievementsTransactionsModel?
+    public var achievementTransactionModel : AchievementsDataModel?
 
     // MARK: Outlets
     @IBOutlet weak var amountInputField: UITextField!
@@ -61,10 +61,20 @@ class TransactionFormController: UIViewController, UITextFieldDelegate {
             alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
             self.present(alert, animated: true)
         } else {
-            achievementTransaction?.amount = (amountInputField.text as NSString?)?.floatValue ?? 0.0
-            achievementTransaction?.text = titleInputField.text!
-            achievementTransaction?.date = datePicker.date
-            achievementsTransactionsModel?.save()
+            // Remove Old Items
+            if let historicalTransaction = self.achievementTransaction?.historicalTransaction {
+                achievementTransactionModel?.viewContext.delete(historicalTransaction)
+            } else {
+                if let transaction = achievementTransaction {
+                    achievementTransactionModel?.viewContext.delete(transaction)
+                }
+            }
+            
+            // Insert New Item
+            _ = achievementTransactionModel?.createAchievementTransactionWith(
+                text: titleInputField.text!,
+                amount: (amountInputField.text as NSString?)?.floatValue ?? 0.0,
+                date: datePicker.date)
             
             self.navigationController!.popViewController(animated: true)
         }

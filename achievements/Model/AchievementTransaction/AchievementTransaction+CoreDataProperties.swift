@@ -19,6 +19,7 @@ extension AchievementTransaction {
     @NSManaged public var date: Date?
     @NSManaged public var text: String?
     @NSManaged public var amount: Float
+    @NSManaged public var historicalTransaction: HistoricalTransaction?
 
 }
 

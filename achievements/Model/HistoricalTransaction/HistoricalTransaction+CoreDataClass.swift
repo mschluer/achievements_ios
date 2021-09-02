@@ -1,0 +1,19 @@
+//
+//  HistoricalTransaction+CoreDataClass.swift
+//  achievements
+//
+//  Created by Maximilian Schluer on 02.09.21.
+//
+//
+
+import Foundation
+import CoreData
+
+@objc(HistoricalTransaction)
+public class HistoricalTransaction: NSManagedObject {
+    static let entityName = "HistoricalTransaction"
+    
+    @nonobjc func calculateHistoricalBalance(balanceBefore: Float) -> Float {
+        return balanceBefore + self.amount
+    }
+}

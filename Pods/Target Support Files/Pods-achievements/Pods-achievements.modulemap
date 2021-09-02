@@ -1,0 +1,6 @@
+framework module Pods_achievements {
+  umbrella header "Pods-achievements-umbrella.h"
+
+  export *
+  module * { export * }
+}

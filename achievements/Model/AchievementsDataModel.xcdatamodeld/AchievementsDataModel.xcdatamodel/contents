@@ -4,17 +4,17 @@
         <attribute name="amount" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="text" optional="YES" attributeType="String"/>
-        <relationship name="historicalTransaction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HistoricalTransaction" inverseName="currentTransaction" inverseEntity="HistoricalTransaction"/>
+        <relationship name="historicalTransaction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HistoricalTransaction" inverseName="recentTransaction" inverseEntity="HistoricalTransaction"/>
     </entity>
     <entity name="HistoricalTransaction" representedClassName="HistoricalTransaction" syncable="YES">
         <attribute name="amount" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="balance" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="text" optional="YES" attributeType="String"/>
-        <relationship name="currentTransaction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AchievementTransaction" inverseName="historicalTransaction" inverseEntity="AchievementTransaction"/>
+        <relationship name="recentTransaction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AchievementTransaction" inverseName="historicalTransaction" inverseEntity="AchievementTransaction"/>
     </entity>
     <elements>
-        <element name="AchievementTransaction" positionX="205.1986694335938" positionY="51.77117919921875" width="128" height="103"/>
+        <element name="AchievementTransaction" positionX="-352.7521362304688" positionY="32.87271118164062" width="128" height="103"/>
         <element name="HistoricalTransaction" positionX="-54" positionY="18" width="128" height="118"/>
     </elements>
 </model>

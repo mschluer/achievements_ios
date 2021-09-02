@@ -20,7 +20,7 @@ extension HistoricalTransaction {
     @NSManaged public var date: Date?
     @NSManaged public var amount: Float
     @NSManaged public var balance: Float
-    @NSManaged public var currentTransaction: AchievementTransaction?
+    @NSManaged public var recentTransaction: AchievementTransaction?
 
 }
 

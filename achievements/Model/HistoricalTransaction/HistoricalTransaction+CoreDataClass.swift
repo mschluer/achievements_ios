@@ -11,5 +11,5 @@ import CoreData
 
 @objc(HistoricalTransaction)
 public class HistoricalTransaction: NSManagedObject {
-
+    static let entityName = "HistoricalTransaction"
 }

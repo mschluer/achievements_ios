@@ -52,14 +52,18 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             
             destination.achievementTransaction = achievementsDataModel.createAchievementTransaction()
             destination.achievementTransactionModel = achievementsDataModel
+        } else if segue.identifier == "ShowHistorySegue" {
+            let destination = segue.destination as! HistoryTableViewController
+            
+            destination.historicalTransactions = achievementsDataModel.historicalTransactions
         } else if segue.identifier == "ShowTransactionDetailViewSegue" {
             let destination = segue.destination as! TransactionDetailViewController
             
-            destination.transaction = sender as! HistoricalTransaction
+            destination.transaction = sender as? HistoricalTransaction
         }
     }
 
-    // MARK: Table View Functionalities
+    // MARK: Table View Data Source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recentTransactionsTableViewData.count
     }

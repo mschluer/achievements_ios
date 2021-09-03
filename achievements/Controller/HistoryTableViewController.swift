@@ -10,8 +10,10 @@ import UIKit
 class HistoryTableViewController: UITableViewController {
     public var historicalTransactions : [HistoricalTransaction] = []
     
+    // MARK: Outlets
     @IBOutlet var historyTableView: UITableView!
     
+    // MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,14 +23,22 @@ class HistoryTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
+    // MARK: Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowTransactionDetailViewSegue" {
+            let destination = segue.destination as! TransactionDetailViewController
+            
+            destination.transaction = sender as? HistoricalTransaction
+        }
+    }
 
-    // MARK: - Table view data source
+    // MARK: Table View Data Source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return historicalTransactions.count
     }
     
@@ -52,6 +62,10 @@ class HistoryTableViewController: UITableViewController {
         }
         
         return UITableViewCell();
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        transactionCellPressed(indexPath)
     }
 
     /*
@@ -88,16 +102,13 @@ class HistoryTableViewController: UITableViewController {
         return true
     }
     */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    // MARK: Action Handlers
+    private func transactionCellPressed(_ indexPath: IndexPath) {
+        performSegue(withIdentifier: "ShowTransactionDetailViewSegue", sender: historicalTransactions[indexPath.row])
     }
-    */
+    
+    // MARK: Private Functions
     private func updateViewFromModel() {
         historyTableView.reloadData()
     }

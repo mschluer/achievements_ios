@@ -56,10 +56,14 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             let destination = segue.destination as! HistoryTableViewController
             
             destination.historicalTransactions = achievementsDataModel.historicalTransactions
+        } else if segue.identifier == "ShowTransactionDetailViewSegue" {
+            let destination = segue.destination as! TransactionDetailViewController
+            
+            destination.transaction = sender as? HistoricalTransaction
         }
     }
 
-    // MARK: Table View Functionalities
+    // MARK: Table View Data Source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recentTransactionsTableViewData.count
     }
@@ -82,6 +86,10 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         return UITableViewCell();
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        transactionCellPressed(indexPath)
+    }
+    
     // MARK: Action Handlers
     private func mainMenuResetButtonPressed() {
         let deletionAlert = UIAlertController(title: "Are you sure?", message: "Reset deletes all your data including historical transactions, templates and settings. Only do this is you are entirely sure what you are doing!", preferredStyle: .actionSheet)
@@ -100,6 +108,10 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     
     private func mainMenuHistoryButtonPressed() {
         performSegue(withIdentifier: "ShowHistorySegue", sender: menuButton)
+    }
+    
+    private func transactionCellPressed(_ indexPath: IndexPath) {
+        performSegue(withIdentifier: "ShowTransactionDetailViewSegue", sender: recentTransactionsTableViewData[indexPath.row].historicalTransaction)
     }
     
     // MARK: Setup Steps

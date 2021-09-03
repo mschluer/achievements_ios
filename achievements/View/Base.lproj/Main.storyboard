@@ -60,6 +60,7 @@
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="p47-nM-Nw2">
                                         <rect key="frame" x="0.0" y="80" width="414" height="650"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <gestureRecognizers/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="transactionCell" textLabel="NOk-zn-sNA" style="IBUITableViewCellStyleDefault" id="ZGM-ke-fqv">
                                                 <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
@@ -114,6 +115,7 @@
                         <outlet property="menuButton" destination="YPi-FL-MVe" id="Ecr-2b-Q6T"/>
                         <outlet property="recentTransactionsTableView" destination="p47-nM-Nw2" id="54d-Ig-g8d"/>
                         <segue destination="vs7-wr-Yeq" kind="show" identifier="ShowHistorySegue" id="iYA-fg-WtE"/>
+                        <segue destination="p9y-pN-eA3" kind="show" identifier="ShowTransactionDetailViewSegue" id="ada-9d-Mi3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X8H-HO-Z0h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -249,13 +251,91 @@
                     <connections>
                         <outlet property="historyTableView" destination="3Zd-EU-7bx" id="RaH-VQ-lhS"/>
                         <outlet property="tableView" destination="3Zd-EU-7bx" id="HYN-kM-H6f"/>
+                        <segue destination="p9y-pN-eA3" kind="show" identifier="ShowTransactionDetailViewSegue" id="dO5-aY-6g4"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YCE-57-KPh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1912" y="867"/>
         </scene>
+        <!--Details-->
+        <scene sceneID="Yo2-v0-uyZ">
+            <objects>
+                <viewController id="p9y-pN-eA3" customClass="TransactionDetailViewController" customModule="achievements" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hzY-Iv-Dwd">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sML-KJ-eHt">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+ / - 0,00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ml1-8e-UcD">
+                                        <rect key="frame" x="20" y="20" width="374" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="30"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="( + / - 0,00 )" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Gm-33-CDt">
+                                        <rect key="frame" x="20" y="64" width="374" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OwO-vu-6UL">
+                                        <rect key="frame" x="20" y="88" width="374" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--, --/--/----, --:--:--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a8K-XT-ncq">
+                                        <rect key="frame" x="20" y="116.5" width="374" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="OwO-vu-6UL" secondAttribute="trailing" constant="20" symbolic="YES" id="6uE-8A-CSw"/>
+                                    <constraint firstItem="5Gm-33-CDt" firstAttribute="top" secondItem="ml1-8e-UcD" secondAttribute="bottom" constant="8" symbolic="YES" id="B1T-NU-yau"/>
+                                    <constraint firstItem="a8K-XT-ncq" firstAttribute="top" secondItem="OwO-vu-6UL" secondAttribute="bottom" constant="8" symbolic="YES" id="C5w-bc-u31"/>
+                                    <constraint firstItem="OwO-vu-6UL" firstAttribute="top" secondItem="5Gm-33-CDt" secondAttribute="bottom" constant="8" symbolic="YES" id="Cxb-wl-luO"/>
+                                    <constraint firstItem="a8K-XT-ncq" firstAttribute="leading" secondItem="sML-KJ-eHt" secondAttribute="leading" constant="20" symbolic="YES" id="IhL-cZ-SsY"/>
+                                    <constraint firstAttribute="trailing" secondItem="5Gm-33-CDt" secondAttribute="trailing" constant="20" symbolic="YES" id="Ja5-9u-yLK"/>
+                                    <constraint firstAttribute="trailing" secondItem="a8K-XT-ncq" secondAttribute="trailing" constant="20" symbolic="YES" id="NZq-R0-8cg"/>
+                                    <constraint firstItem="ml1-8e-UcD" firstAttribute="top" secondItem="sML-KJ-eHt" secondAttribute="top" constant="20" symbolic="YES" id="PWP-ns-rge"/>
+                                    <constraint firstItem="5Gm-33-CDt" firstAttribute="leading" secondItem="sML-KJ-eHt" secondAttribute="leading" constant="20" symbolic="YES" id="SLW-ny-mOw"/>
+                                    <constraint firstItem="OwO-vu-6UL" firstAttribute="leading" secondItem="sML-KJ-eHt" secondAttribute="leading" constant="20" symbolic="YES" id="aSp-i1-HBn"/>
+                                    <constraint firstItem="ml1-8e-UcD" firstAttribute="leading" secondItem="sML-KJ-eHt" secondAttribute="leading" constant="20" symbolic="YES" id="o3Z-01-jcn"/>
+                                    <constraint firstAttribute="trailing" secondItem="ml1-8e-UcD" secondAttribute="trailing" constant="20" symbolic="YES" id="uYy-Su-Uvw"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="D70-bQ-6sJ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="D70-bQ-6sJ" firstAttribute="bottom" secondItem="sML-KJ-eHt" secondAttribute="bottom" id="2d5-FP-UEL"/>
+                            <constraint firstItem="sML-KJ-eHt" firstAttribute="leading" secondItem="D70-bQ-6sJ" secondAttribute="leading" id="k60-ny-ufR"/>
+                            <constraint firstItem="sML-KJ-eHt" firstAttribute="top" secondItem="D70-bQ-6sJ" secondAttribute="top" id="rve-Rf-dql"/>
+                            <constraint firstItem="D70-bQ-6sJ" firstAttribute="trailing" secondItem="sML-KJ-eHt" secondAttribute="trailing" id="ySu-YG-Xz1"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Details" id="JvC-DS-hrE"/>
+                    <connections>
+                        <outlet property="amountLabel" destination="ml1-8e-UcD" id="Lnv-Hf-B2i"/>
+                        <outlet property="dateLabel" destination="a8K-XT-ncq" id="iHz-L9-gFx"/>
+                        <outlet property="historicalBalanceLabel" destination="5Gm-33-CDt" id="fCb-lI-91j"/>
+                        <outlet property="textLabel" destination="OwO-vu-6UL" id="2ve-Ua-5Eu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0pw-as-0zv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1009" y="867"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="ada-9d-Mi3"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="line.horizontal.3" catalog="system" width="128" height="64"/>
         <systemColor name="systemBackgroundColor">

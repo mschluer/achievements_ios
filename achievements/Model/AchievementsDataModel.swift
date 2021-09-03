@@ -163,10 +163,6 @@ class AchievementsDataModel {
     func recalculateHistoricalBalances(from beginIndex: Int?) {
         var i = 0
         if beginIndex != nil {
-            i = beginIndex!
-            if i > 0 {
-                i -= 1
-            }
         }
         
         var currentBalance : Float = 0

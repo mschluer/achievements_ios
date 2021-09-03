@@ -90,6 +90,31 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         transactionCellPressed(indexPath)
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .destructive, title: "Löschen") { (action, view, completion) in
+            self.transactionCellSwipeLeft(indexPath)
+            completion(false)
+        }
+        
+        let config = UISwipeActionsConfiguration(actions: [delete])
+        config.performsFirstActionWithFullSwipe = true
+        
+        return config
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let edit = UIContextualAction(style: .normal, title: "Bearbeiten") { (action, view, completion) in
+            self.transactionCellSwipeRight(indexPath)
+            completion(true)
+        }
+        edit.backgroundColor = .systemYellow
+        
+        let config = UISwipeActionsConfiguration(actions: [edit])
+        config.performsFirstActionWithFullSwipe = true
+        
+        return config
+    }
+    
     // MARK: Action Handlers
     private func mainMenuResetButtonPressed() {
         let deletionAlert = UIAlertController(title: "Are you sure?", message: "Reset deletes all your data including historical transactions, templates and settings. Only do this is you are entirely sure what you are doing!", preferredStyle: .actionSheet)
@@ -112,6 +137,18 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     
     private func transactionCellPressed(_ indexPath: IndexPath) {
         performSegue(withIdentifier: "ShowTransactionDetailViewSegue", sender: recentTransactionsTableViewData[indexPath.row].historicalTransaction)
+    }
+    
+    private func transactionCellSwipeRight(_ indexPath: IndexPath) {
+        // Swipe to Edit
+    }
+    
+    private func transactionCellSwipeLeft(_ indexPath: IndexPath) {
+        achievementsDataModel.remove(historicalTransaction: recentTransactionsTableViewData[indexPath.row].historicalTransaction!)
+        recentTransactionsTableViewData = self.achievementsDataModel.achievementTransactions
+        
+        self.recentTransactionsTableView.deleteRows(at: [indexPath], with: .automatic)
+        self.recalculateBalance()
     }
     
     // MARK: Setup Steps

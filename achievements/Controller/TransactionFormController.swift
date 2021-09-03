@@ -17,15 +17,17 @@ class TransactionFormController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var titleInputField: UITextField!
     @IBOutlet weak var datePicker: UIDatePicker!
     
-    // MARK: viewDidLoad
+    // MARK: View Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
 
         titleInputField.delegate = self
-        // Do any additional setup after loading the view.
+        
+        if achievementTransaction != nil {
+            populateFormWith(achievementTransaction!)
+        }
     }
     
-
     /*
     // MARK: - Navigation
 
@@ -86,6 +88,28 @@ class TransactionFormController: UIViewController, UITextFieldDelegate {
             return signedString.replacingOccurrences(of: "-", with: "")
         } else {
             return "-\(signedString)"
+        }
+    }
+    
+    private func populateFormWith(_ transaction: AchievementTransaction) {
+        if transaction.amount != 0 {
+            amountInputField.text = "\(transaction.amount)"
+            
+            if transaction.amount < 0 {
+                amountInputField.textColor = .systemRed
+            } else if transaction.amount == 0 {
+                amountInputField.textColor = .none
+            }
+        } else {
+            amountInputField.text = ""
+        }
+        
+        if transaction.text != nil {
+            titleInputField.text = transaction.text
+        }
+        
+        if transaction.date != nil {
+            datePicker.date = transaction.date!
         }
     }
 }

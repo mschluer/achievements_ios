@@ -33,7 +33,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet weak var recentTransactionsTableView: UITableView!
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
-    // MARK: viewDidLoad
+    // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,7 +50,6 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         if segue.identifier == "CreateTransactionFormSegue" {
             let destination = segue.destination as! TransactionFormController
             
-            destination.achievementTransaction = achievementsDataModel.createAchievementTransaction()
             destination.achievementTransactionModel = achievementsDataModel
         } else if segue.identifier == "ShowHistorySegue" {
             let destination = segue.destination as! HistoryTableViewController
@@ -60,6 +59,11 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             let destination = segue.destination as! TransactionDetailViewController
             
             destination.transaction = sender as? HistoricalTransaction
+        } else if segue.identifier == "EditTransactionFormSegue" {
+            let destination = segue.destination as! TransactionFormController
+            
+            destination.achievementTransaction = (sender as! AchievementTransaction)
+            destination.achievementTransactionModel = achievementsDataModel
         }
     }
 
@@ -90,6 +94,31 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         transactionCellPressed(indexPath)
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .destructive, title: "Löschen") { (action, view, completion) in
+            self.transactionCellSwipeLeft(indexPath)
+            completion(false)
+        }
+        
+        let config = UISwipeActionsConfiguration(actions: [delete])
+        config.performsFirstActionWithFullSwipe = true
+        
+        return config
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let edit = UIContextualAction(style: .normal, title: "Bearbeiten") { (action, view, completion) in
+            self.transactionCellSwipeRight(indexPath)
+            completion(true)
+        }
+        edit.backgroundColor = .systemYellow
+        
+        let config = UISwipeActionsConfiguration(actions: [edit])
+        config.performsFirstActionWithFullSwipe = true
+        
+        return config
+    }
+    
     // MARK: Action Handlers
     private func mainMenuResetButtonPressed() {
         let deletionAlert = UIAlertController(title: "Are you sure?", message: "Reset deletes all your data including historical transactions, templates and settings. Only do this is you are entirely sure what you are doing!", preferredStyle: .actionSheet)
@@ -112,6 +141,18 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     
     private func transactionCellPressed(_ indexPath: IndexPath) {
         performSegue(withIdentifier: "ShowTransactionDetailViewSegue", sender: recentTransactionsTableViewData[indexPath.row].historicalTransaction)
+    }
+    
+    private func transactionCellSwipeRight(_ indexPath: IndexPath) {
+        performSegue(withIdentifier: "EditTransactionFormSegue", sender: recentTransactionsTableViewData[indexPath.row])
+    }
+    
+    private func transactionCellSwipeLeft(_ indexPath: IndexPath) {
+        achievementsDataModel.remove(historicalTransaction: recentTransactionsTableViewData[indexPath.row].historicalTransaction!)
+        recentTransactionsTableViewData = self.achievementsDataModel.achievementTransactions
+        
+        self.recentTransactionsTableView.deleteRows(at: [indexPath], with: .automatic)
+        self.recalculateBalance()
     }
     
     // MARK: Setup Steps

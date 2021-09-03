@@ -33,7 +33,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet weak var recentTransactionsTableView: UITableView!
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
-    // MARK: viewDidLoad
+    // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,7 +50,6 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         if segue.identifier == "CreateTransactionFormSegue" {
             let destination = segue.destination as! TransactionFormController
             
-            destination.achievementTransaction = achievementsDataModel.createAchievementTransaction()
             destination.achievementTransactionModel = achievementsDataModel
         } else if segue.identifier == "ShowHistorySegue" {
             let destination = segue.destination as! HistoryTableViewController
@@ -60,6 +59,11 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             let destination = segue.destination as! TransactionDetailViewController
             
             destination.transaction = sender as? HistoricalTransaction
+        } else if segue.identifier == "EditTransactionFormSegue" {
+            let destination = segue.destination as! TransactionFormController
+            
+            destination.achievementTransaction = (sender as! AchievementTransaction)
+            destination.achievementTransactionModel = achievementsDataModel
         }
     }
 
@@ -140,7 +144,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     private func transactionCellSwipeRight(_ indexPath: IndexPath) {
-        // Swipe to Edit
+        performSegue(withIdentifier: "EditTransactionFormSegue", sender: recentTransactionsTableViewData[indexPath.row])
     }
     
     private func transactionCellSwipeLeft(_ indexPath: IndexPath) {

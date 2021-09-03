@@ -116,6 +116,7 @@
                         <outlet property="recentTransactionsTableView" destination="p47-nM-Nw2" id="54d-Ig-g8d"/>
                         <segue destination="vs7-wr-Yeq" kind="show" identifier="ShowHistorySegue" id="iYA-fg-WtE"/>
                         <segue destination="p9y-pN-eA3" kind="show" identifier="ShowTransactionDetailViewSegue" id="ada-9d-Mi3"/>
+                        <segue destination="zUx-eK-QHC" kind="show" identifier="EditTransactionFormSegue" id="D9y-fI-rBU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X8H-HO-Z0h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -335,6 +336,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="ada-9d-Mi3"/>
+        <segue reference="D9y-fI-rBU"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="line.horizontal.3" catalog="system" width="128" height="64"/>

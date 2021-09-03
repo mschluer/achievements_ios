@@ -168,7 +168,7 @@ class AchievementsDataModel {
         
         var currentBalance : Float = 0
         if i > 0 {
-            currentBalance = historicalTransactionsReverse[i].balance
+            currentBalance = historicalTransactionsReverse[i - 1].balance
         }
         
         while i < historicalTransactions.count {

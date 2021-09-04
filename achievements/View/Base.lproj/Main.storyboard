@@ -25,6 +25,60 @@
             </objects>
             <point key="canvasLocation" x="172" y="137"/>
         </scene>
+        <!--Vorlagen-->
+        <scene sceneID="ryw-ho-buO">
+            <objects>
+                <viewController id="kX9-eO-iUX" customClass="TransactionTemplatesViewController" customModule="achievements" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ic7-PX-lCE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vnz-8V-L3B">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="OzO-K8-rTQ" detailTextLabel="OeE-at-1o6" style="IBUITableViewCellStyleValue1" id="oTX-P7-0RB">
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oTX-P7-0RB" id="lFk-rk-qT4">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OzO-K8-rTQ">
+                                                    <rect key="frame" x="20" y="15" width="25" height="14.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OeE-at-1o6">
+                                                    <rect key="frame" x="361" y="15" width="33" height="14.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="wXe-Nm-E03"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="wXe-Nm-E03" firstAttribute="bottom" secondItem="Vnz-8V-L3B" secondAttribute="bottom" id="KXQ-BB-Zku"/>
+                            <constraint firstItem="wXe-Nm-E03" firstAttribute="trailing" secondItem="Vnz-8V-L3B" secondAttribute="trailing" id="ShC-tZ-IHp"/>
+                            <constraint firstItem="Vnz-8V-L3B" firstAttribute="top" secondItem="wXe-Nm-E03" secondAttribute="top" id="cd0-Im-TAZ"/>
+                            <constraint firstItem="Vnz-8V-L3B" firstAttribute="leading" secondItem="wXe-Nm-E03" secondAttribute="leading" id="tzx-oy-q4u"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Vorlagen" id="2AO-3U-5XN"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9xl-0c-B70" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1031" y="-572"/>
+        </scene>
         <!--Dashboard-->
         <scene sceneID="rag-lS-wYD">
             <objects>
@@ -51,6 +105,12 @@
                                             <barButtonItem systemItem="add" id="g9P-G5-iWy">
                                                 <connections>
                                                     <segue destination="zUx-eK-QHC" kind="show" identifier="CreateTransactionFormSegue" id="f4e-MX-0fD"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="cGd-Qe-fed"/>
+                                            <barButtonItem image="folder" catalog="system" style="plain" id="MHP-u2-p94" userLabel="Templates">
+                                                <connections>
+                                                    <segue destination="kX9-eO-iUX" kind="show" id="eUS-Hz-00A"/>
                                                 </connections>
                                             </barButtonItem>
                                             <barButtonItem style="plain" systemItem="flexibleSpace" id="2zf-jU-6kR"/>
@@ -339,6 +399,7 @@
         <segue reference="D9y-fI-rBU"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="folder" catalog="system" width="128" height="97"/>
         <image name="line.horizontal.3" catalog="system" width="128" height="64"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

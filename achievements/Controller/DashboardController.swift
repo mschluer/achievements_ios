@@ -64,6 +64,8 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             
             destination.achievementTransaction = (sender as! AchievementTransaction)
             destination.achievementTransactionModel = achievementsDataModel
+        } else if segue.identifier == "ShowTemplatesViewSegue" {
+            let destination = segue.destination as! TransactionTemplatesViewController
         }
     }
 

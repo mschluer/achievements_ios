@@ -40,7 +40,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="OzO-K8-rTQ" detailTextLabel="OeE-at-1o6" style="IBUITableViewCellStyleValue1" id="oTX-P7-0RB">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="templateCell" textLabel="OzO-K8-rTQ" detailTextLabel="OeE-at-1o6" style="IBUITableViewCellStyleValue1" id="oTX-P7-0RB">
                                                 <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oTX-P7-0RB" id="lFk-rk-qT4">
@@ -99,6 +99,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Vorlagen" id="2AO-3U-5XN"/>
+                    <connections>
+                        <outlet property="templatesTable" destination="Vnz-8V-L3B" id="tHf-Q4-m0x"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9xl-0c-B70" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -221,7 +224,7 @@
                                             <barButtonItem style="plain" systemItem="flexibleSpace" id="cGd-Qe-fed"/>
                                             <barButtonItem image="folder" catalog="system" style="plain" id="MHP-u2-p94" userLabel="Templates">
                                                 <connections>
-                                                    <segue destination="kX9-eO-iUX" kind="show" id="eUS-Hz-00A"/>
+                                                    <segue destination="kX9-eO-iUX" kind="show" identifier="ShowTemplatesViewSegue" id="eUS-Hz-00A"/>
                                                 </connections>
                                             </barButtonItem>
                                             <barButtonItem style="plain" systemItem="flexibleSpace" id="2zf-jU-6kR"/>

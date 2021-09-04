@@ -9,6 +9,7 @@ import UIKit
 
 class TransactionTemplateFormController: UIViewController, UITextFieldDelegate {
     // MARK: Persistence Models
+    public var achievementsDataModel : AchievementsDataModel?
 
     // MARK: Outlets
     @IBOutlet weak var amountInputField: UITextField!
@@ -44,6 +45,12 @@ class TransactionTemplateFormController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
+        let template = achievementsDataModel?.createTransactionTemplate()
+        
+        template?.text = titleInputField.text!
+        template?.amount = (amountInputField.text as NSString?)?.floatValue ?? 0.0
+        achievementsDataModel?.save()
+        
         self.navigationController!.popViewController(animated: true)
     }
     

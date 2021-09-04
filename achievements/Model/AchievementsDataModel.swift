@@ -44,6 +44,12 @@ class AchievementsDataModel {
         return try! viewContext.fetch(request)
     }
     
+    var transactionTemplates: [TransactionTemplate] {
+        let request : NSFetchRequest<TransactionTemplate> = TransactionTemplate.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "text", ascending: true)]
+        return try! viewContext.fetch(request)
+    }
+    
     // MARK: Insertions
     func createAchievementTransaction() -> AchievementTransaction {
         return NSEntityDescription.insertNewObject(forEntityName: AchievementTransaction.entityName, into: self.viewContext) as! AchievementTransaction
@@ -51,6 +57,10 @@ class AchievementsDataModel {
     
     func createHistoricalTransaction() -> HistoricalTransaction {
         return NSEntityDescription.insertNewObject(forEntityName: HistoricalTransaction.entityName, into: self.viewContext) as! HistoricalTransaction
+    }
+    
+    func createTransactionTemplate() -> TransactionTemplate {
+        return NSEntityDescription.insertNewObject(forEntityName: TransactionTemplate.entityName, into: self.viewContext) as! TransactionTemplate
     }
     
     func createAchievementTransactionWith(text: String, amount: Float, date: Date) -> AchievementTransaction {
@@ -98,6 +108,10 @@ class AchievementsDataModel {
         self.save()
     }
     
+    func remove(transactionTemplate template: TransactionTemplate) {
+        self.viewContext.delete(template)
+    }
+    
     func purgeRecent() {
         let fetchRequest : NSFetchRequest<AchievementTransaction> = AchievementTransaction.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
@@ -139,6 +153,9 @@ class AchievementsDataModel {
         
         request = NSBatchDeleteRequest(fetchRequest: HistoricalTransaction.fetchRequest())
         try! viewContext.execute(request)
+        
+        request = NSBatchDeleteRequest(fetchRequest: TransactionTemplate.fetchRequest())
+        try! viewContext.execute(request)
     }
     
     // MARK: Save
@@ -151,7 +168,7 @@ class AchievementsDataModel {
         }
     }
     
-    // MARK: Recalculation
+    // MARK: Recalculation of Historical Balances
     func recalculateHistoricalBalances(from element: HistoricalTransaction?) {
         if element != nil {
             recalculateHistoricalBalances(from: historicalTransactionsReverse.firstIndex(of: element!))

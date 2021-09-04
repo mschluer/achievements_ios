@@ -25,6 +25,7 @@
 		B349499326E1483E00829A5F /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349499226E1483E00829A5F /* HistoryTableViewController.swift */; };
 		B349499526E1670F00829A5F /* TransactionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349499426E1670F00829A5F /* TransactionDetailViewController.swift */; };
 		B349499726E3D31100829A5F /* TransactionTemplatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349499626E3D31100829A5F /* TransactionTemplatesViewController.swift */; };
+		B349499926E3DB6E00829A5F /* TransactionTemplateFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349499826E3DB6E00829A5F /* TransactionTemplateFormController.swift */; };
 		B381160426E10B130090029D /* HistoricalTransaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B381160226E10B130090029D /* HistoricalTransaction+CoreDataProperties.swift */; };
 		B381160526E10B130090029D /* HistoricalTransaction+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B381160326E10B130090029D /* HistoricalTransaction+CoreDataClass.swift */; };
 		BFD6C785F97405A1226BF454 /* Pods_achievements_achievementsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1A735B418EFC8B305903A53 /* Pods_achievements_achievementsUITests.framework */; };
@@ -73,6 +74,7 @@
 		B349499226E1483E00829A5F /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
 		B349499426E1670F00829A5F /* TransactionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewController.swift; sourceTree = "<group>"; };
 		B349499626E3D31100829A5F /* TransactionTemplatesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTemplatesViewController.swift; sourceTree = "<group>"; };
+		B349499826E3DB6E00829A5F /* TransactionTemplateFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTemplateFormController.swift; sourceTree = "<group>"; };
 		B381160226E10B130090029D /* HistoricalTransaction+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HistoricalTransaction+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B381160326E10B130090029D /* HistoricalTransaction+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HistoricalTransaction+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B91FC670CCE80E443AB4694D /* Pods_achievements.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_achievements.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -215,6 +217,7 @@
 				B349499226E1483E00829A5F /* HistoryTableViewController.swift */,
 				B349499426E1670F00829A5F /* TransactionDetailViewController.swift */,
 				B349499626E3D31100829A5F /* TransactionTemplatesViewController.swift */,
+				B349499826E3DB6E00829A5F /* TransactionTemplateFormController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -442,6 +445,7 @@
 			files = (
 				B381160526E10B130090029D /* HistoricalTransaction+CoreDataClass.swift in Sources */,
 				B349499326E1483E00829A5F /* HistoryTableViewController.swift in Sources */,
+				B349499926E3DB6E00829A5F /* TransactionTemplateFormController.swift in Sources */,
 				B328327326DC2D02007CAD2A /* TransactionFormController.swift in Sources */,
 				B328326C26DBD253007CAD2A /* AchievementTransaction+CoreDataClass.swift in Sources */,
 				B349499726E3D31100829A5F /* TransactionTemplatesViewController.swift in Sources */,

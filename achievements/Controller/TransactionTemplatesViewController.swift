@@ -91,6 +91,7 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
         edit.backgroundColor = .systemYellow
         
         let delete = UIContextualAction(style: .destructive, title: "Löschen") { (action, view, completion) in
+            self.swipeLeftDelete(at: indexPath)
             completion(true)
         }
         
@@ -115,6 +116,13 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
     
     private func bookTransactionTemplate(transactionTemplate template: TransactionTemplate) {
         performSegue(withIdentifier: "BookTransactionTemplateSegue", sender: template)
+    }
+    
+    private func swipeLeftDelete(at indexPath: IndexPath) {
+        achievementsDataModel?.remove(transactionTemplate: transactionTemplates[indexPath.item])
+        transactionTemplates = achievementsDataModel?.transactionTemplates ?? []
+        
+        self.templatesTable.deleteRows(at: [indexPath], with: .automatic)
     }
     
     // MARK: Setup Steps

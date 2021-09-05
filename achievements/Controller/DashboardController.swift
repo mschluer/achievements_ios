@@ -125,7 +125,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     
     // MARK: Action Handlers
     private func mainMenuResetButtonPressed() {
-        let deletionAlert = UIAlertController(title: "Are you sure?", message: "Reset deletes all your data including historical transactions, templates and settings. Only do this is you are entirely sure what you are doing!", preferredStyle: .actionSheet)
+        let deletionAlert = UIAlertController(title: "Sicher?", message: "Der Reset setzt alle Daten der App zurück. Dies kann nicht rückgängig gemacht werden!", preferredStyle: .actionSheet)
         deletionAlert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { _ in
             self.resetApplication()
         }))

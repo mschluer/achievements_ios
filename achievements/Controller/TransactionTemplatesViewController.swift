@@ -36,6 +36,11 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
             let destination = segue.destination as! TransactionTemplateFormController
             
             destination.achievementsDataModel = achievementsDataModel
+        } else if segue.identifier == "BookTransactionTemplateSegue" {
+            let destination = segue.destination as! TransactionFormController
+            
+            destination.transactionTemplate = (sender as! TransactionTemplate)
+            destination.achievementTransactionModel = self.achievementsDataModel
         }
     }
     
@@ -63,7 +68,7 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        bookTransactionTemplate(transactionTemplate: transactionTemplates[indexPath.item])
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -106,6 +111,10 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
                 amount: template.amount,
                 date: Date())
         }
+    }
+    
+    private func bookTransactionTemplate(transactionTemplate template: TransactionTemplate) {
+        performSegue(withIdentifier: "BookTransactionTemplateSegue", sender: template)
     }
     
     // MARK: Setup Steps

@@ -101,6 +101,7 @@
                     <navigationItem key="navigationItem" title="Vorlagen" id="2AO-3U-5XN"/>
                     <connections>
                         <outlet property="templatesTable" destination="Vnz-8V-L3B" id="tHf-Q4-m0x"/>
+                        <segue destination="zUx-eK-QHC" kind="show" identifier="BookTransactionTemplateSegue" id="jck-ry-h6I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9xl-0c-B70" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -510,7 +511,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="ada-9d-Mi3"/>
-        <segue reference="D9y-fI-rBU"/>
+        <segue reference="jck-ry-h6I"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="folder" catalog="system" width="128" height="97"/>

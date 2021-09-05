@@ -11,6 +11,7 @@ class TransactionFormController: UIViewController, UITextFieldDelegate {
     // MARK: Variables
     public var achievementTransaction: AchievementTransaction?
     public var achievementTransactionModel : AchievementsDataModel?
+    public var transactionTemplate : TransactionTemplate?
 
     // MARK: Outlets
     @IBOutlet weak var amountInputField: UITextField!
@@ -25,6 +26,8 @@ class TransactionFormController: UIViewController, UITextFieldDelegate {
         
         if achievementTransaction != nil {
             populateFormWith(achievementTransaction!)
+        } else if transactionTemplate != nil {
+            populateFormWith(transactionTemplate!)
         }
     }
     
@@ -100,6 +103,24 @@ class TransactionFormController: UIViewController, UITextFieldDelegate {
         
         if transaction.date != nil {
             datePicker.date = transaction.date!
+        }
+    }
+    
+    private func populateFormWith(_ template: TransactionTemplate) {
+        if template.amount != 0 {
+            amountInputField.text = "\(template.amount)"
+            
+            if template.amount < 0 {
+                amountInputField.textColor = .systemRed
+            } else if template.amount == 0 {
+                amountInputField.textColor = .none
+            }
+        } else {
+            amountInputField.text = ""
+        }
+        
+        if template.text != nil {
+            titleInputField.text = template.text
         }
     }
 }

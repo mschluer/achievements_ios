@@ -49,6 +49,7 @@ class TransactionTemplateFormController: UIViewController, UITextFieldDelegate {
         
         template?.text = titleInputField.text!
         template?.amount = (amountInputField.text as NSString?)?.floatValue ?? 0.0
+        template?.recurring = true
         achievementsDataModel?.save()
         
         self.navigationController!.popViewController(animated: true)

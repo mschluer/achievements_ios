@@ -50,9 +50,11 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
             if transactionTemplates[indexPath.item].amount < 0 {
                 cell.detailTextLabel?.textColor = UIColor.systemRed
                 cell.detailTextLabel?.text = String (format: "%.2f", transactionTemplates[indexPath.item].amount)
-            } else {
+            } else if transactionTemplates[indexPath.item].amount > 0 {
                 cell.detailTextLabel?.textColor = UIColor.systemGreen
                 cell.detailTextLabel?.text = String (format: "%.2f", transactionTemplates[indexPath.item].amount)
+            } else {
+                cell.detailTextLabel?.text = ""
             }
             
             return cell
@@ -60,7 +62,51 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
         return UITableViewCell()
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let book = UIContextualAction(style: .normal, title: "Buchen") { (action, view, completion) in
+            self.quickBookTransactionTemplate(transactionTemplate: self.transactionTemplates[indexPath.item])
+            completion(false)
+        }
+        book.backgroundColor = .systemGreen
+        
+        let config = UISwipeActionsConfiguration(actions: [book])
+        config.performsFirstActionWithFullSwipe = true
+        
+        return config
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let edit = UIContextualAction(style: .normal, title: "Bearbeiten") { (action, view, completion) in
+            completion(false)
+        }
+        edit.backgroundColor = .systemYellow
+        
+        let delete = UIContextualAction(style: .destructive, title: "Löschen") { (action, view, completion) in
+            completion(true)
+        }
+        
+        let config = UISwipeActionsConfiguration(actions: [delete, edit])
+        
+        return config
+    }
+    
     // MARK: Action Handlers
+    private func quickBookTransactionTemplate(transactionTemplate template: TransactionTemplate) {
+        if template.text == "" || template.amount == 0 {
+            let insufficientDataAlert = UIAlertController(title: "Unzureichende Daten", message: "Um diese Vorlage schnell zu buchen, müssen die Daten vollständig sein.", preferredStyle: .alert)
+            insufficientDataAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            self.present(insufficientDataAlert, animated: true)
+        } else {
+            _ = self.achievementsDataModel?.createAchievementTransactionWith(
+                text: template.text!,
+                amount: template.amount,
+                date: Date())
+        }
+    }
     
     // MARK: Setup Steps
     private func setupTemplateTable() {

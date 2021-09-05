@@ -41,6 +41,11 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
             
             destination.transactionTemplate = (sender as! TransactionTemplate)
             destination.achievementTransactionModel = self.achievementsDataModel
+        } else if segue.identifier == "EditTransactionTemplateSegue" {
+            let destination = segue.destination as! TransactionTemplateFormController
+            
+            destination.achievementsDataModel = achievementsDataModel
+            destination.transactionTemplate = sender as! TransactionTemplate
         }
     }
     
@@ -68,12 +73,12 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        bookTransactionTemplate(transactionTemplate: transactionTemplates[indexPath.item])
+        transactionTemplateCellPressed(at: indexPath)
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let book = UIContextualAction(style: .normal, title: "Buchen") { (action, view, completion) in
-            self.quickBookTransactionTemplate(transactionTemplate: self.transactionTemplates[indexPath.item])
+            self.swipeRightQuickBook(transactionTemplate: self.transactionTemplates[indexPath.item])
             completion(false)
         }
         book.backgroundColor = .systemGreen
@@ -86,6 +91,7 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let edit = UIContextualAction(style: .normal, title: "Bearbeiten") { (action, view, completion) in
+            self.swipeLeftEdit(at: indexPath)
             completion(false)
         }
         edit.backgroundColor = .systemYellow
@@ -101,7 +107,7 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
     }
     
     // MARK: Action Handlers
-    private func quickBookTransactionTemplate(transactionTemplate template: TransactionTemplate) {
+    private func swipeRightQuickBook(transactionTemplate template: TransactionTemplate) {
         if template.text == "" || template.amount == 0 {
             let insufficientDataAlert = UIAlertController(title: "Unzureichende Daten", message: "Um diese Vorlage schnell zu buchen, müssen die Daten vollständig sein.", preferredStyle: .alert)
             insufficientDataAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
@@ -114,8 +120,12 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
         }
     }
     
-    private func bookTransactionTemplate(transactionTemplate template: TransactionTemplate) {
-        performSegue(withIdentifier: "BookTransactionTemplateSegue", sender: template)
+    private func transactionTemplateCellPressed(at indexPath: IndexPath) {
+        performSegue(withIdentifier: "BookTransactionTemplateSegue", sender: transactionTemplates[indexPath.item])
+    }
+    
+    private func swipeLeftEdit(at indexPath: IndexPath) {
+        performSegue(withIdentifier: "EditTransactionTemplateSegue", sender: transactionTemplates[indexPath.item])
     }
     
     private func swipeLeftDelete(at indexPath: IndexPath) {

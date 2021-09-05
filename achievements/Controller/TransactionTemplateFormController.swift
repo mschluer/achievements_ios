@@ -10,6 +10,9 @@ import UIKit
 class TransactionTemplateFormController: UIViewController, UITextFieldDelegate {
     // MARK: Persistence Models
     public var achievementsDataModel : AchievementsDataModel?
+    
+    // MARK: Variables
+    public var transactionTemplate : TransactionTemplate?
 
     // MARK: Outlets
     @IBOutlet weak var amountInputField: UITextField!
@@ -20,6 +23,10 @@ class TransactionTemplateFormController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         titleInputField.delegate = self
+        
+        if let template = self.transactionTemplate {
+            populateFormWith(template)
+        }
     }
     
     // MARK: Navigation
@@ -50,6 +57,12 @@ class TransactionTemplateFormController: UIViewController, UITextFieldDelegate {
         template?.text = titleInputField.text!
         template?.amount = (amountInputField.text as NSString?)?.floatValue ?? 0.0
         template?.recurring = true
+        
+        // Check whether it was an edit
+        if let oldTransactionTemplate = self.transactionTemplate {
+            achievementsDataModel?.remove(transactionTemplate: oldTransactionTemplate)
+        }
+        
         achievementsDataModel?.save()
         
         self.navigationController!.popViewController(animated: true)
@@ -63,6 +76,24 @@ class TransactionTemplateFormController: UIViewController, UITextFieldDelegate {
             return signedString.replacingOccurrences(of: "-", with: "")
         } else {
             return "-\(signedString)"
+        }
+    }
+    
+    private func populateFormWith(_ template: TransactionTemplate) {
+        if template.amount != 0 {
+            amountInputField.text = "\(template.amount)"
+            
+            if template.amount < 0 {
+                amountInputField.textColor = .systemRed
+            } else if template.amount == 0 {
+                amountInputField.textColor = .none
+            }
+        } else {
+            amountInputField.text = ""
+        }
+        
+        if template.text != nil {
+            titleInputField.text = template.text
         }
     }
 }

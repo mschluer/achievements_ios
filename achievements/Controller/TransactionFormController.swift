@@ -56,12 +56,12 @@ class TransactionFormController: UIViewController, UITextFieldDelegate {
             alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
             self.present(alert, animated: true)
         } else {
-            // Remove Old Items
-            if let historicalTransaction = self.achievementTransaction?.historicalTransaction {
-                achievementTransactionModel?.viewContext.delete(historicalTransaction)
-            } else {
-                if let transaction = achievementTransaction {
-                    achievementTransactionModel?.viewContext.delete(transaction)
+            // Remove Old Items if edit
+            if let transaction = self.achievementTransaction {
+                if let historicalTransaciton = transaction.historicalTransaction {
+                    achievementTransactionModel?.remove(historicalTransaction: historicalTransaciton)
+                } else {
+                    achievementTransactionModel?.remove(achievementTransaction: transaction)
                 }
             }
             

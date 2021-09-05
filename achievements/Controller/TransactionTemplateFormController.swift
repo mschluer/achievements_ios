@@ -27,6 +27,8 @@ class TransactionTemplateFormController: UIViewController, UITextFieldDelegate {
         if let template = self.transactionTemplate {
             populateFormWith(template)
         }
+        
+        amountInputField.becomeFirstResponder()
     }
     
     // MARK: Navigation

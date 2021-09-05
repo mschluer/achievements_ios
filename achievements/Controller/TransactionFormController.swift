@@ -29,6 +29,8 @@ class TransactionFormController: UIViewController, UITextFieldDelegate {
         } else if transactionTemplate != nil {
             populateFormWith(transactionTemplate!)
         }
+        
+        amountInputField.becomeFirstResponder()
     }
     
     // MARK: TextFieldDelegate

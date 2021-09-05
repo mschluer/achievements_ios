@@ -11,6 +11,7 @@ class TransactionFormController: UIViewController, UITextFieldDelegate {
     // MARK: Variables
     public var achievementTransaction: AchievementTransaction?
     public var achievementTransactionModel : AchievementsDataModel?
+    public var transactionTemplate : TransactionTemplate?
 
     // MARK: Outlets
     @IBOutlet weak var amountInputField: UITextField!
@@ -25,18 +26,12 @@ class TransactionFormController: UIViewController, UITextFieldDelegate {
         
         if achievementTransaction != nil {
             populateFormWith(achievementTransaction!)
+        } else if transactionTemplate != nil {
+            populateFormWith(transactionTemplate!)
         }
+        
+        amountInputField.becomeFirstResponder()
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     // MARK: TextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -63,12 +58,12 @@ class TransactionFormController: UIViewController, UITextFieldDelegate {
             alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
             self.present(alert, animated: true)
         } else {
-            // Remove Old Items
-            if let historicalTransaction = self.achievementTransaction?.historicalTransaction {
-                achievementTransactionModel?.viewContext.delete(historicalTransaction)
-            } else {
-                if let transaction = achievementTransaction {
-                    achievementTransactionModel?.viewContext.delete(transaction)
+            // Remove Old Items if edit
+            if let transaction = self.achievementTransaction {
+                if let historicalTransaciton = transaction.historicalTransaction {
+                    achievementTransactionModel?.remove(historicalTransaction: historicalTransaciton)
+                } else {
+                    achievementTransactionModel?.remove(achievementTransaction: transaction)
                 }
             }
             
@@ -110,6 +105,24 @@ class TransactionFormController: UIViewController, UITextFieldDelegate {
         
         if transaction.date != nil {
             datePicker.date = transaction.date!
+        }
+    }
+    
+    private func populateFormWith(_ template: TransactionTemplate) {
+        if template.amount != 0 {
+            amountInputField.text = "\(template.amount)"
+            
+            if template.amount < 0 {
+                amountInputField.textColor = .systemRed
+            } else if template.amount == 0 {
+                amountInputField.textColor = .none
+            }
+        } else {
+            amountInputField.text = ""
+        }
+        
+        if template.text != nil {
+            titleInputField.text = template.text
         }
     }
 }

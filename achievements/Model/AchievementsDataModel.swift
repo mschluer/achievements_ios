@@ -44,6 +44,68 @@ class AchievementsDataModel {
         return try! viewContext.fetch(request)
     }
     
+    var transactionTemplates: [TransactionTemplate] {
+        let request : NSFetchRequest<TransactionTemplate> = TransactionTemplate.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "text", ascending: true)]
+        return try! viewContext.fetch(request)
+    }
+    
+    var recentIncomes : [AchievementTransaction] {
+        let fetchRequest : NSFetchRequest<AchievementTransaction> = AchievementTransaction.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "amount >= 0")
+        return try! self.viewContext.fetch(fetchRequest)
+    }
+    
+    var totalRecentIncomes : Float {
+        var result : Float = 0
+        for income in recentIncomes {
+            result += income.amount
+        }
+        return result
+    }
+    
+    var recentExpenses : [AchievementTransaction] {
+        let fetchRequest : NSFetchRequest<AchievementTransaction> = AchievementTransaction.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "amount < 0")
+        return try! self.viewContext.fetch(fetchRequest)
+    }
+    
+    var totalRecentExpenses : Float {
+        var result : Float = 0
+        for expense in recentExpenses {
+            result += expense.amount
+        }
+        return result
+    }
+    
+    var historicalIncomes : [HistoricalTransaction] {
+        let fetchRequest : NSFetchRequest<HistoricalTransaction> = HistoricalTransaction.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "amount >= 0")
+        return try! self.viewContext.fetch(fetchRequest)
+    }
+    
+    var totalHistoricalIncomes : Float {
+        var result : Float = 0
+        for income in historicalIncomes {
+            result += income.amount
+        }
+        return result
+    }
+    
+    var historicalExpenses : [HistoricalTransaction] {
+        let fetchRequest : NSFetchRequest<HistoricalTransaction> = HistoricalTransaction.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "amount < 0")
+        return try! self.viewContext.fetch(fetchRequest)
+    }
+    
+    var totalHistoricalExpenses : Float {
+        var result : Float = 0
+        for expense in historicalExpenses {
+            result += expense.amount
+        }
+        return result
+    }
+    
     // MARK: Insertions
     func createAchievementTransaction() -> AchievementTransaction {
         return NSEntityDescription.insertNewObject(forEntityName: AchievementTransaction.entityName, into: self.viewContext) as! AchievementTransaction
@@ -51,6 +113,10 @@ class AchievementsDataModel {
     
     func createHistoricalTransaction() -> HistoricalTransaction {
         return NSEntityDescription.insertNewObject(forEntityName: HistoricalTransaction.entityName, into: self.viewContext) as! HistoricalTransaction
+    }
+    
+    func createTransactionTemplate() -> TransactionTemplate {
+        return NSEntityDescription.insertNewObject(forEntityName: TransactionTemplate.entityName, into: self.viewContext) as! TransactionTemplate
     }
     
     func createAchievementTransactionWith(text: String, amount: Float, date: Date) -> AchievementTransaction {
@@ -98,16 +164,17 @@ class AchievementsDataModel {
         self.save()
     }
     
+    func remove(transactionTemplate template: TransactionTemplate) {
+        self.viewContext.delete(template)
+    }
+    
     func purgeRecent() {
         let fetchRequest : NSFetchRequest<AchievementTransaction> = AchievementTransaction.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
         
         fetchRequest.predicate = NSPredicate(format: "amount >= 0")
         var recentIncomes = try! self.viewContext.fetch(fetchRequest)
-        var totalIncomes : Float = 0
-        for income in recentIncomes {
-            totalIncomes += income.amount
-        }
+        var totalIncomes = totalRecentIncomes
         
         fetchRequest.predicate = NSPredicate(format: "amount < 0")
         var recentExpenses = try! self.viewContext.fetch(fetchRequest)
@@ -139,6 +206,9 @@ class AchievementsDataModel {
         
         request = NSBatchDeleteRequest(fetchRequest: HistoricalTransaction.fetchRequest())
         try! viewContext.execute(request)
+        
+        request = NSBatchDeleteRequest(fetchRequest: TransactionTemplate.fetchRequest())
+        try! viewContext.execute(request)
     }
     
     // MARK: Save
@@ -151,7 +221,7 @@ class AchievementsDataModel {
         }
     }
     
-    // MARK: Recalculation
+    // MARK: Recalculation of Historical Balances
     func recalculateHistoricalBalances(from element: HistoricalTransaction?) {
         if element != nil {
             recalculateHistoricalBalances(from: historicalTransactionsReverse.firstIndex(of: element!))

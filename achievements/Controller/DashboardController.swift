@@ -64,6 +64,14 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             
             destination.achievementTransaction = (sender as! AchievementTransaction)
             destination.achievementTransactionModel = achievementsDataModel
+        } else if segue.identifier == "ShowTemplatesViewSegue" {
+            let destination = segue.destination as! TransactionTemplatesViewController
+            
+            destination.achievementsDataModel = achievementsDataModel
+        } else if segue.identifier == "ShowStatisticsViewSegue" {
+            let destination = segue.destination as! StatisticsViewController
+            
+            destination.achievementsDataModel = achievementsDataModel
         }
     }
 
@@ -121,11 +129,11 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     
     // MARK: Action Handlers
     private func mainMenuResetButtonPressed() {
-        let deletionAlert = UIAlertController(title: "Are you sure?", message: "Reset deletes all your data including historical transactions, templates and settings. Only do this is you are entirely sure what you are doing!", preferredStyle: .actionSheet)
-        deletionAlert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { _ in
+        let deletionAlert = UIAlertController(title: "Sicher?", message: "Der Reset setzt alle Daten der App zurück. Dies kann nicht rückgängig gemacht werden!", preferredStyle: .actionSheet)
+        deletionAlert.addAction(UIAlertAction(title: "App Zurücksetzen", style: .destructive, handler: { _ in
             self.resetApplication()
         }))
-        deletionAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        deletionAlert.addAction(UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil))
         
         self.present(deletionAlert, animated: true)
     }
@@ -137,6 +145,10 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     
     private func mainMenuHistoryButtonPressed() {
         performSegue(withIdentifier: "ShowHistorySegue", sender: menuButton)
+    }
+    
+    private func mainMenuStatisticsButtonPressed() {
+        performSegue(withIdentifier: "ShowStatisticsViewSegue", sender: menuButton)
     }
     
     private func transactionCellPressed(_ indexPath: IndexPath) {
@@ -174,7 +186,9 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             UIAction(title: "Historie", image: UIImage(systemName: "clock.arrow.circlepath"), handler: { _ in
                 self.mainMenuHistoryButtonPressed()
             }),
-            UIAction(title: "Statistiken", image: UIImage(systemName: "chart.bar"), handler: { _ in })
+            UIAction(title: "Statistiken", image: UIImage(systemName: "chart.bar"), handler: { _ in
+                self.mainMenuStatisticsButtonPressed()
+            })
         ])
         menuButton.menu = UIMenu(title: "", children: [mainMenuItems, mainMenuDestruct])
     }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Charts
 
 class StatisticsViewController: UIViewController {
     // MARK: Persistence Models
@@ -22,6 +23,7 @@ class StatisticsViewController: UIViewController {
     @IBOutlet weak var totalExpensesLabel: UILabel!
     @IBOutlet weak var amountIncomesLabel: UILabel!
     @IBOutlet weak var amountExpensesLabel: UILabel!
+    @IBOutlet weak var balanceLineChart: LineChartView!
     
     // MARK: View Lifecycle
     override func viewDidLoad() {
@@ -29,6 +31,7 @@ class StatisticsViewController: UIViewController {
 
         self.setupRecentStatistics()
         self.setupHistoricalStatistics()
+        self.setupBalanceLineChart()
     }
     
     // MARK: Setup Steps
@@ -47,6 +50,46 @@ class StatisticsViewController: UIViewController {
             totalExpensesLabel.text = String(format: "%.2f", model.totalHistoricalExpenses)
             amountIncomesLabel.text = "\(model.historicalIncomes.count)"
             amountExpensesLabel.text = "\(model.historicalExpenses.count)"
+        }
+    }
+    
+    private func setupBalanceLineChart() {
+        if let model = achievementsDataModel {
+            
+            var chartEntries = [ChartDataEntry]()
+            for i in 0..<model.historicalTransactions.count {
+                chartEntries.append(ChartDataEntry(x: Double(i), y: Double(model.historicalTransactionsReverse[i].balance)))
+            }
+            let balanceLine = LineChartDataSet(entries: chartEntries)
+            balanceLine.colors = [NSUIColor.blue]
+            balanceLine.drawCirclesEnabled = false
+            balanceLine.drawValuesEnabled = false
+            
+            var zeroLineEntries = [ChartDataEntry]()
+            for i in 0..<model.historicalTransactions.count {
+                zeroLineEntries.append(ChartDataEntry(x: Double(i), y: 0.0))
+            }
+            let zeroLine = LineChartDataSet(entries: zeroLineEntries)
+            zeroLine.colors = [NSUIColor.black]
+            zeroLine.drawCirclesEnabled = false
+            zeroLine.drawValuesEnabled = false
+            
+            let data = LineChartData()
+            data.addDataSet(balanceLine)
+            data.addDataSet(zeroLine)
+            
+            balanceLineChart.data = data
+            
+            balanceLineChart.rightAxis.enabled = false
+            balanceLineChart.drawGridBackgroundEnabled = false
+            
+            balanceLineChart.leftAxis.enabled = false
+            balanceLineChart.xAxis.enabled = false
+            balanceLineChart.legend.enabled = false
+            balanceLineChart.doubleTapToZoomEnabled = false
+            balanceLineChart.highlightPerTapEnabled = false
+            balanceLineChart.highlightPerDragEnabled = false
+            
         }
     }
     

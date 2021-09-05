@@ -6,6 +6,7 @@ target 'achievements' do
   use_frameworks!
 
   # Pods for achievements
+  pod 'Charts'
 
   target 'achievementsTests' do
     inherit! :search_paths

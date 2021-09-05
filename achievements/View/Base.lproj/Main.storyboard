@@ -525,6 +525,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Statistiken" id="hq8-ys-vMb"/>
+                    <connections>
+                        <outlet property="amountExpensesLabel" destination="X2f-R2-fkd" id="dGp-j0-CrG"/>
+                        <outlet property="amountIncomesLabel" destination="yo3-5j-qyx" id="bvc-i6-tgi"/>
+                        <outlet property="amountRecentExpensesLabel" destination="k9l-Sa-Hoa" id="tQw-SX-OOn"/>
+                        <outlet property="amountRecentIncomesLabel" destination="APA-o5-9SX" id="2pr-er-LtV"/>
+                        <outlet property="totalExpensesLabel" destination="TAx-Us-M4u" id="ieu-JQ-Ga6"/>
+                        <outlet property="totalIncomesLabel" destination="ZPH-rU-vaF" id="fYE-Q8-ZH4"/>
+                        <outlet property="totalRecentExpensesLabel" destination="OQf-E6-HOE" id="1yo-Vx-GXL"/>
+                        <outlet property="totalRecentIncomesLabel" destination="eF6-zg-DTD" id="mtm-we-0rb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bAC-C5-KLg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

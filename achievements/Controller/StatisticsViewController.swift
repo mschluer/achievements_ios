@@ -70,7 +70,7 @@ class StatisticsViewController: UIViewController {
                 zeroLineEntries.append(ChartDataEntry(x: Double(i), y: 0.0))
             }
             let zeroLine = LineChartDataSet(entries: zeroLineEntries)
-            zeroLine.colors = [NSUIColor.black]
+            zeroLine.colors = [UIColor.systemGray]
             zeroLine.drawCirclesEnabled = false
             zeroLine.drawValuesEnabled = false
             

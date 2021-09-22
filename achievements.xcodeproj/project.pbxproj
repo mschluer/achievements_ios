@@ -31,6 +31,8 @@
 		B3C5C4AF26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4AD26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift */; };
 		B3C5C4B026E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */; };
 		B3C5C4B226E5267600A52CBC /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4B126E5267600A52CBC /* StatisticsViewController.swift */; };
+		B3FB47FD26FB3D3700494C4F /* TransactionTemplateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FB47FC26FB3D3700494C4F /* TransactionTemplateTest.swift */; };
+		B3FB480026FB471200494C4F /* AchievementsDataModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FB47FF26FB471200494C4F /* AchievementsDataModelTest.swift */; };
 		BFD6C785F97405A1226BF454 /* Pods_achievements_achievementsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1A735B418EFC8B305903A53 /* Pods_achievements_achievementsUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +85,8 @@
 		B3C5C4AD26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionTemplate+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionTemplate+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B3C5C4B126E5267600A52CBC /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
+		B3FB47FC26FB3D3700494C4F /* TransactionTemplateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTemplateTest.swift; sourceTree = "<group>"; };
+		B3FB47FF26FB471200494C4F /* AchievementsDataModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsDataModelTest.swift; sourceTree = "<group>"; };
 		B91FC670CCE80E443AB4694D /* Pods_achievements.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_achievements.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1A735B418EFC8B305903A53 /* Pods_achievements_achievementsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_achievements_achievementsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C896202FB7D32745338C8FF5 /* Pods_achievementsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_achievementsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,6 +175,7 @@
 		B328324226D93F23007CAD2A /* achievementsTests */ = {
 			isa = PBXGroup;
 			children = (
+				B3FB47FA26FB3D0900494C4F /* Model */,
 				B328324326D93F23007CAD2A /* achievementsTests.swift */,
 				B328324526D93F23007CAD2A /* Info.plist */,
 			);
@@ -246,6 +251,31 @@
 				B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */,
 			);
 			path = TransactionTemplate;
+			sourceTree = "<group>";
+		};
+		B3FB47FA26FB3D0900494C4F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B3FB47FE26FB42AD00494C4F /* AchievementTransaction */,
+				B3FB47FB26FB3D1500494C4F /* TransactionTemplate */,
+				B3FB47FF26FB471200494C4F /* AchievementsDataModelTest.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B3FB47FB26FB3D1500494C4F /* TransactionTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				B3FB47FC26FB3D3700494C4F /* TransactionTemplateTest.swift */,
+			);
+			path = TransactionTemplate;
+			sourceTree = "<group>";
+		};
+		B3FB47FE26FB42AD00494C4F /* AchievementTransaction */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AchievementTransaction;
 			sourceTree = "<group>";
 		};
 		E04F7E163FA5D1D646D68CC9 /* Frameworks */ = {
@@ -520,6 +550,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3FB47FD26FB3D3700494C4F /* TransactionTemplateTest.swift in Sources */,
+				B3FB480026FB471200494C4F /* AchievementsDataModelTest.swift in Sources */,
 				B328324426D93F23007CAD2A /* achievementsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

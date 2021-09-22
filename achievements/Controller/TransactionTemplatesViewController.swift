@@ -45,7 +45,7 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
             let destination = segue.destination as! TransactionTemplateFormController
             
             destination.achievementsDataModel = achievementsDataModel
-            destination.transactionTemplate = sender as! TransactionTemplate
+            destination.transactionTemplate = (sender as! TransactionTemplate)
         }
     }
     

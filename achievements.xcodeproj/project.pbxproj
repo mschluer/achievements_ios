@@ -14,7 +14,6 @@
 		B328323426D93F22007CAD2A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B328323226D93F22007CAD2A /* Main.storyboard */; };
 		B328323626D93F23007CAD2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B328323526D93F23007CAD2A /* Assets.xcassets */; };
 		B328323926D93F23007CAD2A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B328323726D93F23007CAD2A /* LaunchScreen.storyboard */; };
-		B328324426D93F23007CAD2A /* achievementsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328324326D93F23007CAD2A /* achievementsTests.swift */; };
 		B328324F26D93F23007CAD2A /* achievementsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328324E26D93F23007CAD2A /* achievementsUITests.swift */; };
 		B328325D26D94909007CAD2A /* DashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328325C26D94909007CAD2A /* DashboardController.swift */; };
 		B328326926DBD1A0007CAD2A /* AchievementsDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B328326726DBD1A0007CAD2A /* AchievementsDataModel.xcdatamodeld */; };
@@ -28,6 +27,8 @@
 		B349499926E3DB6E00829A5F /* TransactionTemplateFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349499826E3DB6E00829A5F /* TransactionTemplateFormController.swift */; };
 		B381160426E10B130090029D /* HistoricalTransaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B381160226E10B130090029D /* HistoricalTransaction+CoreDataProperties.swift */; };
 		B381160526E10B130090029D /* HistoricalTransaction+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B381160326E10B130090029D /* HistoricalTransaction+CoreDataClass.swift */; };
+		B3939ABD2704797C005D243B /* AchievementTransactionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939ABC2704797C005D243B /* AchievementTransactionTest.swift */; };
+		B3939AC0270481FC005D243B /* HistoricalTransactionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939ABF270481FC005D243B /* HistoricalTransactionTest.swift */; };
 		B3C5C4AF26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4AD26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift */; };
 		B3C5C4B026E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */; };
 		B3C5C4B226E5267600A52CBC /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4B126E5267600A52CBC /* StatisticsViewController.swift */; };
@@ -65,7 +66,6 @@
 		B328323826D93F23007CAD2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B328323A26D93F23007CAD2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B328323F26D93F23007CAD2A /* achievementsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = achievementsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B328324326D93F23007CAD2A /* achievementsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = achievementsTests.swift; sourceTree = "<group>"; };
 		B328324526D93F23007CAD2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B328324A26D93F23007CAD2A /* achievementsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = achievementsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B328324E26D93F23007CAD2A /* achievementsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = achievementsUITests.swift; sourceTree = "<group>"; };
@@ -82,6 +82,8 @@
 		B349499826E3DB6E00829A5F /* TransactionTemplateFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTemplateFormController.swift; sourceTree = "<group>"; };
 		B381160226E10B130090029D /* HistoricalTransaction+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HistoricalTransaction+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B381160326E10B130090029D /* HistoricalTransaction+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HistoricalTransaction+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B3939ABC2704797C005D243B /* AchievementTransactionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTransactionTest.swift; sourceTree = "<group>"; };
+		B3939ABF270481FC005D243B /* HistoricalTransactionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalTransactionTest.swift; sourceTree = "<group>"; };
 		B3C5C4AD26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionTemplate+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionTemplate+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B3C5C4B126E5267600A52CBC /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
@@ -176,7 +178,6 @@
 			isa = PBXGroup;
 			children = (
 				B3FB47FA26FB3D0900494C4F /* Model */,
-				B328324326D93F23007CAD2A /* achievementsTests.swift */,
 				B328324526D93F23007CAD2A /* Info.plist */,
 			);
 			path = achievementsTests;
@@ -244,6 +245,22 @@
 			path = HistoricalTransaction;
 			sourceTree = "<group>";
 		};
+		B3939ABB2704796A005D243B /* AchievementTransaction */ = {
+			isa = PBXGroup;
+			children = (
+				B3939ABC2704797C005D243B /* AchievementTransactionTest.swift */,
+			);
+			path = AchievementTransaction;
+			sourceTree = "<group>";
+		};
+		B3939ABE270481E8005D243B /* HistoricalTransaction */ = {
+			isa = PBXGroup;
+			children = (
+				B3939ABF270481FC005D243B /* HistoricalTransactionTest.swift */,
+			);
+			path = HistoricalTransaction;
+			sourceTree = "<group>";
+		};
 		B3C5C4AC26E3E1A200A52CBC /* TransactionTemplate */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,7 +273,8 @@
 		B3FB47FA26FB3D0900494C4F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B3FB47FE26FB42AD00494C4F /* AchievementTransaction */,
+				B3939ABE270481E8005D243B /* HistoricalTransaction */,
+				B3939ABB2704796A005D243B /* AchievementTransaction */,
 				B3FB47FB26FB3D1500494C4F /* TransactionTemplate */,
 				B3FB47FF26FB471200494C4F /* AchievementsDataModelTest.swift */,
 			);
@@ -269,13 +287,6 @@
 				B3FB47FC26FB3D3700494C4F /* TransactionTemplateTest.swift */,
 			);
 			path = TransactionTemplate;
-			sourceTree = "<group>";
-		};
-		B3FB47FE26FB42AD00494C4F /* AchievementTransaction */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AchievementTransaction;
 			sourceTree = "<group>";
 		};
 		E04F7E163FA5D1D646D68CC9 /* Frameworks */ = {
@@ -550,9 +561,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3939ABD2704797C005D243B /* AchievementTransactionTest.swift in Sources */,
 				B3FB47FD26FB3D3700494C4F /* TransactionTemplateTest.swift in Sources */,
+				B3939AC0270481FC005D243B /* HistoricalTransactionTest.swift in Sources */,
 				B3FB480026FB471200494C4F /* AchievementsDataModelTest.swift in Sources */,
-				B328324426D93F23007CAD2A /* achievementsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

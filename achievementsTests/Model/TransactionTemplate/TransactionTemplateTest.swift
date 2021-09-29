@@ -62,7 +62,6 @@ class TransactionTemplateTest: XCTestCase {
         let recurring = [ true, true, true ]
         
         for i in 0...2 {
-            print("creating item \(i)")
             let template = dataModel.createTransactionTemplate()
             
             template.text = texts[i]
@@ -80,11 +79,32 @@ class TransactionTemplateTest: XCTestCase {
         XCTAssertEqual(storedTemplates[2].text, "delta")
     }
     
-    // MARK: Performance Tests
-
-    func testPerformanceExample() throws {
-        self.measure {
-        }
+    func testDeletion() throws {
+        XCTAssertEqual(dataModel.transactionTemplates.count, 0)
+        
+        // Create Templates
+        let firstTemplate = dataModel.createTransactionTemplate()
+        firstTemplate.text = "alpha"
+        firstTemplate.amount = 2.0
+        firstTemplate.recurring = true
+        
+        let secondTemplate = dataModel.createTransactionTemplate()
+        secondTemplate.text = "beta"
+        secondTemplate.amount = 4.0
+        secondTemplate.recurring = true
+        
+        let thirdTemplate = dataModel.createTransactionTemplate()
+        thirdTemplate.text = "delta"
+        thirdTemplate.amount = 6.0
+        thirdTemplate.recurring = true
+        dataModel.save()
+        
+        XCTAssertEqual(dataModel.transactionTemplates.count, 3)
+        
+        dataModel.remove(transactionTemplate: secondTemplate)
+        
+        XCTAssertEqual(dataModel.transactionTemplates.count, 2)
+        XCTAssertEqual(dataModel.transactionTemplates[0].text, "alpha")
+        XCTAssertEqual(dataModel.transactionTemplates[1].text, "delta")
     }
-
 }

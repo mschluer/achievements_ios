@@ -94,7 +94,18 @@ class AchievementsDataModelTest: XCTestCase {
         subject.save()
         
         XCTAssertEqual(subject.historicalExpenses.count, 1)
+    }
+    
+    // MARK: Historical Balance Recalculation
+    func testBalanceRecalculationUponHistoryItemDeletion() throws {
+        _ = subject.createAchievementTransactionWith(text: "alpha", amount: 2.0, date: Date() - 120)
+        let second = subject.createAchievementTransactionWith(text: "beta", amount: 3.0, date: Date() - 60)
+        _ = subject.createAchievementTransactionWith(text: "gamma", amount: -5.0, date: Date())
         
+        subject.remove(historicalTransaction: second.historicalTransaction!)
+        
+        XCTAssertEqual(subject.historicalTransactions[1].balance, 2.0)
+        XCTAssertEqual(subject.historicalTransactions[0].balance, -3.0)
     }
 
     // MARK: Destructive Operations

@@ -118,5 +118,7 @@ class HistoricalTransactionTest: XCTestCase {
         XCTAssertEqual(dataModel.historicalTransactions[0].text, "delta")
         XCTAssertEqual(dataModel.historicalTransactions[1].text, "alpha")
         
+        // Check, whether the recent transaction is removed as well
+        XCTAssertEqual(dataModel.achievementTransactions.count, 2)
     }
 }

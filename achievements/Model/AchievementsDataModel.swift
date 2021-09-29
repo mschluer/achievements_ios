@@ -201,14 +201,22 @@ class AchievementsDataModel {
     }
     
     func clear() {
-        var request = NSBatchDeleteRequest(fetchRequest: AchievementTransaction.fetchRequest())
-        try! viewContext.execute(request)
+        guard let url = persistentContainer.persistentStoreDescriptions.first?.url else { return }
         
-        request = NSBatchDeleteRequest(fetchRequest: HistoricalTransaction.fetchRequest())
-        try! viewContext.execute(request)
+        let persistenStoreCoordinator = persistentContainer.persistentStoreCoordinator
         
-        request = NSBatchDeleteRequest(fetchRequest: TransactionTemplate.fetchRequest())
-        try! viewContext.execute(request)
+        do {
+            try persistenStoreCoordinator.destroyPersistentStore(at: url,
+                                                                 type: NSPersistentStore.StoreType(rawValue: NSSQLiteStoreType),
+                                                                 options: nil)
+            try persistenStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType,
+                                                             configurationName: nil,
+                                                             at: url,
+                                                             options: nil)
+            
+        } catch let error {
+            print("Clearing database resulted in error: \(error.localizedDescription)")
+        }
     }
     
     // MARK: Save

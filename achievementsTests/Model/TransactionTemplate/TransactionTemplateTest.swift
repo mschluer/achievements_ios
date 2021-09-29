@@ -16,6 +16,8 @@ class TransactionTemplateTest: XCTestCase {
     override func setUpWithError() throws {
         self.subject = TransactionTemplate()
         self.dataModel = AchievementsDataModel()
+        
+        dataModel.clear()
     }
 
     override func tearDownWithError() throws {

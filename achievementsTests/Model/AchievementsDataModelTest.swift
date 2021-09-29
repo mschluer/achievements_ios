@@ -14,6 +14,8 @@ class AchievementsDataModelTest: XCTestCase {
     
     override func setUpWithError() throws {
         self.subject = AchievementsDataModel()
+        
+        subject.clear()
     }
 
     override func tearDownWithError() throws {

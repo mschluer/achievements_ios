@@ -14,7 +14,6 @@
 		B328323426D93F22007CAD2A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B328323226D93F22007CAD2A /* Main.storyboard */; };
 		B328323626D93F23007CAD2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B328323526D93F23007CAD2A /* Assets.xcassets */; };
 		B328323926D93F23007CAD2A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B328323726D93F23007CAD2A /* LaunchScreen.storyboard */; };
-		B328324F26D93F23007CAD2A /* achievementsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328324E26D93F23007CAD2A /* achievementsUITests.swift */; };
 		B328325D26D94909007CAD2A /* DashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328325C26D94909007CAD2A /* DashboardController.swift */; };
 		B328326926DBD1A0007CAD2A /* AchievementsDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B328326726DBD1A0007CAD2A /* AchievementsDataModel.xcdatamodeld */; };
 		B328326C26DBD253007CAD2A /* AchievementTransaction+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328326A26DBD253007CAD2A /* AchievementTransaction+CoreDataClass.swift */; };
@@ -68,7 +67,6 @@
 		B328323F26D93F23007CAD2A /* achievementsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = achievementsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B328324526D93F23007CAD2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B328324A26D93F23007CAD2A /* achievementsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = achievementsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B328324E26D93F23007CAD2A /* achievementsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = achievementsUITests.swift; sourceTree = "<group>"; };
 		B328325026D93F23007CAD2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B328325C26D94909007CAD2A /* DashboardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardController.swift; sourceTree = "<group>"; };
 		B328326826DBD1A0007CAD2A /* AchievementsDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AchievementsDataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -186,7 +184,6 @@
 		B328324D26D93F23007CAD2A /* achievementsUITests */ = {
 			isa = PBXGroup;
 			children = (
-				B328324E26D93F23007CAD2A /* achievementsUITests.swift */,
 				B328325026D93F23007CAD2A /* Info.plist */,
 			);
 			path = achievementsUITests;
@@ -572,7 +569,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B328324F26D93F23007CAD2A /* achievementsUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

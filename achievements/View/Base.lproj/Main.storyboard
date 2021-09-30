@@ -34,10 +34,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aez-AK-Bn0">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vnz-8V-L3B">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="730"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="templateCell" textLabel="OzO-K8-rTQ" detailTextLabel="OeE-at-1o6" style="IBUITableViewCellStyleValue1" id="oTX-P7-0RB">
@@ -63,39 +63,41 @@
                                                         </label>
                                                     </subviews>
                                                 </tableViewCellContentView>
+                                                <accessibility key="accessibilityConfiguration" label="templateCell"/>
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
-                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hRI-w3-w8S">
-                                        <rect key="frame" x="0.0" y="730" width="414" height="44"/>
-                                        <items>
-                                            <barButtonItem title="Add" image="plus" catalog="system" style="plain" id="04R-vW-1hV" userLabel="Add">
-                                                <connections>
-                                                    <segue destination="zlz-b9-5oP" kind="show" identifier="AddTransactionTemplateFormSegue" id="Fk0-NM-ax9"/>
-                                                </connections>
-                                            </barButtonItem>
-                                        </items>
-                                    </toolbar>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="Vnz-8V-L3B" firstAttribute="top" secondItem="Aez-AK-Bn0" secondAttribute="top" id="0UA-wg-8R4"/>
-                                    <constraint firstAttribute="bottom" secondItem="hRI-w3-w8S" secondAttribute="bottom" id="FGz-1U-dzC"/>
-                                    <constraint firstAttribute="bottom" secondItem="Vnz-8V-L3B" secondAttribute="bottom" constant="44" id="HIp-HV-e2e"/>
-                                    <constraint firstItem="Vnz-8V-L3B" firstAttribute="leading" secondItem="Aez-AK-Bn0" secondAttribute="leading" id="O9k-60-FwE"/>
-                                    <constraint firstItem="hRI-w3-w8S" firstAttribute="leading" secondItem="Aez-AK-Bn0" secondAttribute="leading" id="P3L-4f-el4"/>
-                                    <constraint firstAttribute="trailing" secondItem="hRI-w3-w8S" secondAttribute="trailing" id="V3f-ld-LtZ"/>
-                                    <constraint firstAttribute="trailing" secondItem="Vnz-8V-L3B" secondAttribute="trailing" id="qC8-PQ-bFI"/>
+                                    <constraint firstAttribute="bottom" secondItem="Vnz-8V-L3B" secondAttribute="bottom" id="Eut-kS-tXo"/>
+                                    <constraint firstAttribute="trailing" secondItem="Vnz-8V-L3B" secondAttribute="trailing" id="Tr0-58-wER"/>
+                                    <constraint firstItem="Vnz-8V-L3B" firstAttribute="leading" secondItem="Aez-AK-Bn0" secondAttribute="leading" id="Vxf-DD-USJ"/>
+                                    <constraint firstItem="Vnz-8V-L3B" firstAttribute="top" secondItem="Aez-AK-Bn0" secondAttribute="top" id="heY-s7-usR"/>
+                                    <constraint firstAttribute="bottom" secondItem="Vnz-8V-L3B" secondAttribute="bottom" id="x0L-gV-TOa"/>
                                 </constraints>
                             </view>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hRI-w3-w8S">
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <items>
+                                    <barButtonItem title="Add" image="plus" catalog="system" style="plain" id="04R-vW-1hV" userLabel="Add">
+                                        <connections>
+                                            <segue destination="zlz-b9-5oP" kind="show" identifier="AddTransactionTemplateFormSegue" id="Fk0-NM-ax9"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wXe-Nm-E03"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Aez-AK-Bn0" firstAttribute="top" secondItem="wXe-Nm-E03" secondAttribute="top" id="TJO-aH-F5F"/>
-                            <constraint firstItem="wXe-Nm-E03" firstAttribute="trailing" secondItem="Aez-AK-Bn0" secondAttribute="trailing" id="ZCO-kp-Fj3"/>
-                            <constraint firstItem="Aez-AK-Bn0" firstAttribute="leading" secondItem="wXe-Nm-E03" secondAttribute="leading" id="sC8-2y-f7J"/>
-                            <constraint firstItem="wXe-Nm-E03" firstAttribute="bottom" secondItem="Aez-AK-Bn0" secondAttribute="bottom" id="y08-T4-0zv"/>
+                            <constraint firstItem="Aez-AK-Bn0" firstAttribute="top" secondItem="wXe-Nm-E03" secondAttribute="top" id="0OY-h1-Tao"/>
+                            <constraint firstItem="hRI-w3-w8S" firstAttribute="leading" secondItem="wXe-Nm-E03" secondAttribute="leading" id="6Cv-l3-94a"/>
+                            <constraint firstItem="Aez-AK-Bn0" firstAttribute="trailing" secondItem="wXe-Nm-E03" secondAttribute="trailing" id="ILf-Sy-eAy"/>
+                            <constraint firstItem="wXe-Nm-E03" firstAttribute="bottom" secondItem="hRI-w3-w8S" secondAttribute="bottom" id="Lxl-g6-U3J"/>
+                            <constraint firstItem="hRI-w3-w8S" firstAttribute="trailing" secondItem="wXe-Nm-E03" secondAttribute="trailing" id="NEA-bC-Fot"/>
+                            <constraint firstItem="Aez-AK-Bn0" firstAttribute="leading" secondItem="wXe-Nm-E03" secondAttribute="leading" id="P9l-q7-ZxJ"/>
+                            <constraint firstItem="Aez-AK-Bn0" firstAttribute="bottom" secondItem="wXe-Nm-E03" secondAttribute="bottom" constant="-49" id="eS9-Is-Ire"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Vorlagen" id="2AO-3U-5XN"/>

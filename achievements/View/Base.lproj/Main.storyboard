@@ -220,24 +220,6 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pJ0-MX-y9q">
-                                        <rect key="frame" x="0.0" y="730" width="414" height="44"/>
-                                        <items>
-                                            <barButtonItem systemItem="add" id="g9P-G5-iWy">
-                                                <connections>
-                                                    <segue destination="zUx-eK-QHC" kind="show" identifier="CreateTransactionFormSegue" id="f4e-MX-0fD"/>
-                                                </connections>
-                                            </barButtonItem>
-                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="cGd-Qe-fed"/>
-                                            <barButtonItem title="Templates" image="folder" catalog="system" style="plain" id="MHP-u2-p94" userLabel="Templates">
-                                                <connections>
-                                                    <segue destination="kX9-eO-iUX" kind="show" identifier="ShowTemplatesViewSegue" id="eUS-Hz-00A"/>
-                                                </connections>
-                                            </barButtonItem>
-                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="2zf-jU-6kR"/>
-                                            <barButtonItem title="Menu" image="line.horizontal.3" catalog="system" style="plain" id="YPi-FL-MVe" userLabel="Menu"/>
-                                        </items>
-                                    </toolbar>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="p47-nM-Nw2">
                                         <rect key="frame" x="0.0" y="80" width="414" height="650"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -266,24 +248,40 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="pJ0-MX-y9q" firstAttribute="top" secondItem="p47-nM-Nw2" secondAttribute="bottom" id="10C-6R-xKl"/>
-                                    <constraint firstItem="p47-nM-Nw2" firstAttribute="top" secondItem="DdM-qT-WDW" secondAttribute="bottom" id="5nF-FG-a0L"/>
-                                    <constraint firstAttribute="trailing" secondItem="p47-nM-Nw2" secondAttribute="trailing" id="7SG-tH-5LZ"/>
-                                    <constraint firstAttribute="trailing" secondItem="pJ0-MX-y9q" secondAttribute="trailing" id="9lP-UX-Bib"/>
+                                    <constraint firstAttribute="bottom" secondItem="p47-nM-Nw2" secondAttribute="bottom" constant="44" id="0yI-jM-dng"/>
+                                    <constraint firstItem="p47-nM-Nw2" firstAttribute="top" secondItem="DdM-qT-WDW" secondAttribute="bottom" id="Dyk-Fg-3nT"/>
                                     <constraint firstAttribute="trailing" secondItem="DdM-qT-WDW" secondAttribute="trailing" id="LbT-dw-59w"/>
-                                    <constraint firstItem="pJ0-MX-y9q" firstAttribute="top" secondItem="p47-nM-Nw2" secondAttribute="bottom" id="NSW-Ut-k8G"/>
-                                    <constraint firstItem="p47-nM-Nw2" firstAttribute="top" secondItem="DdM-qT-WDW" secondAttribute="bottom" id="OO1-pQ-AFp"/>
                                     <constraint firstItem="DdM-qT-WDW" firstAttribute="top" secondItem="ESU-iE-Qyq" secondAttribute="top" id="QiC-cM-zho"/>
-                                    <constraint firstItem="pJ0-MX-y9q" firstAttribute="leading" secondItem="ESU-iE-Qyq" secondAttribute="leading" id="YMx-3j-zMX"/>
-                                    <constraint firstAttribute="bottom" secondItem="pJ0-MX-y9q" secondAttribute="bottom" id="Z1C-Dv-6u4"/>
-                                    <constraint firstItem="p47-nM-Nw2" firstAttribute="leading" secondItem="ESU-iE-Qyq" secondAttribute="leading" id="ePG-uc-sbp"/>
+                                    <constraint firstItem="p47-nM-Nw2" firstAttribute="trailing" secondItem="DdM-qT-WDW" secondAttribute="trailing" id="SyS-qE-25h"/>
+                                    <constraint firstItem="p47-nM-Nw2" firstAttribute="leading" secondItem="DdM-qT-WDW" secondAttribute="leading" id="ef4-Ff-hsJ"/>
                                     <constraint firstItem="DdM-qT-WDW" firstAttribute="leading" secondItem="ESU-iE-Qyq" secondAttribute="leading" id="iQy-49-LWq"/>
                                 </constraints>
                             </view>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pJ0-MX-y9q">
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <items>
+                                    <barButtonItem systemItem="add" id="g9P-G5-iWy">
+                                        <connections>
+                                            <segue destination="zUx-eK-QHC" kind="show" identifier="CreateTransactionFormSegue" id="f4e-MX-0fD"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="cGd-Qe-fed"/>
+                                    <barButtonItem title="Templates" image="folder" catalog="system" style="plain" id="MHP-u2-p94" userLabel="Templates">
+                                        <connections>
+                                            <segue destination="kX9-eO-iUX" kind="show" identifier="ShowTemplatesViewSegue" id="eUS-Hz-00A"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="2zf-jU-6kR"/>
+                                    <barButtonItem title="Menu" image="line.horizontal.3" catalog="system" style="plain" id="YPi-FL-MVe" userLabel="Menu"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KFZ-yK-khd"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="pJ0-MX-y9q" firstAttribute="leading" secondItem="KFZ-yK-khd" secondAttribute="leading" id="48v-1m-8Kz"/>
+                            <constraint firstItem="pJ0-MX-y9q" firstAttribute="trailing" secondItem="KFZ-yK-khd" secondAttribute="trailing" id="OYG-1y-6TO"/>
+                            <constraint firstItem="KFZ-yK-khd" firstAttribute="bottom" secondItem="pJ0-MX-y9q" secondAttribute="bottom" id="aM0-wF-Lps"/>
                             <constraint firstItem="ESU-iE-Qyq" firstAttribute="leading" secondItem="KFZ-yK-khd" secondAttribute="leading" id="acR-dt-ZMH"/>
                             <constraint firstItem="ESU-iE-Qyq" firstAttribute="bottom" secondItem="KFZ-yK-khd" secondAttribute="bottom" id="fMi-cW-WcI"/>
                             <constraint firstItem="ESU-iE-Qyq" firstAttribute="top" secondItem="KFZ-yK-khd" secondAttribute="top" id="ngF-iV-7wk"/>
@@ -697,7 +695,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="ada-9d-Mi3"/>
-        <segue reference="jck-ry-h6I"/>
+        <segue reference="D9y-fI-rBU"/>
         <segue reference="boi-0n-d1U"/>
     </inferredMetricsTieBreakers>
     <resources>

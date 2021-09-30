@@ -55,7 +55,7 @@ class HistoryTableViewController: UITableViewController {
             }
             
             if let detailLabel = cell.detailTextLabel {
-                detailLabel.text = "(\(historicalTransactions[indexPath.item].balance))"
+                detailLabel.text = "(\(String (format: "%.2f", historicalTransactions[indexPath.item].balance)))"
             }
             
             return cell

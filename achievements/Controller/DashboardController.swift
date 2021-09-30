@@ -179,7 +179,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         let mainMenuDestruct = UIAction(title: "Reset", image: UIImage(systemName: "trash.circle"), attributes: .destructive) { _ in
             self.mainMenuResetButtonPressed() }
             
-        let mainMenuItems = UIMenu(title: "Main Menu", options: .displayInline, children: [
+        let mainMenuItems = UIMenu(title: "mainMenu", options: .displayInline, children: [
             UIAction(title: "Transaktionen Verrechnen", image: UIImage(systemName: "arrow.left.arrow.right.circle"), handler: { _ in
                 self.mainMenuSettleButtonPressed()
             }),

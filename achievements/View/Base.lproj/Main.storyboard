@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7Mr-OG-FsZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7Mr-OG-FsZ">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -41,7 +41,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="templateCell" textLabel="OzO-K8-rTQ" detailTextLabel="OeE-at-1o6" style="IBUITableViewCellStyleValue1" id="oTX-P7-0RB">
-                                                <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oTX-P7-0RB" id="lFk-rk-qT4">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -69,7 +69,7 @@
                                     <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hRI-w3-w8S">
                                         <rect key="frame" x="0.0" y="730" width="414" height="44"/>
                                         <items>
-                                            <barButtonItem image="plus" catalog="system" style="plain" id="04R-vW-1hV" userLabel="Add">
+                                            <barButtonItem title="Add" image="plus" catalog="system" style="plain" id="04R-vW-1hV" userLabel="Add">
                                                 <connections>
                                                     <segue destination="zlz-b9-5oP" kind="show" identifier="AddTransactionTemplateFormSegue" id="Fk0-NM-ax9"/>
                                                 </connections>
@@ -128,6 +128,7 @@
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Betrag" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8id-r1-PRK">
                                                         <rect key="frame" x="0.0" y="0.0" width="328" height="36"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="amountInputField"/>
                                                         <color key="textColor" systemColor="systemGreenColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad" returnKeyType="next" enablesReturnKeyAutomatically="YES" smartDashesType="yes"/>
@@ -145,6 +146,7 @@
                                             </stackView>
                                             <textField opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Titel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l6y-Rq-Cnj">
                                                 <rect key="frame" x="0.0" y="44" width="374" height="34"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="textInputField"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                             </textField>
@@ -157,6 +159,7 @@
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pfk-SN-2yQ">
                                         <rect key="frame" x="20" y="106" width="374" height="36"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="submitButton"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Speichern"/>
                                         <connections>
@@ -206,7 +209,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ESU-iE-Qyq">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+ / - 0,00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DdM-qT-WDW">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+ / - 0,00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DdM-qT-WDW" userLabel="balanceLabel">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="oto-24-8TO"/>
@@ -224,13 +227,13 @@
                                                 </connections>
                                             </barButtonItem>
                                             <barButtonItem style="plain" systemItem="flexibleSpace" id="cGd-Qe-fed"/>
-                                            <barButtonItem image="folder" catalog="system" style="plain" id="MHP-u2-p94" userLabel="Templates">
+                                            <barButtonItem title="Templates" image="folder" catalog="system" style="plain" id="MHP-u2-p94" userLabel="Templates">
                                                 <connections>
                                                     <segue destination="kX9-eO-iUX" kind="show" identifier="ShowTemplatesViewSegue" id="eUS-Hz-00A"/>
                                                 </connections>
                                             </barButtonItem>
                                             <barButtonItem style="plain" systemItem="flexibleSpace" id="2zf-jU-6kR"/>
-                                            <barButtonItem image="line.horizontal.3" catalog="system" style="plain" id="YPi-FL-MVe" userLabel="Menu"/>
+                                            <barButtonItem title="Menu" image="line.horizontal.3" catalog="system" style="plain" id="YPi-FL-MVe" userLabel="Menu"/>
                                         </items>
                                     </toolbar>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="p47-nM-Nw2">
@@ -239,7 +242,7 @@
                                         <gestureRecognizers/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="transactionCell" textLabel="NOk-zn-sNA" style="IBUITableViewCellStyleDefault" id="ZGM-ke-fqv">
-                                                <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZGM-ke-fqv" id="9YY-tz-n95">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -254,7 +257,7 @@
                                                         </label>
                                                     </subviews>
                                                 </tableViewCellContentView>
-                                                <accessibility key="accessibilityConfiguration" label="0,00 - Transaction"/>
+                                                <accessibility key="accessibilityConfiguration" label="transactionCell"/>
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
@@ -319,6 +322,7 @@
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Betrag" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZR4-Su-uWh">
                                                         <rect key="frame" x="0.0" y="0.0" width="328" height="36"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="amountInputField"/>
                                                         <color key="textColor" systemColor="systemGreenColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad" returnKeyType="next" enablesReturnKeyAutomatically="YES" smartDashesType="yes"/>
@@ -335,6 +339,7 @@
                                             </stackView>
                                             <textField opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Titel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pwD-Sl-lxS">
                                                 <rect key="frame" x="0.0" y="44" width="374" height="34"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="textInputField"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                             </textField>
@@ -343,8 +348,9 @@
                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="835-ku-i13">
                                         <rect key="frame" x="20" y="106" width="374" height="216"/>
                                     </datePicker>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BF2-5i-pBQ">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BF2-5i-pBQ" userLabel="Submit">
                                         <rect key="frame" x="20" y="330" width="374" height="36"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="submitButton"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Speichern"/>
                                         <connections>
@@ -572,7 +578,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="historyItemCell" textLabel="tyW-0v-mpC" detailTextLabel="tHw-UV-8PL" style="IBUITableViewCellStyleValue1" id="iDB-tL-lnh">
-                                <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iDB-tL-lnh" id="Cfu-9o-Qsh">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>

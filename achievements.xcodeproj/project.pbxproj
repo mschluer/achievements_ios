@@ -28,6 +28,10 @@
 		B381160526E10B130090029D /* HistoricalTransaction+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B381160326E10B130090029D /* HistoricalTransaction+CoreDataClass.swift */; };
 		B3939ABD2704797C005D243B /* AchievementTransactionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939ABC2704797C005D243B /* AchievementTransactionTest.swift */; };
 		B3939AC0270481FC005D243B /* HistoricalTransactionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939ABF270481FC005D243B /* HistoricalTransactionTest.swift */; };
+		B3939AC927049F51005D243B /* AchievementTransactionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939AC827049F51005D243B /* AchievementTransactionTest.swift */; };
+		B3939ACB2705F627005D243B /* TransactionTemplateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939ACA2705F627005D243B /* TransactionTemplateTest.swift */; };
+		B3939ACD2705FE44005D243B /* MultiplteTransactionsAndPurgeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939ACC2705FE44005D243B /* MultiplteTransactionsAndPurgeTest.swift */; };
+		B3939ACF2706048D005D243B /* HistoricalTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939ACE2706048D005D243B /* HistoricalTransaction.swift */; };
 		B3C5C4AF26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4AD26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift */; };
 		B3C5C4B026E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */; };
 		B3C5C4B226E5267600A52CBC /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4B126E5267600A52CBC /* StatisticsViewController.swift */; };
@@ -82,6 +86,10 @@
 		B381160326E10B130090029D /* HistoricalTransaction+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HistoricalTransaction+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B3939ABC2704797C005D243B /* AchievementTransactionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTransactionTest.swift; sourceTree = "<group>"; };
 		B3939ABF270481FC005D243B /* HistoricalTransactionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalTransactionTest.swift; sourceTree = "<group>"; };
+		B3939AC827049F51005D243B /* AchievementTransactionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTransactionTest.swift; sourceTree = "<group>"; };
+		B3939ACA2705F627005D243B /* TransactionTemplateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTemplateTest.swift; sourceTree = "<group>"; };
+		B3939ACC2705FE44005D243B /* MultiplteTransactionsAndPurgeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplteTransactionsAndPurgeTest.swift; sourceTree = "<group>"; };
+		B3939ACE2706048D005D243B /* HistoricalTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalTransaction.swift; sourceTree = "<group>"; };
 		B3C5C4AD26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionTemplate+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionTemplate+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B3C5C4B126E5267600A52CBC /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
@@ -185,6 +193,10 @@
 			isa = PBXGroup;
 			children = (
 				B328325026D93F23007CAD2A /* Info.plist */,
+				B3939AC827049F51005D243B /* AchievementTransactionTest.swift */,
+				B3939ACA2705F627005D243B /* TransactionTemplateTest.swift */,
+				B3939ACC2705FE44005D243B /* MultiplteTransactionsAndPurgeTest.swift */,
+				B3939ACE2706048D005D243B /* HistoricalTransaction.swift */,
 			);
 			path = achievementsUITests;
 			sourceTree = "<group>";
@@ -375,6 +387,7 @@
 					};
 					B328324926D93F23007CAD2A = {
 						CreatedOnToolsVersion = 12.5.1;
+						LastSwiftMigration = 1300;
 						TestTargetID = B328322826D93F22007CAD2A;
 					};
 				};
@@ -569,6 +582,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3939ACD2705FE44005D243B /* MultiplteTransactionsAndPurgeTest.swift in Sources */,
+				B3939ACB2705F627005D243B /* TransactionTemplateTest.swift in Sources */,
+				B3939ACF2706048D005D243B /* HistoricalTransaction.swift in Sources */,
+				B3939AC927049F51005D243B /* AchievementTransactionTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -814,6 +831,7 @@
 			baseConfigurationReference = DCF3F8DFA402F4542866A61B /* Pods-achievements-achievementsUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q73H52JFLZ;
 				INFOPLIST_FILE = achievementsUITests/Info.plist;
@@ -824,6 +842,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dakalabs.achievementsUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = achievements;
@@ -835,6 +854,7 @@
 			baseConfigurationReference = DF6DDB2F2D1F2054E42E5B4E /* Pods-achievements-achievementsUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q73H52JFLZ;
 				INFOPLIST_FILE = achievementsUITests/Info.plist;

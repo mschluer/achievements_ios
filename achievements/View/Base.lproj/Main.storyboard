@@ -123,7 +123,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="8Yt-LS-ZyA">
-                                        <rect key="frame" x="20" y="20" width="374" height="78"/>
+                                        <rect key="frame" x="20" y="20" width="374" height="117"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bAb-Nz-avg">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="36"/>
@@ -152,6 +152,20 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                             </textField>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="tGa-dH-fPF">
+                                                <rect key="frame" x="0.0" y="86" width="374" height="31"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wiederkehrend" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5f3-Wf-x49">
+                                                        <rect key="frame" x="0.0" y="0.0" width="317" height="31"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1bJ-lV-HeC">
+                                                        <rect key="frame" x="325" y="0.0" width="51" height="31"/>
+                                                    </switch>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="bAb-Nz-avg" secondAttribute="trailing" id="Fmd-BZ-Jto"/>
@@ -160,7 +174,7 @@
                                         </constraints>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pfk-SN-2yQ">
-                                        <rect key="frame" x="20" y="106" width="374" height="36"/>
+                                        <rect key="frame" x="20" y="145" width="374" height="36"/>
                                         <accessibility key="accessibilityConfiguration" identifier="submitButton"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Speichern"/>
@@ -172,7 +186,7 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="pfk-SN-2yQ" firstAttribute="top" secondItem="8Yt-LS-ZyA" secondAttribute="bottom" constant="8" symbolic="YES" id="Bv4-BY-AcZ"/>
+                                    <constraint firstItem="pfk-SN-2yQ" firstAttribute="top" secondItem="8Yt-LS-ZyA" secondAttribute="bottom" constant="8" id="Bv4-BY-AcZ"/>
                                     <constraint firstAttribute="trailing" secondItem="pfk-SN-2yQ" secondAttribute="trailing" constant="20" symbolic="YES" id="R0c-Da-bwr"/>
                                     <constraint firstItem="8Yt-LS-ZyA" firstAttribute="leading" secondItem="ufI-kG-Pvu" secondAttribute="leading" constant="20" symbolic="YES" id="RN7-fM-Ifl"/>
                                     <constraint firstItem="pfk-SN-2yQ" firstAttribute="leading" secondItem="ufI-kG-Pvu" secondAttribute="leading" constant="20" symbolic="YES" id="hnQ-Pn-yfu"/>

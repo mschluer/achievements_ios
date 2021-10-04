@@ -54,6 +54,9 @@ class TransactionTemplateFormController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
+        // Make sure to accept ',' instead of '.'
+        amountInputField.text? = amountInputField.text!.replacingOccurrences(of: ",", with: ".")
+        
         let template = achievementsDataModel?.createTransactionTemplate()
         
         template?.text = titleInputField.text!

@@ -58,6 +58,9 @@ class TransactionFormController: UIViewController, UITextFieldDelegate {
             alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
             self.present(alert, animated: true)
         } else {
+            // Make sure to accept ',' instead of '.'
+            amountInputField.text? = amountInputField.text!.replacingOccurrences(of: ",", with: ".")
+            
             // Remove Old Items if edit
             if let transaction = self.achievementTransaction {
                 if let historicalTransaciton = transaction.historicalTransaction {

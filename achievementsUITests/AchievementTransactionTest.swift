@@ -33,7 +33,7 @@ class AchievementTransactionTest: XCTestCase {
         app.toolbars["Toolbar"].buttons["Add"].tap()
         
         // Transaction Form (Create)
-        app.textFields["amountInputField"].typeText("5.0")
+        app.textFields["amountInputField"].typeText("5,50")
         
         let titleTextField = app.textFields["textInputField"]
         titleTextField.tap()
@@ -42,12 +42,12 @@ class AchievementTransactionTest: XCTestCase {
         app.buttons["submitButton"].tap()
         
         // Dashboard
-        XCTAssert(app.staticTexts["+5.00"].exists)
+        XCTAssert(app.staticTexts["+5.50"].exists)
         app.tables.cells["transactionCell"].tap()
         
         // Transaction Detail View
-        XCTAssert(app.staticTexts["+5.00"].exists)
-        XCTAssert(app.staticTexts["( +5.00 )"].exists)
+        XCTAssert(app.staticTexts["+5.50"].exists)
+        XCTAssert(app.staticTexts["( +5.50 )"].exists)
         XCTAssert(app.staticTexts["Test-Text"].exists)
         app.navigationBars["Details"].buttons["Dashboard"].tap()
         
@@ -60,7 +60,7 @@ class AchievementTransactionTest: XCTestCase {
         app.buttons["submitButton"].tap()
         
         // Dashboard
-        XCTAssert(app.staticTexts["-5.00"].exists)
+        XCTAssert(app.staticTexts["-5.50"].exists)
         app.tables.cells["transactionCell"].swipeLeft()
         app.staticTexts["Löschen"].tap()
         XCTAssert(app.staticTexts["+/- 0.00"].exists)

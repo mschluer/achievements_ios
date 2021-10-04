@@ -17,6 +17,7 @@ class TransactionTemplateFormController: UIViewController, UITextFieldDelegate {
     // MARK: Outlets
     @IBOutlet weak var amountInputField: UITextField!
     @IBOutlet weak var titleInputField: UITextField!
+    @IBOutlet weak var recurringSwitch: UISwitch!
     
     // MARK: View Lifecycle Methods
     override func viewDidLoad() {
@@ -61,7 +62,7 @@ class TransactionTemplateFormController: UIViewController, UITextFieldDelegate {
         
         template?.text = titleInputField.text!
         template?.amount = (amountInputField.text as NSString?)?.floatValue ?? 0.0
-        template?.recurring = true
+        template?.recurring = recurringSwitch.isOn
         
         // Check whether it was an edit
         if let oldTransactionTemplate = self.transactionTemplate {
@@ -100,5 +101,7 @@ class TransactionTemplateFormController: UIViewController, UITextFieldDelegate {
         if template.text != nil {
             titleInputField.text = template.text
         }
+        
+        recurringSwitch.isOn = template.recurring
     }
 }

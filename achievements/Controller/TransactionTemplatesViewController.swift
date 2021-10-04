@@ -78,7 +78,7 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let book = UIContextualAction(style: .normal, title: "Buchen") { (action, view, completion) in
-            self.swipeRightQuickBook(transactionTemplate: self.transactionTemplates[indexPath.item])
+            self.swipeRightQuickBook(at: indexPath)
             completion(false)
         }
         book.backgroundColor = .systemGreen
@@ -107,7 +107,9 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
     }
     
     // MARK: Action Handlers
-    private func swipeRightQuickBook(transactionTemplate template: TransactionTemplate) {
+    private func swipeRightQuickBook(at indexPath: IndexPath) {
+        let template = transactionTemplates[indexPath.item]
+        
         if template.text == "" || template.amount == 0 {
             let insufficientDataAlert = UIAlertController(title: "Unzureichende Daten", message: "Um diese Vorlage schnell zu buchen, müssen die Daten vollständig sein.", preferredStyle: .alert)
             insufficientDataAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
@@ -117,6 +119,13 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
                 text: template.text!,
                 amount: template.amount,
                 date: Date())
+            
+            if(!template.recurring) {
+                achievementsDataModel?.remove(transactionTemplate: template)
+                transactionTemplates = achievementsDataModel?.transactionTemplates ?? []
+                
+                self.templatesTable.deleteRows(at: [indexPath], with: .automatic)
+            }
         }
     }
     

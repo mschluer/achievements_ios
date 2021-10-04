@@ -101,4 +101,39 @@ class TransactionTemplateTest: XCTestCase {
         XCTAssert(app.staticTexts["( +5.00 )"].exists)
         XCTAssert(app.staticTexts["Test-Template"].exists)
     }
+    
+    func testNonRecurringTemplate() throws {
+        let app = XCUIApplication()
+        
+        // Dashboard
+        app.toolbars["Toolbar"].buttons["Templates"].tap()
+        
+        // Transaction Templates List
+        app.toolbars["Toolbar"].buttons["Add"].tap()
+        
+        // Transaction Template Form (Create)
+        app.textFields["amountInputField"].typeText("6,75")
+        
+        let titleTextField = app.textFields["textInputField"]
+        titleTextField.tap()
+        titleTextField.typeText("Test-Template")
+        
+        app.switches["recurringSwitch"].tap()
+        app.buttons["submitButton"].tap()
+        
+        // Transaction Templates List
+        XCTAssert(app.staticTexts["Test-Template"].exists)
+        XCTAssert(app.staticTexts["6.75"].exists)
+        
+        app.tables/*@START_MENU_TOKEN@*/.staticTexts["Test-Template"]/*[[".cells.staticTexts[\"Test-Template\"]",".staticTexts[\"Test-Template\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.swipeRight()
+        app.staticTexts["Buchen"].tap()
+        
+        XCTAssertFalse(app.staticTexts["6.75"].exists)
+        
+        app.navigationBars.buttons["Dashboard"].tap()
+        
+        // Dashboard
+        XCTAssert(app.staticTexts["+6.75"].exists)
+        app.tables.cells["transactionCell"].tap()
+    }
 }

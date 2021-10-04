@@ -14,6 +14,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     // MARK: Variables
     private var balance: Float = 0 {
         didSet {
+            // Update Progress Wheel Caption
             if balance < 0 {
                 progressWheel.text = "\(String (format: "%.2f", balance))"
                 progressWheel.textColor = .systemRed
@@ -23,6 +24,17 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             } else {
                 progressWheel.text = "+\(String (format: "%.2f", balance))"
                 progressWheel.textColor = .systemGreen
+            }
+            
+            // Update Progress Wheel
+            if(balance >= 0) {
+                progressWheel.inactiveColor = UIColor.systemGray
+                progressWheel.activeColor = UIColor.systemGray
+                progressWheel.percentage = 100
+            } else {
+                progressWheel.inactiveColor = UIColor.systemRed
+                progressWheel.activeColor = UIColor.systemGreen
+                progressWheel.percentage = (achievementsDataModel.totalRecentIncomes / achievementsDataModel.recentExpenses.first!.amount) * -100
             }
         }
     }

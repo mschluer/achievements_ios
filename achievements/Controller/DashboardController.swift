@@ -15,21 +15,21 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     private var balance: Float = 0 {
         didSet {
             if balance < 0 {
-                balanceLabel.text = "\(String (format: "%.2f", balance))"
-                balanceLabel.textColor = .systemRed
+                progressWheel.text = "\(String (format: "%.2f", balance))"
+                progressWheel.textColor = .systemRed
             } else if balance == 0 {
-                balanceLabel.text = "+/- \(String (format: "%.2f", balance))"
-                balanceLabel.textColor = .none
+                progressWheel.text = "+/- \(String (format: "%.2f", balance))"
+                progressWheel.textColor = .systemGray
             } else {
-                balanceLabel.text = "+\(String (format: "%.2f", balance))"
-                balanceLabel.textColor = .systemGreen
+                progressWheel.text = "+\(String (format: "%.2f", balance))"
+                progressWheel.textColor = .systemGreen
             }
         }
     }
     private var recentTransactionsTableViewData: [AchievementTransaction] = []
     
     // MARK: Outlets
-    @IBOutlet weak var balanceLabel: UILabel!
+    @IBOutlet weak var progressWheel: ProgressWheel!
     @IBOutlet weak var recentTransactionsTableView: UITableView!
     @IBOutlet weak var menuButton: UIBarButtonItem!
     

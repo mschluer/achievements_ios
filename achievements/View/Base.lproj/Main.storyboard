@@ -207,6 +207,7 @@
                     <navigationItem key="navigationItem" id="Hfa-T5-tCz"/>
                     <connections>
                         <outlet property="amountInputField" destination="8id-r1-PRK" id="Tn3-43-a4i"/>
+                        <outlet property="recurringSwitch" destination="1bJ-lV-HeC" id="1WV-2U-rMR"/>
                         <outlet property="titleInputField" destination="l6y-Rq-Cnj" id="81y-Rx-bPl"/>
                     </connections>
                 </viewController>

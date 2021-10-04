@@ -14,22 +14,34 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     // MARK: Variables
     private var balance: Float = 0 {
         didSet {
+            // Update Progress Wheel Caption
             if balance < 0 {
-                balanceLabel.text = "\(String (format: "%.2f", balance))"
-                balanceLabel.textColor = .systemRed
+                progressWheel.text = "\(String (format: "%.2f", balance))"
+                progressWheel.textColor = .systemRed
             } else if balance == 0 {
-                balanceLabel.text = "+/- \(String (format: "%.2f", balance))"
-                balanceLabel.textColor = .none
+                progressWheel.text = "+/- \(String (format: "%.2f", balance))"
+                progressWheel.textColor = .systemGray
             } else {
-                balanceLabel.text = "+\(String (format: "%.2f", balance))"
-                balanceLabel.textColor = .systemGreen
+                progressWheel.text = "+\(String (format: "%.2f", balance))"
+                progressWheel.textColor = .systemGreen
+            }
+            
+            // Update Progress Wheel
+            if(balance >= 0) {
+                progressWheel.inactiveColor = UIColor.systemGray
+                progressWheel.activeColor = UIColor.systemGray
+                progressWheel.percentage = 100
+            } else {
+                progressWheel.inactiveColor = UIColor.systemRed
+                progressWheel.activeColor = UIColor.systemGreen
+                progressWheel.percentage = (achievementsDataModel.totalRecentIncomes / achievementsDataModel.recentExpenses.first!.amount) * -100
             }
         }
     }
     private var recentTransactionsTableViewData: [AchievementTransaction] = []
     
     // MARK: Outlets
-    @IBOutlet weak var balanceLabel: UILabel!
+    @IBOutlet weak var progressWheel: ProgressWheel!
     @IBOutlet weak var recentTransactionsTableView: UITableView!
     @IBOutlet weak var menuButton: UIBarButtonItem!
     

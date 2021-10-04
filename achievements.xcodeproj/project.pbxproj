@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		825E1D43BF3A8CD45660F60D /* Pods_achievementsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C896202FB7D32745338C8FF5 /* Pods_achievementsTests.framework */; };
 		9934B5CD83E2F83B4B865A9D /* Pods_achievements.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B91FC670CCE80E443AB4694D /* Pods_achievements.framework */; };
+		B3186B6D270B63A6000B4AE8 /* ProgressWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3186B6C270B63A6000B4AE8 /* ProgressWheel.swift */; };
 		B328322D26D93F22007CAD2A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328322C26D93F22007CAD2A /* AppDelegate.swift */; };
 		B328322F26D93F22007CAD2A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328322E26D93F22007CAD2A /* SceneDelegate.swift */; };
 		B328323426D93F22007CAD2A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B328323226D93F22007CAD2A /* Main.storyboard */; };
@@ -61,6 +62,7 @@
 		28B15C75CF263CDDFB9F367A /* Pods-achievementsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-achievementsTests.release.xcconfig"; path = "Target Support Files/Pods-achievementsTests/Pods-achievementsTests.release.xcconfig"; sourceTree = "<group>"; };
 		63547EF14F7522796196D941 /* Pods-achievementsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-achievementsTests.debug.xcconfig"; path = "Target Support Files/Pods-achievementsTests/Pods-achievementsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7CFC9745E66B8E13D341C26D /* Pods-achievements.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-achievements.debug.xcconfig"; path = "Target Support Files/Pods-achievements/Pods-achievements.debug.xcconfig"; sourceTree = "<group>"; };
+		B3186B6C270B63A6000B4AE8 /* ProgressWheel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressWheel.swift; sourceTree = "<group>"; };
 		B328322926D93F22007CAD2A /* achievements.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = achievements.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B328322C26D93F22007CAD2A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B328322E26D93F22007CAD2A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 			children = (
 				B328323226D93F22007CAD2A /* Main.storyboard */,
 				B328323726D93F23007CAD2A /* LaunchScreen.storyboard */,
+				B3186B6C270B63A6000B4AE8 /* ProgressWheel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -551,6 +554,7 @@
 				B3C5C4AF26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift in Sources */,
 				B349499326E1483E00829A5F /* HistoryTableViewController.swift in Sources */,
 				B349499926E3DB6E00829A5F /* TransactionTemplateFormController.swift in Sources */,
+				B3186B6D270B63A6000B4AE8 /* ProgressWheel.swift in Sources */,
 				B3C5C4B026E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift in Sources */,
 				B328327326DC2D02007CAD2A /* TransactionFormController.swift in Sources */,
 				B328326C26DBD253007CAD2A /* AchievementTransaction+CoreDataClass.swift in Sources */,

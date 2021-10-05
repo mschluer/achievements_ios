@@ -12,7 +12,8 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
     public var achievementsDataModel : AchievementsDataModel?
     
     // MARK: Variables
-    private var transactionTemplates: [TransactionTemplate] = []
+    private var nonRecurringTransactionTemplates: [TransactionTemplate] = []
+    private var recurringTransactionTemplates: [TransactionTemplate] = []
 
     // MARK: Outlets
     @IBOutlet weak var templatesTable: UITableView!
@@ -50,19 +51,38 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
     }
     
     // MARK: Table View Data Source
+    func numberOfSections(in tableView: UITableView) -> Int {
+         return 2
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if(section == 0) {
+            return "Einmalig"
+        } else {
+            return "Wiederkehrend"
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return transactionTemplates.count
+        if(section == 0) {
+            return nonRecurringTransactionTemplates.count
+        } else {
+            return recurringTransactionTemplates.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "templateCell") {
-            cell.textLabel?.text = transactionTemplates[indexPath.item].text
-            if transactionTemplates[indexPath.item].amount < 0 {
+            let template = transactionTemplateFor(indexPath: indexPath)
+            
+            // Populate Cell
+            cell.textLabel?.text = template.text
+            if template.amount < 0 {
                 cell.detailTextLabel?.textColor = UIColor.systemRed
-                cell.detailTextLabel?.text = String (format: "%.2f", transactionTemplates[indexPath.item].amount)
-            } else if transactionTemplates[indexPath.item].amount > 0 {
+                cell.detailTextLabel?.text = String (format: "%.2f", template.amount)
+            } else if template.amount > 0 {
                 cell.detailTextLabel?.textColor = UIColor.systemGreen
-                cell.detailTextLabel?.text = String (format: "%.2f", transactionTemplates[indexPath.item].amount)
+                cell.detailTextLabel?.text = String (format: "%.2f", template.amount)
             } else {
                 cell.detailTextLabel?.text = ""
             }
@@ -108,7 +128,7 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
     
     // MARK: Action Handlers
     private func swipeRightQuickBook(at indexPath: IndexPath) {
-        let template = transactionTemplates[indexPath.item]
+        let template = transactionTemplateFor(indexPath: indexPath)
         
         if template.text == "" || template.amount == 0 {
             let insufficientDataAlert = UIAlertController(title: "Unzureichende Daten", message: "Um diese Vorlage schnell zu buchen, müssen die Daten vollständig sein.", preferredStyle: .alert)
@@ -122,7 +142,7 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
             
             if(!template.recurring) {
                 achievementsDataModel?.remove(transactionTemplate: template)
-                transactionTemplates = achievementsDataModel?.transactionTemplates ?? []
+                refreshDataFor(indexPath: indexPath)
                 
                 self.templatesTable.deleteRows(at: [indexPath], with: .automatic)
             }
@@ -130,17 +150,16 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
     }
     
     private func transactionTemplateCellPressed(at indexPath: IndexPath) {
-        performSegue(withIdentifier: "BookTransactionTemplateSegue", sender: transactionTemplates[indexPath.item])
+        performSegue(withIdentifier: "BookTransactionTemplateSegue", sender: transactionTemplateFor(indexPath: indexPath))
     }
     
     private func swipeLeftEdit(at indexPath: IndexPath) {
-        performSegue(withIdentifier: "EditTransactionTemplateSegue", sender: transactionTemplates[indexPath.item])
+        performSegue(withIdentifier: "EditTransactionTemplateSegue", sender: transactionTemplateFor(indexPath: indexPath))
     }
     
     private func swipeLeftDelete(at indexPath: IndexPath) {
-        achievementsDataModel?.remove(transactionTemplate: transactionTemplates[indexPath.item])
-        transactionTemplates = achievementsDataModel?.transactionTemplates ?? []
-        
+        achievementsDataModel?.remove(transactionTemplate: transactionTemplateFor(indexPath: indexPath))
+        refreshDataFor(indexPath: indexPath)
         self.templatesTable.deleteRows(at: [indexPath], with: .automatic)
     }
     
@@ -149,12 +168,33 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
         self.templatesTable.dataSource = self
         self.templatesTable.delegate = self
         
-        transactionTemplates = achievementsDataModel?.transactionTemplates ?? []
+        refreshData()
     }
     
     // MARK: Private Functions
     private func updateViewFromModel() {
-        transactionTemplates = self.achievementsDataModel?.transactionTemplates ?? []
+        refreshData()
         templatesTable.reloadData()
+    }
+    
+    private func transactionTemplateFor(indexPath: IndexPath) -> TransactionTemplate {
+        if(indexPath.section == 0) {
+            return nonRecurringTransactionTemplates[indexPath.item]
+        } else {
+            return recurringTransactionTemplates[indexPath.item]
+        }
+    }
+    
+    private func refreshDataFor(indexPath: IndexPath) {
+        if(indexPath.section == 0) {
+            nonRecurringTransactionTemplates = achievementsDataModel?.nonRecurringTransactionTemplates ?? []
+        } else {
+            recurringTransactionTemplates = achievementsDataModel?.recurringTransactionTemplates ?? []
+        }
+    }
+    
+    private func refreshData() {
+        nonRecurringTransactionTemplates = achievementsDataModel?.nonRecurringTransactionTemplates ?? []
+        recurringTransactionTemplates = achievementsDataModel?.recurringTransactionTemplates ?? []
     }
 }

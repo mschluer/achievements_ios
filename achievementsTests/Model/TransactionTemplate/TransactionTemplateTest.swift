@@ -55,6 +55,48 @@ class TransactionTemplateTest: XCTestCase {
         XCTAssertEqual(dataModel.transactionTemplates.count, 3)
     }
     
+    func testFetchForRecurringTemplates() throws {
+        // Create Templates
+        let texts = [ "alpha", "beta", "gamma" ]
+        let amounts : [Float] = [ 3.0, 2.0, 1.0 ]
+        let recurring = [ true, false, true ]
+        
+        for i in 0...2 {
+            let template = dataModel.createTransactionTemplate()
+            
+            template.text = texts[i]
+            template.amount = amounts[i]
+            template.recurring = recurring[i]
+            
+            dataModel.save()
+        }
+        
+        XCTAssertEqual(dataModel.recurringTransactionTemplates.count, 2)
+        XCTAssertEqual(dataModel.recurringTransactionTemplates[0].text, "alpha")
+        XCTAssertEqual(dataModel.recurringTransactionTemplates[1].text, "gamma")
+    }
+    
+    func testFetchForNonRecurringTemplates() throws {
+        // Create Templates
+        let texts = [ "alpha", "beta", "gamma" ]
+        let amounts : [Float] = [ 3.0, 2.0, 1.0 ]
+        let recurring = [ true, false, false ]
+        
+        for i in 0...2 {
+            let template = dataModel.createTransactionTemplate()
+            
+            template.text = texts[i]
+            template.amount = amounts[i]
+            template.recurring = recurring[i]
+            
+            dataModel.save()
+        }
+        
+        XCTAssertEqual(dataModel.nonRecurringTransactionTemplates.count, 2)
+        XCTAssertEqual(dataModel.nonRecurringTransactionTemplates[0].text, "beta")
+        XCTAssertEqual(dataModel.nonRecurringTransactionTemplates[1].text, "gamma")
+    }
+    
     func testWhetherTemplatesAreSortedAlphabetically() throws {
         // Create Templates
         let texts = [ "delta", "beta", "alpha" ]

@@ -14,28 +14,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     // MARK: Variables
     private var balance: Float = 0 {
         didSet {
-            // Update Progress Wheel Caption
-            if balance < 0 {
-                progressWheel.text = "\(String (format: "%.2f", balance))"
-                progressWheel.textColor = .systemRed
-            } else if balance == 0 {
-                progressWheel.text = "+/- \(String (format: "%.2f", balance))"
-                progressWheel.textColor = .systemGray
-            } else {
-                progressWheel.text = "+\(String (format: "%.2f", balance))"
-                progressWheel.textColor = .systemGreen
-            }
-            
-            // Update Progress Wheel
-            if(balance >= 0) {
-                progressWheel.inactiveColor = UIColor.systemGray
-                progressWheel.activeColor = UIColor.systemGray
-                progressWheel.percentage = 100
-            } else {
-                progressWheel.inactiveColor = UIColor.systemRed
-                progressWheel.activeColor = UIColor.systemGreen
-                progressWheel.percentage = (achievementsDataModel.totalRecentIncomes / achievementsDataModel.recentExpenses.first!.amount) * -100
-            }
+            populateProgressWheel()
         }
     }
     private var recentTransactionsTableViewData: [AchievementTransaction] = []
@@ -44,6 +23,9 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet weak var progressWheel: ProgressWheel!
     @IBOutlet weak var recentTransactionsTableView: UITableView!
     @IBOutlet weak var menuButton: UIBarButtonItem!
+    
+    // MARK: Private Variables
+    private var progressWheelState = 0
     
     // MARK: View Lifecycle
     override func viewDidLoad() {
@@ -54,6 +36,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        progressWheelState = 0
         updateViewFromModel()
     }
     
@@ -140,6 +123,12 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     // MARK: Action Handlers
+    @IBAction func progressWheelPressed(_ sender: Any) {
+        progressWheelState = (progressWheelState + 1) % 4
+        
+        populateProgressWheel()
+    }
+    
     private func mainMenuResetButtonPressed() {
         let deletionAlert = UIAlertController(title: "Sicher?", message: "Der Reset setzt alle Daten der App zurück. Dies kann nicht rückgängig gemacht werden!", preferredStyle: .actionSheet)
         deletionAlert.addAction(UIAlertAction(title: "App Zurücksetzen", style: .destructive, handler: { _ in
@@ -210,6 +199,73 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         recentTransactionsTableViewData = self.achievementsDataModel.achievementTransactions
         recentTransactionsTableView.reloadData()
         recalculateBalance()
+    }
+    
+    private func populateProgressWheel() {
+        switch progressWheelState {
+        case 1:
+            showTotalRecentIncomesInProgressWheelLabel()
+        case 2:
+            showRemainingExpenseAmountInProgressWheelLabel()
+        case 3:
+            showCurrentRedemptionPercentageInProgressWheelLabel()
+        default:
+            showTotalBalanceInProgressWheelLabel()
+        }
+        
+        // Update Progress Wheel
+        if(balance >= 0) {
+            progressWheel.inactiveColor = UIColor.systemGray
+            progressWheel.activeColor = UIColor.systemGray
+            progressWheel.percentage = 100
+        } else {
+            progressWheel.inactiveColor = UIColor.systemRed
+            progressWheel.activeColor = UIColor.systemGreen
+            progressWheel.percentage = (achievementsDataModel.totalRecentIncomes / achievementsDataModel.recentExpenses.first!.amount) * -100
+        }
+    }
+    
+    private func showTotalBalanceInProgressWheelLabel() {
+        if balance < 0 {
+            progressWheel.text = "\(String (format: "%.2f", balance))"
+            progressWheel.textColor = .systemRed
+        } else if balance == 0 {
+            progressWheel.text = "+/- \(String (format: "%.2f", balance))"
+            progressWheel.textColor = .systemGray
+        } else {
+            progressWheel.text = "+\(String (format: "%.2f", balance))"
+            progressWheel.textColor = .systemGreen
+        }
+    }
+    
+    private func showTotalRecentIncomesInProgressWheelLabel() {
+        progressWheel.text = "(+\(String (format: "%.2f", achievementsDataModel.totalRecentIncomes)))"
+        progressWheel.textColor = .systemGreen
+    }
+    
+    private func showRemainingExpenseAmountInProgressWheelLabel() {
+        let remainingAmount = (achievementsDataModel.recentExpenses.first?.amount ?? 0.0 ) + achievementsDataModel.totalRecentIncomes
+        
+        if remainingAmount < 0 {
+            progressWheel.text = "(\(String (format: "%.2f", remainingAmount)))"
+            progressWheel.textColor = .systemRed
+        } else if remainingAmount == 0 {
+            progressWheel.text = "(+/- \(String (format: "%.2f", remainingAmount)))"
+            progressWheel.textColor = .systemGray
+        } else {
+            progressWheel.text = "(+\(String (format: "%.2f", remainingAmount)))"
+            progressWheel.textColor = .systemGreen
+        }
+    }
+    
+    private func showCurrentRedemptionPercentageInProgressWheelLabel() {
+        var percentage : Float = 0.0
+        if(achievementsDataModel.recentExpenses.first != nil) {
+            percentage = (achievementsDataModel.totalRecentIncomes / achievementsDataModel.recentExpenses.first!.amount) * -100
+        }
+        
+        progressWheel.text = "\(String (format: "%.2f", percentage)) %"
+        progressWheel.textColor = .systemGray
     }
     
     private func recalculateBalance() {

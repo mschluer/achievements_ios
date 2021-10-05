@@ -33,11 +33,10 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         
         setupMainMenu()
         setupTransactionTable()
-        
-        progressWheelState = 0
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        progressWheelState = 0
         updateViewFromModel()
     }
     
@@ -240,18 +239,33 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     private func showTotalRecentIncomesInProgressWheelLabel() {
-        progressWheel.text = "Waiting for Implementation"
-        progressWheel.textColor = .systemBlue
+        progressWheel.text = "(+\(String (format: "%.2f", achievementsDataModel.totalRecentIncomes)))"
+        progressWheel.textColor = .systemGreen
     }
     
     private func showRemainingExpenseAmountInProgressWheelLabel() {
-        progressWheel.text = "Waiting for Implementation"
-        progressWheel.textColor = .systemCyan
+        let remainingAmount = (achievementsDataModel.recentExpenses.first?.amount ?? 0.0 ) + achievementsDataModel.totalRecentIncomes
+        
+        if remainingAmount < 0 {
+            progressWheel.text = "(\(String (format: "%.2f", remainingAmount)))"
+            progressWheel.textColor = .systemRed
+        } else if remainingAmount == 0 {
+            progressWheel.text = "(+/- \(String (format: "%.2f", remainingAmount)))"
+            progressWheel.textColor = .systemGray
+        } else {
+            progressWheel.text = "(+\(String (format: "%.2f", remainingAmount)))"
+            progressWheel.textColor = .systemGreen
+        }
     }
     
     private func showCurrentRedemptionPercentageInProgressWheelLabel() {
-        progressWheel.text = "Waiting for Implementation"
-        progressWheel.textColor = .systemTeal
+        var percentage : Float = 0.0
+        if(achievementsDataModel.recentExpenses.first != nil) {
+            percentage = (achievementsDataModel.totalRecentIncomes / achievementsDataModel.recentExpenses.first!.amount) * -100
+        }
+        
+        progressWheel.text = "\(String (format: "%.2f", percentage)) %"
+        progressWheel.textColor = .systemGray
     }
     
     private func recalculateBalance() {

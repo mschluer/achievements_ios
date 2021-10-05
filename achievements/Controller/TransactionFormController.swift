@@ -76,6 +76,13 @@ class TransactionFormController: UIViewController, UITextFieldDelegate {
                 amount: (amountInputField.text as NSString?)?.floatValue ?? 0.0,
                 date: datePicker.date)
             
+            // Remove Template if not recurring
+            if let template = self.transactionTemplate {
+                if(!template.recurring) {
+                    achievementTransactionModel?.remove(transactionTemplate: template)
+                }
+            }
+            
             self.navigationController!.popViewController(animated: true)
         }
     }

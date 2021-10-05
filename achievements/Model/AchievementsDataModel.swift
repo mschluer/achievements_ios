@@ -50,6 +50,20 @@ class AchievementsDataModel {
         return try! viewContext.fetch(request)
     }
     
+    var recurringTransactionTemplates: [TransactionTemplate] {
+        let request : NSFetchRequest<TransactionTemplate> = TransactionTemplate.fetchRequest()
+        request.predicate = NSPredicate(format: "recurring = true")
+        request.sortDescriptors = [NSSortDescriptor(key: "text", ascending: true)]
+        return try! self.viewContext.fetch(request)
+    }
+    
+    var nonRecurringTransactionTemplates: [TransactionTemplate] {
+        let request : NSFetchRequest<TransactionTemplate> = TransactionTemplate.fetchRequest()
+        request.predicate = NSPredicate(format: "recurring = false")
+        request.sortDescriptors = [NSSortDescriptor(key: "text", ascending: true)]
+        return try! self.viewContext.fetch(request)
+    }
+    
     var recentIncomes : [AchievementTransaction] {
         let fetchRequest : NSFetchRequest<AchievementTransaction> = AchievementTransaction.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "amount >= 0")

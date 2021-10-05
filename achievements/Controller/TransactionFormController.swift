@@ -91,7 +91,7 @@ class TransactionFormController: UIViewController, UITextFieldDelegate {
     
     private func populateFormWith(_ transaction: AchievementTransaction) {
         if transaction.amount != 0 {
-            amountInputField.text = "\(transaction.amount)"
+            amountInputField.text = "\(String (format: "%.2f", transaction.amount))"
             
             if transaction.amount < 0 {
                 amountInputField.textColor = .systemRed
@@ -113,7 +113,7 @@ class TransactionFormController: UIViewController, UITextFieldDelegate {
     
     private func populateFormWith(_ template: TransactionTemplate) {
         if template.amount != 0 {
-            amountInputField.text = "\(template.amount)"
+            amountInputField.text = "\(String (format: "%.2f", template.amount))"
             
             if template.amount < 0 {
                 amountInputField.textColor = .systemRed

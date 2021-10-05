@@ -126,6 +126,9 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     @IBAction func progressWheelPressed(_ sender: Any) {
         progressWheelState = (progressWheelState + 1) % 4
         
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+        
         populateProgressWheel()
     }
     

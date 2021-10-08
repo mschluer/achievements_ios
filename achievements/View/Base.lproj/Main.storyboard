@@ -296,11 +296,13 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="cGd-Qe-fed"/>
-                                    <barButtonItem title="Templates" image="folder" catalog="system" style="plain" id="MHP-u2-p94" userLabel="Templates">
+                                    <barButtonItem title="incomeTemplates" image="folder.badge.plus" catalog="system" style="plain" id="MHP-u2-p94">
                                         <connections>
                                             <segue destination="kX9-eO-iUX" kind="show" identifier="ShowTemplatesViewSegue" id="eUS-Hz-00A"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="ctg-yN-9bK"/>
+                                    <barButtonItem title="expenseTemplates" image="folder.badge.minus" catalog="system" style="plain" id="8iy-rC-9zu" userLabel="expenseTemplates"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="2zf-jU-6kR"/>
                                     <barButtonItem title="Menu" image="line.horizontal.3" catalog="system" style="plain" id="YPi-FL-MVe" userLabel="Menu"/>
                                 </items>
@@ -735,7 +737,8 @@
         <segue reference="boi-0n-d1U"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="folder" catalog="system" width="128" height="97"/>
+        <image name="folder.badge.minus" catalog="system" width="128" height="91"/>
+        <image name="folder.badge.plus" catalog="system" width="128" height="91"/>
         <image name="line.horizontal.3" catalog="system" width="128" height="64"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">

@@ -29,7 +29,7 @@ class TransactionTemplateTest: XCTestCase {
         let app = XCUIApplication()
         
         // Dashboard
-        app.toolbars["Toolbar"].buttons["Templates"].tap()
+        app.toolbars["Toolbar"].buttons["incomeTemplates"].tap()
         
         // Transaction Templates List
         app.toolbars["Toolbar"].buttons["Add"].tap()
@@ -70,7 +70,7 @@ class TransactionTemplateTest: XCTestCase {
         let app = XCUIApplication()
         
         // Dashboard
-        app.toolbars["Toolbar"].buttons["Templates"].tap()
+        app.toolbars["Toolbar"].buttons["incomeTemplates"].tap()
         
         // Transaction Templates List
         app.toolbars["Toolbar"].buttons["Add"].tap()
@@ -106,7 +106,7 @@ class TransactionTemplateTest: XCTestCase {
         let app = XCUIApplication()
         
         // Dashboard
-        app.toolbars["Toolbar"].buttons["Templates"].tap()
+        app.toolbars["Toolbar"].buttons["incomeTemplates"].tap()
         
         // Transaction Templates List
         app.toolbars["Toolbar"].buttons["Add"].tap()

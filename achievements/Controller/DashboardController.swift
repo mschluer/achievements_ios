@@ -311,7 +311,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     
     private func updateSections() {
         var result = Array(recentTransactionsTableViewData.keys)
-        result.sort()
+        result.sort(by: >)
         
         self.recentTransactionsDates = result
     }

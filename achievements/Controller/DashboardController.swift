@@ -17,7 +17,9 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             populateProgressWheel()
         }
     }
-    private var recentTransactionsTableViewData: [AchievementTransaction] = []
+    private var recentTransactions: [AchievementTransaction] = []
+    private var recentTransactionsTableViewData: [Date: [AchievementTransaction]] = [:]
+    private var recentTransactionsDates : [Date] = []
     
     // MARK: Outlets
     @IBOutlet weak var progressWheel: ProgressWheel!
@@ -75,20 +77,35 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
 
     // MARK: Table View Data Source
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return recentTransactionsDates.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        return formatter.string(for: recentTransactionsDates[section])
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recentTransactionsTableViewData.count
+        let date = recentTransactionsDates[section]
+        let dictionaryEntry = recentTransactionsTableViewData[date]
+        
+        return dictionaryEntry?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "transactionCell") {
-            if recentTransactionsTableViewData[indexPath.item].amount < 0 {
+            let transaction = getRecentTransactionFor(indexPath: indexPath)
+            
+            if transaction.amount < 0 {
                 cell.backgroundColor = UIColor.systemRed
             } else {
                 cell.backgroundColor = UIColor.systemGreen
             }
             
             if let label = cell.textLabel {
-                label.text = (recentTransactionsTableViewData[indexPath.item].toString())
+                label.text = (transaction.toString())
             }
             
             return cell
@@ -160,16 +177,20 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     private func transactionCellPressed(_ indexPath: IndexPath) {
-        performSegue(withIdentifier: "ShowTransactionDetailViewSegue", sender: recentTransactionsTableViewData[indexPath.row].historicalTransaction)
+        performSegue(withIdentifier: "ShowTransactionDetailViewSegue", sender: getRecentTransactionFor(indexPath: indexPath).historicalTransaction)
     }
     
     private func transactionCellSwipeRight(_ indexPath: IndexPath) {
-        performSegue(withIdentifier: "EditTransactionFormSegue", sender: recentTransactionsTableViewData[indexPath.row])
+        performSegue(withIdentifier: "EditTransactionFormSegue", sender: getRecentTransactionFor(indexPath: indexPath))
     }
     
     private func transactionCellSwipeLeft(_ indexPath: IndexPath) {
-        achievementsDataModel.remove(historicalTransaction: recentTransactionsTableViewData[indexPath.row].historicalTransaction!)
-        recentTransactionsTableViewData = self.achievementsDataModel.achievementTransactions
+        let transactionToDelete = getRecentTransactionFor(indexPath: indexPath).historicalTransaction!
+        achievementsDataModel.remove(historicalTransaction: transactionToDelete)
+        
+        // Update Data
+        recentTransactionsTableViewData = self.achievementsDataModel.groupedAchievementTransactions
+        
         
         self.recentTransactionsTableView.deleteRows(at: [indexPath], with: .automatic)
         self.recalculateBalance()
@@ -180,7 +201,8 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         self.recentTransactionsTableView.dataSource = self
         self.recentTransactionsTableView.delegate = self
         
-        recentTransactionsTableViewData = achievementsDataModel.achievementTransactions
+        recentTransactions = achievementsDataModel.achievementTransactions
+        recentTransactionsTableViewData = achievementsDataModel.groupedAchievementTransactions
     }
     
     private func setupMainMenu() {
@@ -203,7 +225,9 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     
     // MARK: Private Functions
     private func updateViewFromModel() {
-        recentTransactionsTableViewData = self.achievementsDataModel.achievementTransactions
+        recentTransactions = self.achievementsDataModel.achievementTransactions
+        recentTransactionsTableViewData = self.achievementsDataModel.groupedAchievementTransactions
+        updateSections()
         recentTransactionsTableView.reloadData()
         recalculateBalance()
     }
@@ -278,16 +302,31 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     private func recalculateBalance() {
         var newBalance : Float = 0;
         
-        for transaction in recentTransactionsTableViewData {
+        for transaction in recentTransactions {
             newBalance += transaction.amount
         }
         
         balance = newBalance
     }
     
+    private func updateSections() {
+        var result = Array(recentTransactionsTableViewData.keys)
+        result.sort()
+        
+        self.recentTransactionsDates = result
+    }
+    
+    private func getRecentTransactionFor(indexPath: IndexPath) -> AchievementTransaction {
+        // Get Transaction
+        let date = recentTransactionsDates[indexPath.section]
+        let dictionaryEntry = recentTransactionsTableViewData[date]!
+        return dictionaryEntry[indexPath.item]
+    }
+    
     private func resetApplication() {
         self.achievementsDataModel.clear()
-        self.recentTransactionsTableViewData = self.achievementsDataModel.achievementTransactions
+        self.recentTransactions = self.achievementsDataModel.achievementTransactions
+        self.recentTransactionsTableViewData = self.achievementsDataModel.groupedAchievementTransactions
         
         updateViewFromModel()
     }

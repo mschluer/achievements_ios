@@ -32,6 +32,23 @@ class AchievementsDataModel {
         return try! viewContext.fetch(request)
     }
     
+    var groupedAchievementTransactions : [Date: [AchievementTransaction]] {
+        let transactions = achievementTransactions
+        
+        var result = [Date: [AchievementTransaction]]()
+        
+        for transaction in transactions {
+            let components = Calendar.current.dateComponents([.year, .month, .day], from: transaction.date!)
+            let date = Calendar.current.date(from: components)
+            
+            var dateEntry = result[date!] ?? []
+            dateEntry.append(transaction)
+            result[date!] = dateEntry
+        }
+        
+        return result
+    }
+    
     var historicalTransactions : [HistoricalTransaction] {
         let request : NSFetchRequest<HistoricalTransaction> = HistoricalTransaction.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]

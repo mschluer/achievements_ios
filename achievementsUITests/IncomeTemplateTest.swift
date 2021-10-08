@@ -7,8 +7,7 @@
 
 import XCTest
 
-class TransactionTemplateTest: XCTestCase {
-
+class IncomeTemplateTest: XCTestCase {
     override func setUpWithError() throws {
         continueAfterFailure = false
 
@@ -51,18 +50,21 @@ class TransactionTemplateTest: XCTestCase {
         app.staticTexts["Bearbeiten"].tap()
         
         // Transaction Tempalte Form (Edit)
-        app.buttons["+ / -"].tap()
+        for _ in 0...4 {
+            app.textFields["amountInputField"].typeText(XCUIKeyboardKey.delete.rawValue)
+        }
+        app.textFields["amountInputField"].typeText("7.00")
         app.buttons["submitButton"].tap()
         
         // Transaction Templates List
         XCTAssert(app.staticTexts["Test-Template"].exists)
-        XCTAssert(app.staticTexts["-5.00"].exists)
+        XCTAssert(app.staticTexts["7.00"].exists)
         
         app.tables/*@START_MENU_TOKEN@*/.staticTexts["Test-Template"]/*[[".cells.staticTexts[\"Test-Template\"]",".staticTexts[\"Test-Template\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.swipeLeft()
         app.staticTexts["Löschen"].tap()
         
         XCTAssertFalse(app.staticTexts["Test-Template"].exists)
-        XCTAssertFalse(app.staticTexts["-5.00"].exists)
+        XCTAssertFalse(app.staticTexts["7.00"].exists)
     }
     
     // MARK: Use Cases

@@ -22,6 +22,10 @@ class PlannedExpensesViewController: UIViewController, UITableViewDelegate, UITa
 
         setupPlannedExpensesTable()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        updateViewFromModel()
+    }
 
     // MARK: Table view data source
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -52,25 +56,105 @@ class PlannedExpensesViewController: UIViewController, UITableViewDelegate, UITa
         }
         return UITableViewCell()
     }
-
-    func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-        // Element am Index.item wieder einsetzen
-        // Speichern
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        plannedExpenseCellPressed(at: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let book = UIContextualAction(style: .normal, title: "Buchen") { (action, view, completion) in
+            self.swipeRightQuickBook(at: indexPath)
+            completion(false)
+        }
+        book.backgroundColor = .systemGreen
+        
+        let config = UISwipeActionsConfiguration(actions: [book])
+        config.performsFirstActionWithFullSwipe = true
+        
+        return config
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let edit = UIContextualAction(style: .normal, title: "Bearbeiten") { (action, view, completion) in
+            self.swipeLeftEdit(at: indexPath)
+            completion(false)
+        }
+        edit.backgroundColor = .systemYellow
+        
+        let delete = UIContextualAction(style: .destructive, title: "Löschen") { (action, view, completion) in
+            self.swipeLeftDelete(at: indexPath)
+            completion(true)
+        }
+        
+        let config = UISwipeActionsConfiguration(actions: [delete, edit])
+        
+        return config
+    }
+    
+    private func swipeLeftEdit(at indexPath: IndexPath) {
+        performSegue(withIdentifier: "EditExpenseTemplateSegue", sender: plannedExpenseFor(indexPath: indexPath))
+    }
+    
+    private func swipeLeftDelete(at indexPath: IndexPath) {
+        achievementsDataModel?.remove(transactionTemplate: plannedExpenseFor(indexPath: indexPath))
+        refreshDataFor(indexPath: indexPath)
+        self.plannedExpensesTable.deleteRows(at: [indexPath], with: .automatic)
     }
 
-    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
+    // func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+    //
+    // }
 
-    /*
-    // MARK: - Navigation
+    // func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+    //     return true
+    // }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    // MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "AddPlannedExpenseSegue" {
+            let destination = segue.destination as! TransactionTemplateFormController
+            
+            destination.flipSignOnShow = true
+            destination.achievementsDataModel = achievementsDataModel
+        } else if segue.identifier == "BookExpenseTemplateSegue" {
+            let destination = segue.destination as! TransactionFormController
+            
+            destination.transactionTemplate = (sender as! TransactionTemplate)
+            destination.achievementTransactionModel = self.achievementsDataModel
+        } else if segue.identifier == "EditExpenseTemplateSegue" {
+            let destination = segue.destination as! TransactionTemplateFormController
+            
+            destination.achievementsDataModel = achievementsDataModel
+            destination.transactionTemplate = (sender as! TransactionTemplate)
+        }
     }
-    */
+    
+    // MARK: Action Handlers
+    private func plannedExpenseCellPressed(at indexPath: IndexPath) {
+        performSegue(withIdentifier: "BookExpenseTemplateSegue", sender: plannedExpenseFor(indexPath: indexPath))
+    }
+    
+    private func swipeRightQuickBook(at indexPath: IndexPath) {
+        let template = plannedExpenseFor(indexPath: indexPath)
+        
+        if template.text == "" || template.amount == 0 {
+            let insufficientDataAlert = UIAlertController(title: "Unzureichende Daten", message: "Um diese Ausgabe schnell zu buchen, müssen die Daten vollständig sein.", preferredStyle: .alert)
+            insufficientDataAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            self.present(insufficientDataAlert, animated: true)
+        } else {
+            _ = self.achievementsDataModel?.createAchievementTransactionWith(
+                text: template.text!,
+                amount: template.amount,
+                date: Date())
+            
+            if(!template.recurring) {
+                achievementsDataModel?.remove(transactionTemplate: template)
+                refreshDataFor(indexPath: indexPath)
+                
+                self.plannedExpensesTable.deleteRows(at: [indexPath], with: .automatic)
+            }
+        }
+    }
     
     // MARK: Setup Steps
     private func setupPlannedExpensesTable() {
@@ -88,6 +172,11 @@ class PlannedExpensesViewController: UIViewController, UITableViewDelegate, UITa
     
     private func refreshData() {
         plannedExpenses = achievementsDataModel?.plannedExpenses ?? []
+    }
+    
+    private func refreshDataFor(indexPath: IndexPath) {
+        // To be extended once there are sections
+        refreshData()
     }
     
     private func plannedExpenseFor(indexPath : IndexPath) -> TransactionTemplate {

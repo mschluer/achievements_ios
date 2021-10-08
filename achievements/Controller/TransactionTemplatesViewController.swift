@@ -187,14 +187,14 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
     
     private func refreshDataFor(indexPath: IndexPath) {
         if(indexPath.section == 0) {
-            nonRecurringTransactionTemplates = achievementsDataModel?.nonRecurringTransactionTemplates ?? []
+            nonRecurringTransactionTemplates = achievementsDataModel?.nonRecurringIncomeTemplates ?? []
         } else {
-            recurringTransactionTemplates = achievementsDataModel?.recurringTransactionTemplates ?? []
+            recurringTransactionTemplates = achievementsDataModel?.recurringIncomeTemplates ?? []
         }
     }
     
     private func refreshData() {
-        nonRecurringTransactionTemplates = achievementsDataModel?.nonRecurringTransactionTemplates ?? []
-        recurringTransactionTemplates = achievementsDataModel?.recurringTransactionTemplates ?? []
+        nonRecurringTransactionTemplates = achievementsDataModel?.nonRecurringIncomeTemplates ?? []
+        recurringTransactionTemplates = achievementsDataModel?.recurringIncomeTemplates ?? []
     }
 }

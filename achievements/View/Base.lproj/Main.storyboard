@@ -749,7 +749,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="templateCell" textLabel="lzf-wQ-Iw5" detailTextLabel="fBW-D7-4Te" style="IBUITableViewCellStyleValue1" id="nBE-un-ozT">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" showsReorderControl="YES" indentationWidth="10" reuseIdentifier="templateCell" textLabel="lzf-wQ-Iw5" detailTextLabel="fBW-D7-4Te" style="IBUITableViewCellStyleValue1" id="nBE-un-ozT">
                                                 <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nBE-un-ozT" id="gsZ-7d-sy3">
@@ -789,7 +789,11 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Go-Xz-ln9">
                                 <rect key="frame" x="0.0" y="813" width="414" height="49"/>
                                 <items>
-                                    <barButtonItem title="Add" image="plus" catalog="system" style="plain" id="sfQ-qD-xEs" userLabel="Add"/>
+                                    <barButtonItem title="Add" image="plus" catalog="system" style="plain" id="sfQ-qD-xEs" userLabel="Add">
+                                        <connections>
+                                            <segue destination="zlz-b9-5oP" kind="show" identifier="AddPlannedExpenseSegue" id="dZv-tm-1Cj"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>
@@ -808,6 +812,8 @@
                     <navigationItem key="navigationItem" title="Geplante Ausgaben" id="r1c-dF-Apv"/>
                     <connections>
                         <outlet property="plannedExpensesTable" destination="yVg-hp-rcY" id="E9p-Rd-bOs"/>
+                        <segue destination="zUx-eK-QHC" kind="show" identifier="BookExpenseTemplateSegue" id="GqU-gu-YSw"/>
+                        <segue destination="zlz-b9-5oP" kind="show" identifier="EditExpenseTemplateSegue" id="P7n-mN-adp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NGf-X5-nqx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -817,8 +823,8 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="ada-9d-Mi3"/>
-        <segue reference="D9y-fI-rBU"/>
-        <segue reference="boi-0n-d1U"/>
+        <segue reference="GqU-gu-YSw"/>
+        <segue reference="P7n-mN-adp"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="folder.badge.minus" catalog="system" width="128" height="91"/>

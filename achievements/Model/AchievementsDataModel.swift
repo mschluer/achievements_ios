@@ -64,6 +64,12 @@ class AchievementsDataModel {
         return try! self.viewContext.fetch(request)
     }
     
+    var plannedExpenses: [TransactionTemplate] {
+        let request : NSFetchRequest<TransactionTemplate> = TransactionTemplate.fetchRequest()
+        request.predicate = NSPredicate(format: "amount < 0")
+        return try! self.viewContext.fetch(request)
+    }
+    
     var recentIncomes : [AchievementTransaction] {
         let fetchRequest : NSFetchRequest<AchievementTransaction> = AchievementTransaction.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "amount >= 0")

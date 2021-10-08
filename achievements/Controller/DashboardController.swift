@@ -67,6 +67,10 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             let destination = segue.destination as! StatisticsViewController
             
             destination.achievementsDataModel = achievementsDataModel
+        } else if segue.identifier == "ShowPlannedExpensesSegue" {
+            let destination = segue.destination as! PlannedExpensesViewController
+            
+            destination.achievementsDataModel = achievementsDataModel
         }
     }
 

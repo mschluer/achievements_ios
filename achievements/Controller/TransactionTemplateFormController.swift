@@ -13,6 +13,7 @@ class TransactionTemplateFormController: UIViewController, UITextFieldDelegate {
     
     // MARK: Variables
     public var transactionTemplate : TransactionTemplate?
+    public var flipSignOnShow = false
 
     // MARK: Outlets
     @IBOutlet weak var amountInputField: UITextField!
@@ -27,6 +28,10 @@ class TransactionTemplateFormController: UIViewController, UITextFieldDelegate {
         
         if let template = self.transactionTemplate {
             populateFormWith(template)
+        }
+        
+        if flipSignOnShow {
+            signButtonPressed(self)
         }
         
         amountInputField.becomeFirstResponder()

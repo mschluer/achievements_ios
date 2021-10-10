@@ -7,7 +7,8 @@
 
 import UIKit
 
-class PlannedExpensesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PlannedExpensesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITableViewDragDelegate {
+    
     // MARK: Persistence Models
     public var achievementsDataModel : AchievementsDataModel?
     
@@ -21,6 +22,9 @@ class PlannedExpensesViewController: UIViewController, UITableViewDelegate, UITa
         super.viewDidLoad()
 
         setupPlannedExpensesTable()
+        
+        plannedExpensesTable.dragInteractionEnabled = true
+        plannedExpensesTable.dragDelegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,6 +95,22 @@ class PlannedExpensesViewController: UIViewController, UITableViewDelegate, UITa
         return config
     }
     
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let item = plannedExpenses.remove(at: sourceIndexPath.item)
+        plannedExpenses.insert(item, at: destinationIndexPath.item)
+    }
+    
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        let dragItem = UIDragItem(itemProvider: NSItemProvider())
+        dragItem.localObject = plannedExpenseFor(indexPath: indexPath)
+        return [ dragItem ]
+    }
+    
+    // MARK: Action Handlers
     private func swipeLeftEdit(at indexPath: IndexPath) {
         performSegue(withIdentifier: "EditExpenseTemplateSegue", sender: plannedExpenseFor(indexPath: indexPath))
     }

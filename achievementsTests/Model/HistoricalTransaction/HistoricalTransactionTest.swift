@@ -36,7 +36,6 @@ class HistoricalTransactionTest: XCTestCase {
         // Prepare Date
         let date = Date()
         let formatter = DateFormatter()
-        formatter.dateStyle = .short
         formatter.timeStyle = .short
         
         let expectedDateString = formatter.string(for: date)

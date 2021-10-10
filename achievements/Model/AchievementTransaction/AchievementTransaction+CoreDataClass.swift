@@ -15,7 +15,6 @@ public class AchievementTransaction: NSManagedObject {
     
     @nonobjc func toString() -> String {
         let formatter = DateFormatter()
-        formatter.dateStyle = .short
         formatter.timeStyle = .short
         
         let dateString = formatter.string(for: date)

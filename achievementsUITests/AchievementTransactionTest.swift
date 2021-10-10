@@ -29,7 +29,6 @@ class AchievementTransactionTest: XCTestCase {
         let app = XCUIApplication()
         
         // Dashboard
-        XCTAssert(app.staticTexts["+/- 0.00"].exists)
         app.toolbars["Toolbar"].buttons["Add"].tap()
         
         // Transaction Form (Create)

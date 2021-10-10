@@ -230,6 +230,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ylL-L5-AZR" customClass="ProgressWheel" customModule="achievements" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <accessibility key="accessibilityConfiguration" label="progressWheel"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="jtN-An-27p"/>
@@ -823,7 +824,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="ada-9d-Mi3"/>
-        <segue reference="GqU-gu-YSw"/>
+        <segue reference="D9y-fI-rBU"/>
         <segue reference="P7n-mN-adp"/>
     </inferredMetricsTieBreakers>
     <resources>

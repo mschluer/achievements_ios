@@ -179,4 +179,54 @@ class ExpenseTemplateTest: XCTestCase {
         XCTAssert(app.staticTexts["( -10.00 )"].exists)
         XCTAssert(app.staticTexts["Non Recurring Test Template"].exists)
     }
+    
+    func testProgressWheelForPlannedExpense() throws {
+        let app = XCUIApplication()
+        
+        // Dashboard
+        app.toolbars["Toolbar"].buttons["expenseTemplates"].tap()
+        
+        // Transaction Templates List
+        app.toolbars["Toolbar"].buttons["Add"].tap()
+        
+        // Transaction Template Form (Create)
+        app.textFields["amountInputField"].typeText("100.00")
+        
+        let titleTextField = app.textFields["textInputField"]
+        titleTextField.tap()
+        titleTextField.typeText("Progress Wheel Test Expense")
+        
+        app.switches["recurringSwitch"].tap()
+        app.buttons["submitButton"].tap()
+        
+        // Transaction Templates List
+        app.navigationBars.buttons["Dashboard"].tap()
+        
+        // Dashboard
+        XCTAssertTrue(app.staticTexts["+/- 0.00"].exists)
+        app.otherElements["progressWheel"].tap()
+        XCTAssertTrue(app.staticTexts["(+0.00)"].exists)
+        app.otherElements["progressWheel"].tap()
+        XCTAssertTrue(app.staticTexts["(-100.00)"].exists)
+        app.otherElements["progressWheel"].tap()
+        XCTAssertTrue(app.staticTexts["0.00 %"].exists)
+        app.toolbars["Toolbar"].buttons["Add"].tap()
+        
+        // Achievement Transaction Form (Create)
+        app.textFields["amountInputField"].typeText("55.20")
+        
+        titleTextField.tap()
+        titleTextField.typeText("Progress Wheel Test Income")
+        
+        app.buttons["submitButton"].tap()
+        
+        // Dashboard
+        XCTAssertTrue(app.staticTexts["+55.20"].exists)
+        app.otherElements["progressWheel"].tap()
+        XCTAssertTrue(app.staticTexts["(+55.20)"].exists)
+        app.otherElements["progressWheel"].tap()
+        XCTAssertTrue(app.staticTexts["(-44.80)"].exists)
+        app.otherElements["progressWheel"].tap()
+        XCTAssertTrue(app.staticTexts["55.20 %"].exists)
+    }
 }

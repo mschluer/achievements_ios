@@ -245,9 +245,21 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         
         // Update Progress Wheel
         if(balance >= 0) {
-            progressWheel.inactiveColor = UIColor.systemGray
-            progressWheel.activeColor = UIColor.systemGray
-            progressWheel.percentage = 100
+            if let plannedExpense = achievementsDataModel.plannedExpenses.first {
+                progressWheel.inactiveColor = UIColor.systemGray
+                progressWheel.activeColor = UIColor.systemGreen
+                let percentage = (achievementsDataModel.totalRecentIncomes / plannedExpense.amount) * -100
+                
+                if percentage <= 100 {
+                    progressWheel.percentage = percentage
+                } else {
+                    progressWheel.percentage = 100
+                }
+            } else {
+                progressWheel.inactiveColor = UIColor.systemGray
+                progressWheel.activeColor = UIColor.systemGray
+                progressWheel.percentage = 100
+            }
         } else {
             progressWheel.inactiveColor = UIColor.systemRed
             progressWheel.activeColor = UIColor.systemGreen
@@ -274,7 +286,14 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     private func showRemainingExpenseAmountInProgressWheelLabel() {
-        let remainingAmount = (achievementsDataModel.recentExpenses.first?.amount ?? 0.0 ) + achievementsDataModel.totalRecentIncomes
+        var remainingAmount : Float = 0.0
+        if achievementsDataModel.recentExpenses.count > 0 {
+            // Redeemable Recent Expense
+            remainingAmount = (achievementsDataModel.recentExpenses.first?.amount ?? 0.0 ) + achievementsDataModel.totalRecentIncomes
+        } else if achievementsDataModel.plannedExpenses.count > 0 {
+            // Planned Expense
+            remainingAmount = (achievementsDataModel.plannedExpenses.first?.amount ?? 0.0) + achievementsDataModel.totalRecentIncomes
+        }
         
         if remainingAmount < 0 {
             progressWheel.text = "(\(String (format: "%.2f", remainingAmount)))"
@@ -290,8 +309,13 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     
     private func showCurrentRedemptionPercentageInProgressWheelLabel() {
         var percentage : Float = 0.0
-        if(achievementsDataModel.recentExpenses.first != nil) {
+        
+        if achievementsDataModel.recentExpenses.first != nil {
+            // Redeemable Recent Expense
             percentage = (achievementsDataModel.totalRecentIncomes / achievementsDataModel.recentExpenses.first!.amount) * -100
+        } else if achievementsDataModel.plannedExpenses.first != nil {
+            // Planned Expense
+            percentage = (achievementsDataModel.totalRecentIncomes / achievementsDataModel.plannedExpenses.first!.amount) * -100
         }
         
         progressWheel.text = "\(String (format: "%.2f", percentage)) %"

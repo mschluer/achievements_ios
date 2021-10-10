@@ -82,9 +82,17 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        // Date Part
         let formatter = DateFormatter()
         formatter.dateStyle = .short
-        return formatter.string(for: recentTransactionsDates[section])
+        let date = recentTransactionsDates[section]
+        let datePart = formatter.string(for: date)
+        
+        // Balance Part
+        let dictionaryItem = recentTransactionsTableViewData[date] ?? []
+        let balance = calculateBalanceFor(array: dictionaryItem)
+        
+        return "\(datePart!) - ( \(String (format: "%.2f", balance)) )"
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -351,5 +359,15 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         self.recentTransactionsTableViewData = self.achievementsDataModel.groupedAchievementTransactions
         
         updateViewFromModel()
+    }
+    
+    private func calculateBalanceFor(array: [AchievementTransaction]) -> Float {
+        var result : Float = 0.0
+        
+        for element in array {
+            result += element.amount
+        }
+        
+        return result
     }
 }

@@ -191,7 +191,6 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         // Update Data
         recentTransactionsTableViewData = self.achievementsDataModel.groupedAchievementTransactions
         
-        
         self.recentTransactionsTableView.deleteRows(at: [indexPath], with: .automatic)
         self.recalculateBalance()
     }
@@ -317,7 +316,6 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     private func getRecentTransactionFor(indexPath: IndexPath) -> AchievementTransaction {
-        // Get Transaction
         let date = recentTransactionsDates[indexPath.section]
         let dictionaryEntry = recentTransactionsTableViewData[date]!
         return dictionaryEntry[indexPath.item]

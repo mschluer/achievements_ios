@@ -8,7 +8,13 @@
 import UIKit
 
 class HistoryTableViewController: UITableViewController {
-    public var historicalTransactions : [HistoricalTransaction] = []
+    // MARK: Persistence Models
+    public var achievementsDataModel : AchievementsDataModel?
+    
+    // MARK: Variables
+    private var historicalTransactions : [Date : [HistoricalTransaction]] = [:]
+    private var historicalTransactionsDates : [Date] = []
+    
     
     // MARK: Outlets
     @IBOutlet var historyTableView: UITableView!
@@ -16,12 +22,7 @@ class HistoryTableViewController: UITableViewController {
     // MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        updateViewFromModel()
     }
     
     // MARK: Navigation
@@ -35,27 +36,37 @@ class HistoryTableViewController: UITableViewController {
 
     // MARK: Table View Data Source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return historicalTransactionsDates.count
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        return formatter.string(for: historicalTransactionsDates[section])
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return historicalTransactions.count
+        let date = historicalTransactionsDates[section]
+        let dictionaryEntry = historicalTransactions[date]
+        
+        return dictionaryEntry?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let transaction = historicalTransactionFor(indexPath: indexPath)
         if let cell = tableView.dequeueReusableCell(withIdentifier: "historyItemCell") {
-            if historicalTransactions[indexPath.item].amount < 0 {
+            if transaction.amount < 0 {
                 cell.backgroundColor = UIColor.systemRed
             } else {
                 cell.backgroundColor = UIColor.systemGreen
             }
             
             if let label = cell.textLabel {
-                label.text = (historicalTransactions[indexPath.item].toString())
+                label.text = transaction.toString()
             }
             
             if let detailLabel = cell.detailTextLabel {
-                detailLabel.text = "(\(String (format: "%.2f", historicalTransactions[indexPath.item].balance)))"
+                detailLabel.text = "(\(String (format: "%.2f", transaction.balance)))"
             }
             
             return cell
@@ -67,49 +78,30 @@ class HistoryTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         transactionCellPressed(indexPath)
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
     
     // MARK: Action Handlers
     private func transactionCellPressed(_ indexPath: IndexPath) {
-        performSegue(withIdentifier: "ShowTransactionDetailViewSegue", sender: historicalTransactions[indexPath.row])
+        performSegue(withIdentifier: "ShowTransactionDetailViewSegue", sender: historicalTransactionFor(indexPath: indexPath))
     }
     
     // MARK: Private Functions
     private func updateViewFromModel() {
+        historicalTransactions = self.achievementsDataModel?.groupedHistoricalTransactions ?? [:]
+        updateSections()
+        
         historyTableView.reloadData()
+    }
+    
+    private func updateSections() {
+        var result = Array(historicalTransactions.keys)
+        result.sort(by: >)
+        
+        self.historicalTransactionsDates = result
+    }
+    
+    private func historicalTransactionFor(indexPath: IndexPath) -> HistoricalTransaction {
+        let date = historicalTransactionsDates[indexPath.section]
+        let dictionaryEntry = historicalTransactions[date]!
+        return dictionaryEntry[indexPath.item]
     }
 }

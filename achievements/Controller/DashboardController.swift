@@ -51,7 +51,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         } else if segue.identifier == "ShowHistorySegue" {
             let destination = segue.destination as! HistoryTableViewController
             
-            destination.historicalTransactions = achievementsDataModel.historicalTransactions
+            destination.achievementsDataModel = achievementsDataModel
         } else if segue.identifier == "ShowTransactionDetailViewSegue" {
             let destination = segue.destination as! TransactionDetailViewController
             

@@ -36,7 +36,6 @@ class HistoricalTransactionTest: XCTestCase {
         // Prepare Date
         let date = Date()
         let formatter = DateFormatter()
-        formatter.dateStyle = .short
         formatter.timeStyle = .short
         
         let expectedDateString = formatter.string(for: date)
@@ -98,7 +97,35 @@ class HistoricalTransactionTest: XCTestCase {
         XCTAssertEqual(storedTransactions[0].text, "alpha")
         XCTAssertEqual(storedTransactions[1].text, "beta")
         XCTAssertEqual(storedTransactions[2].text, "delta")
+    }
+    
+    func testGroupedHistoricalTransactions() throws {
+        // Prepare Dates
+        let today = Date()
+        var oneDay = DateComponents()
+        oneDay.day = 1
+        let tomorrow = Calendar.current.date(byAdding: oneDay, to: today)!
         
+        // Create Transactions
+        let texts = [ "delta", "beta", "alpha" ]
+        let amounts : [Float] = [ 3.0, 2.0, 1.0 ]
+        let dates = [ today, tomorrow, today ]
+        
+        for i in 0...2 {
+            _ = dataModel.createAchievementTransactionWith(text: texts[i], amount: amounts[i], date: dates[i])
+            
+            dataModel.save()
+        }
+        
+        // Check Grouping
+        let groupedTransactions = dataModel.groupedHistoricalTransactions
+        var keys = Array(groupedTransactions.keys)
+        keys.sort()
+        
+        XCTAssertEqual(groupedTransactions.count, 2)
+        XCTAssertEqual(groupedTransactions[keys[0]]!.count, 2)
+        XCTAssertEqual(groupedTransactions[keys[1]]?.first?.text, "beta")
+        XCTAssertEqual(groupedTransactions[keys[1]]!.count, 1)
     }
     
     func testDeletion() throws {

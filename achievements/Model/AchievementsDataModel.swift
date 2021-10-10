@@ -108,6 +108,7 @@ class AchievementsDataModel {
     var plannedExpenses: [TransactionTemplate] {
         let request : NSFetchRequest<TransactionTemplate> = TransactionTemplate.fetchRequest()
         request.predicate = NSPredicate(format: "amount < 0")
+        request.sortDescriptors = [NSSortDescriptor(key: "orderIndex", ascending: true)]
         return try! self.viewContext.fetch(request)
     }
     
@@ -316,5 +317,33 @@ class AchievementsDataModel {
             
             i += 1
         }
+    }
+    
+    func reindexPlannedExpenses() {
+        let expenses = plannedExpenses
+        
+        print(plannedExpenses.count)
+        
+        for i in 0...(expenses.count - 1) {
+            expenses[i].orderIndex = Int16(i)
+        }
+        
+        save()
+    }
+    
+    func rearrangeTransactionTemplates(template: TransactionTemplate, destinationIndex: Int) {
+        reindexPlannedExpenses()
+        
+        // Push forward
+        let expenses = plannedExpenses
+        if destinationIndex < plannedExpenses.count {
+            for i in destinationIndex...(expenses.count - 1) {
+                expenses[i].orderIndex += 1
+            }
+        }
+        
+        // Insert
+        template.orderIndex = Int16(destinationIndex)
+        save()
     }
 }

@@ -12,6 +12,7 @@
 		B307CE7B27106EC800FB7E8C /* PlannedExpensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B307CE7A27106EC800FB7E8C /* PlannedExpensesViewController.swift */; };
 		B307CE7D271075C200FB7E8C /* TransactionTemplateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B307CE7C271075C200FB7E8C /* TransactionTemplateTest.swift */; };
 		B307CE7F271083A600FB7E8C /* ExpenseTemplateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B307CE7E271083A600FB7E8C /* ExpenseTemplateTest.swift */; };
+		B307CE812713886200FB7E8C /* ExpenseTemplateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B307CE802713886200FB7E8C /* ExpenseTemplateTest.swift */; };
 		B3186B6D270B63A6000B4AE8 /* ProgressWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3186B6C270B63A6000B4AE8 /* ProgressWheel.swift */; };
 		B328322D26D93F22007CAD2A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328322C26D93F22007CAD2A /* AppDelegate.swift */; };
 		B328322F26D93F22007CAD2A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328322E26D93F22007CAD2A /* SceneDelegate.swift */; };
@@ -68,6 +69,7 @@
 		B307CE7A27106EC800FB7E8C /* PlannedExpensesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannedExpensesViewController.swift; sourceTree = "<group>"; };
 		B307CE7C271075C200FB7E8C /* TransactionTemplateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTemplateTest.swift; sourceTree = "<group>"; };
 		B307CE7E271083A600FB7E8C /* ExpenseTemplateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseTemplateTest.swift; sourceTree = "<group>"; };
+		B307CE802713886200FB7E8C /* ExpenseTemplateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseTemplateTest.swift; sourceTree = "<group>"; };
 		B3186B6C270B63A6000B4AE8 /* ProgressWheel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressWheel.swift; sourceTree = "<group>"; };
 		B328322926D93F22007CAD2A /* achievements.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = achievements.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B328322C26D93F22007CAD2A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 			children = (
 				B3FB47FC26FB3D3700494C4F /* IncomeTemplateTest.swift */,
 				B307CE7C271075C200FB7E8C /* TransactionTemplateTest.swift */,
+				B307CE802713886200FB7E8C /* ExpenseTemplateTest.swift */,
 			);
 			path = TransactionTemplate;
 			sourceTree = "<group>";
@@ -587,6 +590,7 @@
 			files = (
 				B3939ABD2704797C005D243B /* AchievementTransactionTest.swift in Sources */,
 				B307CE7D271075C200FB7E8C /* TransactionTemplateTest.swift in Sources */,
+				B307CE812713886200FB7E8C /* ExpenseTemplateTest.swift in Sources */,
 				B3FB47FD26FB3D3700494C4F /* IncomeTemplateTest.swift in Sources */,
 				B3939AC0270481FC005D243B /* HistoricalTransactionTest.swift in Sources */,
 				B3FB480026FB471200494C4F /* AchievementsDataModelTest.swift in Sources */,

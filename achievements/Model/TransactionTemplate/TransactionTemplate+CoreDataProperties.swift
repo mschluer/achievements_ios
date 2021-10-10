@@ -19,6 +19,7 @@ extension TransactionTemplate {
     @NSManaged public var recurring: Bool
     @NSManaged public var text: String?
     @NSManaged public var amount: Float
+    @NSManaged public var orderIndex: Int16
 
 }
 

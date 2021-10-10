@@ -100,8 +100,12 @@ class PlannedExpensesViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        // Update Table View Data
         let item = plannedExpenses.remove(at: sourceIndexPath.item)
         plannedExpenses.insert(item, at: destinationIndexPath.item)
+        
+        // Update Data
+        achievementsDataModel?.rearrangeTransactionTemplates(template: item, destinationIndex: destinationIndexPath.item)
     }
     
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {

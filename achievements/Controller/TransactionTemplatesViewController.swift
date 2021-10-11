@@ -38,9 +38,9 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
             let destination = segue.destination as! TransactionTemplateFormController
             destination.achievementsDataModel = achievementsDataModel
         case "BookTransactionTemplateSegue":
-            let destination = segue.destination as! TransactionFormController
+            let destination = segue.destination as! AchievementTransactionFormController
             destination.transactionTemplate = (sender as! TransactionTemplate)
-            destination.achievementTransactionModel = self.achievementsDataModel
+            destination.achievementsDataModel = self.achievementsDataModel
         case "EditTransactionTemplateSegue":
             let destination = segue.destination as! TransactionTemplateFormController
             destination.achievementsDataModel = achievementsDataModel

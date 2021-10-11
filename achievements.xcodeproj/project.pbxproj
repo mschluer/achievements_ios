@@ -28,7 +28,7 @@
 		B328326C26DBD253007CAD2A /* AchievementTransaction+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328326A26DBD253007CAD2A /* AchievementTransaction+CoreDataClass.swift */; };
 		B328326D26DBD253007CAD2A /* AchievementTransaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328326B26DBD253007CAD2A /* AchievementTransaction+CoreDataProperties.swift */; };
 		B328326F26DBD379007CAD2A /* AchievementsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328326E26DBD379007CAD2A /* AchievementsDataModel.swift */; };
-		B328327326DC2D02007CAD2A /* TransactionFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328327226DC2D02007CAD2A /* TransactionFormController.swift */; };
+		B328327326DC2D02007CAD2A /* AchievementTransactionFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328327226DC2D02007CAD2A /* AchievementTransactionFormController.swift */; };
 		B349499326E1483E00829A5F /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349499226E1483E00829A5F /* HistoryTableViewController.swift */; };
 		B349499526E1670F00829A5F /* TransactionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349499426E1670F00829A5F /* TransactionDetailViewController.swift */; };
 		B349499726E3D31100829A5F /* TransactionTemplatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349499626E3D31100829A5F /* TransactionTemplatesViewController.swift */; };
@@ -95,7 +95,7 @@
 		B328326A26DBD253007CAD2A /* AchievementTransaction+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AchievementTransaction+CoreDataClass.swift"; path = "achievements/Model/AchievementTransaction/AchievementTransaction+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		B328326B26DBD253007CAD2A /* AchievementTransaction+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AchievementTransaction+CoreDataProperties.swift"; path = "achievements/Model/AchievementTransaction/AchievementTransaction+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		B328326E26DBD379007CAD2A /* AchievementsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsDataModel.swift; sourceTree = "<group>"; };
-		B328327226DC2D02007CAD2A /* TransactionFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFormController.swift; sourceTree = "<group>"; };
+		B328327226DC2D02007CAD2A /* AchievementTransactionFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTransactionFormController.swift; sourceTree = "<group>"; };
 		B349499226E1483E00829A5F /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
 		B349499426E1670F00829A5F /* TransactionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewController.swift; sourceTree = "<group>"; };
 		B349499626E3D31100829A5F /* TransactionTemplatesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTemplatesViewController.swift; sourceTree = "<group>"; };
@@ -258,7 +258,7 @@
 		B328327726DF90B9007CAD2A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				B328327226DC2D02007CAD2A /* TransactionFormController.swift */,
+				B328327226DC2D02007CAD2A /* AchievementTransactionFormController.swift */,
 				B328325C26D94909007CAD2A /* DashboardController.swift */,
 				B349499226E1483E00829A5F /* HistoryTableViewController.swift */,
 				B349499426E1670F00829A5F /* TransactionDetailViewController.swift */,
@@ -581,7 +581,7 @@
 				B349499926E3DB6E00829A5F /* TransactionTemplateFormController.swift in Sources */,
 				B3186B6D270B63A6000B4AE8 /* ProgressWheel.swift in Sources */,
 				B3C5C4B026E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift in Sources */,
-				B328327326DC2D02007CAD2A /* TransactionFormController.swift in Sources */,
+				B328327326DC2D02007CAD2A /* AchievementTransactionFormController.swift in Sources */,
 				B328326C26DBD253007CAD2A /* AchievementTransaction+CoreDataClass.swift in Sources */,
 				B3C5C4B226E5267600A52CBC /* StatisticsViewController.swift in Sources */,
 				B349499726E3D31100829A5F /* TransactionTemplatesViewController.swift in Sources */,

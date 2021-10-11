@@ -346,10 +346,10 @@
             </objects>
             <point key="canvasLocation" x="1008.6956521739131" y="136.60714285714286"/>
         </scene>
-        <!--Transaction Form Controller-->
+        <!--Achievement Transaction Form Controller-->
         <scene sceneID="fc5-OO-H5Q">
             <objects>
-                <viewController id="zUx-eK-QHC" customClass="TransactionFormController" customModule="achievements" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="zUx-eK-QHC" customClass="AchievementTransactionFormController" customModule="achievements" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UP4-YB-7uY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

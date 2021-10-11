@@ -7,10 +7,10 @@
 
 import UIKit
 
-class TransactionFormController: UIViewController, UITextFieldDelegate {
+class AchievementTransactionFormController: UIViewController, UITextFieldDelegate {
     // MARK: Variables
     public var achievementTransaction: AchievementTransaction?
-    public var achievementTransactionModel : AchievementsDataModel?
+    public var achievementsDataModel : AchievementsDataModel?
     public var transactionTemplate : TransactionTemplate?
 
     // MARK: Outlets
@@ -64,14 +64,14 @@ class TransactionFormController: UIViewController, UITextFieldDelegate {
             // Remove Old Items if edit
             if let transaction = self.achievementTransaction {
                 if let historicalTransaciton = transaction.historicalTransaction {
-                    achievementTransactionModel?.remove(historicalTransaction: historicalTransaciton)
+                    achievementsDataModel?.remove(historicalTransaction: historicalTransaciton)
                 } else {
-                    achievementTransactionModel?.remove(achievementTransaction: transaction)
+                    achievementsDataModel?.remove(achievementTransaction: transaction)
                 }
             }
             
             // Insert New Item
-            _ = achievementTransactionModel?.createAchievementTransactionWith(
+            _ = achievementsDataModel?.createAchievementTransactionWith(
                 text: titleInputField.text!,
                 amount: (amountInputField.text as NSString?)?.floatValue ?? 0.0,
                 date: datePicker.date)
@@ -79,7 +79,7 @@ class TransactionFormController: UIViewController, UITextFieldDelegate {
             // Remove Template if not recurring
             if let template = self.transactionTemplate {
                 if(!template.recurring) {
-                    achievementTransactionModel?.remove(transactionTemplate: template)
+                    achievementsDataModel?.remove(transactionTemplate: template)
                 }
             }
             

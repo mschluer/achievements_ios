@@ -46,12 +46,12 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "CreateTransactionFormSegue":
-            let destination = segue.destination as! TransactionFormController
-            destination.achievementTransactionModel = achievementsDataModel
+            let destination = segue.destination as! AchievementTransactionFormController
+            destination.achievementsDataModel = achievementsDataModel
         case "EditTransactionFormSegue":
-            let destination = segue.destination as! TransactionFormController
+            let destination = segue.destination as! AchievementTransactionFormController
             destination.achievementTransaction = (sender as! AchievementTransaction)
-            destination.achievementTransactionModel = achievementsDataModel
+            destination.achievementsDataModel = achievementsDataModel
         case "ShowHistorySegue":
             let destination = segue.destination as! HistoryTableViewController
             destination.achievementsDataModel = achievementsDataModel

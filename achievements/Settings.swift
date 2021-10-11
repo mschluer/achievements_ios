@@ -37,9 +37,13 @@ public class Settings {
         
         self.applicationSettings = loadedApplicationSettings ?? ApplicationSettings()
     }
+    
+    static func resetApplicationSettings() {
+        self.applicationSettings = ApplicationSettings()
+    }
 }
 
 // MARK: Data Structs with Defaults
 struct ApplicationSettings : Codable {
-    var automaticPurge: Bool = true
+    var automaticPurge: Bool = false
 }

@@ -176,6 +176,16 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         updateViewFromModel()
     }
     
+    private func mainMenuAutoSettleButtonPressed() {
+        Settings.applicationSettings.automaticPurge = !Settings.applicationSettings.automaticPurge
+        if (Settings.applicationSettings.automaticPurge) {
+            achievementsDataModel.purgeRecent()
+            updateViewFromModel()
+        }
+        setupMainMenu()
+        
+    }
+    
     private func mainMenuHistoryButtonPressed() {
         performSegue(withIdentifier: "ShowHistorySegue", sender: menuButton)
     }
@@ -217,6 +227,9 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             self.mainMenuResetButtonPressed() }
             
         let mainMenuItems = UIMenu(title: "mainMenu", options: .displayInline, children: [
+            UIAction(title: "Transaktionen autom. Verrechnen", image: UIImage(systemName: Settings.applicationSettings.automaticPurge ? "checkmark.square" : "square"), handler: { _ in
+                self.mainMenuAutoSettleButtonPressed()
+            }),
             UIAction(title: "Transaktionen Verrechnen", image: UIImage(systemName: "arrow.left.arrow.right.circle"), handler: { _ in
                 self.mainMenuSettleButtonPressed()
             }),
@@ -354,11 +367,16 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     private func resetApplication() {
+        // Reset DataModel
         self.achievementsDataModel.clear()
         self.recentTransactions = self.achievementsDataModel.achievementTransactions
         self.recentTransactionsTableViewData = self.achievementsDataModel.groupedAchievementTransactions
         
+        // Reset Settings
+        Settings.resetApplicationSettings()
+        
         updateViewFromModel()
+        setupMainMenu()
     }
     
     private func calculateBalanceFor(array: [AchievementTransaction]) -> Float {

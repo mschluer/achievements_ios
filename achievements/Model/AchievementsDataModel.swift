@@ -27,6 +27,10 @@ class AchievementsDataModel {
     }
     
     var achievementTransactions : [AchievementTransaction] {
+        if(Settings.applicationSettings.automaticPurge) {
+            purgeRecent()
+        }
+        
         let request : NSFetchRequest<AchievementTransaction> = AchievementTransaction.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
         return try! viewContext.fetch(request)

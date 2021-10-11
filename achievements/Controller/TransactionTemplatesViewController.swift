@@ -97,6 +97,10 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard transactionTemplateFor(indexPath: indexPath).isQuickBookable() else {
+            return nil
+        }
+        
         let book = UIContextualAction(style: .normal, title: "Buchen") { (action, view, completion) in
             self.swipeRightQuickBook(at: indexPath)
             completion(false)
@@ -130,22 +134,16 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
     private func swipeRightQuickBook(at indexPath: IndexPath) {
         let template = transactionTemplateFor(indexPath: indexPath)
         
-        if template.text == "" || template.amount == 0 {
-            let insufficientDataAlert = UIAlertController(title: "Unzureichende Daten", message: "Um diese Vorlage schnell zu buchen, müssen die Daten vollständig sein.", preferredStyle: .alert)
-            insufficientDataAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-            self.present(insufficientDataAlert, animated: true)
-        } else {
-            _ = self.achievementsDataModel?.createAchievementTransactionWith(
-                text: template.text!,
-                amount: template.amount,
-                date: Date())
+        _ = self.achievementsDataModel?.createAchievementTransactionWith(
+            text: template.text!,
+            amount: template.amount,
+            date: Date())
+        
+        if(!template.recurring) {
+            achievementsDataModel?.remove(transactionTemplate: template)
+            refreshDataFor(indexPath: indexPath)
             
-            if(!template.recurring) {
-                achievementsDataModel?.remove(transactionTemplate: template)
-                refreshDataFor(indexPath: indexPath)
-                
-                self.templatesTable.deleteRows(at: [indexPath], with: .automatic)
-            }
+            self.templatesTable.deleteRows(at: [indexPath], with: .automatic)
         }
     }
     

@@ -66,6 +66,9 @@ class PlannedExpensesViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard plannedExpenseFor(indexPath: indexPath).isQuickBookable() else {
+            return nil
+        }
         let book = UIContextualAction(style: .normal, title: "Buchen") { (action, view, completion) in
             self.swipeRightQuickBook(at: indexPath)
             completion(false)
@@ -124,14 +127,6 @@ class PlannedExpensesViewController: UIViewController, UITableViewDelegate, UITa
         refreshDataFor(indexPath: indexPath)
         self.plannedExpensesTable.deleteRows(at: [indexPath], with: .automatic)
     }
-
-    // func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-    //
-    // }
-
-    // func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-    //     return true
-    // }
 
     // MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

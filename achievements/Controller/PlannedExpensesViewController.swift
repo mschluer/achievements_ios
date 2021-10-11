@@ -69,7 +69,7 @@ class PlannedExpensesViewController: UIViewController, UITableViewDelegate, UITa
         guard plannedExpenseFor(indexPath: indexPath).isQuickBookable() else {
             return nil
         }
-        let book = UIContextualAction(style: .normal, title: "Buchen") { (action, view, completion) in
+        let book = UIContextualAction(style: .normal, title: "Book") { (action, view, completion) in
             self.swipeRightQuickBook(at: indexPath)
             completion(false)
         }
@@ -82,13 +82,13 @@ class PlannedExpensesViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let edit = UIContextualAction(style: .normal, title: "Bearbeiten") { (action, view, completion) in
+        let edit = UIContextualAction(style: .normal, title: "Edit") { (action, view, completion) in
             self.swipeLeftEdit(at: indexPath)
             completion(false)
         }
         edit.backgroundColor = .systemYellow
         
-        let delete = UIContextualAction(style: .destructive, title: "Löschen") { (action, view, completion) in
+        let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
             self.swipeLeftDelete(at: indexPath)
             completion(true)
         }
@@ -156,22 +156,16 @@ class PlannedExpensesViewController: UIViewController, UITableViewDelegate, UITa
     private func swipeRightQuickBook(at indexPath: IndexPath) {
         let template = plannedExpenseFor(indexPath: indexPath)
         
-        if template.text == "" || template.amount == 0 {
-            let insufficientDataAlert = UIAlertController(title: "Unzureichende Daten", message: "Um diese Ausgabe schnell zu buchen, müssen die Daten vollständig sein.", preferredStyle: .alert)
-            insufficientDataAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-            self.present(insufficientDataAlert, animated: true)
-        } else {
-            _ = self.achievementsDataModel?.createAchievementTransactionWith(
-                text: template.text!,
-                amount: template.amount,
-                date: Date())
+        _ = self.achievementsDataModel?.createAchievementTransactionWith(
+            text: template.text!,
+            amount: template.amount,
+            date: Date())
+        
+        if(!template.recurring) {
+            achievementsDataModel?.remove(transactionTemplate: template)
+            refreshDataFor(indexPath: indexPath)
             
-            if(!template.recurring) {
-                achievementsDataModel?.remove(transactionTemplate: template)
-                refreshDataFor(indexPath: indexPath)
-                
-                self.plannedExpensesTable.deleteRows(at: [indexPath], with: .automatic)
-            }
+            self.plannedExpensesTable.deleteRows(at: [indexPath], with: .automatic)
         }
     }
     

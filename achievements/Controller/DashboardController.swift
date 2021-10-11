@@ -123,7 +123,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let delete = UIContextualAction(style: .destructive, title: "Löschen") { (action, view, completion) in
+        let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
             self.transactionCellSwipeLeft(indexPath)
             completion(false)
         }
@@ -135,7 +135,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let edit = UIContextualAction(style: .normal, title: "Bearbeiten") { (action, view, completion) in
+        let edit = UIContextualAction(style: .normal, title: "Edit") { (action, view, completion) in
             self.transactionCellSwipeRight(indexPath)
             completion(true)
         }
@@ -158,11 +158,11 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     private func mainMenuResetButtonPressed() {
-        let deletionAlert = UIAlertController(title: "Sicher?", message: "Der Reset setzt alle Daten der App zurück. Dies kann nicht rückgängig gemacht werden!", preferredStyle: .actionSheet)
-        deletionAlert.addAction(UIAlertAction(title: "App Zurücksetzen", style: .destructive, handler: { _ in
+        let deletionAlert = UIAlertController(title: "Sure?", message: "This will reset / clear all data and cannot be undone!", preferredStyle: .actionSheet)
+        deletionAlert.addAction(UIAlertAction(title: "Reset App", style: .destructive, handler: { _ in
             self.resetApplication()
         }))
-        deletionAlert.addAction(UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil))
+        deletionAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         self.present(deletionAlert, animated: true)
     }
@@ -223,16 +223,16 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             self.mainMenuResetButtonPressed() }
             
         let mainMenuItems = UIMenu(title: "mainMenu", options: .displayInline, children: [
-            UIAction(title: "Transaktionen autom. Verrechnen", image: UIImage(systemName: Settings.applicationSettings.automaticPurge ? "checkmark.square" : "square"), handler: { _ in
+            UIAction(title: "Settle automatically", image: UIImage(systemName: Settings.applicationSettings.automaticPurge ? "checkmark.square" : "square"), handler: { _ in
                 self.mainMenuAutoSettleButtonPressed()
             }),
-            UIAction(title: "Transaktionen Verrechnen", image: UIImage(systemName: "arrow.left.arrow.right.circle"), handler: { _ in
+            UIAction(title: "Settle Transactions", image: UIImage(systemName: "arrow.left.arrow.right.circle"), handler: { _ in
                 self.mainMenuSettleButtonPressed()
             }),
-            UIAction(title: "Historie", image: UIImage(systemName: "clock.arrow.circlepath"), handler: { _ in
+            UIAction(title: "History", image: UIImage(systemName: "clock.arrow.circlepath"), handler: { _ in
                 self.mainMenuHistoryButtonPressed()
             }),
-            UIAction(title: "Statistiken", image: UIImage(systemName: "chart.bar"), handler: { _ in
+            UIAction(title: "Statistics", image: UIImage(systemName: "chart.bar"), handler: { _ in
                 self.mainMenuStatisticsButtonPressed()
             })
         ])

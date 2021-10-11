@@ -25,10 +25,10 @@
             </objects>
             <point key="canvasLocation" x="172" y="137"/>
         </scene>
-        <!--Vorlagen-->
+        <!--Templates-->
         <scene sceneID="ryw-ho-buO">
             <objects>
-                <viewController id="kX9-eO-iUX" customClass="TransactionTemplatesViewController" customModule="achievements" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="kX9-eO-iUX" userLabel="Templates" customClass="TransactionTemplatesViewController" customModule="achievements" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ic7-PX-lCE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -100,7 +100,7 @@
                             <constraint firstItem="Aez-AK-Bn0" firstAttribute="bottom" secondItem="wXe-Nm-E03" secondAttribute="bottom" constant="-49" id="eS9-Is-Ire"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Vorlagen" id="2AO-3U-5XN"/>
+                    <navigationItem key="navigationItem" title="Templates" id="2AO-3U-5XN"/>
                     <connections>
                         <outlet property="templatesTable" destination="Vnz-8V-L3B" id="tHf-Q4-m0x"/>
                         <segue destination="zUx-eK-QHC" kind="show" identifier="BookTransactionTemplateSegue" id="jck-ry-h6I"/>
@@ -128,7 +128,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bAb-Nz-avg">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="36"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Betrag" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8id-r1-PRK">
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8id-r1-PRK">
                                                         <rect key="frame" x="0.0" y="0.0" width="328" height="36"/>
                                                         <accessibility key="accessibilityConfiguration" identifier="amountInputField"/>
                                                         <color key="textColor" systemColor="systemGreenColor"/>
@@ -146,7 +146,7 @@
                                                     </button>
                                                 </subviews>
                                             </stackView>
-                                            <textField opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Titel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l6y-Rq-Cnj">
+                                            <textField opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l6y-Rq-Cnj">
                                                 <rect key="frame" x="0.0" y="44" width="374" height="34"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="textInputField"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -155,7 +155,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="tGa-dH-fPF">
                                                 <rect key="frame" x="0.0" y="86" width="374" height="31"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wiederkehrend" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5f3-Wf-x49">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recurring" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5f3-Wf-x49">
                                                         <rect key="frame" x="0.0" y="0.0" width="317" height="31"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
@@ -178,7 +178,7 @@
                                         <rect key="frame" x="20" y="145" width="374" height="36"/>
                                         <accessibility key="accessibilityConfiguration" identifier="submitButton"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="Speichern"/>
+                                        <state key="normal" title="Submit"/>
                                         <connections>
                                             <action selector="saveButtonPressed:" destination="zUx-eK-QHC" eventType="touchUpInside" id="PfI-bU-OKO"/>
                                             <action selector="saveButtonPressed:" destination="zlz-b9-5oP" eventType="touchUpInside" id="TKq-x7-8Kt"/>
@@ -363,7 +363,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="uuQ-tC-PDU">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="36"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Betrag" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZR4-Su-uWh">
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZR4-Su-uWh">
                                                         <rect key="frame" x="0.0" y="0.0" width="328" height="36"/>
                                                         <accessibility key="accessibilityConfiguration" identifier="amountInputField"/>
                                                         <color key="textColor" systemColor="systemGreenColor"/>
@@ -380,7 +380,7 @@
                                                     </button>
                                                 </subviews>
                                             </stackView>
-                                            <textField opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Titel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pwD-Sl-lxS">
+                                            <textField opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pwD-Sl-lxS">
                                                 <rect key="frame" x="0.0" y="44" width="374" height="34"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="textInputField"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -395,7 +395,7 @@
                                         <rect key="frame" x="20" y="330" width="374" height="36"/>
                                         <accessibility key="accessibilityConfiguration" identifier="submitButton"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="Speichern"/>
+                                        <state key="normal" title="Submit"/>
                                         <connections>
                                             <action selector="saveButtonPressed:" destination="zUx-eK-QHC" eventType="touchUpInside" id="EQe-87-TIq"/>
                                         </connections>
@@ -435,7 +435,7 @@
             </objects>
             <point key="canvasLocation" x="1912" y="137"/>
         </scene>
-        <!--Statistiken-->
+        <!--Statistics-->
         <scene sceneID="ypC-9q-fp4">
             <objects>
                 <viewController id="370-Ih-0bf" customClass="StatisticsViewController" customModule="achievements" customModuleProvider="target" sceneMemberID="viewController">
@@ -446,7 +446,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CWg-I1-EYh">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aktuell" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yGq-ON-DJU">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yGq-ON-DJU">
                                         <rect key="frame" x="20" y="20" width="374" height="24"/>
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
                                         <nil key="textColor"/>
@@ -492,13 +492,13 @@
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="viv-oG-aYr"/>
                                         </constraints>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gesamt" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IAB-GQ-BMk">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IAB-GQ-BMk">
                                         <rect key="frame" x="20" y="168" width="374" height="24"/>
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saldo-Verlauf" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u4H-Rw-Zc7">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance History" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u4H-Rw-Zc7">
                                         <rect key="frame" x="20" y="316" width="374" height="24"/>
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
                                         <nil key="textColor"/>
@@ -594,7 +594,7 @@
                             <constraint firstItem="CWg-I1-EYh" firstAttribute="top" secondItem="ved-Rk-1gc" secondAttribute="top" id="zqr-ZU-Srz"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Statistiken" id="hq8-ys-vMb"/>
+                    <navigationItem key="navigationItem" title="Statistics" id="hq8-ys-vMb"/>
                     <connections>
                         <outlet property="amountExpensesLabel" destination="X2f-R2-fkd" id="dGp-j0-CrG"/>
                         <outlet property="amountIncomesLabel" destination="yo3-5j-qyx" id="bvc-i6-tgi"/>
@@ -611,7 +611,7 @@
             </objects>
             <point key="canvasLocation" x="2844.9275362318845" y="136.60714285714286"/>
         </scene>
-        <!--Historie-->
+        <!--History-->
         <scene sceneID="hqg-WN-OMp">
             <objects>
                 <tableViewController id="vs7-wr-Yeq" customClass="HistoryTableViewController" customModule="achievements" customModuleProvider="target" sceneMemberID="viewController">
@@ -650,7 +650,7 @@
                             <outlet property="delegate" destination="vs7-wr-Yeq" id="Bm3-yo-sEk"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Historie" id="wS2-M0-VYk"/>
+                    <navigationItem key="navigationItem" title="History" id="wS2-M0-VYk"/>
                     <connections>
                         <outlet property="historyTableView" destination="3Zd-EU-7bx" id="RaH-VQ-lhS"/>
                         <outlet property="tableView" destination="3Zd-EU-7bx" id="HYN-kM-H6f"/>
@@ -735,7 +735,7 @@
             </objects>
             <point key="canvasLocation" x="1009" y="867"/>
         </scene>
-        <!--Geplante Ausgaben-->
+        <!--Planned Expenses-->
         <scene sceneID="6UC-RY-U7S">
             <objects>
                 <viewController id="NUp-NC-fBa" customClass="PlannedExpensesViewController" customModule="achievements" customModuleProvider="target" sceneMemberID="viewController">
@@ -810,7 +810,7 @@
                             <constraint firstItem="m4u-jr-4Vg" firstAttribute="bottom" secondItem="rsL-NU-nhL" secondAttribute="bottom" constant="-49" id="fkD-sI-jXv"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Geplante Ausgaben" id="r1c-dF-Apv"/>
+                    <navigationItem key="navigationItem" title="Planned Expenses" id="r1c-dF-Apv"/>
                     <connections>
                         <outlet property="plannedExpensesTable" destination="yVg-hp-rcY" id="E9p-Rd-bOs"/>
                         <segue destination="zUx-eK-QHC" kind="show" identifier="BookExpenseTemplateSegue" id="GqU-gu-YSw"/>
@@ -823,7 +823,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ada-9d-Mi3"/>
+        <segue reference="dO5-aY-6g4"/>
         <segue reference="GqU-gu-YSw"/>
         <segue reference="P7n-mN-adp"/>
     </inferredMetricsTieBreakers>

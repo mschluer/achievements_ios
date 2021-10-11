@@ -17,7 +17,7 @@ class ExpenseTemplateTest: XCTestCase {
         let app = XCUIApplication()
         app.toolbars["Toolbar"].buttons["Menu"].tap()
         app.collectionViews.buttons["Reset"].tap()
-        app.sheets["Sicher?"].scrollViews.otherElements.buttons["App Zurücksetzen"].tap()
+        app.sheets["Sure?"].scrollViews.otherElements.buttons["Reset App"].tap()
     }
 
     override func tearDownWithError() throws {
@@ -47,7 +47,7 @@ class ExpenseTemplateTest: XCTestCase {
         XCTAssert(app.staticTexts["-5.00"].exists)
         
         app.tables.staticTexts["Test Expense Template"].swipeLeft()
-        app.staticTexts["Bearbeiten"].tap()
+        app.staticTexts["Edit"].tap()
         
         // Transaction Tempalte Form (Edit)
         for _ in 0...3 {
@@ -61,7 +61,7 @@ class ExpenseTemplateTest: XCTestCase {
         XCTAssert(app.staticTexts["-7.00"].exists)
         
         app.tables.staticTexts["Test Expense Template"].swipeLeft()
-        app.staticTexts["Löschen"].tap()
+        app.staticTexts["Delete"].tap()
         
         XCTAssertFalse(app.staticTexts["Test Expense Template"].exists)
         XCTAssertFalse(app.staticTexts["-7.00"].exists)
@@ -87,7 +87,7 @@ class ExpenseTemplateTest: XCTestCase {
         XCTAssert(app.staticTexts["-5.00"].exists)
         
         app.tables.staticTexts["-5.00"].swipeRight()
-        XCTAssertFalse(app.staticTexts["Buchen"].exists)
+        XCTAssertFalse(app.staticTexts["Book"].exists)
     }
     
     func testFormBookProcess() throws {
@@ -114,7 +114,7 @@ class ExpenseTemplateTest: XCTestCase {
         app.tables.staticTexts["Extended Test Template"].tap()
         
         // Achievement Transaction Form
-        app.buttons["Speichern"].tap()
+        app.buttons["Submit"].tap()
         
         // Transaction Templates List
         app.navigationBars.buttons["Dashboard"].tap()
@@ -153,7 +153,7 @@ class ExpenseTemplateTest: XCTestCase {
         XCTAssert(app.staticTexts["-10.00"].exists)
         
         app.tables.staticTexts["Non Recurring Test Template"].swipeRight()
-        app.staticTexts["Buchen"].tap()
+        app.staticTexts["Book"].tap()
         app.navigationBars.buttons["Dashboard"].tap()
         
         // Dashboard

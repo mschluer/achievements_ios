@@ -17,7 +17,7 @@ class ProgressWheelTest: XCTestCase {
         let app = XCUIApplication()
         app.toolbars["Toolbar"].buttons["Menu"].tap()
         app.collectionViews.buttons["Reset"].tap()
-        app.sheets["Sicher?"].scrollViews.otherElements.buttons["App Zurücksetzen"].tap()
+        app.sheets["Sure?"].scrollViews.otherElements.buttons["Reset App"].tap()
     }
 
     override func tearDownWithError() throws {

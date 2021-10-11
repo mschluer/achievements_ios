@@ -57,9 +57,9 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if(section == 0) {
-            return "Einmalig"
+            return "Unique"
         } else {
-            return "Wiederkehrend"
+            return "Recurring"
         }
     }
     
@@ -101,7 +101,7 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
             return nil
         }
         
-        let book = UIContextualAction(style: .normal, title: "Buchen") { (action, view, completion) in
+        let book = UIContextualAction(style: .normal, title: "Book") { (action, view, completion) in
             self.swipeRightQuickBook(at: indexPath)
             completion(false)
         }
@@ -114,13 +114,13 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let edit = UIContextualAction(style: .normal, title: "Bearbeiten") { (action, view, completion) in
+        let edit = UIContextualAction(style: .normal, title: "Edit") { (action, view, completion) in
             self.swipeLeftEdit(at: indexPath)
             completion(false)
         }
         edit.backgroundColor = .systemYellow
         
-        let delete = UIContextualAction(style: .destructive, title: "Löschen") { (action, view, completion) in
+        let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
             self.swipeLeftDelete(at: indexPath)
             completion(true)
         }

@@ -8,18 +8,16 @@
 import XCTest
 
 class HistoricalTransaction: XCTestCase {
-
     override func setUpWithError() throws {
         continueAfterFailure = false
 
         XCUIApplication().launch()
-
+        
         // Reset App before each test
         let app = XCUIApplication()
         app.toolbars["Toolbar"].buttons["Menu"].tap()
         app.collectionViews.buttons["Reset"].tap()
-        app.sheets["Sicher?"].scrollViews.otherElements.buttons["App Zurücksetzen"].tap()
-    }
+        app.sheets["Sure?"].scrollViews.otherElements.buttons["Reset App"].tap()    }
 
     override func tearDownWithError() throws {
     }
@@ -41,7 +39,7 @@ class HistoricalTransaction: XCTestCase {
         
         // Dashboard
         app.toolbars["Toolbar"].buttons["Menu"].tap()
-        app.collectionViews.buttons["Historie"].tap()
+        app.collectionViews.buttons["History"].tap()
         
         // History
         app.staticTexts["(5.00)"].tap()

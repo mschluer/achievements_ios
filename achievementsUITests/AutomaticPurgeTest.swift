@@ -17,7 +17,7 @@ class AutomaticPurgeTest: XCTestCase {
         let app = XCUIApplication()
         app.toolbars["Toolbar"].buttons["Menu"].tap()
         app.collectionViews.buttons["Reset"].tap()
-        app.sheets["Sicher?"].scrollViews.otherElements.buttons["App Zurücksetzen"].tap()
+        app.sheets["Sure?"].scrollViews.otherElements.buttons["Reset App"].tap()
     }
 
     override func tearDownWithError() throws {
@@ -33,7 +33,7 @@ class AutomaticPurgeTest: XCTestCase {
         XCTAssertEqual(app.tables.children(matching: .cell).count, 2)
         
         app.toolbars["Toolbar"].buttons["Menu"].tap()
-        app.collectionViews.buttons["Transaktionen autom. Verrechnen"].tap()
+        app.collectionViews.buttons["Settle automatically"].tap()
         // automaticPurge == 1
         
         XCTAssertEqual(app.tables.children(matching: .cell).count, 1)
@@ -43,7 +43,7 @@ class AutomaticPurgeTest: XCTestCase {
         XCTAssertEqual(app.tables.children(matching: .cell).count, 1)
         
         app.toolbars["Toolbar"].buttons["Menu"].tap()
-        app.collectionViews.buttons["Transaktionen autom. Verrechnen"].tap()
+        app.collectionViews.buttons["Settle automatically"].tap()
         // automaticPurge == 0
         
         bookExampleTransaction(with: -1.00, in: app)

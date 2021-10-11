@@ -54,8 +54,8 @@ class AchievementTransactionFormController: UIViewController, UITextFieldDelegat
     @IBAction func saveButtonPressed(_ sender: Any) {
         // Validate Presence
         if amountInputField.text == "" || titleInputField.text == "" {
-            let alert = UIAlertController(title: "Es fehlen Daten", message: "Bitte Eingabe prüfen.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+            let alert = UIAlertController(title: NSLocalizedString("Data missing", comment: "The user did not enter sufficient data."), message: NSLocalizedString("Please check your input", comment: "Ask the user to check his or her input"), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Message of approval"), style: .default, handler: nil))
             self.present(alert, animated: true)
         } else {
             // Make sure to accept ',' instead of '.'

@@ -57,9 +57,9 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if(section == 0) {
-            return "Einmalig"
+            return NSLocalizedString("Unique", comment: "Deleted after being booked once")
         } else {
-            return "Wiederkehrend"
+            return NSLocalizedString("Recurring", comment: "Not Deleted after being booked once")
         }
     }
     
@@ -101,7 +101,7 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
             return nil
         }
         
-        let book = UIContextualAction(style: .normal, title: "Buchen") { (action, view, completion) in
+        let book = UIContextualAction(style: .normal, title: NSLocalizedString("Book", comment: "Take Transaction Template into effect.")) { (action, view, completion) in
             self.swipeRightQuickBook(at: indexPath)
             completion(false)
         }
@@ -114,13 +114,13 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let edit = UIContextualAction(style: .normal, title: "Bearbeiten") { (action, view, completion) in
+        let edit = UIContextualAction(style: .normal, title: NSLocalizedString("Edit", comment: "Change Something")) { (action, view, completion) in
             self.swipeLeftEdit(at: indexPath)
             completion(false)
         }
         edit.backgroundColor = .systemYellow
         
-        let delete = UIContextualAction(style: .destructive, title: "Löschen") { (action, view, completion) in
+        let delete = UIContextualAction(style: .destructive, title: NSLocalizedString("Delete", comment: "Remove something (eg. from Database)")) { (action, view, completion) in
             self.swipeLeftDelete(at: indexPath)
             completion(true)
         }

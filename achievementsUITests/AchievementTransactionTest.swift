@@ -8,7 +8,6 @@
 import XCTest
 
 class AchievementTransactionTest: XCTestCase {
-
     override func setUpWithError() throws {
         continueAfterFailure = false
 
@@ -18,7 +17,7 @@ class AchievementTransactionTest: XCTestCase {
         let app = XCUIApplication()
         app.toolbars["Toolbar"].buttons["Menu"].tap()
         app.collectionViews.buttons["Reset"].tap()
-        app.sheets["Sicher?"].scrollViews.otherElements.buttons["App Zurücksetzen"].tap()
+        app.sheets["Sure?"].scrollViews.otherElements.buttons["Reset App"].tap()
     }
 
     override func tearDownWithError() throws {
@@ -52,7 +51,7 @@ class AchievementTransactionTest: XCTestCase {
         
         // Dashboard
         app.tables.cells["transactionCell"].swipeRight()
-        app.staticTexts["Bearbeiten"].tap()
+        app.staticTexts["Edit"].tap()
     
         // Transaction Form (Edit)
         app.buttons["+ / -"].tap()
@@ -61,7 +60,7 @@ class AchievementTransactionTest: XCTestCase {
         // Dashboard
         XCTAssert(app.staticTexts["-5.50"].exists)
         app.tables.cells["transactionCell"].swipeLeft()
-        app.staticTexts["Löschen"].tap()
+        app.staticTexts["Delete"].tap()
         XCTAssert(app.staticTexts["+/- 0.00"].exists)
     }
 }

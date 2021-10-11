@@ -8,18 +8,16 @@
 import XCTest
 
 class MultiplteTransactionsAndPurgeTest: XCTestCase {
-
     override func setUpWithError() throws {
         continueAfterFailure = false
-        
+
         XCUIApplication().launch()
         
         // Reset App before each test
         let app = XCUIApplication()
         app.toolbars["Toolbar"].buttons["Menu"].tap()
         app.collectionViews.buttons["Reset"].tap()
-        app.sheets["Sicher?"].scrollViews.otherElements.buttons["App Zurücksetzen"].tap()
-    }
+        app.sheets["Sure?"].scrollViews.otherElements.buttons["Reset App"].tap()    }
 
     override func tearDownWithError() throws {
     }
@@ -59,10 +57,10 @@ class MultiplteTransactionsAndPurgeTest: XCTestCase {
         // Dashboard
         XCTAssert(app.staticTexts["+2.00"].exists)
         app.toolbars["Toolbar"].buttons["Menu"].tap()
-        app.collectionViews.buttons["Transaktionen Verrechnen"].tap()
+        app.collectionViews.buttons["Settle Transactions"].tap()
         XCTAssert(app.staticTexts["+2.00"].exists)
         app.toolbars["Toolbar"].buttons["Menu"].tap()
-        app.collectionViews.buttons["Statistiken"].tap()
+        app.collectionViews.buttons["Statistics"].tap()
         
         // Statistics
         XCTAssert(app.staticTexts["2.00"].exists)
@@ -73,7 +71,7 @@ class MultiplteTransactionsAndPurgeTest: XCTestCase {
         
         // Dashboard
         app.toolbars["Toolbar"].buttons["Menu"].tap()
-        app.collectionViews.buttons["Historie"].tap()
+        app.collectionViews.buttons["History"].tap()
         
         // History
         XCTAssert(app.staticTexts["(3.00)"].exists)

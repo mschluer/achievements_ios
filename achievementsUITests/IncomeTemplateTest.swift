@@ -17,7 +17,7 @@ class IncomeTemplateTest: XCTestCase {
         let app = XCUIApplication()
         app.toolbars["Toolbar"].buttons["Menu"].tap()
         app.collectionViews.buttons["Reset"].tap()
-        app.sheets["Sicher?"].scrollViews.otherElements.buttons["App Zurücksetzen"].tap()
+        app.sheets["Sure?"].scrollViews.otherElements.buttons["Reset App"].tap()
     }
 
     override func tearDownWithError() throws {
@@ -47,7 +47,7 @@ class IncomeTemplateTest: XCTestCase {
         XCTAssert(app.staticTexts["5.00"].exists)
         
         app.tables/*@START_MENU_TOKEN@*/.staticTexts["Test-Template"]/*[[".cells.staticTexts[\"Test-Template\"]",".staticTexts[\"Test-Template\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.swipeLeft()
-        app.staticTexts["Bearbeiten"].tap()
+        app.staticTexts["Edit"].tap()
         
         // Transaction Tempalte Form (Edit)
         for _ in 0...4 {
@@ -61,7 +61,7 @@ class IncomeTemplateTest: XCTestCase {
         XCTAssert(app.staticTexts["7.00"].exists)
         
         app.tables/*@START_MENU_TOKEN@*/.staticTexts["Test-Template"]/*[[".cells.staticTexts[\"Test-Template\"]",".staticTexts[\"Test-Template\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.swipeLeft()
-        app.staticTexts["Löschen"].tap()
+        app.staticTexts["Delete"].tap()
         
         XCTAssertFalse(app.staticTexts["Test-Template"].exists)
         XCTAssertFalse(app.staticTexts["7.00"].exists)
@@ -91,7 +91,7 @@ class IncomeTemplateTest: XCTestCase {
         XCTAssert(app.staticTexts["5.00"].exists)
         
         app.tables/*@START_MENU_TOKEN@*/.staticTexts["Test-Template"]/*[[".cells.staticTexts[\"Test-Template\"]",".staticTexts[\"Test-Template\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.swipeRight()
-        app.staticTexts["Buchen"].tap()
+        app.staticTexts["Book"].tap()
         app.navigationBars.buttons["Dashboard"].tap()
         
         // Dashboard
@@ -127,7 +127,7 @@ class IncomeTemplateTest: XCTestCase {
         XCTAssert(app.staticTexts["5.00"].exists)
         
         app.tables.staticTexts["Test Template"].swipeRight()
-        app.staticTexts["Buchen"].tap()
+        app.staticTexts["Book"].tap()
         app.navigationBars.buttons["Dashboard"].tap()
         
         // Dashboard
@@ -164,7 +164,7 @@ class IncomeTemplateTest: XCTestCase {
         XCTAssert(app.staticTexts["6.75"].exists)
         
         app.tables/*@START_MENU_TOKEN@*/.staticTexts["Test-Template"]/*[[".cells.staticTexts[\"Test-Template\"]",".staticTexts[\"Test-Template\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.swipeRight()
-        app.staticTexts["Buchen"].tap()
+        app.staticTexts["Book"].tap()
         
         XCTAssertFalse(app.staticTexts["6.75"].exists)
         

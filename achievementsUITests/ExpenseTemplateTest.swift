@@ -68,41 +68,6 @@ class ExpenseTemplateTest: XCTestCase {
     }
 
     // MARK: Use Cases
-    func testQuickBook() throws {
-        let app = XCUIApplication()
-        
-        // Dashboard
-        app.toolbars["Toolbar"].buttons["expenseTemplates"].tap()
-        
-        // Transaction Templates List
-        app.toolbars["Toolbar"].buttons["Add"].tap()
-        
-        // Transaction Template Form (Create)
-        app.textFields["amountInputField"].typeText("5.00")
-        
-        let titleTextField = app.textFields["textInputField"]
-        titleTextField.tap()
-        titleTextField.typeText("Test Template")
-        
-        app.buttons["submitButton"].tap()
-        
-        // Transaction Templates List
-        XCTAssert(app.staticTexts["Test Template"].exists)
-        XCTAssert(app.staticTexts["-5.00"].exists)
-        
-        app.tables.staticTexts["Test Template"].swipeRight()
-        app.staticTexts["Buchen"].tap()
-        app.navigationBars.buttons["Dashboard"].tap()
-        
-        // Dashboard
-        XCTAssert(app.staticTexts["-5.00"].exists)
-        app.tables.cells["transactionCell"].tap()
-        
-        // Transaction Detail View
-        XCTAssert(app.staticTexts["-5.00"].exists)
-        XCTAssert(app.staticTexts["( -5.00 )"].exists)
-        XCTAssert(app.staticTexts["Test Template"].exists)
-    }
     
     func testQuickBookNotPossible() throws {
         let app = XCUIApplication()

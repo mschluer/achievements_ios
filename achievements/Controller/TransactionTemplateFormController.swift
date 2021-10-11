@@ -37,10 +37,6 @@ class TransactionTemplateFormController: UIViewController, UITextFieldDelegate {
         amountInputField.becomeFirstResponder()
     }
     
-    // MARK: Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    }
-    
     // MARK: TextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder();

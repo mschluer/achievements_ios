@@ -33,20 +33,20 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
     
     // MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "AddTransactionTemplateFormSegue" {
+        switch segue.identifier {
+        case "AddTransactionTemplateFormSegue":
             let destination = segue.destination as! TransactionTemplateFormController
-            
             destination.achievementsDataModel = achievementsDataModel
-        } else if segue.identifier == "BookTransactionTemplateSegue" {
+        case "BookTransactionTemplateSegue":
             let destination = segue.destination as! TransactionFormController
-            
             destination.transactionTemplate = (sender as! TransactionTemplate)
             destination.achievementTransactionModel = self.achievementsDataModel
-        } else if segue.identifier == "EditTransactionTemplateSegue" {
+        case "EditTransactionTemplateSegue":
             let destination = segue.destination as! TransactionTemplateFormController
-            
             destination.achievementsDataModel = achievementsDataModel
             destination.transactionTemplate = (sender as! TransactionTemplate)
+        default:
+            break
         }
     }
     

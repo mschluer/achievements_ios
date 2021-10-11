@@ -29,7 +29,6 @@ class HistoryTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowTransactionDetailViewSegue" {
             let destination = segue.destination as! TransactionDetailViewController
-            
             destination.transaction = sender as? HistoricalTransaction
         }
     }

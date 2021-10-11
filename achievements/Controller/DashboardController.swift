@@ -44,35 +44,31 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "CreateTransactionFormSegue" {
+        switch segue.identifier {
+        case "CreateTransactionFormSegue":
             let destination = segue.destination as! TransactionFormController
-            
             destination.achievementTransactionModel = achievementsDataModel
-        } else if segue.identifier == "ShowHistorySegue" {
-            let destination = segue.destination as! HistoryTableViewController
-            
-            destination.achievementsDataModel = achievementsDataModel
-        } else if segue.identifier == "ShowTransactionDetailViewSegue" {
-            let destination = segue.destination as! TransactionDetailViewController
-            
-            destination.transaction = sender as? HistoricalTransaction
-        } else if segue.identifier == "EditTransactionFormSegue" {
+        case "EditTransactionFormSegue":
             let destination = segue.destination as! TransactionFormController
-            
             destination.achievementTransaction = (sender as! AchievementTransaction)
             destination.achievementTransactionModel = achievementsDataModel
-        } else if segue.identifier == "ShowTemplatesViewSegue" {
-            let destination = segue.destination as! TransactionTemplatesViewController
-            
+        case "ShowHistorySegue":
+            let destination = segue.destination as! HistoryTableViewController
             destination.achievementsDataModel = achievementsDataModel
-        } else if segue.identifier == "ShowStatisticsViewSegue" {
-            let destination = segue.destination as! StatisticsViewController
-            
-            destination.achievementsDataModel = achievementsDataModel
-        } else if segue.identifier == "ShowPlannedExpensesSegue" {
+        case "ShowPlannedExpensesSegue":
             let destination = segue.destination as! PlannedExpensesViewController
-            
             destination.achievementsDataModel = achievementsDataModel
+        case "ShowStatisticsViewSegue":
+            let destination = segue.destination as! StatisticsViewController
+            destination.achievementsDataModel = achievementsDataModel
+        case "ShowTemplatesViewSegue":
+            let destination = segue.destination as! TransactionTemplatesViewController
+            destination.achievementsDataModel = achievementsDataModel
+        case "ShowTransactionDetailViewSegue":
+            let destination = segue.destination as! TransactionDetailViewController
+            destination.transaction = sender as? HistoricalTransaction
+        default:
+            break
         }
     }
 

@@ -130,21 +130,21 @@ class PlannedExpensesViewController: UIViewController, UITableViewDelegate, UITa
 
     // MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "AddPlannedExpenseSegue" {
+        switch segue.identifier {
+        case "AddPlannedExpenseSegue":
             let destination = segue.destination as! TransactionTemplateFormController
-            
             destination.flipSignOnShow = true
             destination.achievementsDataModel = achievementsDataModel
-        } else if segue.identifier == "BookExpenseTemplateSegue" {
+        case "BookExpenseTemplateSegue":
             let destination = segue.destination as! TransactionFormController
-            
             destination.transactionTemplate = (sender as! TransactionTemplate)
             destination.achievementTransactionModel = self.achievementsDataModel
-        } else if segue.identifier == "EditExpenseTemplateSegue" {
+        case "EditExpenseTemplateSegue":
             let destination = segue.destination as! TransactionTemplateFormController
-            
             destination.achievementsDataModel = achievementsDataModel
             destination.transactionTemplate = (sender as! TransactionTemplate)
+        default:
+            break
         }
     }
     

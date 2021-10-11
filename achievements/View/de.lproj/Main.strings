@@ -1,0 +1,138 @@
+
+/* Class = "UIBarButtonItem"; title = "Add"; ObjectID = "04R-vW-1hV"; */
+"04R-vW-1hV.title" = "Hinzufügen";
+
+/* Class = "UISwitch"; accessibilityLabel = "recurringSwitch"; ObjectID = "1bJ-lV-HeC"; */
+"1bJ-lV-HeC.accessibilityLabel" = "Schalter: Wiederkehrend";
+
+/* Class = "UINavigationItem"; title = "Templates"; ObjectID = "2AO-3U-5XN"; */
+"2AO-3U-5XN.title" = "Vorlagen";
+
+/* Class = "UILabel"; text = "( + / - 0,00 )"; ObjectID = "5Gm-33-CDt"; */
+"5Gm-33-CDt.text" = "( + / - 0,00 )";
+
+/* Class = "UILabel"; text = "Recurring"; ObjectID = "5f3-Wf-x49"; */
+"5f3-Wf-x49.text" = "Wiederkehrend";
+
+/* Class = "UIButton"; normalTitle = "+ / -"; ObjectID = "8W0-EI-jX4"; */
+"8W0-EI-jX4.normalTitle" = "+ / -";
+
+/* Class = "UITextField"; placeholder = "Amount"; ObjectID = "8id-r1-PRK"; */
+"8id-r1-PRK.placeholder" = "Betrag";
+
+/* Class = "UIBarButtonItem"; title = "expenseTemplates"; ObjectID = "8iy-rC-9zu"; */
+"8iy-rC-9zu.title" = "Ausgaben-Vorlagen";
+
+/* Class = "UINavigationItem"; title = "Dashboard"; ObjectID = "9Zd-MP-RNW"; */
+"9Zd-MP-RNW.title" = "Dashboard";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "APA-o5-9SX"; */
+"APA-o5-9SX.text" = "0";
+
+/* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "BF2-5i-pBQ"; */
+"BF2-5i-pBQ.normalTitle" = "Speichern";
+
+/* Class = "UILabel"; text = "Total"; ObjectID = "IAB-GQ-BMk"; */
+"IAB-GQ-BMk.text" = "Gesamt";
+
+/* Class = "UINavigationItem"; title = "Details"; ObjectID = "JvC-DS-hrE"; */
+"JvC-DS-hrE.title" = "Details";
+
+/* Class = "UIButton"; normalTitle = "+ / -"; ObjectID = "Kbs-iV-sck"; */
+"Kbs-iV-sck.normalTitle" = "+ / -";
+
+/* Class = "UIBarButtonItem"; title = "incomeTemplates"; ObjectID = "MHP-u2-p94"; */
+"MHP-u2-p94.title" = "Einnahmen-Vorlagen";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "NOk-zn-sNA"; */
+"NOk-zn-sNA.text" = "Titel";
+
+/* Class = "UILabel"; text = "0,00"; ObjectID = "OQf-E6-HOE"; */
+"OQf-E6-HOE.text" = "0,00";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "OeE-at-1o6"; */
+"OeE-at-1o6.text" = "Detail";
+
+/* Class = "UILabel"; text = "Text"; ObjectID = "OwO-vu-6UL"; */
+"OwO-vu-6UL.text" = "Text";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "OzO-K8-rTQ"; */
+"OzO-K8-rTQ.text" = "Titel";
+
+/* Class = "UILabel"; text = "0,00"; ObjectID = "TAx-Us-M4u"; */
+"TAx-Us-M4u.text" = "0,00";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "X2f-R2-fkd"; */
+"X2f-R2-fkd.text" = "0";
+
+/* Class = "UIBarButtonItem"; title = "Menu"; ObjectID = "YPi-FL-MVe"; */
+"YPi-FL-MVe.title" = "Menü";
+
+/* Class = "UITableViewCell"; accessibilityLabel = "transactionCell"; ObjectID = "ZGM-ke-fqv"; */
+"ZGM-ke-fqv.accessibilityLabel" = "Transaktionszeile";
+
+/* Class = "UILabel"; text = "0,00"; ObjectID = "ZPH-rU-vaF"; */
+"ZPH-rU-vaF.text" = "0,00";
+
+/* Class = "UITextField"; placeholder = "Amount"; ObjectID = "ZR4-Su-uWh"; */
+"ZR4-Su-uWh.placeholder" = "Betrag";
+
+/* Class = "UILabel"; text = "--, --/--/----, --:--:--"; ObjectID = "a8K-XT-ncq"; */
+"a8K-XT-ncq.text" = "--, --/--/----, --:--:--";
+
+/* Class = "UILabel"; text = "0,00"; ObjectID = "eF6-zg-DTD"; */
+"eF6-zg-DTD.text" = "0,00";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "fBW-D7-4Te"; */
+"fBW-D7-4Te.text" = "Detail";
+
+/* Class = "UINavigationItem"; title = "Statistics"; ObjectID = "hq8-ys-vMb"; */
+"hq8-ys-vMb.title" = "Statistiken";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "k9l-Sa-Hoa"; */
+"k9l-Sa-Hoa.text" = "0";
+
+/* Class = "UITextField"; placeholder = "Title"; ObjectID = "l6y-Rq-Cnj"; */
+"l6y-Rq-Cnj.placeholder" = "Titel";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "lzf-wQ-Iw5"; */
+"lzf-wQ-Iw5.text" = "Titel";
+
+/* Class = "UILabel"; text = "+ / - 0,00"; ObjectID = "ml1-8e-UcD"; */
+"ml1-8e-UcD.text" = "+ / - 0,00";
+
+/* Class = "UITableViewCell"; accessibilityLabel = "templateCell"; ObjectID = "nBE-un-ozT"; */
+"nBE-un-ozT.accessibilityLabel" = "Vorlagenzeile";
+
+/* Class = "UITableViewCell"; accessibilityLabel = "templateCell"; ObjectID = "oTX-P7-0RB"; */
+"oTX-P7-0RB.accessibilityLabel" = "Vorlagenzeile";
+
+/* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "pfk-SN-2yQ"; */
+"pfk-SN-2yQ.normalTitle" = "Speichern";
+
+/* Class = "UITextField"; placeholder = "Title"; ObjectID = "pwD-Sl-lxS"; */
+"pwD-Sl-lxS.placeholder" = "Titel";
+
+/* Class = "UINavigationItem"; title = "Planned Expenses"; ObjectID = "r1c-dF-Apv"; */
+"r1c-dF-Apv.title" = "Geplante Ausgaben";
+
+/* Class = "UIBarButtonItem"; title = "Add"; ObjectID = "sfQ-qD-xEs"; */
+"sfQ-qD-xEs.title" = "Hinzufügen";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "tHw-UV-8PL"; */
+"tHw-UV-8PL.text" = "Detail";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "tyW-0v-mpC"; */
+"tyW-0v-mpC.text" = "Titel";
+
+/* Class = "UILabel"; text = "Balance History"; ObjectID = "u4H-Rw-Zc7"; */
+"u4H-Rw-Zc7.text" = "Verlauf des Saldo";
+
+/* Class = "UINavigationItem"; title = "History"; ObjectID = "wS2-M0-VYk"; */
+"wS2-M0-VYk.title" = "Historie";
+
+/* Class = "UILabel"; text = "Recent"; ObjectID = "yGq-ON-DJU"; */
+"yGq-ON-DJU.text" = "Aktuell";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "yo3-5j-qyx"; */
+"yo3-5j-qyx.text" = "0";

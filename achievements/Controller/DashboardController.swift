@@ -172,8 +172,12 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     private func mainMenuSettleButtonPressed() {
-        achievementsDataModel.purgeRecent()
-        updateViewFromModel()
+        Settings.applicationSettings.automaticPurge = !Settings.applicationSettings.automaticPurge
+        if (Settings.applicationSettings.automaticPurge) {
+            achievementsDataModel.purgeRecent()
+            updateViewFromModel()
+        }
+        setupMainMenu()
     }
     
     private func mainMenuHistoryButtonPressed() {
@@ -217,7 +221,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             self.mainMenuResetButtonPressed() }
             
         let mainMenuItems = UIMenu(title: "mainMenu", options: .displayInline, children: [
-            UIAction(title: "Transaktionen Verrechnen", image: UIImage(systemName: "arrow.left.arrow.right.circle"), handler: { _ in
+            UIAction(title: "Transaktionen autom. Verrechnen", image: UIImage(systemName: Settings.applicationSettings.automaticPurge ? "checkmark.square" : "square"), handler: { _ in
                 self.mainMenuSettleButtonPressed()
             }),
             UIAction(title: "Historie", image: UIImage(systemName: "clock.arrow.circlepath"), handler: { _ in

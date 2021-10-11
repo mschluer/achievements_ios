@@ -16,6 +16,7 @@
 		B307CE83271456EB00FB7E8C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B307CE82271456EB00FB7E8C /* Settings.swift */; };
 		B307CE8527147DCE00FB7E8C /* SettingsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B307CE8427147DCE00FB7E8C /* SettingsTest.swift */; };
 		B307CE8727147EEE00FB7E8C /* AutomaticPurgeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B307CE8627147EED00FB7E8C /* AutomaticPurgeTest.swift */; };
+		B307CE892714A31100FB7E8C /* ProgressWheelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B307CE882714A31100FB7E8C /* ProgressWheelTest.swift */; };
 		B3186B6D270B63A6000B4AE8 /* ProgressWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3186B6C270B63A6000B4AE8 /* ProgressWheel.swift */; };
 		B328322D26D93F22007CAD2A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328322C26D93F22007CAD2A /* AppDelegate.swift */; };
 		B328322F26D93F22007CAD2A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328322E26D93F22007CAD2A /* SceneDelegate.swift */; };
@@ -76,6 +77,7 @@
 		B307CE82271456EB00FB7E8C /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		B307CE8427147DCE00FB7E8C /* SettingsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTest.swift; sourceTree = "<group>"; };
 		B307CE8627147EED00FB7E8C /* AutomaticPurgeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomaticPurgeTest.swift; sourceTree = "<group>"; };
+		B307CE882714A31100FB7E8C /* ProgressWheelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressWheelTest.swift; sourceTree = "<group>"; };
 		B3186B6C270B63A6000B4AE8 /* ProgressWheel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressWheel.swift; sourceTree = "<group>"; };
 		B328322926D93F22007CAD2A /* achievements.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = achievements.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B328322C26D93F22007CAD2A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				B3939ACE2706048D005D243B /* HistoricalTransaction.swift */,
 				B307CE7E271083A600FB7E8C /* ExpenseTemplateTest.swift */,
 				B307CE8627147EED00FB7E8C /* AutomaticPurgeTest.swift */,
+				B307CE882714A31100FB7E8C /* ProgressWheelTest.swift */,
 			);
 			path = achievementsUITests;
 			sourceTree = "<group>";
@@ -617,6 +620,7 @@
 				B3939ACB2705F627005D243B /* IncomeTemplateTest.swift in Sources */,
 				B3939ACF2706048D005D243B /* HistoricalTransaction.swift in Sources */,
 				B3939AC927049F51005D243B /* AchievementTransactionTest.swift in Sources */,
+				B307CE892714A31100FB7E8C /* ProgressWheelTest.swift in Sources */,
 				B307CE8727147EEE00FB7E8C /* AutomaticPurgeTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

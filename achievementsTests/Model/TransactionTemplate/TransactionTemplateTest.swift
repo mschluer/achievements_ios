@@ -14,7 +14,6 @@ class TransactionTemplateTest: XCTestCase {
     private var dataModel : AchievementsDataModel!
     
     override func setUpWithError() throws {
-        self.subject = TransactionTemplate()
         self.dataModel = AchievementsDataModel()
         
         dataModel.clear()
@@ -32,6 +31,20 @@ class TransactionTemplateTest: XCTestCase {
         XCTAssertEqual(
             TransactionTemplate.fetchRequest(),
             NSFetchRequest<TransactionTemplate>(entityName: "TransactionTemplate"))
+    }
+    
+    func testQuickBookable() throws {
+        let subject = dataModel.createTransactionTemplate()
+        
+        XCTAssertFalse(subject.isQuickBookable())
+        
+        subject.text = "Test"
+        
+        XCTAssertFalse(subject.isQuickBookable())
+        
+        subject.amount = 2.0
+        
+        XCTAssertTrue(subject.isQuickBookable())
     }
     
     // MARK: Test for the DataModel

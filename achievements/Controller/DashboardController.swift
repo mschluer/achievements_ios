@@ -56,9 +56,6 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         case "ShowPlannedExpensesSegue":
             let destination = segue.destination as! PlannedExpensesViewController
             destination.achievementsDataModel = achievementsDataModel
-        case "ShowStatisticsViewSegue":
-            let destination = segue.destination as! StatisticsViewController
-            destination.achievementsDataModel = achievementsDataModel
         case "ShowTemplatesViewSegue":
             let destination = segue.destination as! TransactionTemplatesViewController
             destination.achievementsDataModel = achievementsDataModel
@@ -169,7 +166,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     private func mainMenuStatisticsButtonPressed() {
-        performSegue(withIdentifier: "ShowStatisticsViewSegue", sender: menuButton)
+        StatisticsPresenter(achievementsDataModel: achievementsDataModel).takeOver(from: self)
     }
     
     @IBAction func progressWheelPressed(_ sender: Any) {

@@ -285,13 +285,13 @@
 		B328327726DF90B9007CAD2A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B393D82C2715B69700232482 /* StatisticsPresenter */,
 				B328327226DC2D02007CAD2A /* AchievementTransactionFormController.swift */,
 				B328325C26D94909007CAD2A /* DashboardController.swift */,
 				B349499226E1483E00829A5F /* HistoryTableViewController.swift */,
 				B349499426E1670F00829A5F /* TransactionDetailViewController.swift */,
 				B349499626E3D31100829A5F /* TransactionTemplatesViewController.swift */,
 				B349499826E3DB6E00829A5F /* TransactionTemplateFormController.swift */,
-				B3C5C4B126E5267600A52CBC /* StatisticsViewController.swift */,
 				B307CE7A27106EC800FB7E8C /* PlannedExpensesViewController.swift */,
 			);
 			path = Controller;
@@ -320,6 +320,14 @@
 				B3939ABF270481FC005D243B /* HistoricalTransactionTest.swift */,
 			);
 			path = HistoricalTransaction;
+			sourceTree = "<group>";
+		};
+		B393D82C2715B69700232482 /* StatisticsPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				B3C5C4B126E5267600A52CBC /* StatisticsViewController.swift */,
+			);
+			path = StatisticsPresenter;
 			sourceTree = "<group>";
 		};
 		B3C5C4AC26E3E1A200A52CBC /* TransactionTemplate */ = {

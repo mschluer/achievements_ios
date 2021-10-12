@@ -12,13 +12,13 @@ class TransactionTemplateFormController: UIViewController, UITextFieldDelegate {
     public var achievementsDataModel : AchievementsDataModel?
     
     // MARK: Variables
-    public var transactionTemplate : TransactionTemplate?
     public var flipSignOnShow = false
+    public var transactionTemplate : TransactionTemplate?
 
     // MARK: Outlets
     @IBOutlet weak var amountInputField: UITextField!
-    @IBOutlet weak var titleInputField: UITextField!
     @IBOutlet weak var recurringSwitch: UISwitch!
+    @IBOutlet weak var titleInputField: UITextField!
     
     // MARK: View Lifecycle Methods
     override func viewDidLoad() {
@@ -43,18 +43,6 @@ class TransactionTemplateFormController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: Action Handlers
-    @IBAction func signButtonPressed(_ sender: Any) {
-        amountInputField.text = invertSign(amountInputField.text ?? "")
-        
-        if let text = amountInputField.text {
-            if (text.contains("-")) {
-                amountInputField.textColor = .systemRed
-            } else {
-                amountInputField.textColor = .systemGreen
-            }
-        }
-    }
-    
     @IBAction func saveButtonPressed(_ sender: Any) {
         // Make sure to accept ',' instead of '.'
         amountInputField.text? = amountInputField.text!.replacingOccurrences(of: ",", with: ".")
@@ -75,7 +63,17 @@ class TransactionTemplateFormController: UIViewController, UITextFieldDelegate {
         self.navigationController!.popViewController(animated: true)
     }
     
-    // MARK: Setup Steps
+    @IBAction func signButtonPressed(_ sender: Any) {
+        amountInputField.text = invertSign(amountInputField.text ?? "")
+        
+        if let text = amountInputField.text {
+            if (text.contains("-")) {
+                amountInputField.textColor = .systemRed
+            } else {
+                amountInputField.textColor = .systemGreen
+            }
+        }
+    }
     
     // MARK: Private Functions
     private func invertSign(_ signedString: String) -> String {

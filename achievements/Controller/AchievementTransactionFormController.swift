@@ -8,15 +8,17 @@
 import UIKit
 
 class AchievementTransactionFormController: UIViewController, UITextFieldDelegate {
+    // MARK: Persistence Models
+    public var achievementsDataModel : AchievementsDataModel?
+    
     // MARK: Variables
     public var achievementTransaction: AchievementTransaction?
-    public var achievementsDataModel : AchievementsDataModel?
     public var transactionTemplate : TransactionTemplate?
 
     // MARK: Outlets
     @IBOutlet weak var amountInputField: UITextField!
-    @IBOutlet weak var titleInputField: UITextField!
     @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var titleInputField: UITextField!
     
     // MARK: View Lifecycle Methods
     override func viewDidLoad() {
@@ -38,19 +40,7 @@ class AchievementTransactionFormController: UIViewController, UITextFieldDelegat
         textField.resignFirstResponder();
     }
 
-    // MARK: Actions
-    @IBAction func signButtonPressed(_ sender: Any) {
-        amountInputField.text = invertSign(amountInputField.text ?? "")
-        
-        if let text = amountInputField.text {
-            if (text.contains("-")) {
-                amountInputField.textColor = .systemRed
-            } else {
-                amountInputField.textColor = .systemGreen
-            }
-        }
-    }
-    
+    // MARK: Action Handlers
     @IBAction func saveButtonPressed(_ sender: Any) {
         // Validate Presence
         if amountInputField.text == "" || titleInputField.text == "" {
@@ -87,12 +77,42 @@ class AchievementTransactionFormController: UIViewController, UITextFieldDelegat
         }
     }
     
+    @IBAction func signButtonPressed(_ sender: Any) {
+        amountInputField.text = invertSign(amountInputField.text ?? "")
+        
+        if let text = amountInputField.text {
+            if (text.contains("-")) {
+                amountInputField.textColor = .systemRed
+            } else {
+                amountInputField.textColor = .systemGreen
+            }
+        }
+    }
+    
     // MARK: Private Functions
     private func invertSign(_ signedString: String) -> String {
         if signedString.contains("-") {
             return signedString.replacingOccurrences(of: "-", with: "")
         } else {
             return "-\(signedString)"
+        }
+    }
+    
+    private func populateFormWith(_ template: TransactionTemplate) {
+        if template.amount != 0 {
+            amountInputField.text = "\(String (format: "%.2f", template.amount))"
+            
+            if template.amount < 0 {
+                amountInputField.textColor = .systemRed
+            } else if template.amount == 0 {
+                amountInputField.textColor = .none
+            }
+        } else {
+            amountInputField.text = ""
+        }
+        
+        if template.text != nil {
+            titleInputField.text = template.text
         }
     }
     
@@ -115,24 +135,6 @@ class AchievementTransactionFormController: UIViewController, UITextFieldDelegat
         
         if transaction.date != nil {
             datePicker.date = transaction.date!
-        }
-    }
-    
-    private func populateFormWith(_ template: TransactionTemplate) {
-        if template.amount != 0 {
-            amountInputField.text = "\(String (format: "%.2f", template.amount))"
-            
-            if template.amount < 0 {
-                amountInputField.textColor = .systemRed
-            } else if template.amount == 0 {
-                amountInputField.textColor = .none
-            }
-        } else {
-            amountInputField.text = ""
-        }
-        
-        if template.text != nil {
-            titleInputField.text = template.text
         }
     }
 }

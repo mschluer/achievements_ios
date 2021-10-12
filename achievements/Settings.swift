@@ -28,7 +28,8 @@ public class Settings {
         }
     }
     
-    static func loadAndSetSettings() {
+    // MARK: Public Functions
+    public static func loadAndSetSettings() {
         guard let data = try? Data.init(contentsOf: plistURL)
         else { return }
         
@@ -38,7 +39,8 @@ public class Settings {
         self.applicationSettings = loadedApplicationSettings ?? ApplicationSettings()
     }
     
-    static func resetApplicationSettings() {
+    // MARK: Destructive Actions
+    public static func resetApplicationSettings() {
         self.applicationSettings = ApplicationSettings()
     }
 }

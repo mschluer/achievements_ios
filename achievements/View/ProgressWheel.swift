@@ -11,38 +11,50 @@ import UIKit
 @IBDesignable
 class ProgressWheel : UIView {
     // MARK: Properties
-    @IBInspectable
-    var percentage: Float = 0.0 { didSet { setNeedsDisplay(); setNeedsLayout() }}
-    @IBInspectable
-    var text: String = "+ / - 0" { didSet { setNeedsDisplay(); setNeedsLayout() }}
-    @IBInspectable
-    var textColor: UIColor = UIColor.systemGray { didSet { setNeedsDisplay(); setNeedsLayout() }}
-    @IBInspectable
-    var activeColor: UIColor = UIColor.systemGray { didSet { setNeedsDisplay(); setNeedsLayout() }}
-    @IBInspectable
-    var inactiveColor: UIColor = UIColor.systemGray { didSet { setNeedsDisplay(); setNeedsLayout() }}
+    @IBInspectable var activeColor: UIColor = UIColor.systemGray { didSet { setNeedsDisplay(); setNeedsLayout() }}
+    @IBInspectable var percentage: Float = 0.0 { didSet { setNeedsDisplay(); setNeedsLayout() }}
+    @IBInspectable var text: String = "+ / - 0" { didSet { setNeedsDisplay(); setNeedsLayout() }}
+    @IBInspectable var textColor: UIColor = UIColor.systemGray { didSet { setNeedsDisplay(); setNeedsLayout() }}
+    @IBInspectable var inactiveColor: UIColor = UIColor.systemGray { didSet { setNeedsDisplay(); setNeedsLayout() }}
     
-    // MARK: Private Variables
+    // MARK: Variables
     private var labelAdded = false
     private var centerLabel : UILabel!
     
     // MARK: Initializers
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-
+    // MARK: View Methods
     override func draw(_ rect: CGRect) {
         drawLines()
         drawLabel()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        setNeedsDisplay()
+    private func drawLabel() {
+        if(!labelAdded) {
+            centerLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+        }
+        
+        centerLabel.center = self.center
+        centerLabel.textAlignment = NSTextAlignment.center
+        centerLabel.font = centerLabel.font.withSize(21)
+        
+        centerLabel.text = self.text
+        centerLabel.textColor = self.textColor
+        
+        if(!labelAdded) {
+            self.addSubview(centerLabel)
+            labelAdded = true
+        } else {
+            centerLabel.setNeedsLayout()
+            centerLabel.setNeedsDisplay()
+        }
     }
     
     private func drawLines() {
@@ -73,24 +85,8 @@ class ProgressWheel : UIView {
         }
     }
     
-    private func drawLabel() {
-        if(!labelAdded) {
-            centerLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
-        }
-        
-        centerLabel.center = self.center
-        centerLabel.textAlignment = NSTextAlignment.center
-        centerLabel.font = centerLabel.font.withSize(21)
-        
-        centerLabel.text = self.text
-        centerLabel.textColor = self.textColor
-        
-        if(!labelAdded) {
-            self.addSubview(centerLabel)
-            labelAdded = true
-        } else {
-            centerLabel.setNeedsLayout()
-            centerLabel.setNeedsDisplay()
-        }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        setNeedsDisplay()
     }
 }

@@ -11,18 +11,17 @@ import CoreData
 
 
 extension AchievementTransaction {
-
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<AchievementTransaction> {
-        return NSFetchRequest<AchievementTransaction>(entityName: "AchievementTransaction")
-    }
-
+    // MARK: Properties
     @NSManaged public var date: Date?
     @NSManaged public var text: String?
     @NSManaged public var amount: Float
     @NSManaged public var historicalTransaction: HistoricalTransaction?
 
+    // MARK: Public Functions
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<AchievementTransaction> {
+        return NSFetchRequest<AchievementTransaction>(entityName: "AchievementTransaction")
+    }
 }
 
 extension AchievementTransaction : Identifiable {
-
 }

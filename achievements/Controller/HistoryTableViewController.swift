@@ -19,7 +19,7 @@ class HistoryTableViewController: UITableViewController {
     // MARK: Outlets
     @IBOutlet var historyTableView: UITableView!
     
-    // MARK: ViewDidLoad
+    // MARK: View Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         updateViewFromModel()
@@ -36,19 +36,6 @@ class HistoryTableViewController: UITableViewController {
     // MARK: Table View Data Source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return historicalTransactionsDates.count
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        return formatter.string(for: historicalTransactionsDates[section])
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let date = historicalTransactionsDates[section]
-        let dictionaryEntry = historicalTransactions[date]
-        
-        return dictionaryEntry?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -78,12 +65,31 @@ class HistoryTableViewController: UITableViewController {
         transactionCellPressed(indexPath)
     }
     
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let date = historicalTransactionsDates[section]
+        let dictionaryEntry = historicalTransactions[date]
+        
+        return dictionaryEntry?.count ?? 0
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        return formatter.string(for: historicalTransactionsDates[section])
+    }
+    
     // MARK: Action Handlers
     private func transactionCellPressed(_ indexPath: IndexPath) {
         performSegue(withIdentifier: "ShowTransactionDetailViewSegue", sender: historicalTransactionFor(indexPath: indexPath))
     }
     
     // MARK: Private Functions
+    private func historicalTransactionFor(indexPath: IndexPath) -> HistoricalTransaction {
+        let date = historicalTransactionsDates[indexPath.section]
+        let dictionaryEntry = historicalTransactions[date]!
+        return dictionaryEntry[indexPath.item]
+    }
+    
     private func updateViewFromModel() {
         historicalTransactions = self.achievementsDataModel?.groupedHistoricalTransactions ?? [:]
         updateSections()
@@ -96,11 +102,5 @@ class HistoryTableViewController: UITableViewController {
         result.sort(by: >)
         
         self.historicalTransactionsDates = result
-    }
-    
-    private func historicalTransactionFor(indexPath: IndexPath) -> HistoricalTransaction {
-        let date = historicalTransactionsDates[indexPath.section]
-        let dictionaryEntry = historicalTransactions[date]!
-        return dictionaryEntry[indexPath.item]
     }
 }

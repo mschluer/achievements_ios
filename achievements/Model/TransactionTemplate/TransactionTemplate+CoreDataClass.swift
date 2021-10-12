@@ -11,8 +11,10 @@ import CoreData
 
 @objc(TransactionTemplate)
 public class TransactionTemplate: NSManagedObject {
+    // MARK: Properties
     static let entityName = "TransactionTemplate"
     
+    // MARK: Public Functions
     @nonobjc func isQuickBookable() -> Bool {
         let textSet = self.text != nil && self.text != ""
         let amountSet = self.amount != 0.0

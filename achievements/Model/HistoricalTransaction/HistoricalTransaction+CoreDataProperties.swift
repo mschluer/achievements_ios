@@ -11,19 +11,18 @@ import CoreData
 
 
 extension HistoricalTransaction {
+    // MARK: Properties
+    @NSManaged public var amount: Float
+    @NSManaged public var balance: Float
+    @NSManaged public var date: Date?
+    @NSManaged public var recentTransaction: AchievementTransaction?
+    @NSManaged public var text: String?
 
+    // MARK: Public Functions
     @nonobjc public class func fetchRequest() -> NSFetchRequest<HistoricalTransaction> {
         return NSFetchRequest<HistoricalTransaction>(entityName: "HistoricalTransaction")
     }
-
-    @NSManaged public var text: String?
-    @NSManaged public var date: Date?
-    @NSManaged public var amount: Float
-    @NSManaged public var balance: Float
-    @NSManaged public var recentTransaction: AchievementTransaction?
-
 }
 
 extension HistoricalTransaction : Identifiable {
-
 }

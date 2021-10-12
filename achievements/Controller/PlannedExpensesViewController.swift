@@ -8,7 +8,6 @@
 import UIKit
 
 class PlannedExpensesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITableViewDragDelegate {
-    
     // MARK: Persistence Models
     public var achievementsDataModel : AchievementsDataModel?
     
@@ -18,6 +17,7 @@ class PlannedExpensesViewController: UIViewController, UITableViewDelegate, UITa
     // MARK: Outlets
     @IBOutlet weak var plannedExpensesTable: UITableView!
     
+    // MARK: View Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,9 +35,9 @@ class PlannedExpensesViewController: UIViewController, UITableViewDelegate, UITa
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return plannedExpenses.count
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -65,6 +65,12 @@ class PlannedExpensesViewController: UIViewController, UITableViewDelegate, UITa
         plannedExpenseCellPressed(at: indexPath)
     }
     
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        let dragItem = UIDragItem(itemProvider: NSItemProvider())
+        dragItem.localObject = plannedExpenseFor(indexPath: indexPath)
+        return [ dragItem ]
+    }
+    
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         guard plannedExpenseFor(indexPath: indexPath).isQuickBookable() else {
             return nil
@@ -79,6 +85,19 @@ class PlannedExpensesViewController: UIViewController, UITableViewDelegate, UITa
         config.performsFirstActionWithFullSwipe = true
         
         return config
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        // Update Table View Data
+        let item = plannedExpenses.remove(at: sourceIndexPath.item)
+        plannedExpenses.insert(item, at: destinationIndexPath.item)
+        
+        // Update Data
+        achievementsDataModel?.rearrangeTransactionTemplates(template: item, destinationIndex: destinationIndexPath.item)
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return plannedExpenses.count
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -96,25 +115,6 @@ class PlannedExpensesViewController: UIViewController, UITableViewDelegate, UITa
         let config = UISwipeActionsConfiguration(actions: [delete, edit])
         
         return config
-    }
-    
-    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        // Update Table View Data
-        let item = plannedExpenses.remove(at: sourceIndexPath.item)
-        plannedExpenses.insert(item, at: destinationIndexPath.item)
-        
-        // Update Data
-        achievementsDataModel?.rearrangeTransactionTemplates(template: item, destinationIndex: destinationIndexPath.item)
-    }
-    
-    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        let dragItem = UIDragItem(itemProvider: NSItemProvider())
-        dragItem.localObject = plannedExpenseFor(indexPath: indexPath)
-        return [ dragItem ]
     }
     
     // MARK: Action Handlers
@@ -178,9 +178,8 @@ class PlannedExpensesViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     // MARK: Private functions
-    private func updateViewFromModel() {
-        refreshData()
-        plannedExpensesTable.reloadData()
+    private func plannedExpenseFor(indexPath : IndexPath) -> TransactionTemplate {
+        return plannedExpenses[indexPath.item]
     }
     
     private func refreshData() {
@@ -192,7 +191,8 @@ class PlannedExpensesViewController: UIViewController, UITableViewDelegate, UITa
         refreshData()
     }
     
-    private func plannedExpenseFor(indexPath : IndexPath) -> TransactionTemplate {
-        return plannedExpenses[indexPath.item]
+    private func updateViewFromModel() {
+        refreshData()
+        plannedExpensesTable.reloadData()
     }
 }

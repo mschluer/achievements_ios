@@ -17,6 +17,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             populateProgressWheel()
         }
     }
+    private var progressWheelState = 0
     private var recentTransactions: [AchievementTransaction] = []
     private var recentTransactionsTableViewData: [Date: [AchievementTransaction]] = [:]
     private var recentTransactionsDates : [Date] = []
@@ -26,10 +27,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet weak var recentTransactionsTableView: UITableView!
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
-    // MARK: Private Variables
-    private var progressWheelState = 0
-    
-    // MARK: View Lifecycle
+    // MARK: View Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -77,27 +75,6 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         return recentTransactionsDates.count
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        // Date Part
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        let date = recentTransactionsDates[section]
-        let datePart = formatter.string(for: date)
-        
-        // Balance Part
-        let dictionaryItem = recentTransactionsTableViewData[date] ?? []
-        let balance = calculateBalanceFor(array: dictionaryItem)
-        
-        return "\(datePart!) - ( \(String (format: "%.2f", balance)) )"
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let date = recentTransactionsDates[section]
-        let dictionaryEntry = recentTransactionsTableViewData[date]
-        
-        return dictionaryEntry?.count ?? 0
-    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "transactionCell") {
             let transaction = getRecentTransactionFor(indexPath: indexPath)
@@ -122,15 +99,36 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         transactionCellPressed(indexPath)
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let date = recentTransactionsDates[section]
+        let dictionaryEntry = recentTransactionsTableViewData[date]
+        
+        return dictionaryEntry?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        // Date Part
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        let date = recentTransactionsDates[section]
+        let datePart = formatter.string(for: date)
+        
+        // Balance Part
+        let dictionaryItem = recentTransactionsTableViewData[date] ?? []
+        let balance = calculateBalanceFor(array: dictionaryItem)
+        
+        return "\(datePart!) - ( \(String (format: "%.2f", balance)) )"
+    }
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let edit = UIContextualAction(style: .normal, title: NSLocalizedString("Edit", comment: "Change Something")) { (action, view, completion) in
-            self.transactionCellSwipeRight(indexPath)
+            self.transactionCellSwipeLeftEdit(indexPath)
             completion(true)
         }
         edit.backgroundColor = .systemYellow
         
         let delete = UIContextualAction(style: .destructive, title: NSLocalizedString("Delete", comment: "Remove something (eg. from Database)")) { (action, view, completion) in
-            self.transactionCellSwipeLeft(indexPath)
+            self.transactionCellSwipeLeftDelete(indexPath)
             completion(false)
         }
         
@@ -141,13 +139,18 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     // MARK: Action Handlers
-    @IBAction func progressWheelPressed(_ sender: Any) {
-        progressWheelState = (progressWheelState + 1) % 4
-        
-        let generator = UIImpactFeedbackGenerator(style: .medium)
-        generator.impactOccurred()
-        
-        populateProgressWheel()
+    private func mainMenuAutoSettleButtonPressed() {
+        Settings.applicationSettings.automaticPurge = !Settings.applicationSettings.automaticPurge
+        if (Settings.applicationSettings.automaticPurge) {
+            achievementsDataModel.purgeRecent()
+            updateViewFromModel()
+        }
+        // Make sure to reflect the status in the autosettle-button
+        setupMainMenu()
+    }
+    
+    private func mainMenuHistoryButtonPressed() {
+        performSegue(withIdentifier: "ShowHistorySegue", sender: menuButton)
     }
     
     private func mainMenuResetButtonPressed() {
@@ -165,33 +168,28 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         updateViewFromModel()
     }
     
-    private func mainMenuAutoSettleButtonPressed() {
-        Settings.applicationSettings.automaticPurge = !Settings.applicationSettings.automaticPurge
-        if (Settings.applicationSettings.automaticPurge) {
-            achievementsDataModel.purgeRecent()
-            updateViewFromModel()
-        }
-        setupMainMenu()
-        
-    }
-    
-    private func mainMenuHistoryButtonPressed() {
-        performSegue(withIdentifier: "ShowHistorySegue", sender: menuButton)
-    }
-    
     private func mainMenuStatisticsButtonPressed() {
         performSegue(withIdentifier: "ShowStatisticsViewSegue", sender: menuButton)
+    }
+    
+    @IBAction func progressWheelPressed(_ sender: Any) {
+        progressWheelState = (progressWheelState + 1) % 4
+        
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+        
+        populateProgressWheel()
     }
     
     private func transactionCellPressed(_ indexPath: IndexPath) {
         performSegue(withIdentifier: "ShowTransactionDetailViewSegue", sender: getRecentTransactionFor(indexPath: indexPath).historicalTransaction)
     }
     
-    private func transactionCellSwipeRight(_ indexPath: IndexPath) {
+    private func transactionCellSwipeLeftEdit(_ indexPath: IndexPath) {
         performSegue(withIdentifier: "EditTransactionFormSegue", sender: getRecentTransactionFor(indexPath: indexPath))
     }
     
-    private func transactionCellSwipeLeft(_ indexPath: IndexPath) {
+    private func transactionCellSwipeLeftDelete(_ indexPath: IndexPath) {
         let transactionToDelete = getRecentTransactionFor(indexPath: indexPath).historicalTransaction!
         achievementsDataModel.remove(historicalTransaction: transactionToDelete)
         
@@ -203,14 +201,6 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     // MARK: Setup Steps
-    private func setupTransactionTable() {
-        self.recentTransactionsTableView.dataSource = self
-        self.recentTransactionsTableView.delegate = self
-        
-        recentTransactions = achievementsDataModel.achievementTransactions
-        recentTransactionsTableViewData = achievementsDataModel.groupedAchievementTransactions
-    }
-    
     private func setupMainMenu() {
         let mainMenuDestruct = UIAction(title: NSLocalizedString("Reset", comment: "Set something back to initial state."), image: UIImage(systemName: "trash.circle"), attributes: .destructive) { _ in
             self.mainMenuResetButtonPressed() }
@@ -232,13 +222,29 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         menuButton.menu = UIMenu(title: "", children: [mainMenuItems, mainMenuDestruct])
     }
     
+    private func setupTransactionTable() {
+        self.recentTransactionsTableView.dataSource = self
+        self.recentTransactionsTableView.delegate = self
+        
+        recentTransactions = achievementsDataModel.achievementTransactions
+        recentTransactionsTableViewData = achievementsDataModel.groupedAchievementTransactions
+    }
+    
     // MARK: Private Functions
-    private func updateViewFromModel() {
-        recentTransactions = self.achievementsDataModel.achievementTransactions
-        recentTransactionsTableViewData = self.achievementsDataModel.groupedAchievementTransactions
-        updateSections()
-        recentTransactionsTableView.reloadData()
-        recalculateBalance()
+    private func calculateBalanceFor(array: [AchievementTransaction]) -> Float {
+        var result : Float = 0.0
+        
+        for element in array {
+            result += element.amount
+        }
+        
+        return result
+    }
+    
+    private func getRecentTransactionFor(indexPath: IndexPath) -> AchievementTransaction {
+        let date = recentTransactionsDates[indexPath.section]
+        let dictionaryEntry = recentTransactionsTableViewData[date]!
+        return dictionaryEntry[indexPath.item]
     }
     
     private func populateProgressWheel() {
@@ -275,6 +281,31 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             progressWheel.activeColor = UIColor.systemGreen
             progressWheel.percentage = (achievementsDataModel.totalRecentIncomes / achievementsDataModel.recentExpenses.first!.amount) * -100
         }
+    }
+    
+    private func recalculateBalance() {
+        var newBalance : Float = 0;
+        
+        for transaction in recentTransactions {
+            newBalance += transaction.amount
+        }
+        
+        balance = newBalance
+    }
+    
+    private func showCurrentRedemptionPercentageInProgressWheelLabel() {
+        var percentage : Float = 0.0
+        
+        if achievementsDataModel.recentExpenses.first != nil {
+            // Redeemable Recent Expense
+            percentage = (achievementsDataModel.totalRecentIncomes / achievementsDataModel.recentExpenses.first!.amount) * -100
+        } else if achievementsDataModel.plannedExpenses.first != nil {
+            // Planned Expense
+            percentage = (achievementsDataModel.totalRecentIncomes / achievementsDataModel.plannedExpenses.first!.amount) * -100
+        }
+        
+        progressWheel.text = "\(String (format: "%.2f", percentage)) %"
+        progressWheel.textColor = .systemGray
     }
     
     private func showTotalBalanceInProgressWheelLabel() {
@@ -317,31 +348,6 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
     
-    private func showCurrentRedemptionPercentageInProgressWheelLabel() {
-        var percentage : Float = 0.0
-        
-        if achievementsDataModel.recentExpenses.first != nil {
-            // Redeemable Recent Expense
-            percentage = (achievementsDataModel.totalRecentIncomes / achievementsDataModel.recentExpenses.first!.amount) * -100
-        } else if achievementsDataModel.plannedExpenses.first != nil {
-            // Planned Expense
-            percentage = (achievementsDataModel.totalRecentIncomes / achievementsDataModel.plannedExpenses.first!.amount) * -100
-        }
-        
-        progressWheel.text = "\(String (format: "%.2f", percentage)) %"
-        progressWheel.textColor = .systemGray
-    }
-    
-    private func recalculateBalance() {
-        var newBalance : Float = 0;
-        
-        for transaction in recentTransactions {
-            newBalance += transaction.amount
-        }
-        
-        balance = newBalance
-    }
-    
     private func updateSections() {
         var result = Array(recentTransactionsTableViewData.keys)
         result.sort(by: >)
@@ -349,12 +355,15 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         self.recentTransactionsDates = result
     }
     
-    private func getRecentTransactionFor(indexPath: IndexPath) -> AchievementTransaction {
-        let date = recentTransactionsDates[indexPath.section]
-        let dictionaryEntry = recentTransactionsTableViewData[date]!
-        return dictionaryEntry[indexPath.item]
+    private func updateViewFromModel() {
+        recentTransactions = self.achievementsDataModel.achievementTransactions
+        recentTransactionsTableViewData = self.achievementsDataModel.groupedAchievementTransactions
+        updateSections()
+        recentTransactionsTableView.reloadData()
+        recalculateBalance()
     }
     
+    // MARK: Destructive Actions
     private func resetApplication() {
         // Reset DataModel
         self.achievementsDataModel.clear()
@@ -366,15 +375,5 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         
         updateViewFromModel()
         setupMainMenu()
-    }
-    
-    private func calculateBalanceFor(array: [AchievementTransaction]) -> Float {
-        var result : Float = 0.0
-        
-        for element in array {
-            result += element.amount
-        }
-        
-        return result
     }
 }

@@ -12,8 +12,8 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
     public var achievementsDataModel : AchievementsDataModel?
     
     // MARK: Variables
-    private var nonRecurringTransactionTemplates: [TransactionTemplate] = []
     private var recurringTransactionTemplates: [TransactionTemplate] = []
+    private var nonRecurringTransactionTemplates: [TransactionTemplate] = []
 
     // MARK: Outlets
     @IBOutlet weak var templatesTable: UITableView!
@@ -53,22 +53,6 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
     // MARK: Table View Data Source
     func numberOfSections(in tableView: UITableView) -> Int {
          return 2
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if(section == 0) {
-            return NSLocalizedString("Unique", comment: "Deleted after being booked once")
-        } else {
-            return NSLocalizedString("Recurring", comment: "Not Deleted after being booked once")
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(section == 0) {
-            return nonRecurringTransactionTemplates.count
-        } else {
-            return recurringTransactionTemplates.count
-        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -113,6 +97,22 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
         return config
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if(section == 0) {
+            return nonRecurringTransactionTemplates.count
+        } else {
+            return recurringTransactionTemplates.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if(section == 0) {
+            return NSLocalizedString("Unique", comment: "Deleted after being booked once")
+        } else {
+            return NSLocalizedString("Recurring", comment: "Not Deleted after being booked once")
+        }
+    }
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let edit = UIContextualAction(style: .normal, title: NSLocalizedString("Edit", comment: "Change Something")) { (action, view, completion) in
             self.swipeLeftEdit(at: indexPath)
@@ -131,6 +131,16 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
     }
     
     // MARK: Action Handlers
+    private func swipeLeftEdit(at indexPath: IndexPath) {
+        performSegue(withIdentifier: "EditTransactionTemplateSegue", sender: transactionTemplateFor(indexPath: indexPath))
+    }
+    
+    private func swipeLeftDelete(at indexPath: IndexPath) {
+        achievementsDataModel?.remove(transactionTemplate: transactionTemplateFor(indexPath: indexPath))
+        refreshDataFor(indexPath: indexPath)
+        self.templatesTable.deleteRows(at: [indexPath], with: .automatic)
+    }
+    
     private func swipeRightQuickBook(at indexPath: IndexPath) {
         let template = transactionTemplateFor(indexPath: indexPath)
         
@@ -149,16 +159,6 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
     
     private func transactionTemplateCellPressed(at indexPath: IndexPath) {
         performSegue(withIdentifier: "BookTransactionTemplateSegue", sender: transactionTemplateFor(indexPath: indexPath))
-    }
-    
-    private func swipeLeftEdit(at indexPath: IndexPath) {
-        performSegue(withIdentifier: "EditTransactionTemplateSegue", sender: transactionTemplateFor(indexPath: indexPath))
-    }
-    
-    private func swipeLeftDelete(at indexPath: IndexPath) {
-        achievementsDataModel?.remove(transactionTemplate: transactionTemplateFor(indexPath: indexPath))
-        refreshDataFor(indexPath: indexPath)
-        self.templatesTable.deleteRows(at: [indexPath], with: .automatic)
     }
     
     // MARK: Setup Steps

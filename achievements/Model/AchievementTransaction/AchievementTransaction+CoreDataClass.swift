@@ -11,9 +11,11 @@ import CoreData
 
 @objc(AchievementTransaction)
 public class AchievementTransaction: NSManagedObject {
+    // MARK: Properties
     static let entityName = "AchievementTransaction"
     
-    @nonobjc func toString() -> String {
+    // MARK: Public Functions
+    @nonobjc public func toString() -> String {
         let formatter = DateFormatter()
         formatter.timeStyle = .short
         

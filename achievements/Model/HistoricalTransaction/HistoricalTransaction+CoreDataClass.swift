@@ -11,13 +11,15 @@ import CoreData
 
 @objc(HistoricalTransaction)
 public class HistoricalTransaction: NSManagedObject {
+    // MARK: Properties
     static let entityName = "HistoricalTransaction"
     
-    @nonobjc func calculateHistoricalBalance(balanceBefore: Float) -> Float {
+    // MARK: Public Functions
+    @nonobjc public func calculateHistoricalBalance(balanceBefore: Float) -> Float {
         return balanceBefore + self.amount
     }
     
-    @nonobjc func toString() -> String {
+    @nonobjc public func toString() -> String {
         let formatter = DateFormatter()
         formatter.timeStyle = .short
         

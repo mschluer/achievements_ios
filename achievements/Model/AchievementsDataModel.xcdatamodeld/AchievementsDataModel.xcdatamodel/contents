@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="20G165" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="0.4">
+    <entity name="AchievementTransaction" representedClassName="AchievementTransaction" syncable="YES">
+        <attribute name="amount" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <relationship name="historicalTransaction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HistoricalTransaction" inverseName="recentTransaction" inverseEntity="HistoricalTransaction"/>
+    </entity>
+    <entity name="HistoricalTransaction" representedClassName="HistoricalTransaction" syncable="YES">
+        <attribute name="amount" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="balance" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <relationship name="recentTransaction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AchievementTransaction" inverseName="historicalTransaction" inverseEntity="AchievementTransaction"/>
+    </entity>
+    <entity name="TransactionTemplate" representedClassName="TransactionTemplate" syncable="YES">
+        <attribute name="amount" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="orderIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="recurring" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="AchievementTransaction" positionX="-352.7521362304688" positionY="32.87271118164062" width="128" height="103"/>
+        <element name="HistoricalTransaction" positionX="-54" positionY="18" width="128" height="104"/>
+        <element name="TransactionTemplate" positionX="-359.52490234375" positionY="-97.56146240234375" width="128" height="103"/>
+    </elements>
+</model>

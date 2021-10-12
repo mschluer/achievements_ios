@@ -50,7 +50,7 @@ class AchievementTransactionTest: XCTestCase {
         app.navigationBars["Details"].buttons["Dashboard"].tap()
         
         // Dashboard
-        app.tables.cells["transactionCell"].swipeRight()
+        app.tables.cells["transactionCell"].swipeLeft()
         app.staticTexts["Edit"].tap()
     
         // Transaction Form (Edit)

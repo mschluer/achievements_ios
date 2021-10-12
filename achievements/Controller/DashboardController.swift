@@ -123,25 +123,18 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let delete = UIContextualAction(style: .destructive, title: NSLocalizedString("Delete", comment: "Remove something (eg. from Database)")) { (action, view, completion) in
-            self.transactionCellSwipeLeft(indexPath)
-            completion(false)
-        }
-        
-        let config = UISwipeActionsConfiguration(actions: [delete])
-        config.performsFirstActionWithFullSwipe = true
-        
-        return config
-    }
-    
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let edit = UIContextualAction(style: .normal, title: NSLocalizedString("Edit", comment: "Change Something")) { (action, view, completion) in
             self.transactionCellSwipeRight(indexPath)
             completion(true)
         }
         edit.backgroundColor = .systemYellow
         
-        let config = UISwipeActionsConfiguration(actions: [edit])
+        let delete = UIContextualAction(style: .destructive, title: NSLocalizedString("Delete", comment: "Remove something (eg. from Database)")) { (action, view, completion) in
+            self.transactionCellSwipeLeft(indexPath)
+            completion(false)
+        }
+        
+        let config = UISwipeActionsConfiguration(actions: [delete, edit])
         config.performsFirstActionWithFullSwipe = true
         
         return config

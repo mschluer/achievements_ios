@@ -11,7 +11,7 @@
         <!--Statistics-->
         <scene sceneID="UfG-8U-CkE">
             <objects>
-                <viewController id="qJL-2T-XE2" customClass="StatisticsViewController" customModule="achievements" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StatisticsViewController" id="qJL-2T-XE2" customClass="StatisticsViewController" customModule="achievements" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1re-1Z-URv">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

@@ -22,7 +22,9 @@ class StatisticsPresenter {
     
     // MARK: Public Functions
     public func takeOver(from initiator : UIViewController) {
-        let viewController = storyboard.instantiateViewController(withIdentifier: "StatisticsViewController")
+        let viewController = storyboard.instantiateViewController(withIdentifier: "StatisticsViewController") as! StatisticsViewController
+        viewController.achievementsDataModel = achievementsDataModel
+        
         initiator.show(viewController, sender: self)
     }
 }

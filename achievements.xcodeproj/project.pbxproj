@@ -19,7 +19,6 @@
 		B307CE892714A31100FB7E8C /* ProgressWheelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B307CE882714A31100FB7E8C /* ProgressWheelTest.swift */; };
 		B307CE902714E56C00FB7E8C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B307CE8E2714E56C00FB7E8C /* Localizable.strings */; };
 		B307CE942715AD3500FB7E8C /* StatisticsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B307CE932715AD3500FB7E8C /* StatisticsPresenter.swift */; };
-		B307CE972715AEC700FB7E8C /* StatisticsPresenterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B307CE962715AEC700FB7E8C /* StatisticsPresenterStoryboard.storyboard */; };
 		B3186B6D270B63A6000B4AE8 /* ProgressWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3186B6C270B63A6000B4AE8 /* ProgressWheel.swift */; };
 		B328322D26D93F22007CAD2A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328322C26D93F22007CAD2A /* AppDelegate.swift */; };
 		B328322F26D93F22007CAD2A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328322E26D93F22007CAD2A /* SceneDelegate.swift */; };
@@ -44,6 +43,7 @@
 		B3939ACB2705F627005D243B /* IncomeTemplateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939ACA2705F627005D243B /* IncomeTemplateTest.swift */; };
 		B3939ACD2705FE44005D243B /* MultiplteTransactionsAndPurgeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939ACC2705FE44005D243B /* MultiplteTransactionsAndPurgeTest.swift */; };
 		B3939ACF2706048D005D243B /* HistoricalTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939ACE2706048D005D243B /* HistoricalTransaction.swift */; };
+		B393D82D2715C15900232482 /* StatisticsPresenterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B393D82F2715C15900232482 /* StatisticsPresenterStoryboard.storyboard */; };
 		B3C5C4AF26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4AD26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift */; };
 		B3C5C4B026E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */; };
 		B3C5C4B226E5267600A52CBC /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4B126E5267600A52CBC /* StatisticsViewController.swift */; };
@@ -85,7 +85,6 @@
 		B307CE8D2714DC3500FB7E8C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		B307CE8F2714E56C00FB7E8C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B307CE932715AD3500FB7E8C /* StatisticsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsPresenter.swift; sourceTree = "<group>"; };
-		B307CE962715AEC700FB7E8C /* StatisticsPresenterStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StatisticsPresenterStoryboard.storyboard; sourceTree = "<group>"; };
 		B3186B6C270B63A6000B4AE8 /* ProgressWheel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressWheel.swift; sourceTree = "<group>"; };
 		B328322926D93F22007CAD2A /* achievements.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = achievements.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B328322C26D93F22007CAD2A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +115,8 @@
 		B3939ACA2705F627005D243B /* IncomeTemplateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeTemplateTest.swift; sourceTree = "<group>"; };
 		B3939ACC2705FE44005D243B /* MultiplteTransactionsAndPurgeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplteTransactionsAndPurgeTest.swift; sourceTree = "<group>"; };
 		B3939ACE2706048D005D243B /* HistoricalTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalTransaction.swift; sourceTree = "<group>"; };
+		B393D82E2715C15900232482 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/StatisticsPresenterStoryboard.storyboard; sourceTree = "<group>"; };
+		B393D8312715C15F00232482 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/StatisticsPresenterStoryboard.strings; sourceTree = "<group>"; };
 		B3C5C4AD26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionTemplate+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionTemplate+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B3C5C4B126E5267600A52CBC /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
@@ -181,7 +182,7 @@
 		B307CE952715AE8000FB7E8C /* StatisticsPresenter */ = {
 			isa = PBXGroup;
 			children = (
-				B307CE962715AEC700FB7E8C /* StatisticsPresenterStoryboard.storyboard */,
+				B393D82F2715C15900232482 /* StatisticsPresenterStoryboard.storyboard */,
 			);
 			path = StatisticsPresenter;
 			sourceTree = "<group>";
@@ -483,7 +484,7 @@
 				B328323926D93F23007CAD2A /* LaunchScreen.storyboard in Resources */,
 				B307CE902714E56C00FB7E8C /* Localizable.strings in Resources */,
 				B328323626D93F23007CAD2A /* Assets.xcassets in Resources */,
-				B307CE972715AEC700FB7E8C /* StatisticsPresenterStoryboard.storyboard in Resources */,
+				B393D82D2715C15900232482 /* StatisticsPresenterStoryboard.storyboard in Resources */,
 				B328323426D93F22007CAD2A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -704,6 +705,15 @@
 				B307CE8D2714DC3500FB7E8C /* de */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		B393D82F2715C15900232482 /* StatisticsPresenterStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B393D82E2715C15900232482 /* Base */,
+				B393D8312715C15F00232482 /* de */,
+			);
+			name = StatisticsPresenterStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

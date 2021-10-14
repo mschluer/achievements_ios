@@ -31,6 +31,7 @@
 		B328326D26DBD253007CAD2A /* AchievementTransaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328326B26DBD253007CAD2A /* AchievementTransaction+CoreDataProperties.swift */; };
 		B328326F26DBD379007CAD2A /* AchievementsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328326E26DBD379007CAD2A /* AchievementsDataModel.swift */; };
 		B328327326DC2D02007CAD2A /* AchievementTransactionFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328327226DC2D02007CAD2A /* AchievementTransactionFormController.swift */; };
+		B32F88052718B6D2004D0960 /* AchievementTransactionsPresenterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B32F88072718B6D2004D0960 /* AchievementTransactionsPresenterStoryboard.storyboard */; };
 		B349499326E1483E00829A5F /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349499226E1483E00829A5F /* HistoryTableViewController.swift */; };
 		B349499526E1670F00829A5F /* TransactionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349499426E1670F00829A5F /* TransactionDetailViewController.swift */; };
 		B349499726E3D31100829A5F /* PlannedIncomesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349499626E3D31100829A5F /* PlannedIncomesViewController.swift */; };
@@ -47,7 +48,6 @@
 		B393D8332715D17600232482 /* TransactionTemplatesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B393D8322715D17600232482 /* TransactionTemplatesPresenter.swift */; };
 		B393D8382718A9E500232482 /* TransactionTemplatesPresenterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B393D83A2718A9E500232482 /* TransactionTemplatesPresenterStoryboard.storyboard */; };
 		B393D83E2718AC1300232482 /* AchievementTransactionsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B393D83D2718AC1300232482 /* AchievementTransactionsPresenter.swift */; };
-		B393D8412718AD6E00232482 /* AchievementTransactionsPresenterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B393D8402718AD6E00232482 /* AchievementTransactionsPresenterStoryboard.storyboard */; };
 		B3C5C4AF26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4AD26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift */; };
 		B3C5C4B026E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */; };
 		B3C5C4B226E5267600A52CBC /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4B126E5267600A52CBC /* StatisticsViewController.swift */; };
@@ -107,6 +107,8 @@
 		B328326B26DBD253007CAD2A /* AchievementTransaction+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AchievementTransaction+CoreDataProperties.swift"; path = "achievements/Model/AchievementTransaction/AchievementTransaction+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		B328326E26DBD379007CAD2A /* AchievementsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsDataModel.swift; sourceTree = "<group>"; };
 		B328327226DC2D02007CAD2A /* AchievementTransactionFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTransactionFormController.swift; sourceTree = "<group>"; };
+		B32F88062718B6D2004D0960 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AchievementTransactionsPresenterStoryboard.storyboard; sourceTree = "<group>"; };
+		B32F88092718B6D3004D0960 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/AchievementTransactionsPresenterStoryboard.strings; sourceTree = "<group>"; };
 		B349499226E1483E00829A5F /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
 		B349499426E1670F00829A5F /* TransactionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewController.swift; sourceTree = "<group>"; };
 		B349499626E3D31100829A5F /* PlannedIncomesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannedIncomesViewController.swift; sourceTree = "<group>"; };
@@ -125,7 +127,6 @@
 		B393D8392718A9E500232482 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TransactionTemplatesPresenterStoryboard.storyboard; sourceTree = "<group>"; };
 		B393D83C2718A9E700232482 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/TransactionTemplatesPresenterStoryboard.strings; sourceTree = "<group>"; };
 		B393D83D2718AC1300232482 /* AchievementTransactionsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTransactionsPresenter.swift; sourceTree = "<group>"; };
-		B393D8402718AD6E00232482 /* AchievementTransactionsPresenterStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AchievementTransactionsPresenterStoryboard.storyboard; sourceTree = "<group>"; };
 		B3C5C4AD26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionTemplate+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionTemplate+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B3C5C4B126E5267600A52CBC /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
@@ -371,7 +372,7 @@
 		B393D83F2718AD3C00232482 /* AchievementTransactionsPresenter */ = {
 			isa = PBXGroup;
 			children = (
-				B393D8402718AD6E00232482 /* AchievementTransactionsPresenterStoryboard.storyboard */,
+				B32F88072718B6D2004D0960 /* AchievementTransactionsPresenterStoryboard.storyboard */,
 			);
 			path = AchievementTransactionsPresenter;
 			sourceTree = "<group>";
@@ -526,7 +527,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B393D8412718AD6E00232482 /* AchievementTransactionsPresenterStoryboard.storyboard in Resources */,
+				B32F88052718B6D2004D0960 /* AchievementTransactionsPresenterStoryboard.storyboard in Resources */,
 				B328323926D93F23007CAD2A /* LaunchScreen.storyboard in Resources */,
 				B307CE902714E56C00FB7E8C /* Localizable.strings in Resources */,
 				B328323626D93F23007CAD2A /* Assets.xcassets in Resources */,
@@ -754,6 +755,15 @@
 				B307CE8D2714DC3500FB7E8C /* de */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		B32F88072718B6D2004D0960 /* AchievementTransactionsPresenterStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B32F88062718B6D2004D0960 /* Base */,
+				B32F88092718B6D3004D0960 /* de */,
+			);
+			name = AchievementTransactionsPresenterStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
 		B393D82F2715C15900232482 /* StatisticsPresenterStoryboard.storyboard */ = {

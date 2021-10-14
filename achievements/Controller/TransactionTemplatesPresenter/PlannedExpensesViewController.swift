@@ -135,10 +135,6 @@ class PlannedExpensesViewController: UIViewController, UITableViewDelegate, UITa
             let destination = segue.destination as! TransactionTemplateFormController
             destination.flipSignOnShow = true
             destination.achievementsDataModel = achievementsDataModel
-        case "BookExpenseTemplateSegue":
-            let destination = segue.destination as! AchievementTransactionFormController
-            destination.transactionTemplate = (sender as! TransactionTemplate)
-            destination.achievementsDataModel = self.achievementsDataModel
         case "EditExpenseTemplateSegue":
             let destination = segue.destination as! TransactionTemplateFormController
             destination.achievementsDataModel = achievementsDataModel
@@ -150,7 +146,7 @@ class PlannedExpensesViewController: UIViewController, UITableViewDelegate, UITa
     
     // MARK: Action Handlers
     private func plannedExpenseCellPressed(at indexPath: IndexPath) {
-        performSegue(withIdentifier: "BookExpenseTemplateSegue", sender: plannedExpenseFor(indexPath: indexPath))
+        AchievementTransactionsPresenter(achievevementsDataModel: achievementsDataModel!).bookAchievementTransaction(from: self, template: plannedExpenseFor(indexPath: indexPath))
     }
     
     private func swipeRightQuickBook(at indexPath: IndexPath) {

@@ -80,7 +80,7 @@ class HistoryTableViewController: UITableViewController {
     
     // MARK: Action Handlers
     private func transactionCellPressed(_ indexPath: IndexPath) {
-        performSegue(withIdentifier: "ShowTransactionDetailViewSegue", sender: historicalTransactionFor(indexPath: indexPath))
+        AchievementTransactionsPresenter(achievevementsDataModel: achievementsDataModel!).showTransactionDetails(from: self, transaction: historicalTransactionFor(indexPath: indexPath))
     }
     
     // MARK: Private Functions

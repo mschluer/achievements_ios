@@ -1,5 +1,5 @@
 //
-//  TransactionTemplateViewController.swift
+//  PlannedIncomesViewController.swift
 //  achievements
 //
 //  Created by Maximilian Schluer on 04.09.21.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TransactionTemplatesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PlannedIncomesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // MARK: Persistence Models
     public var achievementsDataModel : AchievementsDataModel?
     
@@ -37,10 +37,6 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
         case "AddTransactionTemplateFormSegue":
             let destination = segue.destination as! TransactionTemplateFormController
             destination.achievementsDataModel = achievementsDataModel
-        case "BookTransactionTemplateSegue":
-            let destination = segue.destination as! AchievementTransactionFormController
-            destination.transactionTemplate = (sender as! TransactionTemplate)
-            destination.achievementsDataModel = self.achievementsDataModel
         case "EditTransactionTemplateSegue":
             let destination = segue.destination as! TransactionTemplateFormController
             destination.achievementsDataModel = achievementsDataModel
@@ -158,7 +154,7 @@ class TransactionTemplatesViewController: UIViewController, UITableViewDelegate,
     }
     
     private func transactionTemplateCellPressed(at indexPath: IndexPath) {
-        performSegue(withIdentifier: "BookTransactionTemplateSegue", sender: transactionTemplateFor(indexPath: indexPath))
+        AchievementTransactionsPresenter(achievevementsDataModel: achievementsDataModel!).bookAchievementTransaction(from: self, template: transactionTemplateFor(indexPath: indexPath))
     }
     
     // MARK: Setup Steps

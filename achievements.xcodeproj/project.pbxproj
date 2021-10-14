@@ -45,7 +45,7 @@
 		B3939ACF2706048D005D243B /* HistoricalTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939ACE2706048D005D243B /* HistoricalTransaction.swift */; };
 		B393D82D2715C15900232482 /* StatisticsPresenterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B393D82F2715C15900232482 /* StatisticsPresenterStoryboard.storyboard */; };
 		B393D8332715D17600232482 /* TransactionTemplatesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B393D8322715D17600232482 /* TransactionTemplatesPresenter.swift */; };
-		B393D8362715D29800232482 /* TransactionTemplatesPresenterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B393D8352715D29800232482 /* TransactionTemplatesPresenterStoryboard.storyboard */; };
+		B393D8382718A9E500232482 /* TransactionTemplatesPresenterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B393D83A2718A9E500232482 /* TransactionTemplatesPresenterStoryboard.storyboard */; };
 		B3C5C4AF26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4AD26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift */; };
 		B3C5C4B026E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */; };
 		B3C5C4B226E5267600A52CBC /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4B126E5267600A52CBC /* StatisticsViewController.swift */; };
@@ -120,7 +120,8 @@
 		B393D82E2715C15900232482 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/StatisticsPresenterStoryboard.storyboard; sourceTree = "<group>"; };
 		B393D8312715C15F00232482 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/StatisticsPresenterStoryboard.strings; sourceTree = "<group>"; };
 		B393D8322715D17600232482 /* TransactionTemplatesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTemplatesPresenter.swift; sourceTree = "<group>"; };
-		B393D8352715D29800232482 /* TransactionTemplatesPresenterStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TransactionTemplatesPresenterStoryboard.storyboard; sourceTree = "<group>"; };
+		B393D8392718A9E500232482 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TransactionTemplatesPresenterStoryboard.storyboard; sourceTree = "<group>"; };
+		B393D83C2718A9E700232482 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/TransactionTemplatesPresenterStoryboard.strings; sourceTree = "<group>"; };
 		B3C5C4AD26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionTemplate+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionTemplate+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B3C5C4B126E5267600A52CBC /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
@@ -338,7 +339,7 @@
 		B393D8342715D26F00232482 /* TransactionTemplatesPresenter */ = {
 			isa = PBXGroup;
 			children = (
-				B393D8352715D29800232482 /* TransactionTemplatesPresenterStoryboard.storyboard */,
+				B393D83A2718A9E500232482 /* TransactionTemplatesPresenterStoryboard.storyboard */,
 			);
 			path = TransactionTemplatesPresenter;
 			sourceTree = "<group>";
@@ -508,7 +509,7 @@
 				B328323626D93F23007CAD2A /* Assets.xcassets in Resources */,
 				B393D82D2715C15900232482 /* StatisticsPresenterStoryboard.storyboard in Resources */,
 				B328323426D93F22007CAD2A /* Main.storyboard in Resources */,
-				B393D8362715D29800232482 /* TransactionTemplatesPresenterStoryboard.storyboard in Resources */,
+				B393D8382718A9E500232482 /* TransactionTemplatesPresenterStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -738,6 +739,15 @@
 				B393D8312715C15F00232482 /* de */,
 			);
 			name = StatisticsPresenterStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		B393D83A2718A9E500232482 /* TransactionTemplatesPresenterStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B393D8392718A9E500232482 /* Base */,
+				B393D83C2718A9E700232482 /* de */,
+			);
+			name = TransactionTemplatesPresenterStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

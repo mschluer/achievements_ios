@@ -9,9 +9,10 @@ import UIKit
 
 class DashboardController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     // MARK: Persistence Models
-    private let achievementsDataModel = AchievementsDataModel()
+    public var achievementsDataModel : AchievementsDataModel!
     
     // MARK: Variables
+    
     private var balance: Float = 0 {
         didSet {
             populateProgressWheel()

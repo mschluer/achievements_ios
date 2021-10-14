@@ -46,6 +46,8 @@
 		B393D82D2715C15900232482 /* StatisticsPresenterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B393D82F2715C15900232482 /* StatisticsPresenterStoryboard.storyboard */; };
 		B393D8332715D17600232482 /* TransactionTemplatesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B393D8322715D17600232482 /* TransactionTemplatesPresenter.swift */; };
 		B393D8382718A9E500232482 /* TransactionTemplatesPresenterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B393D83A2718A9E500232482 /* TransactionTemplatesPresenterStoryboard.storyboard */; };
+		B393D83E2718AC1300232482 /* AchievementTransactionsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B393D83D2718AC1300232482 /* AchievementTransactionsPresenter.swift */; };
+		B393D8412718AD6E00232482 /* AchievementTransactionsPresenterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B393D8402718AD6E00232482 /* AchievementTransactionsPresenterStoryboard.storyboard */; };
 		B3C5C4AF26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4AD26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift */; };
 		B3C5C4B026E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */; };
 		B3C5C4B226E5267600A52CBC /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4B126E5267600A52CBC /* StatisticsViewController.swift */; };
@@ -122,6 +124,8 @@
 		B393D8322715D17600232482 /* TransactionTemplatesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTemplatesPresenter.swift; sourceTree = "<group>"; };
 		B393D8392718A9E500232482 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TransactionTemplatesPresenterStoryboard.storyboard; sourceTree = "<group>"; };
 		B393D83C2718A9E700232482 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/TransactionTemplatesPresenterStoryboard.strings; sourceTree = "<group>"; };
+		B393D83D2718AC1300232482 /* AchievementTransactionsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTransactionsPresenter.swift; sourceTree = "<group>"; };
+		B393D8402718AD6E00232482 /* AchievementTransactionsPresenterStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AchievementTransactionsPresenterStoryboard.storyboard; sourceTree = "<group>"; };
 		B3C5C4AD26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionTemplate+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionTemplate+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B3C5C4B126E5267600A52CBC /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
@@ -181,6 +185,7 @@
 			children = (
 				B307CE932715AD3500FB7E8C /* StatisticsPresenter.swift */,
 				B393D8322715D17600232482 /* TransactionTemplatesPresenter.swift */,
+				B393D83D2718AC1300232482 /* AchievementTransactionsPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -280,6 +285,7 @@
 		B328327626DF90AB007CAD2A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B393D83F2718AD3C00232482 /* AchievementTransactionsPresenter */,
 				B393D8342715D26F00232482 /* TransactionTemplatesPresenter */,
 				B307CE952715AE8000FB7E8C /* StatisticsPresenter */,
 				B307CE8E2714E56C00FB7E8C /* Localizable.strings */,
@@ -293,14 +299,22 @@
 		B328327726DF90B9007CAD2A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B32F88042718AF8E004D0960 /* AchivementTransactionPresenter */,
 				B393D83727161A6500232482 /* TransactionTemplatesPresenter */,
 				B393D82C2715B69700232482 /* StatisticsPresenter */,
-				B328327226DC2D02007CAD2A /* AchievementTransactionFormController.swift */,
 				B328325C26D94909007CAD2A /* DashboardController.swift */,
 				B349499226E1483E00829A5F /* HistoryTableViewController.swift */,
-				B349499426E1670F00829A5F /* TransactionDetailViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		B32F88042718AF8E004D0960 /* AchivementTransactionPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				B328327226DC2D02007CAD2A /* AchievementTransactionFormController.swift */,
+				B349499426E1670F00829A5F /* TransactionDetailViewController.swift */,
+			);
+			path = AchivementTransactionPresenter;
 			sourceTree = "<group>";
 		};
 		B381160126E10A200090029D /* HistoricalTransaction */ = {
@@ -352,6 +366,14 @@
 				B307CE7A27106EC800FB7E8C /* PlannedExpensesViewController.swift */,
 			);
 			path = TransactionTemplatesPresenter;
+			sourceTree = "<group>";
+		};
+		B393D83F2718AD3C00232482 /* AchievementTransactionsPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				B393D8402718AD6E00232482 /* AchievementTransactionsPresenterStoryboard.storyboard */,
+			);
+			path = AchievementTransactionsPresenter;
 			sourceTree = "<group>";
 		};
 		B3C5C4AC26E3E1A200A52CBC /* TransactionTemplate */ = {
@@ -504,6 +526,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B393D8412718AD6E00232482 /* AchievementTransactionsPresenterStoryboard.storyboard in Resources */,
 				B328323926D93F23007CAD2A /* LaunchScreen.storyboard in Resources */,
 				B307CE902714E56C00FB7E8C /* Localizable.strings in Resources */,
 				B328323626D93F23007CAD2A /* Assets.xcassets in Resources */,
@@ -648,6 +671,7 @@
 				B328326C26DBD253007CAD2A /* AchievementTransaction+CoreDataClass.swift in Sources */,
 				B3C5C4B226E5267600A52CBC /* StatisticsViewController.swift in Sources */,
 				B349499726E3D31100829A5F /* PlannedIncomesViewController.swift in Sources */,
+				B393D83E2718AC1300232482 /* AchievementTransactionsPresenter.swift in Sources */,
 				B307CE942715AD3500FB7E8C /* StatisticsPresenter.swift in Sources */,
 				B349499526E1670F00829A5F /* TransactionDetailViewController.swift in Sources */,
 				B328322D26D93F22007CAD2A /* AppDelegate.swift in Sources */,

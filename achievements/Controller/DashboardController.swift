@@ -43,19 +43,9 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
-        case "CreateTransactionFormSegue":
-            let destination = segue.destination as! AchievementTransactionFormController
-            destination.achievementsDataModel = achievementsDataModel
-        case "EditTransactionFormSegue":
-            let destination = segue.destination as! AchievementTransactionFormController
-            destination.achievementTransaction = (sender as! AchievementTransaction)
-            destination.achievementsDataModel = achievementsDataModel
         case "ShowHistorySegue":
             let destination = segue.destination as! HistoryTableViewController
             destination.achievementsDataModel = achievementsDataModel
-        case "ShowTransactionDetailViewSegue":
-            let destination = segue.destination as! TransactionDetailViewController
-            destination.transaction = sender as? HistoricalTransaction
         default:
             break
         }
@@ -172,6 +162,10 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         populateProgressWheel()
     }
     
+    @IBAction func toolbarAddButtonPressed(_ sender: Any) {
+        AchievementTransactionsPresenter(achievevementsDataModel: achievementsDataModel).bookAchievementTransaction(from: self)
+    }
+    
     @IBAction func toolbarIncomeTemplatesButtonPressed(_ sender: Any) {
         TransactionTemplatesPresenter(achievementsDataModel: achievementsDataModel).showPlannedIncomes(from: self)
     }
@@ -181,11 +175,11 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     private func transactionCellPressed(_ indexPath: IndexPath) {
-        performSegue(withIdentifier: "ShowTransactionDetailViewSegue", sender: getRecentTransactionFor(indexPath: indexPath).historicalTransaction)
+        AchievementTransactionsPresenter(achievevementsDataModel: achievementsDataModel).showTransactionDetails(from: self, transaction: getRecentTransactionFor(indexPath: indexPath))
     }
     
     private func transactionCellSwipeLeftEdit(_ indexPath: IndexPath) {
-        performSegue(withIdentifier: "EditTransactionFormSegue", sender: getRecentTransactionFor(indexPath: indexPath))
+        AchievementTransactionsPresenter(achievevementsDataModel: achievementsDataModel).editTransaction(from: self, transaction: getRecentTransactionFor(indexPath: indexPath))
     }
     
     private func transactionCellSwipeLeftDelete(_ indexPath: IndexPath) {

@@ -8,12 +8,6 @@
 import Foundation
 import UIKit
 
-/*
- 
- TODO: Remove the additional form for Achievement Transactions from the Storyboard as soon as the corresponding Presenter is implemented.
- 
- */
-
 class TransactionTemplatesPresenter {
     // MARK: Persistence Models
     let achievementsDataModel : AchievementsDataModel

@@ -37,10 +37,6 @@ class PlannedIncomesViewController: UIViewController, UITableViewDelegate, UITab
         case "AddTransactionTemplateFormSegue":
             let destination = segue.destination as! TransactionTemplateFormController
             destination.achievementsDataModel = achievementsDataModel
-        case "BookTransactionTemplateSegue":
-            let destination = segue.destination as! AchievementTransactionFormController
-            destination.transactionTemplate = (sender as! TransactionTemplate)
-            destination.achievementsDataModel = self.achievementsDataModel
         case "EditTransactionTemplateSegue":
             let destination = segue.destination as! TransactionTemplateFormController
             destination.achievementsDataModel = achievementsDataModel
@@ -158,7 +154,7 @@ class PlannedIncomesViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     private func transactionTemplateCellPressed(at indexPath: IndexPath) {
-        performSegue(withIdentifier: "BookTransactionTemplateSegue", sender: transactionTemplateFor(indexPath: indexPath))
+        AchievementTransactionsPresenter(achievevementsDataModel: achievementsDataModel!).bookAchievementTransaction(from: self, template: transactionTemplateFor(indexPath: indexPath))
     }
     
     // MARK: Setup Steps

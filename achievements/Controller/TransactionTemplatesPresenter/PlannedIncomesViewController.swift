@@ -1,5 +1,5 @@
 //
-//  TransactionTemplateViewController.swift
+//  PlannedIncomesViewController.swift
 //  achievements
 //
 //  Created by Maximilian Schluer on 04.09.21.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TransactionTemplatesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PlannedIncomesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // MARK: Persistence Models
     public var achievementsDataModel : AchievementsDataModel?
     

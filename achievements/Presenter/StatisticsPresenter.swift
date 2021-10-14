@@ -17,7 +17,6 @@ class StatisticsPresenter {
     // MARK: Initializers
     init(achievementsDataModel : AchievementsDataModel) {
         self.achievementsDataModel = achievementsDataModel
-        print(storyboard)
     }
     
     // MARK: Public Functions

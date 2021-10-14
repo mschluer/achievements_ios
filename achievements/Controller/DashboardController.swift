@@ -53,12 +53,6 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         case "ShowHistorySegue":
             let destination = segue.destination as! HistoryTableViewController
             destination.achievementsDataModel = achievementsDataModel
-        case "ShowPlannedExpensesSegue":
-            let destination = segue.destination as! PlannedExpensesViewController
-            destination.achievementsDataModel = achievementsDataModel
-        case "ShowTemplatesViewSegue":
-            let destination = segue.destination as! TransactionTemplatesViewController
-            destination.achievementsDataModel = achievementsDataModel
         case "ShowTransactionDetailViewSegue":
             let destination = segue.destination as! TransactionDetailViewController
             destination.transaction = sender as? HistoricalTransaction
@@ -176,6 +170,14 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         generator.impactOccurred()
         
         populateProgressWheel()
+    }
+    
+    @IBAction func toolbarIncomeTemplatesButtonPressed(_ sender: Any) {
+        TransactionTemplatesPresenter(achievementsDataModel: achievementsDataModel).showPlannedIncomes(from: self)
+    }
+    
+    @IBAction func toolbarExpenseTemplatesButtonPressed(_ sender: Any) {
+        TransactionTemplatesPresenter(achievementsDataModel: achievementsDataModel).showPlannedExpenses(from: self)
     }
     
     private func transactionCellPressed(_ indexPath: IndexPath) {

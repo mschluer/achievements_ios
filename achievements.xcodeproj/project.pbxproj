@@ -52,6 +52,9 @@
 		B3C5C4AF26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4AD26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift */; };
 		B3C5C4B026E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */; };
 		B3C5C4B226E5267600A52CBC /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4B126E5267600A52CBC /* StatisticsViewController.swift */; };
+		B3E7475427199E8F006C92C5 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E7475327199E8F006C92C5 /* SettingsPresenter.swift */; };
+		B3E7475827199ED0006C92C5 /* SettingsPresenterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3E7475727199ED0006C92C5 /* SettingsPresenterStoryboard.storyboard */; };
+		B3E7475A27199F54006C92C5 /* SettingsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E7475927199F54006C92C5 /* SettingsListTableViewController.swift */; };
 		B3FB47FD26FB3D3700494C4F /* IncomeTemplateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FB47FC26FB3D3700494C4F /* IncomeTemplateTest.swift */; };
 		B3FB480026FB471200494C4F /* AchievementsDataModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FB47FF26FB471200494C4F /* AchievementsDataModelTest.swift */; };
 		BFD6C785F97405A1226BF454 /* Pods_achievements_achievementsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1A735B418EFC8B305903A53 /* Pods_achievements_achievementsUITests.framework */; };
@@ -132,6 +135,9 @@
 		B3C5C4AD26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionTemplate+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionTemplate+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B3C5C4B126E5267600A52CBC /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
+		B3E7475327199E8F006C92C5 /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
+		B3E7475727199ED0006C92C5 /* SettingsPresenterStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsPresenterStoryboard.storyboard; sourceTree = "<group>"; };
+		B3E7475927199F54006C92C5 /* SettingsListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListTableViewController.swift; sourceTree = "<group>"; };
 		B3FB47FC26FB3D3700494C4F /* IncomeTemplateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeTemplateTest.swift; sourceTree = "<group>"; };
 		B3FB47FF26FB471200494C4F /* AchievementsDataModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsDataModelTest.swift; sourceTree = "<group>"; };
 		B91FC670CCE80E443AB4694D /* Pods_achievements.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_achievements.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -190,6 +196,7 @@
 				B393D8322715D17600232482 /* TransactionTemplatesPresenter.swift */,
 				B393D83D2718AC1300232482 /* AchievementTransactionsPresenter.swift */,
 				B32F880A2718B98B004D0960 /* AccountPresenter.swift */,
+				B3E7475327199E8F006C92C5 /* SettingsPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -289,6 +296,7 @@
 		B328327626DF90AB007CAD2A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B3E7475627199EAD006C92C5 /* SettingsPresenter */,
 				B32F880C2718B9F0004D0960 /* AccountPresenter */,
 				B393D83F2718AD3C00232482 /* AchievementTransactionsPresenter */,
 				B393D8342715D26F00232482 /* TransactionTemplatesPresenter */,
@@ -303,6 +311,7 @@
 		B328327726DF90B9007CAD2A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B3E7475527199E99006C92C5 /* SettingsPresenter */,
 				B32F880D2718BC01004D0960 /* AccountPresenter */,
 				B32F88042718AF8E004D0960 /* AchivementTransactionPresenter */,
 				B393D83727161A6500232482 /* TransactionTemplatesPresenter */,
@@ -403,6 +412,22 @@
 				B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */,
 			);
 			path = TransactionTemplate;
+			sourceTree = "<group>";
+		};
+		B3E7475527199E99006C92C5 /* SettingsPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				B3E7475927199F54006C92C5 /* SettingsListTableViewController.swift */,
+			);
+			path = SettingsPresenter;
+			sourceTree = "<group>";
+		};
+		B3E7475627199EAD006C92C5 /* SettingsPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				B3E7475727199ED0006C92C5 /* SettingsPresenterStoryboard.storyboard */,
+			);
+			path = SettingsPresenter;
 			sourceTree = "<group>";
 		};
 		B3FB47FA26FB3D0900494C4F /* Model */ = {
@@ -553,6 +578,7 @@
 				B393D82D2715C15900232482 /* StatisticsPresenterStoryboard.storyboard in Resources */,
 				B328323426D93F22007CAD2A /* AccountPresenterStoryboard.storyboard in Resources */,
 				B393D8382718A9E500232482 /* TransactionTemplatesPresenterStoryboard.storyboard in Resources */,
+				B3E7475827199ED0006C92C5 /* SettingsPresenterStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -684,6 +710,7 @@
 				B307CE83271456EB00FB7E8C /* Settings.swift in Sources */,
 				B3C5C4AF26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift in Sources */,
 				B349499326E1483E00829A5F /* HistoryTableViewController.swift in Sources */,
+				B3E7475427199E8F006C92C5 /* SettingsPresenter.swift in Sources */,
 				B349499926E3DB6E00829A5F /* TransactionTemplateFormController.swift in Sources */,
 				B3186B6D270B63A6000B4AE8 /* ProgressWheel.swift in Sources */,
 				B3C5C4B026E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift in Sources */,
@@ -699,6 +726,7 @@
 				B381160426E10B130090029D /* HistoricalTransaction+CoreDataProperties.swift in Sources */,
 				B307CE7B27106EC800FB7E8C /* PlannedExpensesViewController.swift in Sources */,
 				B393D8332715D17600232482 /* TransactionTemplatesPresenter.swift in Sources */,
+				B3E7475A27199F54006C92C5 /* SettingsListTableViewController.swift in Sources */,
 				B328325D26D94909007CAD2A /* DashboardController.swift in Sources */,
 				B328322F26D93F22007CAD2A /* SceneDelegate.swift in Sources */,
 				B328326F26DBD379007CAD2A /* AchievementsDataModel.swift in Sources */,

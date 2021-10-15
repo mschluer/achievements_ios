@@ -23,7 +23,10 @@ class SettingsPresenter {
     
     // MARK: Presenting Functions
     public func showBackupAndRestoreScreen(from initiator: UIViewController) {
+        let viewController = storyboard.instantiateViewController(withIdentifier: "BackupAndRestoreViewController") as! BackupAndRestoreViewController
+        viewController.settingsPresenter = self
         
+        initiator.show(viewController, sender: self)
     }
     
     public func showSettingsList(from initiator: UIViewController) {
@@ -31,6 +34,18 @@ class SettingsPresenter {
         viewController.settingsPresenter = self
         
         initiator.show(viewController, sender: self)
+    }
+    
+    // MARK: Public Functions
+    public func exportAchievementsDataModelFile() -> URL? {
+        // TODO: Encrypt
+        
+        return achievementsDataModel.url()
+    }
+    
+    public func importAchivementsDataModelFile() -> Bool {
+        // TODO: Decrypt
+        return false
     }
     
     // MARK: Destructive Actions

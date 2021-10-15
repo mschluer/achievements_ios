@@ -192,6 +192,10 @@ class AchievementsDataModel {
         return NSEntityDescription.insertNewObject(forEntityName: TransactionTemplate.entityName, into: self.viewContext) as! TransactionTemplate
     }
     
+    public func url() -> URL? {
+        return persistentContainer.persistentStoreDescriptions.first?.url
+    }
+    
     public func rearrangeTransactionTemplates(template: TransactionTemplate, destinationIndex: Int) {
         reindexPlannedExpenses()
         

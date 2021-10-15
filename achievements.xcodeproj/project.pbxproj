@@ -55,6 +55,7 @@
 		B3E7475427199E8F006C92C5 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E7475327199E8F006C92C5 /* SettingsPresenter.swift */; };
 		B3E7475827199ED0006C92C5 /* SettingsPresenterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3E7475727199ED0006C92C5 /* SettingsPresenterStoryboard.storyboard */; };
 		B3E7475A27199F54006C92C5 /* SettingsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E7475927199F54006C92C5 /* SettingsListTableViewController.swift */; };
+		B3E7475E2719D21B006C92C5 /* BackupAndRestoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E7475D2719D21B006C92C5 /* BackupAndRestoreViewController.swift */; };
 		B3FB47FD26FB3D3700494C4F /* IncomeTemplateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FB47FC26FB3D3700494C4F /* IncomeTemplateTest.swift */; };
 		B3FB480026FB471200494C4F /* AchievementsDataModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FB47FF26FB471200494C4F /* AchievementsDataModelTest.swift */; };
 		BFD6C785F97405A1226BF454 /* Pods_achievements_achievementsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1A735B418EFC8B305903A53 /* Pods_achievements_achievementsUITests.framework */; };
@@ -138,6 +139,7 @@
 		B3E7475327199E8F006C92C5 /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
 		B3E7475727199ED0006C92C5 /* SettingsPresenterStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsPresenterStoryboard.storyboard; sourceTree = "<group>"; };
 		B3E7475927199F54006C92C5 /* SettingsListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListTableViewController.swift; sourceTree = "<group>"; };
+		B3E7475D2719D21B006C92C5 /* BackupAndRestoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackupAndRestoreViewController.swift; sourceTree = "<group>"; };
 		B3FB47FC26FB3D3700494C4F /* IncomeTemplateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeTemplateTest.swift; sourceTree = "<group>"; };
 		B3FB47FF26FB471200494C4F /* AchievementsDataModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsDataModelTest.swift; sourceTree = "<group>"; };
 		B91FC670CCE80E443AB4694D /* Pods_achievements.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_achievements.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -417,6 +419,7 @@
 		B3E7475527199E99006C92C5 /* SettingsPresenter */ = {
 			isa = PBXGroup;
 			children = (
+				B3E7475D2719D21B006C92C5 /* BackupAndRestoreViewController.swift */,
 				B3E7475927199F54006C92C5 /* SettingsListTableViewController.swift */,
 			);
 			path = SettingsPresenter;
@@ -706,6 +709,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3E7475E2719D21B006C92C5 /* BackupAndRestoreViewController.swift in Sources */,
 				B381160526E10B130090029D /* HistoricalTransaction+CoreDataClass.swift in Sources */,
 				B307CE83271456EB00FB7E8C /* Settings.swift in Sources */,
 				B3C5C4AF26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift in Sources */,

@@ -37,10 +37,13 @@ class SettingsPresenter {
     }
     
     // MARK: Public Functions
-    public func exportAchievementsDataModelFile() -> URL? {
+    public func exportAchievementsDataModelFile() -> Data {
+        guard let url = achievementsDataModel.url() else {
+            return Data()
+        }
         // TODO: Encrypt
         
-        return achievementsDataModel.url()
+        return try! Data(contentsOf: url)
     }
     
     public func importAchivementsDataModelFile() -> Bool {

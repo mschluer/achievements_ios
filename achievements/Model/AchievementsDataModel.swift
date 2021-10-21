@@ -95,11 +95,13 @@ class AchievementsDataModel {
     var recentExpenses : [AchievementTransaction] {
         let fetchRequest : NSFetchRequest<AchievementTransaction> = AchievementTransaction.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "amount < 0")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
         return try! self.viewContext.fetch(fetchRequest)
     }
     var recentIncomes : [AchievementTransaction] {
         let fetchRequest : NSFetchRequest<AchievementTransaction> = AchievementTransaction.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "amount >= 0")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
         return try! self.viewContext.fetch(fetchRequest)
     }
     var recurringIncomeTemplates: [TransactionTemplate] {

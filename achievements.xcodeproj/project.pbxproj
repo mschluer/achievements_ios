@@ -39,6 +39,7 @@
 		B349499926E3DB6E00829A5F /* TransactionTemplateFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349499826E3DB6E00829A5F /* TransactionTemplateFormController.swift */; };
 		B361477C2721852E00941051 /* BackupRestoreTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B361477B2721852E00941051 /* BackupRestoreTest.swift */; };
 		B361478027218C7400941051 /* SettingsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B361477F27218C7400941051 /* SettingsTest.swift */; };
+		B361478127219E9500941051 /* SettingsPresenterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B361478327219E9500941051 /* SettingsPresenterStoryboard.storyboard */; };
 		B381160426E10B130090029D /* HistoricalTransaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B381160226E10B130090029D /* HistoricalTransaction+CoreDataProperties.swift */; };
 		B381160526E10B130090029D /* HistoricalTransaction+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B381160326E10B130090029D /* HistoricalTransaction+CoreDataClass.swift */; };
 		B3939ABD2704797C005D243B /* AchievementTransactionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939ABC2704797C005D243B /* AchievementTransactionTest.swift */; };
@@ -55,7 +56,6 @@
 		B3C5C4B026E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */; };
 		B3C5C4B226E5267600A52CBC /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4B126E5267600A52CBC /* StatisticsViewController.swift */; };
 		B3E7475427199E8F006C92C5 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E7475327199E8F006C92C5 /* SettingsPresenter.swift */; };
-		B3E7475827199ED0006C92C5 /* SettingsPresenterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3E7475727199ED0006C92C5 /* SettingsPresenterStoryboard.storyboard */; };
 		B3E7475A27199F54006C92C5 /* SettingsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E7475927199F54006C92C5 /* SettingsListTableViewController.swift */; };
 		B3E7475E2719D21B006C92C5 /* BackupAndRestoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E7475D2719D21B006C92C5 /* BackupAndRestoreViewController.swift */; };
 		B3FB47FD26FB3D3700494C4F /* IncomeTemplateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FB47FC26FB3D3700494C4F /* IncomeTemplateTest.swift */; };
@@ -123,6 +123,8 @@
 		B349499826E3DB6E00829A5F /* TransactionTemplateFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTemplateFormController.swift; sourceTree = "<group>"; };
 		B361477B2721852E00941051 /* BackupRestoreTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BackupRestoreTest.swift; path = achievementsTests/Presenter/SettingsPresenter/BackupRestoreTest.swift; sourceTree = SOURCE_ROOT; };
 		B361477F27218C7400941051 /* SettingsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTest.swift; sourceTree = "<group>"; };
+		B361478227219E9500941051 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SettingsPresenterStoryboard.storyboard; sourceTree = "<group>"; };
+		B361478527219E9800941051 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/SettingsPresenterStoryboard.strings; sourceTree = "<group>"; };
 		B381160226E10B130090029D /* HistoricalTransaction+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HistoricalTransaction+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B381160326E10B130090029D /* HistoricalTransaction+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HistoricalTransaction+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B3939ABC2704797C005D243B /* AchievementTransactionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTransactionTest.swift; sourceTree = "<group>"; };
@@ -141,7 +143,6 @@
 		B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionTemplate+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B3C5C4B126E5267600A52CBC /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		B3E7475327199E8F006C92C5 /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
-		B3E7475727199ED0006C92C5 /* SettingsPresenterStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsPresenterStoryboard.storyboard; sourceTree = "<group>"; };
 		B3E7475927199F54006C92C5 /* SettingsListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListTableViewController.swift; sourceTree = "<group>"; };
 		B3E7475D2719D21B006C92C5 /* BackupAndRestoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackupAndRestoreViewController.swift; sourceTree = "<group>"; };
 		B3FB47FC26FB3D3700494C4F /* IncomeTemplateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeTemplateTest.swift; sourceTree = "<group>"; };
@@ -450,7 +451,7 @@
 		B3E7475627199EAD006C92C5 /* SettingsPresenter */ = {
 			isa = PBXGroup;
 			children = (
-				B3E7475727199ED0006C92C5 /* SettingsPresenterStoryboard.storyboard */,
+				B361478327219E9500941051 /* SettingsPresenterStoryboard.storyboard */,
 			);
 			path = SettingsPresenter;
 			sourceTree = "<group>";
@@ -603,7 +604,7 @@
 				B393D82D2715C15900232482 /* StatisticsPresenterStoryboard.storyboard in Resources */,
 				B328323426D93F22007CAD2A /* AccountPresenterStoryboard.storyboard in Resources */,
 				B393D8382718A9E500232482 /* TransactionTemplatesPresenterStoryboard.storyboard in Resources */,
-				B3E7475827199ED0006C92C5 /* SettingsPresenterStoryboard.storyboard in Resources */,
+				B361478127219E9500941051 /* SettingsPresenterStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -840,6 +841,15 @@
 				B32F88092718B6D3004D0960 /* de */,
 			);
 			name = AchievementTransactionsPresenterStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		B361478327219E9500941051 /* SettingsPresenterStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B361478227219E9500941051 /* Base */,
+				B361478527219E9800941051 /* de */,
+			);
+			name = SettingsPresenterStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
 		B393D82F2715C15900232482 /* StatisticsPresenterStoryboard.storyboard */ = {

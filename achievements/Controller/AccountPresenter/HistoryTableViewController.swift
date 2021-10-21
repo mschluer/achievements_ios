@@ -73,9 +73,19 @@ class HistoryTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let date = historicalTransactionsDates[section]
+        
+        // Date Part
         let formatter = DateFormatter()
         formatter.dateStyle = .short
-        return formatter.string(for: historicalTransactionsDates[section])
+        let datePart = formatter.string(for: date)!
+        
+        // Balance Part
+        let dictionaryItem = historicalTransactions[date]!
+        let balance = calculateBalanceFor(array: dictionaryItem)
+        let balancePart = "( \(String (format: "%.2f", balance)) )"
+        
+        return "\(datePart) - \(balancePart)"
     }
     
     // MARK: Action Handlers
@@ -84,6 +94,16 @@ class HistoryTableViewController: UITableViewController {
     }
     
     // MARK: Private Functions
+    private func calculateBalanceFor(array: [HistoricalTransaction]) -> Float {
+        var result : Float = 0.0
+        
+        for element in array {
+            result += element.amount
+        }
+        
+        return result
+    }
+    
     private func historicalTransactionFor(indexPath: IndexPath) -> HistoricalTransaction {
         let date = historicalTransactionsDates[indexPath.section]
         let dictionaryEntry = historicalTransactions[date]!

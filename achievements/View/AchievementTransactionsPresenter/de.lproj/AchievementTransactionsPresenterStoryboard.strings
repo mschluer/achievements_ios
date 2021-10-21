@@ -1,0 +1,27 @@
+
+/* Class = "UITextField"; placeholder = "Title"; ObjectID = "6Aq-MQ-Lbn"; */
+"6Aq-MQ-Lbn.placeholder" = "Titel";
+
+/* Class = "UINavigationItem"; title = "Details"; ObjectID = "6Xa-7s-dmI"; */
+"6Xa-7s-dmI.title" = "Details";
+
+/* Class = "UITextField"; placeholder = "Amount"; ObjectID = "TZH-uN-z76"; */
+"TZH-uN-z76.placeholder" = "Betrag";
+
+/* Class = "UILabel"; text = "--, --/--/----, --:--:--"; ObjectID = "Wg5-eZ-F1s"; */
+"Wg5-eZ-F1s.text" = "--, --/--/----, --:--:--";
+
+/* Class = "UILabel"; text = "Text"; ObjectID = "c7U-YP-sQ2"; */
+"c7U-YP-sQ2.text" = "Text";
+
+/* Class = "UILabel"; text = "( + / - 0,00 )"; ObjectID = "gDG-TX-ThJ"; */
+"gDG-TX-ThJ.text" = "( + / - 0,00 )";
+
+/* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "jNv-Xn-hda"; */
+"jNv-Xn-hda.normalTitle" = "Speichern";
+
+/* Class = "UIButton"; normalTitle = "+ / -"; ObjectID = "lT7-x1-Fbg"; */
+"lT7-x1-Fbg.normalTitle" = "+ / -";
+
+/* Class = "UILabel"; text = "+ / - 0,00"; ObjectID = "qdW-C0-ocK"; */
+"qdW-C0-ocK.text" = "+ / - 0,00";

@@ -1,0 +1,21 @@
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "5X6-hg-Spb"; */
+"5X6-hg-Spb.text" = "Titel";
+
+/* Class = "UIButton"; configuration.title = "Backup Data"; ObjectID = "LT3-Du-Ifz"; */
+"LT3-Du-Ifz.configuration.title" = "Datensicherung";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "LT3-Du-Ifz"; */
+"LT3-Du-Ifz.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Backup"; ObjectID = "QQs-pU-z3A"; */
+"QQs-pU-z3A.text" = "Datensicherung";
+
+/* Class = "UILabel"; text = "Restore"; ObjectID = "g1T-T5-8bu"; */
+"g1T-T5-8bu.text" = "Daten Wiederherstellen";
+
+/* Class = "UIButton"; configuration.title = "Restore Data"; ObjectID = "jgb-Zd-Pfr"; */
+"jgb-Zd-Pfr.configuration.title" = "Wiederherstellen";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "jgb-Zd-Pfr"; */
+"jgb-Zd-Pfr.normalTitle" = "Button";

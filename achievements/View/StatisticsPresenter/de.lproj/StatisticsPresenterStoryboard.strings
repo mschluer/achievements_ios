@@ -1,0 +1,36 @@
+
+/* Class = "UILabel"; text = "0"; ObjectID = "EpC-xw-xlV"; */
+"EpC-xw-xlV.text" = "0";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "JSc-Wk-z3k"; */
+"JSc-Wk-z3k.text" = "0";
+
+/* Class = "UILabel"; text = "0,00"; ObjectID = "L1Q-Aj-DO2"; */
+"L1Q-Aj-DO2.text" = "0,00";
+
+/* Class = "UILabel"; text = "Recent"; ObjectID = "Ti8-6q-086"; */
+"Ti8-6q-086.text" = "Aktuell";
+
+/* Class = "UILabel"; text = "0,00"; ObjectID = "fb5-2k-4T2"; */
+"fb5-2k-4T2.text" = "0,00";
+
+/* Class = "UILabel"; text = "0,00"; ObjectID = "j2c-Rg-ZTf"; */
+"j2c-Rg-ZTf.text" = "0,00";
+
+/* Class = "UINavigationItem"; title = "Statistics"; ObjectID = "kAY-dR-PFl"; */
+"kAY-dR-PFl.title" = "Statistiken";
+
+/* Class = "UILabel"; text = "Total"; ObjectID = "mTB-Ae-4fE"; */
+"mTB-Ae-4fE.text" = "Gesamt";
+
+/* Class = "UILabel"; text = "Balance History"; ObjectID = "oYz-iF-pe4"; */
+"oYz-iF-pe4.text" = "Saldo-Verlauf";
+
+/* Class = "UILabel"; text = "0,00"; ObjectID = "rrp-pf-ciO"; */
+"rrp-pf-ciO.text" = "0,00";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "tee-vh-z06"; */
+"tee-vh-z06.text" = "0";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "wOB-Ex-ldh"; */
+"wOB-Ex-ldh.text" = "0";

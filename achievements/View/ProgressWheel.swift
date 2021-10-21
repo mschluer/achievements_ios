@@ -60,7 +60,7 @@ class ProgressWheel : UIView {
     private func drawLines() {
         for i in 0...49 {
             // Determine Angle
-            let angle = Float(i) * -0.125
+            let angle = Float(i) * -0.126
             
             // Instanciate and configure path
             let uIBezierPath = UIBezierPath()

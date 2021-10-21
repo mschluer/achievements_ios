@@ -18,10 +18,12 @@
 		B307CE8727147EEE00FB7E8C /* AutomaticPurgeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B307CE8627147EED00FB7E8C /* AutomaticPurgeTest.swift */; };
 		B307CE892714A31100FB7E8C /* ProgressWheelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B307CE882714A31100FB7E8C /* ProgressWheelTest.swift */; };
 		B307CE902714E56C00FB7E8C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B307CE8E2714E56C00FB7E8C /* Localizable.strings */; };
+		B307CE942715AD3500FB7E8C /* StatisticsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B307CE932715AD3500FB7E8C /* StatisticsPresenter.swift */; };
+		B30CA4A32721B4650032E646 /* achievements-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B30CA4A22721B4650032E646 /* achievements-logo.png */; };
 		B3186B6D270B63A6000B4AE8 /* ProgressWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3186B6C270B63A6000B4AE8 /* ProgressWheel.swift */; };
 		B328322D26D93F22007CAD2A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328322C26D93F22007CAD2A /* AppDelegate.swift */; };
 		B328322F26D93F22007CAD2A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328322E26D93F22007CAD2A /* SceneDelegate.swift */; };
-		B328323426D93F22007CAD2A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B328323226D93F22007CAD2A /* Main.storyboard */; };
+		B328323426D93F22007CAD2A /* AccountPresenterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B328323226D93F22007CAD2A /* AccountPresenterStoryboard.storyboard */; };
 		B328323626D93F23007CAD2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B328323526D93F23007CAD2A /* Assets.xcassets */; };
 		B328323926D93F23007CAD2A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B328323726D93F23007CAD2A /* LaunchScreen.storyboard */; };
 		B328325D26D94909007CAD2A /* DashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328325C26D94909007CAD2A /* DashboardController.swift */; };
@@ -30,10 +32,15 @@
 		B328326D26DBD253007CAD2A /* AchievementTransaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328326B26DBD253007CAD2A /* AchievementTransaction+CoreDataProperties.swift */; };
 		B328326F26DBD379007CAD2A /* AchievementsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328326E26DBD379007CAD2A /* AchievementsDataModel.swift */; };
 		B328327326DC2D02007CAD2A /* AchievementTransactionFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328327226DC2D02007CAD2A /* AchievementTransactionFormController.swift */; };
+		B32F88052718B6D2004D0960 /* AchievementTransactionsPresenterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B32F88072718B6D2004D0960 /* AchievementTransactionsPresenterStoryboard.storyboard */; };
+		B32F880B2718B98B004D0960 /* AccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32F880A2718B98B004D0960 /* AccountPresenter.swift */; };
 		B349499326E1483E00829A5F /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349499226E1483E00829A5F /* HistoryTableViewController.swift */; };
 		B349499526E1670F00829A5F /* TransactionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349499426E1670F00829A5F /* TransactionDetailViewController.swift */; };
-		B349499726E3D31100829A5F /* TransactionTemplatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349499626E3D31100829A5F /* TransactionTemplatesViewController.swift */; };
+		B349499726E3D31100829A5F /* PlannedIncomesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349499626E3D31100829A5F /* PlannedIncomesViewController.swift */; };
 		B349499926E3DB6E00829A5F /* TransactionTemplateFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349499826E3DB6E00829A5F /* TransactionTemplateFormController.swift */; };
+		B361477C2721852E00941051 /* BackupRestoreTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B361477B2721852E00941051 /* BackupRestoreTest.swift */; };
+		B361478027218C7400941051 /* SettingsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B361477F27218C7400941051 /* SettingsTest.swift */; };
+		B361478127219E9500941051 /* SettingsPresenterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B361478327219E9500941051 /* SettingsPresenterStoryboard.storyboard */; };
 		B381160426E10B130090029D /* HistoricalTransaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B381160226E10B130090029D /* HistoricalTransaction+CoreDataProperties.swift */; };
 		B381160526E10B130090029D /* HistoricalTransaction+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B381160326E10B130090029D /* HistoricalTransaction+CoreDataClass.swift */; };
 		B3939ABD2704797C005D243B /* AchievementTransactionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939ABC2704797C005D243B /* AchievementTransactionTest.swift */; };
@@ -42,9 +49,16 @@
 		B3939ACB2705F627005D243B /* IncomeTemplateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939ACA2705F627005D243B /* IncomeTemplateTest.swift */; };
 		B3939ACD2705FE44005D243B /* MultiplteTransactionsAndPurgeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939ACC2705FE44005D243B /* MultiplteTransactionsAndPurgeTest.swift */; };
 		B3939ACF2706048D005D243B /* HistoricalTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939ACE2706048D005D243B /* HistoricalTransaction.swift */; };
+		B393D82D2715C15900232482 /* StatisticsPresenterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B393D82F2715C15900232482 /* StatisticsPresenterStoryboard.storyboard */; };
+		B393D8332715D17600232482 /* TransactionTemplatesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B393D8322715D17600232482 /* TransactionTemplatesPresenter.swift */; };
+		B393D8382718A9E500232482 /* TransactionTemplatesPresenterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B393D83A2718A9E500232482 /* TransactionTemplatesPresenterStoryboard.storyboard */; };
+		B393D83E2718AC1300232482 /* AchievementTransactionsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B393D83D2718AC1300232482 /* AchievementTransactionsPresenter.swift */; };
 		B3C5C4AF26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4AD26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift */; };
 		B3C5C4B026E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */; };
 		B3C5C4B226E5267600A52CBC /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4B126E5267600A52CBC /* StatisticsViewController.swift */; };
+		B3E7475427199E8F006C92C5 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E7475327199E8F006C92C5 /* SettingsPresenter.swift */; };
+		B3E7475A27199F54006C92C5 /* SettingsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E7475927199F54006C92C5 /* SettingsListTableViewController.swift */; };
+		B3E7475E2719D21B006C92C5 /* BackupAndRestoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E7475D2719D21B006C92C5 /* BackupAndRestoreViewController.swift */; };
 		B3FB47FD26FB3D3700494C4F /* IncomeTemplateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FB47FC26FB3D3700494C4F /* IncomeTemplateTest.swift */; };
 		B3FB480026FB471200494C4F /* AchievementsDataModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FB47FF26FB471200494C4F /* AchievementsDataModelTest.swift */; };
 		BFD6C785F97405A1226BF454 /* Pods_achievements_achievementsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1A735B418EFC8B305903A53 /* Pods_achievements_achievementsUITests.framework */; };
@@ -79,14 +93,17 @@
 		B307CE8427147DCE00FB7E8C /* SettingsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTest.swift; sourceTree = "<group>"; };
 		B307CE8627147EED00FB7E8C /* AutomaticPurgeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomaticPurgeTest.swift; sourceTree = "<group>"; };
 		B307CE882714A31100FB7E8C /* ProgressWheelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressWheelTest.swift; sourceTree = "<group>"; };
-		B307CE8C2714DC3500FB7E8C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
+		B307CE8C2714DC3500FB7E8C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/AccountPresenterStoryboard.strings; sourceTree = "<group>"; };
 		B307CE8D2714DC3500FB7E8C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		B307CE8F2714E56C00FB7E8C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B307CE932715AD3500FB7E8C /* StatisticsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsPresenter.swift; sourceTree = "<group>"; };
+		B30CA4A22721B4650032E646 /* achievements-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "achievements-logo.png"; path = "../../Library/Mobile Documents/com~apple~CloudDocs/achievements-logo.png"; sourceTree = "<group>"; };
+		B30CA4A42721B4760032E646 /* achievements-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "achievements-logo.png"; sourceTree = "<group>"; };
 		B3186B6C270B63A6000B4AE8 /* ProgressWheel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressWheel.swift; sourceTree = "<group>"; };
 		B328322926D93F22007CAD2A /* achievements.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = achievements.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B328322C26D93F22007CAD2A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B328322E26D93F22007CAD2A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B328323326D93F22007CAD2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B328323326D93F22007CAD2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AccountPresenterStoryboard.storyboard; sourceTree = "<group>"; };
 		B328323526D93F23007CAD2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B328323826D93F23007CAD2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B328323A26D93F23007CAD2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -100,10 +117,17 @@
 		B328326B26DBD253007CAD2A /* AchievementTransaction+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AchievementTransaction+CoreDataProperties.swift"; path = "achievements/Model/AchievementTransaction/AchievementTransaction+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		B328326E26DBD379007CAD2A /* AchievementsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsDataModel.swift; sourceTree = "<group>"; };
 		B328327226DC2D02007CAD2A /* AchievementTransactionFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTransactionFormController.swift; sourceTree = "<group>"; };
+		B32F88062718B6D2004D0960 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AchievementTransactionsPresenterStoryboard.storyboard; sourceTree = "<group>"; };
+		B32F88092718B6D3004D0960 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/AchievementTransactionsPresenterStoryboard.strings; sourceTree = "<group>"; };
+		B32F880A2718B98B004D0960 /* AccountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPresenter.swift; sourceTree = "<group>"; };
 		B349499226E1483E00829A5F /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
 		B349499426E1670F00829A5F /* TransactionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewController.swift; sourceTree = "<group>"; };
-		B349499626E3D31100829A5F /* TransactionTemplatesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTemplatesViewController.swift; sourceTree = "<group>"; };
+		B349499626E3D31100829A5F /* PlannedIncomesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannedIncomesViewController.swift; sourceTree = "<group>"; };
 		B349499826E3DB6E00829A5F /* TransactionTemplateFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTemplateFormController.swift; sourceTree = "<group>"; };
+		B361477B2721852E00941051 /* BackupRestoreTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BackupRestoreTest.swift; path = achievementsTests/Presenter/SettingsPresenter/BackupRestoreTest.swift; sourceTree = SOURCE_ROOT; };
+		B361477F27218C7400941051 /* SettingsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTest.swift; sourceTree = "<group>"; };
+		B361478227219E9500941051 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SettingsPresenterStoryboard.storyboard; sourceTree = "<group>"; };
+		B361478527219E9800941051 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/SettingsPresenterStoryboard.strings; sourceTree = "<group>"; };
 		B381160226E10B130090029D /* HistoricalTransaction+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HistoricalTransaction+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B381160326E10B130090029D /* HistoricalTransaction+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HistoricalTransaction+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B3939ABC2704797C005D243B /* AchievementTransactionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTransactionTest.swift; sourceTree = "<group>"; };
@@ -112,9 +136,18 @@
 		B3939ACA2705F627005D243B /* IncomeTemplateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeTemplateTest.swift; sourceTree = "<group>"; };
 		B3939ACC2705FE44005D243B /* MultiplteTransactionsAndPurgeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplteTransactionsAndPurgeTest.swift; sourceTree = "<group>"; };
 		B3939ACE2706048D005D243B /* HistoricalTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalTransaction.swift; sourceTree = "<group>"; };
+		B393D82E2715C15900232482 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/StatisticsPresenterStoryboard.storyboard; sourceTree = "<group>"; };
+		B393D8312715C15F00232482 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/StatisticsPresenterStoryboard.strings; sourceTree = "<group>"; };
+		B393D8322715D17600232482 /* TransactionTemplatesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTemplatesPresenter.swift; sourceTree = "<group>"; };
+		B393D8392718A9E500232482 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TransactionTemplatesPresenterStoryboard.storyboard; sourceTree = "<group>"; };
+		B393D83C2718A9E700232482 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/TransactionTemplatesPresenterStoryboard.strings; sourceTree = "<group>"; };
+		B393D83D2718AC1300232482 /* AchievementTransactionsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTransactionsPresenter.swift; sourceTree = "<group>"; };
 		B3C5C4AD26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionTemplate+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionTemplate+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B3C5C4B126E5267600A52CBC /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
+		B3E7475327199E8F006C92C5 /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
+		B3E7475927199F54006C92C5 /* SettingsListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListTableViewController.swift; sourceTree = "<group>"; };
+		B3E7475D2719D21B006C92C5 /* BackupAndRestoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackupAndRestoreViewController.swift; sourceTree = "<group>"; };
 		B3FB47FC26FB3D3700494C4F /* IncomeTemplateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeTemplateTest.swift; sourceTree = "<group>"; };
 		B3FB47FF26FB471200494C4F /* AchievementsDataModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsDataModelTest.swift; sourceTree = "<group>"; };
 		B91FC670CCE80E443AB4694D /* Pods_achievements.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_achievements.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,9 +199,30 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		B307CE922715ACFA00FB7E8C /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				B307CE932715AD3500FB7E8C /* StatisticsPresenter.swift */,
+				B393D8322715D17600232482 /* TransactionTemplatesPresenter.swift */,
+				B393D83D2718AC1300232482 /* AchievementTransactionsPresenter.swift */,
+				B32F880A2718B98B004D0960 /* AccountPresenter.swift */,
+				B3E7475327199E8F006C92C5 /* SettingsPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		B307CE952715AE8000FB7E8C /* StatisticsPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				B393D82F2715C15900232482 /* StatisticsPresenterStoryboard.storyboard */,
+			);
+			path = StatisticsPresenter;
+			sourceTree = "<group>";
+		};
 		B328322026D93F22007CAD2A = {
 			isa = PBXGroup;
 			children = (
+				B30CA4A22721B4650032E646 /* achievements-logo.png */,
 				B328322B26D93F22007CAD2A /* achievements */,
 				B328324226D93F23007CAD2A /* achievementsTests */,
 				B328324D26D93F23007CAD2A /* achievementsUITests */,
@@ -191,6 +245,7 @@
 		B328322B26D93F22007CAD2A /* achievements */ = {
 			isa = PBXGroup;
 			children = (
+				B307CE922715ACFA00FB7E8C /* Presenter */,
 				B328327726DF90B9007CAD2A /* Controller */,
 				B328327626DF90AB007CAD2A /* View */,
 				B328327426DF908C007CAD2A /* Model */,
@@ -198,6 +253,7 @@
 				B328322E26D93F22007CAD2A /* SceneDelegate.swift */,
 				B328323526D93F23007CAD2A /* Assets.xcassets */,
 				B328323A26D93F23007CAD2A /* Info.plist */,
+				B30CA4A42721B4760032E646 /* achievements-logo.png */,
 				B307CE82271456EB00FB7E8C /* Settings.swift */,
 			);
 			path = achievements;
@@ -206,6 +262,7 @@
 		B328324226D93F23007CAD2A /* achievementsTests */ = {
 			isa = PBXGroup;
 			children = (
+				B361477D272187A900941051 /* Presenter */,
 				B3FB47FA26FB3D0900494C4F /* Model */,
 				B328324526D93F23007CAD2A /* Info.plist */,
 				B307CE8427147DCE00FB7E8C /* SettingsTest.swift */,
@@ -224,6 +281,7 @@
 				B307CE7E271083A600FB7E8C /* ExpenseTemplateTest.swift */,
 				B307CE8627147EED00FB7E8C /* AutomaticPurgeTest.swift */,
 				B307CE882714A31100FB7E8C /* ProgressWheelTest.swift */,
+				B361477F27218C7400941051 /* SettingsTest.swift */,
 			);
 			path = achievementsUITests;
 			sourceTree = "<group>";
@@ -252,8 +310,12 @@
 		B328327626DF90AB007CAD2A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B3E7475627199EAD006C92C5 /* SettingsPresenter */,
+				B32F880C2718B9F0004D0960 /* AccountPresenter */,
+				B393D83F2718AD3C00232482 /* AchievementTransactionsPresenter */,
+				B393D8342715D26F00232482 /* TransactionTemplatesPresenter */,
+				B307CE952715AE8000FB7E8C /* StatisticsPresenter */,
 				B307CE8E2714E56C00FB7E8C /* Localizable.strings */,
-				B328323226D93F22007CAD2A /* Main.storyboard */,
 				B328323726D93F23007CAD2A /* LaunchScreen.storyboard */,
 				B3186B6C270B63A6000B4AE8 /* ProgressWheel.swift */,
 			);
@@ -263,16 +325,55 @@
 		B328327726DF90B9007CAD2A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				B328327226DC2D02007CAD2A /* AchievementTransactionFormController.swift */,
-				B328325C26D94909007CAD2A /* DashboardController.swift */,
-				B349499226E1483E00829A5F /* HistoryTableViewController.swift */,
-				B349499426E1670F00829A5F /* TransactionDetailViewController.swift */,
-				B349499626E3D31100829A5F /* TransactionTemplatesViewController.swift */,
-				B349499826E3DB6E00829A5F /* TransactionTemplateFormController.swift */,
-				B3C5C4B126E5267600A52CBC /* StatisticsViewController.swift */,
-				B307CE7A27106EC800FB7E8C /* PlannedExpensesViewController.swift */,
+				B3E7475527199E99006C92C5 /* SettingsPresenter */,
+				B32F880D2718BC01004D0960 /* AccountPresenter */,
+				B32F88042718AF8E004D0960 /* AchivementTransactionPresenter */,
+				B393D83727161A6500232482 /* TransactionTemplatesPresenter */,
+				B393D82C2715B69700232482 /* StatisticsPresenter */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		B32F88042718AF8E004D0960 /* AchivementTransactionPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				B328327226DC2D02007CAD2A /* AchievementTransactionFormController.swift */,
+				B349499426E1670F00829A5F /* TransactionDetailViewController.swift */,
+			);
+			path = AchivementTransactionPresenter;
+			sourceTree = "<group>";
+		};
+		B32F880C2718B9F0004D0960 /* AccountPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				B328323226D93F22007CAD2A /* AccountPresenterStoryboard.storyboard */,
+			);
+			path = AccountPresenter;
+			sourceTree = "<group>";
+		};
+		B32F880D2718BC01004D0960 /* AccountPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				B328325C26D94909007CAD2A /* DashboardController.swift */,
+				B349499226E1483E00829A5F /* HistoryTableViewController.swift */,
+			);
+			path = AccountPresenter;
+			sourceTree = "<group>";
+		};
+		B361477D272187A900941051 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				B361477E272187B200941051 /* SettingsPresenter */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		B361477E272187B200941051 /* SettingsPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				B361477B2721852E00941051 /* BackupRestoreTest.swift */,
+			);
+			path = SettingsPresenter;
 			sourceTree = "<group>";
 		};
 		B381160126E10A200090029D /* HistoricalTransaction */ = {
@@ -300,6 +401,40 @@
 			path = HistoricalTransaction;
 			sourceTree = "<group>";
 		};
+		B393D82C2715B69700232482 /* StatisticsPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				B3C5C4B126E5267600A52CBC /* StatisticsViewController.swift */,
+			);
+			path = StatisticsPresenter;
+			sourceTree = "<group>";
+		};
+		B393D8342715D26F00232482 /* TransactionTemplatesPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				B393D83A2718A9E500232482 /* TransactionTemplatesPresenterStoryboard.storyboard */,
+			);
+			path = TransactionTemplatesPresenter;
+			sourceTree = "<group>";
+		};
+		B393D83727161A6500232482 /* TransactionTemplatesPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				B349499626E3D31100829A5F /* PlannedIncomesViewController.swift */,
+				B349499826E3DB6E00829A5F /* TransactionTemplateFormController.swift */,
+				B307CE7A27106EC800FB7E8C /* PlannedExpensesViewController.swift */,
+			);
+			path = TransactionTemplatesPresenter;
+			sourceTree = "<group>";
+		};
+		B393D83F2718AD3C00232482 /* AchievementTransactionsPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				B32F88072718B6D2004D0960 /* AchievementTransactionsPresenterStoryboard.storyboard */,
+			);
+			path = AchievementTransactionsPresenter;
+			sourceTree = "<group>";
+		};
 		B3C5C4AC26E3E1A200A52CBC /* TransactionTemplate */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,6 +442,23 @@
 				B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */,
 			);
 			path = TransactionTemplate;
+			sourceTree = "<group>";
+		};
+		B3E7475527199E99006C92C5 /* SettingsPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				B3E7475D2719D21B006C92C5 /* BackupAndRestoreViewController.swift */,
+				B3E7475927199F54006C92C5 /* SettingsListTableViewController.swift */,
+			);
+			path = SettingsPresenter;
+			sourceTree = "<group>";
+		};
+		B3E7475627199EAD006C92C5 /* SettingsPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				B361478327219E9500941051 /* SettingsPresenterStoryboard.storyboard */,
+			);
+			path = SettingsPresenter;
 			sourceTree = "<group>";
 		};
 		B3FB47FA26FB3D0900494C4F /* Model */ = {
@@ -450,10 +602,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B32F88052718B6D2004D0960 /* AchievementTransactionsPresenterStoryboard.storyboard in Resources */,
 				B328323926D93F23007CAD2A /* LaunchScreen.storyboard in Resources */,
+				B30CA4A32721B4650032E646 /* achievements-logo.png in Resources */,
 				B307CE902714E56C00FB7E8C /* Localizable.strings in Resources */,
 				B328323626D93F23007CAD2A /* Assets.xcassets in Resources */,
-				B328323426D93F22007CAD2A /* Main.storyboard in Resources */,
+				B393D82D2715C15900232482 /* StatisticsPresenterStoryboard.storyboard in Resources */,
+				B328323426D93F22007CAD2A /* AccountPresenterStoryboard.storyboard in Resources */,
+				B393D8382718A9E500232482 /* TransactionTemplatesPresenterStoryboard.storyboard in Resources */,
+				B361478127219E9500941051 /* SettingsPresenterStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -581,25 +738,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3E7475E2719D21B006C92C5 /* BackupAndRestoreViewController.swift in Sources */,
 				B381160526E10B130090029D /* HistoricalTransaction+CoreDataClass.swift in Sources */,
 				B307CE83271456EB00FB7E8C /* Settings.swift in Sources */,
 				B3C5C4AF26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift in Sources */,
 				B349499326E1483E00829A5F /* HistoryTableViewController.swift in Sources */,
+				B3E7475427199E8F006C92C5 /* SettingsPresenter.swift in Sources */,
 				B349499926E3DB6E00829A5F /* TransactionTemplateFormController.swift in Sources */,
 				B3186B6D270B63A6000B4AE8 /* ProgressWheel.swift in Sources */,
 				B3C5C4B026E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift in Sources */,
 				B328327326DC2D02007CAD2A /* AchievementTransactionFormController.swift in Sources */,
 				B328326C26DBD253007CAD2A /* AchievementTransaction+CoreDataClass.swift in Sources */,
 				B3C5C4B226E5267600A52CBC /* StatisticsViewController.swift in Sources */,
-				B349499726E3D31100829A5F /* TransactionTemplatesViewController.swift in Sources */,
+				B349499726E3D31100829A5F /* PlannedIncomesViewController.swift in Sources */,
+				B393D83E2718AC1300232482 /* AchievementTransactionsPresenter.swift in Sources */,
+				B307CE942715AD3500FB7E8C /* StatisticsPresenter.swift in Sources */,
 				B349499526E1670F00829A5F /* TransactionDetailViewController.swift in Sources */,
 				B328322D26D93F22007CAD2A /* AppDelegate.swift in Sources */,
 				B328326D26DBD253007CAD2A /* AchievementTransaction+CoreDataProperties.swift in Sources */,
 				B381160426E10B130090029D /* HistoricalTransaction+CoreDataProperties.swift in Sources */,
 				B307CE7B27106EC800FB7E8C /* PlannedExpensesViewController.swift in Sources */,
+				B393D8332715D17600232482 /* TransactionTemplatesPresenter.swift in Sources */,
+				B3E7475A27199F54006C92C5 /* SettingsListTableViewController.swift in Sources */,
 				B328325D26D94909007CAD2A /* DashboardController.swift in Sources */,
 				B328322F26D93F22007CAD2A /* SceneDelegate.swift in Sources */,
 				B328326F26DBD379007CAD2A /* AchievementsDataModel.swift in Sources */,
+				B32F880B2718B98B004D0960 /* AccountPresenter.swift in Sources */,
 				B328326926DBD1A0007CAD2A /* AchievementsDataModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -612,6 +776,7 @@
 				B307CE8527147DCE00FB7E8C /* SettingsTest.swift in Sources */,
 				B307CE7D271075C200FB7E8C /* TransactionTemplateTest.swift in Sources */,
 				B307CE812713886200FB7E8C /* ExpenseTemplateTest.swift in Sources */,
+				B361477C2721852E00941051 /* BackupRestoreTest.swift in Sources */,
 				B3FB47FD26FB3D3700494C4F /* IncomeTemplateTest.swift in Sources */,
 				B3939AC0270481FC005D243B /* HistoricalTransactionTest.swift in Sources */,
 				B3FB480026FB471200494C4F /* AchievementsDataModelTest.swift in Sources */,
@@ -628,6 +793,7 @@
 				B3939ACF2706048D005D243B /* HistoricalTransaction.swift in Sources */,
 				B3939AC927049F51005D243B /* AchievementTransactionTest.swift in Sources */,
 				B307CE892714A31100FB7E8C /* ProgressWheelTest.swift in Sources */,
+				B361478027218C7400941051 /* SettingsTest.swift in Sources */,
 				B307CE8727147EEE00FB7E8C /* AutomaticPurgeTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -656,13 +822,13 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		B328323226D93F22007CAD2A /* Main.storyboard */ = {
+		B328323226D93F22007CAD2A /* AccountPresenterStoryboard.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				B328323326D93F22007CAD2A /* Base */,
 				B307CE8C2714DC3500FB7E8C /* de */,
 			);
-			name = Main.storyboard;
+			name = AccountPresenterStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
 		B328323726D93F23007CAD2A /* LaunchScreen.storyboard */ = {
@@ -672,6 +838,42 @@
 				B307CE8D2714DC3500FB7E8C /* de */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		B32F88072718B6D2004D0960 /* AchievementTransactionsPresenterStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B32F88062718B6D2004D0960 /* Base */,
+				B32F88092718B6D3004D0960 /* de */,
+			);
+			name = AchievementTransactionsPresenterStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		B361478327219E9500941051 /* SettingsPresenterStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B361478227219E9500941051 /* Base */,
+				B361478527219E9800941051 /* de */,
+			);
+			name = SettingsPresenterStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		B393D82F2715C15900232482 /* StatisticsPresenterStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B393D82E2715C15900232482 /* Base */,
+				B393D8312715C15F00232482 /* de */,
+			);
+			name = StatisticsPresenterStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		B393D83A2718A9E500232482 /* TransactionTemplatesPresenterStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B393D8392718A9E500232482 /* Base */,
+				B393D83C2718A9E700232482 /* de */,
+			);
+			name = TransactionTemplatesPresenterStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -808,7 +1010,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dakalabs.achievements;
+				MARKETING_VERSION = 0.2;
+				PRODUCT_BUNDLE_IDENTIFIER = de.max.schluer.achievements;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -828,7 +1031,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dakalabs.achievements;
+				MARKETING_VERSION = 0.2;
+				PRODUCT_BUNDLE_IDENTIFIER = de.max.schluer.achievements;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

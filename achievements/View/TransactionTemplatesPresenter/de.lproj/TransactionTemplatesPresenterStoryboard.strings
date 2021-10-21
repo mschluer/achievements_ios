@@ -1,0 +1,60 @@
+
+/* Class = "UISwitch"; accessibilityLabel = "recurringSwitch"; ObjectID = "11k-Zz-B4w"; */
+"11k-Zz-B4w.accessibilityLabel" = "Schalter: Wiederkehrend";
+
+/* Class = "UIButton"; normalTitle = "+ / -"; ObjectID = "Ajd-Lx-Q5B"; */
+"Ajd-Lx-Q5B.normalTitle" = "+ / -";
+
+/* Class = "UITableViewCell"; accessibilityLabel = "templateCell"; ObjectID = "FAd-x4-VMs"; */
+"FAd-x4-VMs.accessibilityLabel" = "Vorlagen-Zelle";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "Grv-6P-1Lg"; */
+"Grv-6P-1Lg.text" = "Detail";
+
+/* Class = "UINavigationItem"; title = "Planned Incomes"; ObjectID = "JJy-z4-Ddn"; */
+"JJy-z4-Ddn.title" = "Geplante Einnahmen";
+
+/* Class = "UITableViewCell"; accessibilityLabel = "templateCell"; ObjectID = "KY9-SZ-wlH"; */
+"KY9-SZ-wlH.accessibilityLabel" = "Vorlagen-Zelle";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "LCf-Cy-lV1"; */
+"LCf-Cy-lV1.text" = "Detail";
+
+/* Class = "UINavigationItem"; title = "Planned Expenses"; ObjectID = "Mac-5b-xCl"; */
+"Mac-5b-xCl.title" = "Geplante Ausgaben";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "N2H-nu-Scw"; */
+"N2H-nu-Scw.text" = "Titel";
+
+/* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "NZc-4y-fQ6"; */
+"NZc-4y-fQ6.normalTitle" = "Speichern";
+
+/* Class = "UITextField"; placeholder = "Title"; ObjectID = "Nur-rT-5Aw"; */
+"Nur-rT-5Aw.placeholder" = "Titel";
+
+/* Class = "UITextField"; placeholder = "Amount"; ObjectID = "ORp-rs-rmv"; */
+"ORp-rs-rmv.placeholder" = "Betrag";
+
+/* Class = "UIBarButtonItem"; title = "Add"; ObjectID = "Th1-0G-6Br"; */
+"Th1-0G-6Br.title" = "Hinzufügen";
+
+/* Class = "UITextField"; placeholder = "Amount"; ObjectID = "UW9-zV-3rm"; */
+"UW9-zV-3rm.placeholder" = "Betrag";
+
+/* Class = "UIBarButtonItem"; title = "Add"; ObjectID = "XzI-NL-cQa"; */
+"XzI-NL-cQa.title" = "Hinzufügen";
+
+/* Class = "UILabel"; text = "Recurring"; ObjectID = "ZTe-9M-TA1"; */
+"ZTe-9M-TA1.text" = "Wiederkehrend";
+
+/* Class = "UIButton"; normalTitle = "+ / -"; ObjectID = "eCK-e2-pXi"; */
+"eCK-e2-pXi.normalTitle" = "+ / -";
+
+/* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "f7k-WT-M8a"; */
+"f7k-WT-M8a.normalTitle" = "Speichern";
+
+/* Class = "UITextField"; placeholder = "Title"; ObjectID = "rjT-61-Pmg"; */
+"rjT-61-Pmg.placeholder" = "Titel";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "sM8-Nq-hkP"; */
+"sM8-Nq-hkP.text" = "Titel";

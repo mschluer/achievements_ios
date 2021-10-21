@@ -7,6 +7,7 @@ target 'achievements' do
 
   # Pods for achievements
   pod 'Charts'
+  pod 'CryptoSwift', '~> 1.4.1'
 
   target 'achievementsTests' do
     inherit! :search_paths

@@ -9,7 +9,7 @@ import UIKit
 
 class DashboardController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     // MARK: Persistence Models
-    private let achievementsDataModel = AchievementsDataModel()
+    public var achievementsDataModel : AchievementsDataModel!
     
     // MARK: Variables
     private var balance: Float = 0 {
@@ -43,28 +43,9 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
-        case "CreateTransactionFormSegue":
-            let destination = segue.destination as! AchievementTransactionFormController
-            destination.achievementsDataModel = achievementsDataModel
-        case "EditTransactionFormSegue":
-            let destination = segue.destination as! AchievementTransactionFormController
-            destination.achievementTransaction = (sender as! AchievementTransaction)
-            destination.achievementsDataModel = achievementsDataModel
         case "ShowHistorySegue":
             let destination = segue.destination as! HistoryTableViewController
             destination.achievementsDataModel = achievementsDataModel
-        case "ShowPlannedExpensesSegue":
-            let destination = segue.destination as! PlannedExpensesViewController
-            destination.achievementsDataModel = achievementsDataModel
-        case "ShowStatisticsViewSegue":
-            let destination = segue.destination as! StatisticsViewController
-            destination.achievementsDataModel = achievementsDataModel
-        case "ShowTemplatesViewSegue":
-            let destination = segue.destination as! TransactionTemplatesViewController
-            destination.achievementsDataModel = achievementsDataModel
-        case "ShowTransactionDetailViewSegue":
-            let destination = segue.destination as! TransactionDetailViewController
-            destination.transaction = sender as? HistoricalTransaction
         default:
             break
         }
@@ -163,13 +144,17 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         self.present(deletionAlert, animated: true)
     }
     
+    private func mainMenuSettingsButtonPressed() {
+        SettingsPresenter(achievementsDataModel: achievementsDataModel).showSettingsList(from: self)
+    }
+    
     private func mainMenuSettleButtonPressed() {
         achievementsDataModel.purgeRecent()
         updateViewFromModel()
     }
     
     private func mainMenuStatisticsButtonPressed() {
-        performSegue(withIdentifier: "ShowStatisticsViewSegue", sender: menuButton)
+        StatisticsPresenter(achievementsDataModel: achievementsDataModel).takeOver(from: self)
     }
     
     @IBAction func progressWheelPressed(_ sender: Any) {
@@ -181,12 +166,24 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         populateProgressWheel()
     }
     
+    @IBAction func toolbarAddButtonPressed(_ sender: Any) {
+        AchievementTransactionsPresenter(achievevementsDataModel: achievementsDataModel).bookAchievementTransaction(from: self)
+    }
+    
+    @IBAction func toolbarIncomeTemplatesButtonPressed(_ sender: Any) {
+        TransactionTemplatesPresenter(achievementsDataModel: achievementsDataModel).showPlannedIncomes(from: self)
+    }
+    
+    @IBAction func toolbarExpenseTemplatesButtonPressed(_ sender: Any) {
+        TransactionTemplatesPresenter(achievementsDataModel: achievementsDataModel).showPlannedExpenses(from: self)
+    }
+    
     private func transactionCellPressed(_ indexPath: IndexPath) {
-        performSegue(withIdentifier: "ShowTransactionDetailViewSegue", sender: getRecentTransactionFor(indexPath: indexPath).historicalTransaction)
+        AchievementTransactionsPresenter(achievevementsDataModel: achievementsDataModel).showTransactionDetails(from: self, transaction: getRecentTransactionFor(indexPath: indexPath))
     }
     
     private func transactionCellSwipeLeftEdit(_ indexPath: IndexPath) {
-        performSegue(withIdentifier: "EditTransactionFormSegue", sender: getRecentTransactionFor(indexPath: indexPath))
+        AchievementTransactionsPresenter(achievevementsDataModel: achievementsDataModel).editTransaction(from: self, transaction: getRecentTransactionFor(indexPath: indexPath))
     }
     
     private func transactionCellSwipeLeftDelete(_ indexPath: IndexPath) {
@@ -205,7 +202,10 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         let mainMenuDestruct = UIAction(title: NSLocalizedString("Reset", comment: "Set something back to initial state."), image: UIImage(systemName: "trash.circle"), attributes: .destructive) { _ in
             self.mainMenuResetButtonPressed() }
             
-        let mainMenuItems = UIMenu(title: "mainMenu", options: .displayInline, children: [
+        var mainMenuItems = UIMenu(title: "mainMenu", options: .displayInline, children: [
+            UIAction(title: NSLocalizedString("Settings", comment: "Menu item to get to the Configuration Menu"), image: UIImage(systemName: "gear"), handler: { _ in
+                self.mainMenuSettingsButtonPressed()
+            }),
             UIAction(title: NSLocalizedString("Settle automatically", comment: "Make sure to settle Transactions immediately after reaching the threshold."), image: UIImage(systemName: Settings.applicationSettings.automaticPurge ? "checkmark.square" : "square"), handler: { _ in
                 self.mainMenuAutoSettleButtonPressed()
             }),
@@ -219,7 +219,12 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
                 self.mainMenuStatisticsButtonPressed()
             })
         ])
-        menuButton.menu = UIMenu(title: "", children: [mainMenuItems, mainMenuDestruct])
+        
+        #if DEBUG
+            menuButton.menu = UIMenu(title: "", children: [mainMenuItems, mainMenuDestruct])
+        #else
+            menuButton.menu = UIMenu(title: "", children: [mainMenuItems])
+        #endif
     }
     
     private func setupTransactionTable() {

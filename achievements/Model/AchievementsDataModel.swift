@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 class AchievementsDataModel {
     private let persistentContainer : NSPersistentContainer
@@ -94,11 +95,13 @@ class AchievementsDataModel {
     var recentExpenses : [AchievementTransaction] {
         let fetchRequest : NSFetchRequest<AchievementTransaction> = AchievementTransaction.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "amount < 0")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
         return try! self.viewContext.fetch(fetchRequest)
     }
     var recentIncomes : [AchievementTransaction] {
         let fetchRequest : NSFetchRequest<AchievementTransaction> = AchievementTransaction.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "amount >= 0")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
         return try! self.viewContext.fetch(fetchRequest)
     }
     var recurringIncomeTemplates: [TransactionTemplate] {
@@ -192,6 +195,38 @@ class AchievementsDataModel {
         return NSEntityDescription.insertNewObject(forEntityName: TransactionTemplate.entityName, into: self.viewContext) as! TransactionTemplate
     }
     
+    public func duplicateDatabase(to path: String)  {
+        // Taken and adapted from https://oleb.net/blog/2018/03/core-data-sqlite-backup/
+        do {
+            let sourceStore = self.persistentContainer
+                                 .persistentStoreCoordinator
+                                 .persistentStores[0]
+            let backupCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.persistentContainer.managedObjectModel)
+            
+            let intermediateStoreOptions = (sourceStore.options ?? [:]).merging([NSReadOnlyPersistentStoreOption: true], uniquingKeysWith: { $1 })
+            let intermediateStore = try backupCoordinator.addPersistentStore(
+                ofType: sourceStore.type,
+                configurationName: sourceStore.configurationName,
+                at: sourceStore.url,
+                options: intermediateStoreOptions)
+            
+            let backupStoreOptions : [AnyHashable : Any] = [
+                NSReadOnlyPersistentStoreOption: true,                  // Disable Write Ahead Logging -> Everything written to one file
+                NSSQLitePragmasOption: ["journal_mode": "DELETE"],      // Minimize File Size
+                NSSQLiteManualVacuumOption: true,
+            ]
+            
+            
+            _ = try backupCoordinator.migratePersistentStore(
+                intermediateStore,
+                to: NSURL(fileURLWithPath: path, isDirectory: false) as URL,
+                options: backupStoreOptions,
+                type: .sqlite)
+        } catch let error {
+            print("Duplicating Database failed due to error: \(error.localizedDescription)")
+        }
+    }
+    
     public func rearrangeTransactionTemplates(template: TransactionTemplate, destinationIndex: Int) {
         reindexPlannedExpenses()
         
@@ -247,6 +282,44 @@ class AchievementsDataModel {
         save()
     }
     
+    public func replaceDatabase(from path: String) {
+        do {
+            let persistentStoreCoordinator = self.persistentContainer.persistentStoreCoordinator
+            let originalStore = persistentStoreCoordinator.persistentStores[0]
+            let originalUrl = originalStore.url!
+            let backupStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: persistentStoreCoordinator.managedObjectModel)
+            
+            // Prepare Restore Database
+            let restoreOptions = originalStore.options
+            let intermediateStore = try backupStoreCoordinator.addPersistentStore(
+                ofType: originalStore.type,
+                configurationName: originalStore.configurationName,
+                at: URL(string: "file://\(path)"),
+                options: restoreOptions)
+            
+            // Destroy Original One
+            try persistentStoreCoordinator.destroyPersistentStore(at: originalUrl,
+                                                                 type: NSPersistentStore.StoreType(rawValue: NSSQLiteStoreType),
+                                                                 options: nil)
+            
+            // Install Restored One
+            _ = try backupStoreCoordinator.migratePersistentStore(
+                intermediateStore,
+                to: originalUrl,
+                options: restoreOptions,
+                type: .sqlite)
+            
+            // Refresh Data
+            self.persistentContainer.loadPersistentStores { storeDescription, error in
+                if let error = error {
+                    print("Database cannot be loaded due to unresolved error: \(error)")
+                }
+            }
+        } catch let error {
+            print("Replacing Database was not possible due to error: \(error.localizedDescription)")
+        }
+    }
+    
     public func save() {
         assert(Thread.isMainThread)
         do {
@@ -260,13 +333,13 @@ class AchievementsDataModel {
     public func clear() {
         guard let url = persistentContainer.persistentStoreDescriptions.first?.url else { return }
         
-        let persistenStoreCoordinator = persistentContainer.persistentStoreCoordinator
+        let persistentStoreCoordinator = persistentContainer.persistentStoreCoordinator
         
         do {
-            try persistenStoreCoordinator.destroyPersistentStore(at: url,
+            try persistentStoreCoordinator.destroyPersistentStore(at: url,
                                                                  type: NSPersistentStore.StoreType(rawValue: NSSQLiteStoreType),
                                                                  options: nil)
-            try persistenStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType,
+            try persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType,
                                                              configurationName: nil,
                                                              at: url,
                                                              options: nil)

@@ -29,31 +29,23 @@ class BackupAndRestoreViewController: UIViewController, UIDocumentPickerDelegate
             return
         }
 
-        do {
-            let passwordAlert = UIAlertController(title: NSLocalizedString("Password", comment: "Dialogue Headline asking the user to enter an encryption / decryption Password"), message: NSLocalizedString("Please enter a Password to decrypt your Backup", comment: "Description of the dialogue asking the user to provide a passphrase to decrypt the backup"), preferredStyle: .alert)
-            
-            passwordAlert.addTextField { (textField) in
-                textField.isSecureTextEntry = true
-                textField.placeholder = "Password"
-            }
-            
-            passwordAlert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Abort Action."), style: .cancel, handler: nil))
-            
-            passwordAlert.addAction(UIAlertAction(title: NSLocalizedString("Confirm", comment: "Confirm that this is the password the user wants to use to encrypt / decrypt the backup."), style: .default, handler:  { [weak passwordAlert] _ in
-                guard let password = passwordAlert?.textFields?.first?.text else {
-                    return
-                }
-                self.replaceDatabaseWith(url: pickedURL, password: password)
-            }))
-            
-            self.present(passwordAlert, animated: true)
-        } catch let error {
-            let alert = UIAlertController(title: NSLocalizedString("Error", comment: "Headline of an Error Message."), message: NSLocalizedString("Saving Backup Data failed.", comment: "Error message for when Backup Data cannot be saved to disk."), preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Message of approval."), style: .default, handler: nil))
-            self.present(alert, animated: true)
-            
-            print("Data backup cannot be saved due to error: \(error)")
+        let passwordAlert = UIAlertController(title: NSLocalizedString("Password", comment: "Dialogue Headline asking the user to enter an encryption / decryption Password"), message: NSLocalizedString("Please enter a Password to decrypt your Backup", comment: "Description of the dialogue asking the user to provide a passphrase to decrypt the backup"), preferredStyle: .alert)
+        
+        passwordAlert.addTextField { (textField) in
+            textField.isSecureTextEntry = true
+            textField.placeholder = "Password"
         }
+        
+        passwordAlert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Abort Action."), style: .cancel, handler: nil))
+        
+        passwordAlert.addAction(UIAlertAction(title: NSLocalizedString("Confirm", comment: "Confirm that this is the password the user wants to use to encrypt / decrypt the backup."), style: .default, handler:  { [weak passwordAlert] _ in
+            guard let password = passwordAlert?.textFields?.first?.text else {
+                return
+            }
+            self.replaceDatabaseWith(url: pickedURL, password: password)
+        }))
+        
+        self.present(passwordAlert, animated: true)
     }
     
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
@@ -71,7 +63,7 @@ class BackupAndRestoreViewController: UIViewController, UIDocumentPickerDelegate
         
         passwordAlert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Abort Action."), style: .cancel, handler: nil))
         
-        passwordAlert.addAction(UIAlertAction(title: NSLocalizedString("Confirm", comment: "Confirm that this is the password the user wants to use to encrypt /decrypt the backup."), style: .default, handler:  { [weak passwordAlert] _ in
+        passwordAlert.addAction(UIAlertAction(title: NSLocalizedString("Confirm", comment: "Confirm that this is the password the user wants to use to encrypt / decrypt the backup."), style: .default, handler:  { [weak passwordAlert] _ in
             guard let password = passwordAlert?.textFields?.first?.text else {
                 return
             }
@@ -82,8 +74,6 @@ class BackupAndRestoreViewController: UIViewController, UIDocumentPickerDelegate
     }
     
     @IBAction func restoreDataButtonPressed(_ sender: Any) {
-        print("Implementation Pending.")
-        
         let documentPickerController = UIDocumentPickerViewController(documentTypes: [ "public.data" ], in: .import )
         documentPickerController.delegate = self
         self.present(documentPickerController, animated: true)

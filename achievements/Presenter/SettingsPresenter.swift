@@ -45,10 +45,10 @@ class SettingsPresenter {
             achievementsDataModel.duplicateDatabase(to: unencryptedBackupFilePath)
             
             // Encrypt Data
-            let iv = "drowssapdrowssap".bytes
+            let iv = "achievementsdmiv".bytes
             let key = try PKCS5.PBKDF2(
                 password: Array(password.utf8),
-                salt: Array("nacllcan".utf8),
+                salt: Array("saltsalt".utf8),
                 iterations: 4096,
                 keyLength: 32,
                 variant: .sha2(.sha512)
@@ -64,9 +64,7 @@ class SettingsPresenter {
             try Data(buffer: pointer).write(to: URL(string: "file://\(temporaryLocation)")!)
             
             // Remove Unencrypted File
-            // TODO: Reactivate
-            print(temporaryLocation)
-            // try FileManager.default.removeItem(atPath: unencryptedBackupFilePath)
+            try FileManager.default.removeItem(atPath: unencryptedBackupFilePath)
             
             // Ask for Location to Store
             let activityViewController = UIActivityViewController(activityItems: [ NSURL(fileURLWithPath: temporaryLocation) ], applicationActivities: nil)
@@ -79,7 +77,10 @@ class SettingsPresenter {
                 try! FileManager.default.removeItem(atPath: unencryptedBackupFilePath)
             }
             
-            // TODO: Show Alert telling the User that something went wrong
+            // Notify User that creating the Backup failed
+            let failAlert = UIAlertController(title: NSLocalizedString("Error", comment: "Headline of an Error Message."), message: NSLocalizedString("Creating backup failed.", comment: "Error message to notify that creating a Backup failed."), preferredStyle: .alert)
+            failAlert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Message of approval."), style: .default, handler: nil))
+            initiator.present(failAlert, animated: true)
         }
     }
     
@@ -88,10 +89,10 @@ class SettingsPresenter {
         
         do {
             // Decrypt
-            let iv = "drowssapdrowssap".bytes
+            let iv = "achievementsdmiv".bytes
             let key = try PKCS5.PBKDF2(
                 password: Array(password.utf8),
-                salt: Array("nacllcan".utf8),
+                salt: Array("saltsalt".utf8),
                 iterations: 4096,
                 keyLength: 32,
                 variant: .sha2(.sha512)
@@ -109,8 +110,12 @@ class SettingsPresenter {
             achievementsDataModel.replaceDatabase(from: unencryptedBackupFilePath)
             
             // Delete unencrypted File
-            // TODO: Reactivate!
-            // try! FileManager.default.removeItem(atPath: unencryptedBackupFilePath)
+            try! FileManager.default.removeItem(atPath: unencryptedBackupFilePath)
+            
+            // Show Success Message
+            let successAlert = UIAlertController(title: NSLocalizedString("Success", comment: "Headline to tell the user that restoring to a backup was completed."), message: NSLocalizedString("Successfully restored from Backup.", comment: "Success Message for when user successfully restored to a backup."), preferredStyle: .alert)
+            successAlert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Message of approval."), style: .default, handler: nil))
+            initiator.present(successAlert, animated: true)
         } catch let error {
             print("Import failed due to error: \(error.localizedDescription)")
             
@@ -119,7 +124,10 @@ class SettingsPresenter {
                 try! FileManager.default.removeItem(atPath: unencryptedBackupFilePath)
             }
             
-            // TODO: Show Alert telling the User that something went wrong
+            // Notify User that creating the Backup failed
+            let failAlert = UIAlertController(title: NSLocalizedString("Error", comment: "Headline of an Error Message."), message: NSLocalizedString("Restoring to backup failed.", comment: "Error message for restoring to a Backup failed."), preferredStyle: .alert)
+            failAlert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Message of approval."), style: .default, handler: nil))
+            initiator.present(failAlert, animated: true)
         }
     }
     

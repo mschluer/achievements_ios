@@ -85,12 +85,12 @@ class BackupAndRestoreViewController: UIViewController, UIDocumentPickerDelegate
     // MARK: Public Functions
     public func toggleLoadingState() {
         if let spinnerView = self.spinner {
-            print("Removing Spinner")
             spinnerView.willMove(toParent: nil)
             spinnerView.view.removeFromSuperview()
             spinnerView.removeFromParent()
+            
+            self.spinner = nil
         } else {
-            print("Adding Spinner")
             let spinnerView = SpinnerViewController()
             
             addChild(spinnerView)
@@ -129,7 +129,7 @@ class SpinnerViewController : UIViewController {
 
         override func loadView() {
             view = UIView()
-            view.backgroundColor = UIColor(white: 0, alpha: 0.7)
+            view.backgroundColor = UIColor(white: 0.5, alpha: 0.7)
 
             spinner.translatesAutoresizingMaskIntoConstraints = false
             spinner.startAnimating()

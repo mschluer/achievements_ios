@@ -64,6 +64,9 @@ class TransactionTemplateFormController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func signButtonPressed(_ sender: Any) {
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
+        
         amountInputField.text = invertSign(amountInputField.text ?? "")
         
         if let text = amountInputField.text {

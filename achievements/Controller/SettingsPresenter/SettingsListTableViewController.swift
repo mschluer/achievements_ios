@@ -16,7 +16,7 @@ class SettingsListTableViewController: UITableViewController {
     var menuItems = [
         NSLocalizedString("Backup / Restore", comment: "Menu Item for the Backup and Restore View."), // 0
         NSLocalizedString("Reset Settings", comment: "Reset Settings to Default State."),             // 1
-        NSLocalizedString("Reset App", comment: "Action to set all data back to standard values.")    // 2
+        NSLocalizedString("Reset Application", comment: "Action to set all data back to standard values.")    // 2
     ]
     
     // MARK: View Lifecycle Methods
@@ -58,7 +58,7 @@ class SettingsListTableViewController: UITableViewController {
     // MARK: Action Handlers
     private func resetApplicationPressed() {
         let deletionAlert = UIAlertController(title: NSLocalizedString("Sure?", comment: "Ask approval from the user"), message: NSLocalizedString("This will reset / clear all data and cannot be undone!", comment: "Make entirely clear that this will reset the entire Application"), preferredStyle: .actionSheet)
-        deletionAlert.addAction(UIAlertAction(title: NSLocalizedString("Reset App", comment: "Action to set all data back to standard values."), style: .destructive, handler: { _ in
+        deletionAlert.addAction(UIAlertAction(title: NSLocalizedString("Reset Application", comment: "Action to set all data back to standard values."), style: .destructive, handler: { _ in
             self.settingsPresenter.resetApplication()
         }))
         deletionAlert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Abort current action."), style: .cancel, handler: nil))

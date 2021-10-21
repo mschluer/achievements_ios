@@ -106,7 +106,13 @@ class BackupAndRestoreViewController: UIViewController, UIDocumentPickerDelegate
     
     // MARK: Private Functions
     private func exportDatabaseFileEncryptedWith(password: String) {
-        settingsPresenter.exportDatabaseBackupWith(password: password, initiator: self)
+        guard let backupFile = settingsPresenter.exportDatabaseBackupWith(password: password, initiator: self) else {
+            return
+        }
+        
+        let activityViewController = UIActivityViewController(activityItems: [ backupFile ], applicationActivities: nil)
+        self.present(activityViewController, animated: true)
+        
         toggleLoadingState()
     }
     

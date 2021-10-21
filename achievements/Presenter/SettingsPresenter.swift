@@ -37,7 +37,7 @@ class SettingsPresenter {
     }
     
     // MARK: Public Functions
-    public func exportDatabaseBackupWith(password: String, initiator: UIViewController) {
+    public func exportDatabaseBackupWith(password: String, initiator: UIViewController) -> NSURL? {
         let unencryptedBackupFilePath = "\(NSTemporaryDirectory())backup.sqlite"
         
         do {
@@ -67,8 +67,7 @@ class SettingsPresenter {
             try FileManager.default.removeItem(atPath: unencryptedBackupFilePath)
             
             // Ask for Location to Store
-            let activityViewController = UIActivityViewController(activityItems: [ NSURL(fileURLWithPath: temporaryLocation) ], applicationActivities: nil)
-            initiator.present(activityViewController, animated: true)
+            return NSURL(fileURLWithPath: temporaryLocation)
         } catch let error {
             print("Export failed due to error: \(error.localizedDescription)")
             
@@ -81,6 +80,8 @@ class SettingsPresenter {
             let failAlert = UIAlertController(title: NSLocalizedString("Error", comment: "Headline of an Error Message."), message: NSLocalizedString("Creating backup failed.", comment: "Error message to notify that creating a Backup failed."), preferredStyle: .alert)
             failAlert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Message of approval."), style: .default, handler: nil))
             initiator.present(failAlert, animated: true)
+            
+            return nil
         }
     }
     

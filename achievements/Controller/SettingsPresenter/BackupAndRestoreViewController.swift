@@ -12,6 +12,7 @@ import UniformTypeIdentifiers
 class BackupAndRestoreViewController: UIViewController, UIDocumentPickerDelegate {
     // MARK: Variables
     var settingsPresenter : SettingsPresenter!
+    var spinner : SpinnerViewController?
     
     // MARK: View Lifecycle Methods
     override func viewDidLoad() {
@@ -54,6 +55,7 @@ class BackupAndRestoreViewController: UIViewController, UIDocumentPickerDelegate
     
     // MARK: Action Handlers
     @IBAction func backupDataButtonPressed(_ sender: Any) {
+        toggleLoadingState()
         let passwordAlert = UIAlertController(title: NSLocalizedString("Password", comment: "Dialogue Headline asking the user to enter an encryption / decryption Password"), message: NSLocalizedString("Please enter a key to encrypt your Backup", comment: "Description of the dialogue asking the user to provide a passphrase to encrypt the backup"), preferredStyle: .alert)
         
         passwordAlert.addTextField { (textField) in
@@ -74,17 +76,60 @@ class BackupAndRestoreViewController: UIViewController, UIDocumentPickerDelegate
     }
     
     @IBAction func restoreDataButtonPressed(_ sender: Any) {
+        toggleLoadingState()
         let documentPickerController = UIDocumentPickerViewController(documentTypes: [ "public.data" ], in: .import )
         documentPickerController.delegate = self
         self.present(documentPickerController, animated: true)
     }
     
+    // MARK: Public Functions
+    public func toggleLoadingState() {
+        if let spinnerView = self.spinner {
+            print("Removing Spinner")
+            spinnerView.willMove(toParent: nil)
+            spinnerView.view.removeFromSuperview()
+            spinnerView.removeFromParent()
+        } else {
+            print("Adding Spinner")
+            let spinnerView = SpinnerViewController()
+            
+            addChild(spinnerView)
+            spinnerView.view.frame = view.frame
+            view.addSubview(spinnerView.view)
+            spinnerView.didMove(toParent: self)
+            
+            self.spinner = spinnerView
+        }
+        
+        self.view.setNeedsDisplay()
+    }
+    
     // MARK: Private Functions
     private func exportDatabaseFileEncryptedWith(password: String) {
         settingsPresenter.exportDatabaseBackupWith(password: password, initiator: self)
+        toggleLoadingState()
     }
     
     private func replaceDatabaseWith(url: URL, password: String) {
         settingsPresenter.replaceDatabaseWith(url: url, password: password, initiator: self)
+        toggleLoadingState()
     }
+}
+
+// Taken from
+// https://www.hackingwithswift.com/example-code/uikit/how-to-use-uiactivityindicatorview-to-show-a-spinner-when-work-is-happening
+class SpinnerViewController : UIViewController {
+    var spinner = UIActivityIndicatorView(style: .large)
+
+        override func loadView() {
+            view = UIView()
+            view.backgroundColor = UIColor(white: 0, alpha: 0.7)
+
+            spinner.translatesAutoresizingMaskIntoConstraints = false
+            spinner.startAnimating()
+            view.addSubview(spinner)
+
+            spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        }
 }

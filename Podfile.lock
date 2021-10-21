@@ -2,17 +2,21 @@ PODS:
   - Charts (3.6.0):
     - Charts/Core (= 3.6.0)
   - Charts/Core (3.6.0)
+  - CryptoSwift (1.4.2)
 
 DEPENDENCIES:
   - Charts
+  - CryptoSwift (~> 1.4.1)
 
 SPEC REPOS:
   trunk:
     - Charts
+    - CryptoSwift
 
 SPEC CHECKSUMS:
   Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
+  CryptoSwift: a532e74ed010f8c95f611d00b8bbae42e9fe7c17
 
-PODFILE CHECKSUM: aa3aa9be006fb9bb03b7c3cf6ed71ad9471587b3
+PODFILE CHECKSUM: d5536f95349eb8aa5483fe9e2a545cea7469e44b
 
 COCOAPODS: 1.11.2

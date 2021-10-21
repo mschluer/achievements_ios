@@ -12,7 +12,6 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     public var achievementsDataModel : AchievementsDataModel!
     
     // MARK: Variables
-    
     private var balance: Float = 0 {
         didSet {
             populateProgressWheel()
@@ -145,6 +144,10 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         self.present(deletionAlert, animated: true)
     }
     
+    private func mainMenuSettingsButtonPressed() {
+        SettingsPresenter(achievementsDataModel: achievementsDataModel).showSettingsList(from: self)
+    }
+    
     private func mainMenuSettleButtonPressed() {
         achievementsDataModel.purgeRecent()
         updateViewFromModel()
@@ -199,7 +202,10 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         let mainMenuDestruct = UIAction(title: NSLocalizedString("Reset", comment: "Set something back to initial state."), image: UIImage(systemName: "trash.circle"), attributes: .destructive) { _ in
             self.mainMenuResetButtonPressed() }
             
-        let mainMenuItems = UIMenu(title: "mainMenu", options: .displayInline, children: [
+        var mainMenuItems = UIMenu(title: "mainMenu", options: .displayInline, children: [
+            UIAction(title: NSLocalizedString("Settings", comment: "Menu item to get to the Configuration Menu"), image: UIImage(systemName: "gear"), handler: { _ in
+                self.mainMenuSettingsButtonPressed()
+            }),
             UIAction(title: NSLocalizedString("Settle automatically", comment: "Make sure to settle Transactions immediately after reaching the threshold."), image: UIImage(systemName: Settings.applicationSettings.automaticPurge ? "checkmark.square" : "square"), handler: { _ in
                 self.mainMenuAutoSettleButtonPressed()
             }),
@@ -213,7 +219,12 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
                 self.mainMenuStatisticsButtonPressed()
             })
         ])
-        menuButton.menu = UIMenu(title: "", children: [mainMenuItems, mainMenuDestruct])
+        
+        #if DEBUG
+            menuButton.menu = UIMenu(title: "", children: [mainMenuItems, mainMenuDestruct])
+        #else
+            menuButton.menu = UIMenu(title: "", children: [mainMenuItems])
+        #endif
     }
     
     private func setupTransactionTable() {

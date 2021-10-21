@@ -32,7 +32,7 @@
                                                 <color key="value" systemColor="systemGreenColor"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="percentage">
-                                                <real key="value" value="51"/>
+                                                <real key="value" value="27"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
                                                 <color key="value" systemColor="systemGreenColor"/>

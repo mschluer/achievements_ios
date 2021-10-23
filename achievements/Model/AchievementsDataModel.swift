@@ -80,6 +80,12 @@ class AchievementsDataModel {
         request.predicate = NSPredicate(format: "amount >= 0")
         return try! self.viewContext.fetch(request)
     }
+    var nonRecurringExpenseTemplates: [TransactionTemplate] {
+        let request : NSFetchRequest<TransactionTemplate> = TransactionTemplate.fetchRequest()
+        request.predicate = NSPredicate(format: "recurring = false && amount < 0")
+        request.sortDescriptors = [NSSortDescriptor(key: "orderIndex", ascending: true)]
+        return try! self.viewContext.fetch(request)
+    }
     var nonRecurringIncomeTemplates: [TransactionTemplate] {
         let request : NSFetchRequest<TransactionTemplate> = TransactionTemplate.fetchRequest()
         request.predicate = NSPredicate(format: "recurring = false && amount >= 0")
@@ -103,6 +109,12 @@ class AchievementsDataModel {
         fetchRequest.predicate = NSPredicate(format: "amount >= 0")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
         return try! self.viewContext.fetch(fetchRequest)
+    }
+    var recurringExpenseTemplates: [TransactionTemplate] {
+        let request : NSFetchRequest<TransactionTemplate> = TransactionTemplate.fetchRequest()
+        request.predicate = NSPredicate(format: "recurring = true && amount < 0")
+        request.sortDescriptors = [NSSortDescriptor(key: "orderIndex", ascending: true)]
+        return try! self.viewContext.fetch(request)
     }
     var recurringIncomeTemplates: [TransactionTemplate] {
         let request : NSFetchRequest<TransactionTemplate> = TransactionTemplate.fetchRequest()
@@ -282,6 +294,9 @@ class AchievementsDataModel {
     
     public func reindexPlannedExpenses() {
         let expenses = plannedExpenses
+        if expenses.count < 1 {
+            return
+        }
         
         for i in 0...expenses.count - 1 {
             expenses[i].orderIndex = Int16(i)
@@ -292,6 +307,9 @@ class AchievementsDataModel {
     
     public func reindexPlannedIncomes() {
         let incomes = incomeTemplates
+        if incomes.count < 1 {
+            return
+        }
         
         for i in 0...incomes.count - 1 {
             incomes[i].orderIndex = Int16(i)

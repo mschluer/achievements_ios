@@ -10,8 +10,11 @@ import UIKit
 class PlannedIncomesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITableViewDragDelegate {
     // MARK: Persistence Models
     public var achievementsDataModel : AchievementsDataModel?
+    public var displayMode : TransactionTemplatesListMode = .incomes // TODO: Remove this default
     
     // MARK: Variables
+    private var templatesTableData : [String : [TransactionTemplate]] = [:]
+    private var templatesTableSections : [String] = []
     private var recurringTransactionTemplates: [TransactionTemplate] = []
     private var nonRecurringTransactionTemplates: [TransactionTemplate] = []
 
@@ -42,6 +45,7 @@ class PlannedIncomesViewController: UIViewController, UITableViewDelegate, UITab
         case "AddTransactionTemplateFormSegue":
             let destination = segue.destination as! TransactionTemplateFormController
             destination.achievementsDataModel = achievementsDataModel
+            displayMode == .expenses ? (destination.flipSignOnShow = true) : (destination.flipSignOnShow = false)
         case "EditTransactionTemplateSegue":
             let destination = segue.destination as! TransactionTemplateFormController
             destination.achievementsDataModel = achievementsDataModel
@@ -53,7 +57,7 @@ class PlannedIncomesViewController: UIViewController, UITableViewDelegate, UITab
     
     // MARK: Table View Data Source
     func numberOfSections(in tableView: UITableView) -> Int {
-         return 2
+        return Settings.applicationSettings.divideIncomeTemplatesByRecurrence ? 2 : 1
     }
     
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
@@ -109,66 +113,49 @@ class PlannedIncomesViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let item : TransactionTemplate
+        let item = transactionTemplateFor(indexPath: sourceIndexPath)
         
-        // Remove from Source
-        if sourceIndexPath.section == 0 {
-            // Unique
-            item = nonRecurringTransactionTemplates.remove(at: sourceIndexPath.item)
-        } else {
-            // Recurring
-            item = recurringTransactionTemplates.remove(at: sourceIndexPath.item)
-        }
-        
-        // Add to Destination and update model
-        if destinationIndexPath.section == 0 {
-            // Unique
-            let destinationIndex : Int
-            if destinationIndexPath.item >= nonRecurringTransactionTemplates.count {
-                destinationIndex = nonRecurringTransactionTemplates.count - 1
+        if((displayMode == .incomes && Settings.applicationSettings.divideIncomeTemplatesByRecurrence) ||
+           (displayMode == .expenses && Settings.applicationSettings.divideExpenseTemplatesByRecurrence)) {
+            let destinationIndex : Int16
+            let key = templatesTableSections[destinationIndexPath.section]
+            var dictionaryEntry = templatesTableData[key]!
+            
+            if(destinationIndexPath.item > 0) {
+                destinationIndex = dictionaryEntry[destinationIndexPath.item - 1].orderIndex
+                dictionaryEntry.insert(item, at: destinationIndexPath.item)
             } else {
-                destinationIndex = destinationIndexPath.item
+                destinationIndex = 0
+                dictionaryEntry.insert(item, at: 0)
             }
             
-            let newIndex = nonRecurringTransactionTemplates[destinationIndex].orderIndex
-            nonRecurringTransactionTemplates.insert(item, at: destinationIndexPath.item)
-            achievementsDataModel?.rearrangeTransactionTemplates(template: item, destinationIndex: Int(newIndex))
-        } else {
-            // Recurring
-            let destinationIndex : Int
-            if destinationIndexPath.item >= recurringTransactionTemplates.count {
-                destinationIndex = recurringTransactionTemplates.count - 1
-            } else {
-                destinationIndex = destinationIndexPath.item
+            // Make sure to update the recurring-flag if necessary
+            if sourceIndexPath.section != destinationIndexPath.section {
+                item.recurring = !item.recurring
             }
             
-            let newIndex = recurringTransactionTemplates[destinationIndex].orderIndex
-            recurringTransactionTemplates.insert(item, at: destinationIndexPath.item)
-            achievementsDataModel?.rearrangeTransactionTemplates(template: item, destinationIndex: Int(newIndex))
+            achievementsDataModel?.rearrangeTransactionTemplates(template: item, destinationIndex: Int(destinationIndex))
+        } else {
+            let key = templatesTableSections[destinationIndexPath.section]
+            var dictionaryEntry = templatesTableData[key]!
+            
+            dictionaryEntry.remove(at: destinationIndexPath.item)
+            dictionaryEntry.insert(item, at: destinationIndexPath.item)
+            
+            achievementsDataModel?.rearrangeTransactionTemplates(template: item, destinationIndex: destinationIndexPath.item)
         }
         
-        // Make sure to update the recurring-flag if necessary
-        if sourceIndexPath.section != destinationIndexPath.section {
-            item.recurring = !item.recurring
-        }
+        refreshData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(section == 0) {
-            return nonRecurringTransactionTemplates.count
-        } else {
-            return recurringTransactionTemplates.count
-        }
+        let key = templatesTableSections[section]
+        return templatesTableData[key]?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if self.tableView(self.templatesTable, numberOfRowsInSection: section) > 0 {
-            switch(section) {
-            case 1:
-                return NSLocalizedString("Recurring", comment: "Not Deleted after being booked once")
-            default:
-                return NSLocalizedString("Unique", comment: "Deleted after being booked once")
-            }
+        if self.tableView(self.templatesTable, numberOfRowsInSection: section) > 0  && templatesTableSections.count != 1 {
+            return templatesTableSections[section]
         } else {
             return nil
         }
@@ -193,22 +180,44 @@ class PlannedIncomesViewController: UIViewController, UITableViewDelegate, UITab
     
     // MARK: Action Handlers
     private func sortMenuSortAlphabeticallyButtonPressed() {
-        achievementsDataModel?.sortPlannedIncomes(by: [ NSSortDescriptor(key: "text", ascending: true) ])
+        if(displayMode == .incomes) {
+            achievementsDataModel?.sortPlannedIncomes(by: [ NSSortDescriptor(key: "text", ascending: true) ])
+        } else {
+            achievementsDataModel?.sortPlannedExpenses(by: [ NSSortDescriptor(key: "text", ascending: true) ])
+        }
         updateViewFromModel()
     }
     
     private func sortMenuSortAlphabeticallyDescendingButtonPressed() {
-        achievementsDataModel?.sortPlannedIncomes(by: [ NSSortDescriptor(key: "text", ascending: false) ])
+        if(displayMode == .incomes) {
+            achievementsDataModel?.sortPlannedIncomes(by: [ NSSortDescriptor(key: "text", ascending: false) ])
+        } else {
+            achievementsDataModel?.sortPlannedExpenses(by: [ NSSortDescriptor(key: "text", ascending: false) ])
+        }
         updateViewFromModel()
     }
     
     private func sortMenuSortByAmountButtonPressed() {
-        achievementsDataModel?.sortPlannedIncomes(by: [ NSSortDescriptor(key: "amount", ascending: true) ])
+        if(displayMode == .incomes) {
+            achievementsDataModel?.sortPlannedIncomes(by: [ NSSortDescriptor(key: "amount", ascending: true) ])
+        } else {
+            achievementsDataModel?.sortPlannedExpenses(by: [ NSSortDescriptor(key: "amount", ascending: false) ])
+        }
         updateViewFromModel()
     }
     
     private func sortMenuSortByAmountDescendingButtonPressed() {
-        achievementsDataModel?.sortPlannedIncomes(by: [ NSSortDescriptor(key: "amount", ascending: false) ])
+        if(displayMode == .incomes) {
+            achievementsDataModel?.sortPlannedIncomes(by: [ NSSortDescriptor(key: "amount", ascending: false) ])
+        } else {
+            achievementsDataModel?.sortPlannedExpenses(by: [ NSSortDescriptor(key: "amount", ascending: true) ])
+        }
+        updateViewFromModel()
+    }
+    
+    private func sortMenuSplitButtonPressed() {
+        Settings.applicationSettings.divideIncomeTemplatesByRecurrence = !Settings.applicationSettings.divideIncomeTemplatesByRecurrence
+        setupSortMenu()
         updateViewFromModel()
     }
     
@@ -218,7 +227,7 @@ class PlannedIncomesViewController: UIViewController, UITableViewDelegate, UITab
     
     private func swipeLeftDelete(at indexPath: IndexPath) {
         achievementsDataModel?.remove(transactionTemplate: transactionTemplateFor(indexPath: indexPath))
-        refreshDataFor(indexPath: indexPath)
+        refreshData()
         self.templatesTable.deleteRows(at: [indexPath], with: .automatic)
     }
     
@@ -232,7 +241,7 @@ class PlannedIncomesViewController: UIViewController, UITableViewDelegate, UITab
         
         if(!template.recurring) {
             achievementsDataModel?.remove(transactionTemplate: template)
-            refreshDataFor(indexPath: indexPath)
+            refreshData()
             
             self.templatesTable.deleteRows(at: [indexPath], with: .automatic)
         }
@@ -278,33 +287,66 @@ class PlannedIncomesViewController: UIViewController, UITableViewDelegate, UITab
                 }),
         ])
         
-        sortButton.menu = UIMenu(title: "", children: [ sortMenuItems ])
+        let splitMenuItems = UIMenu(title: "", options: .displayInline, children: [
+            UIAction(
+                title: NSLocalizedString("Split Unique/Recurring", comment: "Menu Option to split into recurring and non recurring items"),
+                image: UIImage(systemName: Settings.applicationSettings.divideIncomeTemplatesByRecurrence ? "checkmark.square" : "square"),
+                handler: { _ in
+                    self.sortMenuSplitButtonPressed()
+                }),
+        ])
+        
+        sortButton.menu = UIMenu(title: "", children: [ splitMenuItems, sortMenuItems ])
     }
     
     // MARK: Private Functions
     private func updateViewFromModel() {
         refreshData()
+        refreshSections()
         templatesTable.reloadData()
     }
     
     private func transactionTemplateFor(indexPath: IndexPath) -> TransactionTemplate {
-        if(indexPath.section == 0) {
-            return nonRecurringTransactionTemplates[indexPath.item]
-        } else {
-            return recurringTransactionTemplates[indexPath.item]
-        }
-    }
-    
-    private func refreshDataFor(indexPath: IndexPath) {
-        if(indexPath.section == 0) {
-            nonRecurringTransactionTemplates = achievementsDataModel?.nonRecurringIncomeTemplates ?? []
-        } else {
-            recurringTransactionTemplates = achievementsDataModel?.recurringIncomeTemplates ?? []
-        }
+        let key = templatesTableSections[indexPath.section]
+        let dictionaryEntry = templatesTableData[key]!
+        
+        return dictionaryEntry[indexPath.item]
     }
     
     private func refreshData() {
-        nonRecurringTransactionTemplates = achievementsDataModel?.nonRecurringIncomeTemplates ?? []
-        recurringTransactionTemplates = achievementsDataModel?.recurringIncomeTemplates ?? []
+        // Determine what to display
+        if(self.displayMode == .incomes) {
+            // Determine, whether user wants recurring and unique to be split visually
+            if(Settings.applicationSettings.divideIncomeTemplatesByRecurrence) {
+                templatesTableData = [
+                    NSLocalizedString("Recurring", comment: "Not Deleted after being booked once") : achievementsDataModel!.recurringIncomeTemplates,
+                    NSLocalizedString("Unique", comment: "Deleted after being booked once") : achievementsDataModel!.nonRecurringIncomeTemplates,
+                ]
+            } else {
+                templatesTableData =  [
+                    "Templates" : achievementsDataModel!.incomeTemplates
+                ]
+            }
+        } else {
+            if(Settings.applicationSettings.divideExpenseTemplatesByRecurrence) {
+                templatesTableData = [
+                    NSLocalizedString("Recurring", comment: "Not Deleted after being booked once") : achievementsDataModel!.recurringExpenseTemplates,
+                    NSLocalizedString("Unique", comment: "Deleted after being booked once") : achievementsDataModel!.nonRecurringExpenseTemplates,
+                ]
+            } else {
+                templatesTableData =  [
+                    "Templates" : achievementsDataModel!.plannedExpenses
+                ]
+            }
+        }
     }
+    
+    private func refreshSections() {
+        templatesTableSections = Array(templatesTableData.keys)
+        templatesTableSections.sort(by: <)
+    }
+}
+
+enum TransactionTemplatesListMode {
+    case incomes, expenses
 }

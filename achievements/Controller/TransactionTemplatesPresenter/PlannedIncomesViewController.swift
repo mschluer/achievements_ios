@@ -16,12 +16,14 @@ class PlannedIncomesViewController: UIViewController, UITableViewDelegate, UITab
     private var nonRecurringTransactionTemplates: [TransactionTemplate] = []
 
     // MARK: Outlets
+    @IBOutlet weak var sortButton: UIBarButtonItem!
     @IBOutlet weak var templatesTable: UITableView!
     
     // MARK: View Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupSortMenu()
         setupTemplateTable()
     }
     
@@ -132,6 +134,22 @@ class PlannedIncomesViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     // MARK: Action Handlers
+    private func sortMenuSortAlphabeticallyButtonPressed() {
+        
+    }
+    
+    private func sortMenuSortAlphabeticallyDescendingButtonPressed() {
+        
+    }
+    
+    private func sortMenuSortByAmountButtonPressed() {
+        
+    }
+    
+    private func sortMenuSortByAmountDescendingButtonPressed() {
+        
+    }
+    
     private func swipeLeftEdit(at indexPath: IndexPath) {
         performSegue(withIdentifier: "EditTransactionTemplateSegue", sender: transactionTemplateFor(indexPath: indexPath))
     }
@@ -168,6 +186,37 @@ class PlannedIncomesViewController: UIViewController, UITableViewDelegate, UITab
         self.templatesTable.delegate = self
         
         refreshData()
+    }
+    
+    private func setupSortMenu() {
+        let sortMenuItems = UIMenu(title: "sortMenu", options: .displayInline, children: [
+            UIAction(
+                title: NSLocalizedString("Amount Descending", comment: "Menu Item for sorting Transaction Templates by Amount (Descending)"),
+                image: nil,
+                handler: { _ in
+                    self.sortMenuSortByAmountDescendingButtonPressed()
+                }),
+            UIAction(
+                title: NSLocalizedString("Amount Ascending", comment: "Menu Item for sorting Transaction Templates by Amount (Ascending)"),
+                image: nil,
+                handler: { _ in
+                    self.sortMenuSortByAmountButtonPressed()
+                }),
+            UIAction(
+                title: "Z-A",
+                image: nil,
+                handler: { _ in
+                    self.sortMenuSortAlphabeticallyDescendingButtonPressed()
+                }),
+            UIAction(
+                title: "A-Z",
+                image: nil,
+                handler: { _ in
+                    self.sortMenuSortAlphabeticallyButtonPressed()
+                }),
+        ])
+        
+        sortButton.menu = UIMenu(title: "", children: [ sortMenuItems ])
     }
     
     // MARK: Private Functions

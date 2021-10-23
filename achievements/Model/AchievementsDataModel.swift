@@ -273,10 +273,18 @@ class AchievementsDataModel {
     public func reindexPlannedExpenses() {
         let expenses = plannedExpenses
         
-        print(plannedExpenses.count)
-        
         for i in 0...(expenses.count - 1) {
             expenses[i].orderIndex = Int16(i)
+        }
+        
+        save()
+    }
+    
+    public func reindexPlannedIncomes() {
+        let incomes = incomeTemplates
+        
+        for i in 0...incomes.count - 1 {
+            incomes[i].orderIndex = Int16(i)
         }
         
         save()

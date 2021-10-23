@@ -229,12 +229,22 @@ class AchievementsDataModel {
     
     public func rearrangeTransactionTemplates(template: TransactionTemplate, destinationIndex: Int) {
         reindexPlannedExpenses()
+        reindexPlannedIncomes()
         
         // Push forward
-        let expenses = plannedExpenses
-        if destinationIndex < plannedExpenses.count {
-            for i in destinationIndex...(expenses.count - 1) {
-                expenses[i].orderIndex += 1
+        if template.amount < 0 {
+            let expenses = plannedExpenses
+            if destinationIndex < plannedExpenses.count {
+                for i in destinationIndex...(expenses.count - 1) {
+                    expenses[i].orderIndex += 1
+                }
+            }
+        } else {
+            let incomes = transactionTemplates
+            if destinationIndex < transactionTemplates.count {
+                for i in destinationIndex...(incomes.count - 1) {
+                    incomes[i].orderIndex += 1
+                }
             }
         }
         

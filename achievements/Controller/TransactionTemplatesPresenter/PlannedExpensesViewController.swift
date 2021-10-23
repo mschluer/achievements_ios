@@ -33,7 +33,7 @@ class PlannedExpensesViewController: UIViewController, UITableViewDelegate, UITa
         updateViewFromModel()
     }
 
-    // MARK: Table view data source
+    // MARK: Table View Data Source
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

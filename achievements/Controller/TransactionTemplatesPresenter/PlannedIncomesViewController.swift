@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PlannedIncomesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PlannedIncomesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITableViewDragDelegate {
     // MARK: Persistence Models
     public var achievementsDataModel : AchievementsDataModel?
     
@@ -25,6 +25,9 @@ class PlannedIncomesViewController: UIViewController, UITableViewDelegate, UITab
         
         setupSortMenu()
         setupTemplateTable()
+        
+        templatesTable.dragInteractionEnabled = true
+        templatesTable.dragDelegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,6 +56,10 @@ class PlannedIncomesViewController: UIViewController, UITableViewDelegate, UITab
          return 2
     }
     
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "templateCell") {
             let template = transactionTemplateFor(indexPath: indexPath)
@@ -78,6 +85,12 @@ class PlannedIncomesViewController: UIViewController, UITableViewDelegate, UITab
         transactionTemplateCellPressed(at: indexPath)
     }
     
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        let dragItem = UIDragItem(itemProvider: NSItemProvider())
+        dragItem.localObject = transactionTemplateFor(indexPath: indexPath)
+        return [ dragItem ]
+    }
+    
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         guard transactionTemplateFor(indexPath: indexPath).isQuickBookable() else {
             return nil
@@ -93,6 +106,51 @@ class PlannedIncomesViewController: UIViewController, UITableViewDelegate, UITab
         config.performsFirstActionWithFullSwipe = true
         
         return config
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let item : TransactionTemplate
+        
+        // Remove from Source
+        if sourceIndexPath.section == 0 {
+            // Unique
+            item = nonRecurringTransactionTemplates.remove(at: sourceIndexPath.item)
+        } else {
+            // Recurring
+            item = recurringTransactionTemplates.remove(at: sourceIndexPath.item)
+        }
+        
+        // Add to Destination and update model
+        if destinationIndexPath.section == 0 {
+            // Unique
+            let destinationIndex : Int
+            if destinationIndexPath.item >= nonRecurringTransactionTemplates.count {
+                destinationIndex = nonRecurringTransactionTemplates.count - 1
+            } else {
+                destinationIndex = destinationIndexPath.item
+            }
+            
+            let newIndex = nonRecurringTransactionTemplates[destinationIndex].orderIndex
+            nonRecurringTransactionTemplates.insert(item, at: destinationIndexPath.item)
+            achievementsDataModel?.rearrangeTransactionTemplates(template: item, destinationIndex: Int(newIndex))
+        } else {
+            // Recurring
+            let destinationIndex : Int
+            if destinationIndexPath.item >= recurringTransactionTemplates.count {
+                destinationIndex = recurringTransactionTemplates.count - 1
+            } else {
+                destinationIndex = destinationIndexPath.item
+            }
+            
+            let newIndex = recurringTransactionTemplates[destinationIndex].orderIndex
+            recurringTransactionTemplates.insert(item, at: destinationIndexPath.item)
+            achievementsDataModel?.rearrangeTransactionTemplates(template: item, destinationIndex: Int(newIndex))
+        }
+        
+        // Make sure to update the recurring-flag if necessary
+        if sourceIndexPath.section != destinationIndexPath.section {
+            item.recurring = !item.recurring
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

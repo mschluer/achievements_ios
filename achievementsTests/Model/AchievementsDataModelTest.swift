@@ -107,6 +107,15 @@ class AchievementsDataModelTest: XCTestCase {
         XCTAssertEqual(subject.historicalTransactions[1].balance, 2.0)
         XCTAssertEqual(subject.historicalTransactions[0].balance, -3.0)
     }
+    
+    // MARK: Sorting
+    func testSortingWithNoPlannedExpenses() throws {
+        subject.sortPlannedIncomes(by: [ NSSortDescriptor(key: "text", ascending: true)])
+    }
+    
+    func testSortingWithNoPlannedIncomes() throws {
+        subject.sortPlannedExpenses(by: [ NSSortDescriptor(key: "text", ascending: true)])
+    }
 
     // MARK: Destructive Operations
     func testPurgeRecent() throws {

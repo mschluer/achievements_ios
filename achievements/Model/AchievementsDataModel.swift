@@ -344,6 +344,11 @@ class AchievementsDataModel {
         request.predicate = NSPredicate(format: "amount < 0")
         let plannedExpenses = try! self.viewContext.fetch(request)
         
+        // Check for emptiness
+        if plannedExpenses.count == 0 {
+            return
+        }
+        
         // Order
         for i in 0...plannedExpenses.count - 1 {
             plannedExpenses[i].orderIndex = Int16(i)
@@ -359,6 +364,11 @@ class AchievementsDataModel {
         request.sortDescriptors = sortDescriptors
         request.predicate = NSPredicate(format: "amount >= 0")
         let plannedIncomes = try! self.viewContext.fetch(request)
+        
+        // Check for emptiness
+        if plannedIncomes.count == 0 {
+            return
+        }
         
         // Order
         for i in 0...plannedIncomes.count - 1 {

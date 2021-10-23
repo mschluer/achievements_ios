@@ -16,11 +16,13 @@ class PlannedExpensesViewController: UIViewController, UITableViewDelegate, UITa
 
     // MARK: Outlets
     @IBOutlet weak var plannedExpensesTable: UITableView!
+    @IBOutlet weak var sortButton: UIBarButtonItem!
     
     // MARK: View Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupSortMenu()
         setupPlannedExpensesTable()
         
         plannedExpensesTable.dragInteractionEnabled = true
@@ -149,6 +151,26 @@ class PlannedExpensesViewController: UIViewController, UITableViewDelegate, UITa
         AchievementTransactionsPresenter(achievevementsDataModel: achievementsDataModel!).bookAchievementTransaction(from: self, template: plannedExpenseFor(indexPath: indexPath))
     }
     
+    private func sortMenuSortAlphabeticallyButtonPressed() {
+        achievementsDataModel?.sortPlannedExpenses(by: [ NSSortDescriptor(key: "text", ascending: true) ])
+        updateViewFromModel()
+    }
+    
+    private func sortMenuSortAlphabeticallyDescendingButtonPressed() {
+        achievementsDataModel?.sortPlannedExpenses(by: [ NSSortDescriptor(key: "text", ascending: false) ])
+        updateViewFromModel()
+    }
+    
+    private func sortMenuSortByAmountButtonPressed() {
+        achievementsDataModel?.sortPlannedExpenses(by: [ NSSortDescriptor(key: "amount", ascending: false) ])
+        updateViewFromModel()
+    }
+    
+    private func sortMenuSortByAmountDescendingButtonPressed() {
+        achievementsDataModel?.sortPlannedExpenses(by: [ NSSortDescriptor(key: "amount", ascending: true) ])
+        updateViewFromModel()
+    }
+    
     private func swipeRightQuickBook(at indexPath: IndexPath) {
         let template = plannedExpenseFor(indexPath: indexPath)
         
@@ -173,6 +195,37 @@ class PlannedExpensesViewController: UIViewController, UITableViewDelegate, UITa
         updateViewFromModel()
     }
     
+    private func setupSortMenu() {
+        let sortMenuItems = UIMenu(title: "sortMenu", options: .displayInline, children: [
+            UIAction(
+                title: NSLocalizedString("Amount Descending", comment: "Menu Item for sorting Transaction Templates by Amount (Descending)"),
+                image: nil,
+                handler: { _ in
+                    self.sortMenuSortByAmountDescendingButtonPressed()
+                }),
+            UIAction(
+                title: NSLocalizedString("Amount Ascending", comment: "Menu Item for sorting Transaction Templates by Amount (Ascending)"),
+                image: nil,
+                handler: { _ in
+                    self.sortMenuSortByAmountButtonPressed()
+                }),
+            UIAction(
+                title: "Z-A",
+                image: nil,
+                handler: { _ in
+                    self.sortMenuSortAlphabeticallyDescendingButtonPressed()
+                }),
+            UIAction(
+                title: "A-Z",
+                image: nil,
+                handler: { _ in
+                    self.sortMenuSortAlphabeticallyButtonPressed()
+                }),
+        ])
+        
+        sortButton.menu = UIMenu(title: "", children: [ sortMenuItems ])
+    }
+    
     // MARK: Private functions
     private func plannedExpenseFor(indexPath : IndexPath) -> TransactionTemplate {
         return plannedExpenses[indexPath.item]
@@ -183,7 +236,6 @@ class PlannedExpensesViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     private func refreshDataFor(indexPath: IndexPath) {
-        // To be extended once there are sections
         refreshData()
     }
     

@@ -48,7 +48,7 @@
 		B3939AC927049F51005D243B /* AchievementTransactionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939AC827049F51005D243B /* AchievementTransactionTest.swift */; };
 		B3939ACB2705F627005D243B /* IncomeTemplateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939ACA2705F627005D243B /* IncomeTemplateTest.swift */; };
 		B3939ACD2705FE44005D243B /* MultiplteTransactionsAndPurgeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939ACC2705FE44005D243B /* MultiplteTransactionsAndPurgeTest.swift */; };
-		B3939ACF2706048D005D243B /* HistoricalTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939ACE2706048D005D243B /* HistoricalTransaction.swift */; };
+		B3939ACF2706048D005D243B /* HistoricalTransactionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939ACE2706048D005D243B /* HistoricalTransactionTest.swift */; };
 		B393D82D2715C15900232482 /* StatisticsPresenterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B393D82F2715C15900232482 /* StatisticsPresenterStoryboard.storyboard */; };
 		B393D8332715D17600232482 /* TransactionTemplatesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B393D8322715D17600232482 /* TransactionTemplatesPresenter.swift */; };
 		B393D8382718A9E500232482 /* TransactionTemplatesPresenterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B393D83A2718A9E500232482 /* TransactionTemplatesPresenterStoryboard.storyboard */; };
@@ -134,7 +134,7 @@
 		B3939AC827049F51005D243B /* AchievementTransactionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTransactionTest.swift; sourceTree = "<group>"; };
 		B3939ACA2705F627005D243B /* IncomeTemplateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeTemplateTest.swift; sourceTree = "<group>"; };
 		B3939ACC2705FE44005D243B /* MultiplteTransactionsAndPurgeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplteTransactionsAndPurgeTest.swift; sourceTree = "<group>"; };
-		B3939ACE2706048D005D243B /* HistoricalTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalTransaction.swift; sourceTree = "<group>"; };
+		B3939ACE2706048D005D243B /* HistoricalTransactionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalTransactionTest.swift; sourceTree = "<group>"; };
 		B393D82E2715C15900232482 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/StatisticsPresenterStoryboard.storyboard; sourceTree = "<group>"; };
 		B393D8312715C15F00232482 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/StatisticsPresenterStoryboard.strings; sourceTree = "<group>"; };
 		B393D8322715D17600232482 /* TransactionTemplatesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTemplatesPresenter.swift; sourceTree = "<group>"; };
@@ -275,7 +275,7 @@
 				B3939AC827049F51005D243B /* AchievementTransactionTest.swift */,
 				B3939ACA2705F627005D243B /* IncomeTemplateTest.swift */,
 				B3939ACC2705FE44005D243B /* MultiplteTransactionsAndPurgeTest.swift */,
-				B3939ACE2706048D005D243B /* HistoricalTransaction.swift */,
+				B3939ACE2706048D005D243B /* HistoricalTransactionTest.swift */,
 				B307CE7E271083A600FB7E8C /* ExpenseTemplateTest.swift */,
 				B307CE8627147EED00FB7E8C /* AutomaticPurgeTest.swift */,
 				B307CE882714A31100FB7E8C /* ProgressWheelTest.swift */,
@@ -788,7 +788,7 @@
 				B307CE7F271083A600FB7E8C /* ExpenseTemplateTest.swift in Sources */,
 				B3939ACD2705FE44005D243B /* MultiplteTransactionsAndPurgeTest.swift in Sources */,
 				B3939ACB2705F627005D243B /* IncomeTemplateTest.swift in Sources */,
-				B3939ACF2706048D005D243B /* HistoricalTransaction.swift in Sources */,
+				B3939ACF2706048D005D243B /* HistoricalTransactionTest.swift in Sources */,
 				B3939AC927049F51005D243B /* AchievementTransactionTest.swift in Sources */,
 				B307CE892714A31100FB7E8C /* ProgressWheelTest.swift in Sources */,
 				B361478027218C7400941051 /* SettingsTest.swift in Sources */,

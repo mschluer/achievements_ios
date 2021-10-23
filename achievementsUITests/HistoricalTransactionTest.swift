@@ -1,5 +1,5 @@
 //
-//  HistoricalTransaction.swift
+//  HistoricalTransactionTest.swift
 //  achievementsUITests
 //
 //  Created by Maximilian Schluer on 30.09.21.
@@ -7,7 +7,7 @@
 
 import XCTest
 
-class HistoricalTransaction: XCTestCase {
+class HistoricalTransactionTest: XCTestCase {
     override func setUpWithError() throws {
         continueAfterFailure = false
 

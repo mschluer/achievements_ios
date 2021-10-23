@@ -69,6 +69,8 @@
                                             <segue destination="dJZ-NQ-wiO" kind="show" identifier="AddTransactionTemplateFormSegue" id="UQi-zy-E5x"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="sh1-BL-R0l"/>
+                                    <barButtonItem title="Sort" image="arrow.up.arrow.down" catalog="system" style="plain" id="Kbk-41-DGf" userLabel="Sort"/>
                                 </items>
                             </toolbar>
                         </subviews>
@@ -86,6 +88,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Planned Incomes" id="JJy-z4-Ddn"/>
                     <connections>
+                        <outlet property="sortButton" destination="Kbk-41-DGf" id="RiR-Kl-7Mx"/>
                         <outlet property="templatesTable" destination="oB8-lW-hNA" id="kSm-iZ-PT1"/>
                         <segue destination="dJZ-NQ-wiO" kind="show" identifier="EditTransactionTemplateSegue" id="SSO-zb-Krq"/>
                     </connections>
@@ -257,6 +260,8 @@
                                             <segue destination="dJZ-NQ-wiO" kind="show" identifier="AddPlannedExpenseSegue" id="U5A-JP-L8v"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="k5g-Hr-UTb"/>
+                                    <barButtonItem title="Sort" image="arrow.up.arrow.down" catalog="system" style="plain" id="jfZ-ed-93z" userLabel="Sort"/>
                                 </items>
                             </toolbar>
                         </subviews>
@@ -275,6 +280,7 @@
                     <navigationItem key="navigationItem" title="Planned Expenses" id="Mac-5b-xCl"/>
                     <connections>
                         <outlet property="plannedExpensesTable" destination="ret-vC-GbX" id="L61-Rt-qkD"/>
+                        <outlet property="sortButton" destination="jfZ-ed-93z" id="xd9-Q6-vyn"/>
                         <segue destination="dJZ-NQ-wiO" kind="show" identifier="EditExpenseTemplateSegue" id="OIV-2N-Xyb"/>
                     </connections>
                 </viewController>
@@ -284,9 +290,10 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="OIV-2N-Xyb"/>
+        <segue reference="SSO-zb-Krq"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="arrow.up.arrow.down" catalog="system" width="128" height="98"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

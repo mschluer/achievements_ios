@@ -55,10 +55,22 @@ class TransactionTemplateFormController: UIViewController, UITextFieldDelegate {
         
         // Check whether it was an edit
         if let oldTransactionTemplate = self.transactionTemplate {
+            template?.orderIndex = oldTransactionTemplate.orderIndex
             achievementsDataModel?.remove(transactionTemplate: oldTransactionTemplate)
+        } else {
+            template?.orderIndex = -1
         }
         
         achievementsDataModel?.save()
+        
+        // Make sure to put new Templates to top
+        if template!.orderIndex == -1 {
+            if template!.amount >= 0 {
+                achievementsDataModel?.reindexPlannedIncomes()
+            } else {
+                achievementsDataModel?.reindexPlannedExpenses()
+            }
+        }
         
         self.navigationController!.popViewController(animated: true)
     }

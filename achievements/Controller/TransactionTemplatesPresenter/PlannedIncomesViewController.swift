@@ -102,10 +102,15 @@ class PlannedIncomesViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if(section == 0) {
-            return NSLocalizedString("Unique", comment: "Deleted after being booked once")
+        if self.tableView(self.templatesTable, numberOfRowsInSection: section) > 0 {
+            switch(section) {
+            case 1:
+                return NSLocalizedString("Recurring", comment: "Not Deleted after being booked once")
+            default:
+                return NSLocalizedString("Unique", comment: "Deleted after being booked once")
+            }
         } else {
-            return NSLocalizedString("Recurring", comment: "Not Deleted after being booked once")
+            return nil
         }
     }
     

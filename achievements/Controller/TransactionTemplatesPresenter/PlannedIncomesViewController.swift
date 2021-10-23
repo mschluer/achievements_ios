@@ -135,19 +135,23 @@ class PlannedIncomesViewController: UIViewController, UITableViewDelegate, UITab
     
     // MARK: Action Handlers
     private func sortMenuSortAlphabeticallyButtonPressed() {
-        
+        achievementsDataModel?.sortPlannedIncomes(by: [ NSSortDescriptor(key: "text", ascending: true) ])
+        updateViewFromModel()
     }
     
     private func sortMenuSortAlphabeticallyDescendingButtonPressed() {
-        
+        achievementsDataModel?.sortPlannedIncomes(by: [ NSSortDescriptor(key: "text", ascending: false) ])
+        updateViewFromModel()
     }
     
     private func sortMenuSortByAmountButtonPressed() {
-        
+        achievementsDataModel?.sortPlannedIncomes(by: [ NSSortDescriptor(key: "amount", ascending: true) ])
+        updateViewFromModel()
     }
     
     private func sortMenuSortByAmountDescendingButtonPressed() {
-        
+        achievementsDataModel?.sortPlannedIncomes(by: [ NSSortDescriptor(key: "amount", ascending: false) ])
+        updateViewFromModel()
     }
     
     private func swipeLeftEdit(at indexPath: IndexPath) {

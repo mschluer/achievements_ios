@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		825E1D43BF3A8CD45660F60D /* Pods_achievementsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C896202FB7D32745338C8FF5 /* Pods_achievementsTests.framework */; };
 		9934B5CD83E2F83B4B865A9D /* Pods_achievements.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B91FC670CCE80E443AB4694D /* Pods_achievements.framework */; };
-		B307CE7B27106EC800FB7E8C /* PlannedExpensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B307CE7A27106EC800FB7E8C /* PlannedExpensesViewController.swift */; };
 		B307CE7D271075C200FB7E8C /* TransactionTemplateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B307CE7C271075C200FB7E8C /* TransactionTemplateTest.swift */; };
 		B307CE7F271083A600FB7E8C /* ExpenseTemplateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B307CE7E271083A600FB7E8C /* ExpenseTemplateTest.swift */; };
 		B307CE812713886200FB7E8C /* ExpenseTemplateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B307CE802713886200FB7E8C /* ExpenseTemplateTest.swift */; };
@@ -20,6 +19,10 @@
 		B307CE902714E56C00FB7E8C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B307CE8E2714E56C00FB7E8C /* Localizable.strings */; };
 		B307CE942715AD3500FB7E8C /* StatisticsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B307CE932715AD3500FB7E8C /* StatisticsPresenter.swift */; };
 		B30CA4A62721D3120032E646 /* achievements-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B30CA4A52721D3120032E646 /* achievements-logo.png */; };
+		B30CA4A82725DF2F0032E646 /* TransactionTemplatesDragNDropTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30CA4A72725DF2F0032E646 /* TransactionTemplatesDragNDropTest.swift */; };
+		B30CA4AA2725DFCA0032E646 /* TransactionTemplatesSortingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30CA4A92725DFCA0032E646 /* TransactionTemplatesSortingTest.swift */; };
+		B30CA4AC27271BE30032E646 /* IncomeConvenienceMenuTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30CA4AB27271BE30032E646 /* IncomeConvenienceMenuTest.swift */; };
+		B30CA4AE27272DE80032E646 /* ExpenseConvenienceMenuTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30CA4AD27272DE80032E646 /* ExpenseConvenienceMenuTest.swift */; };
 		B3186B6D270B63A6000B4AE8 /* ProgressWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3186B6C270B63A6000B4AE8 /* ProgressWheel.swift */; };
 		B328322D26D93F22007CAD2A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328322C26D93F22007CAD2A /* AppDelegate.swift */; };
 		B328322F26D93F22007CAD2A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328322E26D93F22007CAD2A /* SceneDelegate.swift */; };
@@ -36,7 +39,7 @@
 		B32F880B2718B98B004D0960 /* AccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32F880A2718B98B004D0960 /* AccountPresenter.swift */; };
 		B349499326E1483E00829A5F /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349499226E1483E00829A5F /* HistoryTableViewController.swift */; };
 		B349499526E1670F00829A5F /* TransactionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349499426E1670F00829A5F /* TransactionDetailViewController.swift */; };
-		B349499726E3D31100829A5F /* PlannedIncomesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349499626E3D31100829A5F /* PlannedIncomesViewController.swift */; };
+		B349499726E3D31100829A5F /* TransactionTemplatesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349499626E3D31100829A5F /* TransactionTemplatesListViewController.swift */; };
 		B349499926E3DB6E00829A5F /* TransactionTemplateFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349499826E3DB6E00829A5F /* TransactionTemplateFormController.swift */; };
 		B361477C2721852E00941051 /* BackupRestoreTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B361477B2721852E00941051 /* BackupRestoreTest.swift */; };
 		B361478027218C7400941051 /* SettingsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B361477F27218C7400941051 /* SettingsTest.swift */; };
@@ -48,7 +51,7 @@
 		B3939AC927049F51005D243B /* AchievementTransactionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939AC827049F51005D243B /* AchievementTransactionTest.swift */; };
 		B3939ACB2705F627005D243B /* IncomeTemplateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939ACA2705F627005D243B /* IncomeTemplateTest.swift */; };
 		B3939ACD2705FE44005D243B /* MultiplteTransactionsAndPurgeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939ACC2705FE44005D243B /* MultiplteTransactionsAndPurgeTest.swift */; };
-		B3939ACF2706048D005D243B /* HistoricalTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939ACE2706048D005D243B /* HistoricalTransaction.swift */; };
+		B3939ACF2706048D005D243B /* HistoricalTransactionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939ACE2706048D005D243B /* HistoricalTransactionTest.swift */; };
 		B393D82D2715C15900232482 /* StatisticsPresenterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B393D82F2715C15900232482 /* StatisticsPresenterStoryboard.storyboard */; };
 		B393D8332715D17600232482 /* TransactionTemplatesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B393D8322715D17600232482 /* TransactionTemplatesPresenter.swift */; };
 		B393D8382718A9E500232482 /* TransactionTemplatesPresenterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B393D83A2718A9E500232482 /* TransactionTemplatesPresenterStoryboard.storyboard */; };
@@ -85,7 +88,6 @@
 		28B15C75CF263CDDFB9F367A /* Pods-achievementsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-achievementsTests.release.xcconfig"; path = "Target Support Files/Pods-achievementsTests/Pods-achievementsTests.release.xcconfig"; sourceTree = "<group>"; };
 		63547EF14F7522796196D941 /* Pods-achievementsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-achievementsTests.debug.xcconfig"; path = "Target Support Files/Pods-achievementsTests/Pods-achievementsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7CFC9745E66B8E13D341C26D /* Pods-achievements.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-achievements.debug.xcconfig"; path = "Target Support Files/Pods-achievements/Pods-achievements.debug.xcconfig"; sourceTree = "<group>"; };
-		B307CE7A27106EC800FB7E8C /* PlannedExpensesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannedExpensesViewController.swift; sourceTree = "<group>"; };
 		B307CE7C271075C200FB7E8C /* TransactionTemplateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTemplateTest.swift; sourceTree = "<group>"; };
 		B307CE7E271083A600FB7E8C /* ExpenseTemplateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseTemplateTest.swift; sourceTree = "<group>"; };
 		B307CE802713886200FB7E8C /* ExpenseTemplateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseTemplateTest.swift; sourceTree = "<group>"; };
@@ -98,6 +100,10 @@
 		B307CE8F2714E56C00FB7E8C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B307CE932715AD3500FB7E8C /* StatisticsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsPresenter.swift; sourceTree = "<group>"; };
 		B30CA4A52721D3120032E646 /* achievements-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "achievements-logo.png"; sourceTree = "<group>"; };
+		B30CA4A72725DF2F0032E646 /* TransactionTemplatesDragNDropTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTemplatesDragNDropTest.swift; sourceTree = "<group>"; };
+		B30CA4A92725DFCA0032E646 /* TransactionTemplatesSortingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTemplatesSortingTest.swift; sourceTree = "<group>"; };
+		B30CA4AB27271BE30032E646 /* IncomeConvenienceMenuTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeConvenienceMenuTest.swift; sourceTree = "<group>"; };
+		B30CA4AD27272DE80032E646 /* ExpenseConvenienceMenuTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseConvenienceMenuTest.swift; sourceTree = "<group>"; };
 		B3186B6C270B63A6000B4AE8 /* ProgressWheel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressWheel.swift; sourceTree = "<group>"; };
 		B328322926D93F22007CAD2A /* achievements.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = achievements.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B328322C26D93F22007CAD2A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -121,7 +127,7 @@
 		B32F880A2718B98B004D0960 /* AccountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPresenter.swift; sourceTree = "<group>"; };
 		B349499226E1483E00829A5F /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
 		B349499426E1670F00829A5F /* TransactionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewController.swift; sourceTree = "<group>"; };
-		B349499626E3D31100829A5F /* PlannedIncomesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannedIncomesViewController.swift; sourceTree = "<group>"; };
+		B349499626E3D31100829A5F /* TransactionTemplatesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTemplatesListViewController.swift; sourceTree = "<group>"; };
 		B349499826E3DB6E00829A5F /* TransactionTemplateFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTemplateFormController.swift; sourceTree = "<group>"; };
 		B361477B2721852E00941051 /* BackupRestoreTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BackupRestoreTest.swift; path = achievementsTests/Presenter/SettingsPresenter/BackupRestoreTest.swift; sourceTree = SOURCE_ROOT; };
 		B361477F27218C7400941051 /* SettingsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTest.swift; sourceTree = "<group>"; };
@@ -134,7 +140,7 @@
 		B3939AC827049F51005D243B /* AchievementTransactionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTransactionTest.swift; sourceTree = "<group>"; };
 		B3939ACA2705F627005D243B /* IncomeTemplateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeTemplateTest.swift; sourceTree = "<group>"; };
 		B3939ACC2705FE44005D243B /* MultiplteTransactionsAndPurgeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplteTransactionsAndPurgeTest.swift; sourceTree = "<group>"; };
-		B3939ACE2706048D005D243B /* HistoricalTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalTransaction.swift; sourceTree = "<group>"; };
+		B3939ACE2706048D005D243B /* HistoricalTransactionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalTransactionTest.swift; sourceTree = "<group>"; };
 		B393D82E2715C15900232482 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/StatisticsPresenterStoryboard.storyboard; sourceTree = "<group>"; };
 		B393D8312715C15F00232482 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/StatisticsPresenterStoryboard.strings; sourceTree = "<group>"; };
 		B393D8322715D17600232482 /* TransactionTemplatesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTemplatesPresenter.swift; sourceTree = "<group>"; };
@@ -275,11 +281,15 @@
 				B3939AC827049F51005D243B /* AchievementTransactionTest.swift */,
 				B3939ACA2705F627005D243B /* IncomeTemplateTest.swift */,
 				B3939ACC2705FE44005D243B /* MultiplteTransactionsAndPurgeTest.swift */,
-				B3939ACE2706048D005D243B /* HistoricalTransaction.swift */,
+				B3939ACE2706048D005D243B /* HistoricalTransactionTest.swift */,
 				B307CE7E271083A600FB7E8C /* ExpenseTemplateTest.swift */,
 				B307CE8627147EED00FB7E8C /* AutomaticPurgeTest.swift */,
 				B307CE882714A31100FB7E8C /* ProgressWheelTest.swift */,
 				B361477F27218C7400941051 /* SettingsTest.swift */,
+				B30CA4A72725DF2F0032E646 /* TransactionTemplatesDragNDropTest.swift */,
+				B30CA4A92725DFCA0032E646 /* TransactionTemplatesSortingTest.swift */,
+				B30CA4AB27271BE30032E646 /* IncomeConvenienceMenuTest.swift */,
+				B30CA4AD27272DE80032E646 /* ExpenseConvenienceMenuTest.swift */,
 			);
 			path = achievementsUITests;
 			sourceTree = "<group>";
@@ -418,9 +428,8 @@
 		B393D83727161A6500232482 /* TransactionTemplatesPresenter */ = {
 			isa = PBXGroup;
 			children = (
-				B349499626E3D31100829A5F /* PlannedIncomesViewController.swift */,
+				B349499626E3D31100829A5F /* TransactionTemplatesListViewController.swift */,
 				B349499826E3DB6E00829A5F /* TransactionTemplateFormController.swift */,
-				B307CE7A27106EC800FB7E8C /* PlannedExpensesViewController.swift */,
 			);
 			path = TransactionTemplatesPresenter;
 			sourceTree = "<group>";
@@ -748,14 +757,13 @@
 				B328327326DC2D02007CAD2A /* AchievementTransactionFormController.swift in Sources */,
 				B328326C26DBD253007CAD2A /* AchievementTransaction+CoreDataClass.swift in Sources */,
 				B3C5C4B226E5267600A52CBC /* StatisticsViewController.swift in Sources */,
-				B349499726E3D31100829A5F /* PlannedIncomesViewController.swift in Sources */,
+				B349499726E3D31100829A5F /* TransactionTemplatesListViewController.swift in Sources */,
 				B393D83E2718AC1300232482 /* AchievementTransactionsPresenter.swift in Sources */,
 				B307CE942715AD3500FB7E8C /* StatisticsPresenter.swift in Sources */,
 				B349499526E1670F00829A5F /* TransactionDetailViewController.swift in Sources */,
 				B328322D26D93F22007CAD2A /* AppDelegate.swift in Sources */,
 				B328326D26DBD253007CAD2A /* AchievementTransaction+CoreDataProperties.swift in Sources */,
 				B381160426E10B130090029D /* HistoricalTransaction+CoreDataProperties.swift in Sources */,
-				B307CE7B27106EC800FB7E8C /* PlannedExpensesViewController.swift in Sources */,
 				B393D8332715D17600232482 /* TransactionTemplatesPresenter.swift in Sources */,
 				B3E7475A27199F54006C92C5 /* SettingsListTableViewController.swift in Sources */,
 				B328325D26D94909007CAD2A /* DashboardController.swift in Sources */,
@@ -785,13 +793,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B30CA4AC27271BE30032E646 /* IncomeConvenienceMenuTest.swift in Sources */,
 				B307CE7F271083A600FB7E8C /* ExpenseTemplateTest.swift in Sources */,
 				B3939ACD2705FE44005D243B /* MultiplteTransactionsAndPurgeTest.swift in Sources */,
 				B3939ACB2705F627005D243B /* IncomeTemplateTest.swift in Sources */,
-				B3939ACF2706048D005D243B /* HistoricalTransaction.swift in Sources */,
+				B3939ACF2706048D005D243B /* HistoricalTransactionTest.swift in Sources */,
 				B3939AC927049F51005D243B /* AchievementTransactionTest.swift in Sources */,
+				B30CA4A82725DF2F0032E646 /* TransactionTemplatesDragNDropTest.swift in Sources */,
 				B307CE892714A31100FB7E8C /* ProgressWheelTest.swift in Sources */,
+				B30CA4AA2725DFCA0032E646 /* TransactionTemplatesSortingTest.swift in Sources */,
 				B361478027218C7400941051 /* SettingsTest.swift in Sources */,
+				B30CA4AE27272DE80032E646 /* ExpenseConvenienceMenuTest.swift in Sources */,
 				B307CE8727147EEE00FB7E8C /* AutomaticPurgeTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1009,7 +1021,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.4;
+				MARKETING_VERSION = 0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = de.max.schluer.achievements;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1031,7 +1043,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.4;
+				MARKETING_VERSION = 0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = de.max.schluer.achievements;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

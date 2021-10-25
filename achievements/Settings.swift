@@ -47,5 +47,7 @@ public class Settings {
 
 // MARK: Data Structs with Defaults
 struct ApplicationSettings : Codable {
-    var automaticPurge: Bool = false
+    var automaticPurge : Bool = false
+    var divideIncomeTemplatesByRecurrence : Bool = true
+    var divideExpenseTemplatesByRecurrence : Bool = true
 }

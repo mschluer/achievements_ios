@@ -66,7 +66,7 @@ class IncomeTemplateTest: XCTestCase {
         XCTAssertEqual(dataModel.nonRecurringIncomeTemplates[1].text, "gamma")
     }
     
-    func testWhetherTemplatesAreSortedAlphabetically() throws {
+    func testWhetherTemplatesCanBeSortedAlphabetically() throws {
         // Create Templates
         let texts = [ "delta", "beta", "alpha" ]
         let amounts : [Float] = [ 3.0, 2.0, 1.0 ]
@@ -81,6 +81,9 @@ class IncomeTemplateTest: XCTestCase {
             
             dataModel.save()
         }
+        
+        // Sort
+        dataModel.sortIncomeTemplates(by: [ NSSortDescriptor(key: "text", ascending: true) ])
         
         // Check alphabetical order
         let storedTemplates = dataModel.incomeTemplates
@@ -105,6 +108,9 @@ class IncomeTemplateTest: XCTestCase {
             
             dataModel.save()
         }
+        
+        // Sort
+        dataModel.sortIncomeTemplates(by: [ NSSortDescriptor(key: "text", ascending: true) ])
         
         // Check alphabetical order
         let storedTemplates = dataModel.incomeTemplates

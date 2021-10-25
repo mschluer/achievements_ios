@@ -22,6 +22,7 @@ class HistoryTableViewController: UITableViewController {
     // MARK: View Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         updateViewFromModel()
     }
     
@@ -40,19 +41,37 @@ class HistoryTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let transaction = historicalTransactionFor(indexPath: indexPath)
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "historyItemCell") {
-            if transaction.amount < 0 {
-                cell.backgroundColor = UIColor.systemRed
-            } else {
-                cell.backgroundColor = UIColor.systemGreen
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "historyItemCell") as! HistoryItemTableViewCell? {
+            if let amountLabel = cell.amountLabel {
+                if transaction.amount < 0 {
+                    amountLabel.textColor = UIColor.systemRed
+                } else {
+                    amountLabel.textColor = UIColor.systemGreen
+                }
+                
+                amountLabel.text = String (format: "%.2f", transaction.amount)
             }
             
-            if let label = cell.textLabel {
-                label.text = transaction.toString()
+            if let historicalBalanceLabel = cell.historicalBalanceLabel {
+                if transaction.balance < 0 {
+                    historicalBalanceLabel.textColor = UIColor.systemRed
+                } else {
+                    historicalBalanceLabel.textColor = UIColor.systemGreen
+                }
+                
+                historicalBalanceLabel.text = "(\(String (format: "%.2f", transaction.balance)))"
             }
             
-            if let detailLabel = cell.detailTextLabel {
-                detailLabel.text = "(\(String (format: "%.2f", transaction.balance)))"
+            if let timeLabel = cell.timeLabel {
+                let formatter = DateFormatter()
+                formatter.timeStyle = .short
+                let dateString = formatter.string(for: transaction.date)
+                 
+                timeLabel.text = dateString!
+            }
+            
+            if let titleLabel = cell.titleLabel {
+                titleLabel.text = transaction.text
             }
             
             return cell
@@ -123,4 +142,13 @@ class HistoryTableViewController: UITableViewController {
         
         self.historicalTransactionsDates = result
     }
+}
+
+class HistoryItemTableViewCell : UITableViewCell {
+    // MARK: Outlets
+    @IBOutlet weak var amountLabel: UILabel!
+    @IBOutlet weak var historicalBalanceLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    
 }

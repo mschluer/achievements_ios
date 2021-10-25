@@ -26,11 +26,12 @@ class BackupRestoreTest: XCTestCase {
     // MARK: Test for Entire Process
     func testBackupAndRestoreProcess() throws {
         // Create one of each
-        let transcation = achievementsDataModel.createAchievementTransactionWith(text: "Transaction", amount: 1.0, date: Date())
-        var template = achievementsDataModel.createTransactionTemplate()
+        _ = achievementsDataModel.createAchievementTransactionWith(text: "Transaction", amount: 1.0, date: Date())
+        let template = achievementsDataModel.createTransactionTemplate()
         template.text = "Template"
         template.amount = 2.0
         template.recurring = false
+        template.orderIndex = 0
         achievementsDataModel.save()
         
         // Create Backup
@@ -47,5 +48,10 @@ class BackupRestoreTest: XCTestCase {
         XCTAssertEqual(1, achievementsDataModel.achievementTransactions.count)
         XCTAssertEqual(1, achievementsDataModel.historicalTransactions.count)
         XCTAssertEqual(1, achievementsDataModel.transactionTemplates.count)
+        
+        // Check Transaction
+        XCTAssertEqual("Transaction", achievementsDataModel.achievementTransactions.first!.text)
+        XCTAssertEqual(0, achievementsDataModel.transactionTemplates.first!.orderIndex)
+        XCTAssertEqual(1.0, achievementsDataModel.historicalTransactions.first!.amount)
     }
 }

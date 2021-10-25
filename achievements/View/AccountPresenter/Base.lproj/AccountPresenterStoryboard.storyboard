@@ -120,6 +120,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Dashboard" id="9Zd-MP-RNW"/>
                     <connections>
+                        <outlet property="expenseTemplatesButton" destination="8iy-rC-9zu" id="lKb-xL-dDg"/>
+                        <outlet property="incomeTemplatesButton" destination="MHP-u2-p94" id="IgM-ML-2P0"/>
                         <outlet property="menuButton" destination="YPi-FL-MVe" id="Ecr-2b-Q6T"/>
                         <outlet property="progressWheel" destination="ylL-L5-AZR" id="oHi-sm-kDu"/>
                         <outlet property="recentTransactionsTableView" destination="p47-nM-Nw2" id="54d-Ig-g8d"/>
@@ -139,34 +141,60 @@
         <scene sceneID="hqg-WN-OMp">
             <objects>
                 <tableViewController id="vs7-wr-Yeq" customClass="HistoryTableViewController" customModule="achievements" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="3Zd-EU-7bx">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="3Zd-EU-7bx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="historyItemCell" textLabel="tyW-0v-mpC" detailTextLabel="tHw-UV-8PL" style="IBUITableViewCellStyleValue1" id="iDB-tL-lnh">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="historyItemCell" rowHeight="60" id="iDB-tL-lnh" customClass="HistoryItemTableViewCell" customModule="achievements" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iDB-tL-lnh" id="Cfu-9o-Qsh">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tyW-0v-mpC">
-                                            <rect key="frame" x="20" y="15" width="25" height="14.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pCf-7r-hJs">
+                                            <rect key="frame" x="20" y="11" width="25" height="14.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tHw-UV-8PL">
-                                            <rect key="frame" x="361" y="15" width="33" height="14.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6e1-if-laZ">
+                                            <rect key="frame" x="350" y="11" width="44" height="14.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Historical Balance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cxf-wM-q6M">
+                                            <rect key="frame" x="307" y="33.5" width="87" height="12"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yVb-lI-UF0">
+                                            <rect key="frame" x="20" y="33.5" width="24" height="12"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="yVb-lI-UF0" firstAttribute="top" secondItem="pCf-7r-hJs" secondAttribute="bottom" constant="8" symbolic="YES" id="Czq-L6-Gie"/>
+                                        <constraint firstItem="Cxf-wM-q6M" firstAttribute="top" secondItem="6e1-if-laZ" secondAttribute="bottom" constant="8" symbolic="YES" id="Hto-Qt-0LO"/>
+                                        <constraint firstItem="pCf-7r-hJs" firstAttribute="leading" secondItem="Cfu-9o-Qsh" secondAttribute="leadingMargin" id="aZt-Ub-rns"/>
+                                        <constraint firstItem="yVb-lI-UF0" firstAttribute="leading" secondItem="Cfu-9o-Qsh" secondAttribute="leadingMargin" id="d5f-vP-WUc"/>
+                                        <constraint firstItem="pCf-7r-hJs" firstAttribute="top" secondItem="Cfu-9o-Qsh" secondAttribute="topMargin" id="lKe-u3-lKw"/>
+                                        <constraint firstItem="6e1-if-laZ" firstAttribute="top" secondItem="Cfu-9o-Qsh" secondAttribute="topMargin" id="llN-pf-v9A"/>
+                                        <constraint firstItem="Cxf-wM-q6M" firstAttribute="trailing" secondItem="Cfu-9o-Qsh" secondAttribute="trailingMargin" id="qiT-wQ-rih"/>
+                                        <constraint firstItem="6e1-if-laZ" firstAttribute="trailing" secondItem="Cfu-9o-Qsh" secondAttribute="trailingMargin" id="wp8-Zy-46l"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="amountLabel" destination="6e1-if-laZ" id="aVz-0D-gLJ"/>
+                                    <outlet property="historicalBalanceLabel" destination="Cxf-wM-q6M" id="jgi-aS-uyj"/>
+                                    <outlet property="timeLabel" destination="yVb-lI-UF0" id="4lY-fW-5q3"/>
+                                    <outlet property="titleLabel" destination="pCf-7r-hJs" id="8me-2M-0xi"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -182,7 +210,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YCE-57-KPh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1826" y="137"/>
+            <point key="canvasLocation" x="1824.6376811594205" y="136.60714285714286"/>
         </scene>
     </scenes>
     <resources>

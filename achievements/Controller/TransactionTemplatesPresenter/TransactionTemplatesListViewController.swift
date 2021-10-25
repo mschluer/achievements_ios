@@ -1,5 +1,5 @@
 //
-//  PlannedIncomesViewController.swift
+//  TransactionTemplatesListViewController.swift
 //  achievements
 //
 //  Created by Maximilian Schluer on 04.09.21.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PlannedIncomesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITableViewDragDelegate {
+class TransactionTemplatesListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITableViewDragDelegate {
     // MARK: Persistence Models
     public var achievementsDataModel : AchievementsDataModel?
     public var displayMode : TransactionTemplatesListMode = .incomes // TODO: Remove this default
@@ -15,8 +15,6 @@ class PlannedIncomesViewController: UIViewController, UITableViewDelegate, UITab
     // MARK: Variables
     private var templatesTableData : [String : [TransactionTemplate]] = [:]
     private var templatesTableSections : [String] = []
-    private var recurringTransactionTemplates: [TransactionTemplate] = []
-    private var nonRecurringTransactionTemplates: [TransactionTemplate] = []
 
     // MARK: Outlets
     @IBOutlet weak var sortButton: UIBarButtonItem!
@@ -57,7 +55,11 @@ class PlannedIncomesViewController: UIViewController, UITableViewDelegate, UITab
     
     // MARK: Table View Data Source
     func numberOfSections(in tableView: UITableView) -> Int {
-        return Settings.applicationSettings.divideIncomeTemplatesByRecurrence ? 2 : 1
+        if(displayMode == .incomes) {
+            return Settings.applicationSettings.divideIncomeTemplatesByRecurrence ? 2 : 1
+        } else {
+            return Settings.applicationSettings.divideExpenseTemplatesByRecurrence ? 2 : 1
+        }
     }
     
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
@@ -113,38 +115,36 @@ class PlannedIncomesViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let item = transactionTemplateFor(indexPath: sourceIndexPath)
-        
-        if((displayMode == .incomes && Settings.applicationSettings.divideIncomeTemplatesByRecurrence) ||
-           (displayMode == .expenses && Settings.applicationSettings.divideExpenseTemplatesByRecurrence)) {
-            let destinationIndex : Int16
-            let key = templatesTableSections[destinationIndexPath.section]
-            var dictionaryEntry = templatesTableData[key]!
+        let sourceKey = templatesTableSections[sourceIndexPath.section]
+        var sourceDictionaryEntry = templatesTableData[sourceKey]!
+        let item : TransactionTemplate
+        if sourceIndexPath.section == destinationIndexPath.section {
+            // Re-Arrange item
+            item = sourceDictionaryEntry.remove(at: sourceIndexPath.item)
+            sourceDictionaryEntry.insert(item, at: destinationIndexPath.item)
             
-            if(destinationIndexPath.item > 0) {
-                destinationIndex = dictionaryEntry[destinationIndexPath.item - 1].orderIndex
-                dictionaryEntry.insert(item, at: destinationIndexPath.item)
-            } else {
-                destinationIndex = 0
-                dictionaryEntry.insert(item, at: 0)
+            // Reindex Dictionary Entry
+            for i in 0...sourceDictionaryEntry.count - 1 {
+                sourceDictionaryEntry[i].orderIndex = Int16(i)
             }
-            
-            // Make sure to update the recurring-flag if necessary
-            if sourceIndexPath.section != destinationIndexPath.section {
-                item.recurring = !item.recurring
-            }
-            
-            achievementsDataModel?.rearrangeTransactionTemplates(template: item, destinationIndex: Int(destinationIndex))
         } else {
-            let key = templatesTableSections[destinationIndexPath.section]
-            var dictionaryEntry = templatesTableData[key]!
+            let destinationKey = templatesTableSections[destinationIndexPath.section]
+            var destinationDictionaryEntry = templatesTableData[destinationKey]!
             
-            dictionaryEntry.remove(at: destinationIndexPath.item)
-            dictionaryEntry.insert(item, at: destinationIndexPath.item)
+            // Re-Arrange item
+            item = sourceDictionaryEntry.remove(at: sourceIndexPath.item)
+            destinationDictionaryEntry.insert(item, at: destinationIndexPath.item)
             
-            achievementsDataModel?.rearrangeTransactionTemplates(template: item, destinationIndex: destinationIndexPath.item)
+            // Reindex Dictionary Entry
+            for i in 0...destinationDictionaryEntry.count - 1 {
+                destinationDictionaryEntry[i].orderIndex = Int16(i)
+            }
+            
+            // Flip Recurring Flag
+            item.recurring = !item.recurring
         }
         
+        achievementsDataModel?.save()
         refreshData()
     }
     
@@ -216,7 +216,11 @@ class PlannedIncomesViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     private func sortMenuSplitButtonPressed() {
-        Settings.applicationSettings.divideIncomeTemplatesByRecurrence = !Settings.applicationSettings.divideIncomeTemplatesByRecurrence
+        if (displayMode == .incomes) {
+            Settings.applicationSettings.divideIncomeTemplatesByRecurrence = !Settings.applicationSettings.divideIncomeTemplatesByRecurrence
+        } else {
+            Settings.applicationSettings.divideExpenseTemplatesByRecurrence = !Settings.applicationSettings.divideExpenseTemplatesByRecurrence
+        }
         setupSortMenu()
         updateViewFromModel()
     }
@@ -287,14 +291,26 @@ class PlannedIncomesViewController: UIViewController, UITableViewDelegate, UITab
                 }),
         ])
         
-        let splitMenuItems = UIMenu(title: "", options: .displayInline, children: [
-            UIAction(
-                title: NSLocalizedString("Split Unique/Recurring", comment: "Menu Option to split into recurring and non recurring items"),
-                image: UIImage(systemName: Settings.applicationSettings.divideIncomeTemplatesByRecurrence ? "checkmark.square" : "square"),
-                handler: { _ in
-                    self.sortMenuSplitButtonPressed()
-                }),
-        ])
+        let splitMenuItems : UIMenu
+        if(displayMode == .incomes) {
+            splitMenuItems = UIMenu(title: "", options: .displayInline, children: [
+                UIAction(
+                    title: NSLocalizedString("Split Unique/Recurring", comment: "Menu Option to split into recurring and non recurring items"),
+                    image: UIImage(systemName: Settings.applicationSettings.divideIncomeTemplatesByRecurrence ? "checkmark.square" : "square"),
+                    handler: { _ in
+                        self.sortMenuSplitButtonPressed()
+                    }),
+            ])
+        } else {
+            splitMenuItems = UIMenu(title: "", options: .displayInline, children: [
+                UIAction(
+                    title: NSLocalizedString("Split Unique/Recurring", comment: "Menu Option to split into recurring and non recurring items"),
+                    image: UIImage(systemName: Settings.applicationSettings.divideExpenseTemplatesByRecurrence ? "checkmark.square" : "square"),
+                    handler: { _ in
+                        self.sortMenuSplitButtonPressed()
+                    }),
+            ])
+        }
         
         sortButton.menu = UIMenu(title: "", children: [ splitMenuItems, sortMenuItems ])
     }

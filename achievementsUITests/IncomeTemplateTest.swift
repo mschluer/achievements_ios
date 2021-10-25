@@ -163,7 +163,7 @@ class IncomeTemplateTest: XCTestCase {
         XCTAssert(app.staticTexts["Test-Template"].exists)
         XCTAssert(app.staticTexts["6.75"].exists)
         
-        app.tables/*@START_MENU_TOKEN@*/.staticTexts["Test-Template"]/*[[".cells.staticTexts[\"Test-Template\"]",".staticTexts[\"Test-Template\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.swipeRight()
+        app.tables.staticTexts["Test-Template"].swipeRight()
         app.staticTexts["Book"].tap()
         
         XCTAssertFalse(app.staticTexts["6.75"].exists)

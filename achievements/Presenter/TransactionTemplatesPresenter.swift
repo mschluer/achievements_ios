@@ -21,15 +21,17 @@ class TransactionTemplatesPresenter {
     
     // MARK: Public Functions
     public func showPlannedExpenses(from initiator : UIViewController) {
-        let viewController = storyboard.instantiateViewController(withIdentifier: "PlannedExpensesViewController") as! PlannedExpensesViewController
+        let viewController = storyboard.instantiateViewController(withIdentifier: "TransactionTemplatesListViewController") as! TransactionTemplatesListViewController
         viewController.achievementsDataModel = achievementsDataModel
+        viewController.displayMode = .expenses
         
         initiator.show(viewController, sender: self)
     }
     
     public func showPlannedIncomes(from initiator : UIViewController) {
-        let viewController = storyboard.instantiateViewController(withIdentifier: "PlannedIncomesViewController") as! PlannedIncomesViewController
+        let viewController = storyboard.instantiateViewController(withIdentifier: "TransactionTemplatesListViewController") as! TransactionTemplatesListViewController
         viewController.achievementsDataModel = achievementsDataModel
+        viewController.displayMode = .incomes
         
         initiator.show(viewController, sender: self)
     }

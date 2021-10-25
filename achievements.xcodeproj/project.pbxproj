@@ -21,6 +21,8 @@
 		B30CA4A62721D3120032E646 /* achievements-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B30CA4A52721D3120032E646 /* achievements-logo.png */; };
 		B30CA4A82725DF2F0032E646 /* TransactionTemplatesDragNDropTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30CA4A72725DF2F0032E646 /* TransactionTemplatesDragNDropTest.swift */; };
 		B30CA4AA2725DFCA0032E646 /* TransactionTemplatesSortingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30CA4A92725DFCA0032E646 /* TransactionTemplatesSortingTest.swift */; };
+		B30CA4AC27271BE30032E646 /* IncomeConvenienceMenuTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30CA4AB27271BE30032E646 /* IncomeConvenienceMenuTest.swift */; };
+		B30CA4AE27272DE80032E646 /* ExpenseConvenienceMenuTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30CA4AD27272DE80032E646 /* ExpenseConvenienceMenuTest.swift */; };
 		B3186B6D270B63A6000B4AE8 /* ProgressWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3186B6C270B63A6000B4AE8 /* ProgressWheel.swift */; };
 		B328322D26D93F22007CAD2A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328322C26D93F22007CAD2A /* AppDelegate.swift */; };
 		B328322F26D93F22007CAD2A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B328322E26D93F22007CAD2A /* SceneDelegate.swift */; };
@@ -100,6 +102,8 @@
 		B30CA4A52721D3120032E646 /* achievements-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "achievements-logo.png"; sourceTree = "<group>"; };
 		B30CA4A72725DF2F0032E646 /* TransactionTemplatesDragNDropTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTemplatesDragNDropTest.swift; sourceTree = "<group>"; };
 		B30CA4A92725DFCA0032E646 /* TransactionTemplatesSortingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTemplatesSortingTest.swift; sourceTree = "<group>"; };
+		B30CA4AB27271BE30032E646 /* IncomeConvenienceMenuTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeConvenienceMenuTest.swift; sourceTree = "<group>"; };
+		B30CA4AD27272DE80032E646 /* ExpenseConvenienceMenuTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseConvenienceMenuTest.swift; sourceTree = "<group>"; };
 		B3186B6C270B63A6000B4AE8 /* ProgressWheel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressWheel.swift; sourceTree = "<group>"; };
 		B328322926D93F22007CAD2A /* achievements.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = achievements.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B328322C26D93F22007CAD2A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -284,6 +288,8 @@
 				B361477F27218C7400941051 /* SettingsTest.swift */,
 				B30CA4A72725DF2F0032E646 /* TransactionTemplatesDragNDropTest.swift */,
 				B30CA4A92725DFCA0032E646 /* TransactionTemplatesSortingTest.swift */,
+				B30CA4AB27271BE30032E646 /* IncomeConvenienceMenuTest.swift */,
+				B30CA4AD27272DE80032E646 /* ExpenseConvenienceMenuTest.swift */,
 			);
 			path = achievementsUITests;
 			sourceTree = "<group>";
@@ -787,6 +793,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B30CA4AC27271BE30032E646 /* IncomeConvenienceMenuTest.swift in Sources */,
 				B307CE7F271083A600FB7E8C /* ExpenseTemplateTest.swift in Sources */,
 				B3939ACD2705FE44005D243B /* MultiplteTransactionsAndPurgeTest.swift in Sources */,
 				B3939ACB2705F627005D243B /* IncomeTemplateTest.swift in Sources */,
@@ -796,6 +803,7 @@
 				B307CE892714A31100FB7E8C /* ProgressWheelTest.swift in Sources */,
 				B30CA4AA2725DFCA0032E646 /* TransactionTemplatesSortingTest.swift in Sources */,
 				B361478027218C7400941051 /* SettingsTest.swift in Sources */,
+				B30CA4AE27272DE80032E646 /* ExpenseConvenienceMenuTest.swift in Sources */,
 				B307CE8727147EEE00FB7E8C /* AutomaticPurgeTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

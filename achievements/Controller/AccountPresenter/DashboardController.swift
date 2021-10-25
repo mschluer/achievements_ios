@@ -23,6 +23,8 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     private var recentTransactionsDates : [Date] = []
     
     // MARK: Outlets
+    @IBOutlet weak var expenseTemplatesButton: UIBarButtonItem!
+    @IBOutlet weak var incomeTemplatesButton: UIBarButtonItem!
     @IBOutlet weak var progressWheel: ProgressWheel!
     @IBOutlet weak var recentTransactionsTableView: UITableView!
     @IBOutlet weak var menuButton: UIBarButtonItem!
@@ -38,6 +40,9 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     override func viewWillAppear(_ animated: Bool) {
         progressWheelState = 0
         updateViewFromModel()
+        
+        setupExpenseConvenienceMenu()
+        setupIncomeConvenienceMenu()
     }
     
     // MARK: - Navigation
@@ -166,6 +171,22 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         populateProgressWheel()
     }
     
+    private func templateConvenienceMenuButtonPressed(transactionTemplate template: TransactionTemplate) {
+        _ = self.achievementsDataModel?.createAchievementTransactionWith(
+            text: template.text!,
+            amount: template.amount,
+            date: Date())
+        
+        if(!template.recurring) {
+            achievementsDataModel?.remove(transactionTemplate: template)
+        }
+        
+        // Refresh
+        updateViewFromModel()
+        setupExpenseConvenienceMenu()
+        setupIncomeConvenienceMenu()
+    }
+    
     @IBAction func toolbarAddButtonPressed(_ sender: Any) {
         AchievementTransactionsPresenter(achievevementsDataModel: achievementsDataModel).bookAchievementTransaction(from: self)
     }
@@ -198,6 +219,105 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     // MARK: Setup Steps
+    private func setupExpenseConvenienceMenu() {
+        let nonRecurringExpensesTemplates = achievementsDataModel.nonRecurringExpenseTemplates
+        let recurringExpensesTemplates = achievementsDataModel.recurringExpenseTemplates
+        
+        var recurringSectionMenuItems : [UIAction] = []
+        for i in 0...4 {
+            if(i >= recurringExpensesTemplates.count) { break }
+            
+            let currentTemplate = recurringExpensesTemplates[i]
+            
+            if(currentTemplate.isQuickBookable()) {
+                recurringSectionMenuItems.append(
+                    UIAction(title: "\(currentTemplate.text!) (\(String (format: "%.2f", currentTemplate.amount)))",
+                             image: nil,
+                             handler: { _ in
+                                 self.templateConvenienceMenuButtonPressed(transactionTemplate: currentTemplate)
+                             }))
+            }
+        }
+        let recurringSection = UIMenu(title: "", options: .displayInline, children:recurringSectionMenuItems)
+        
+        var nonRecurringSectionMenuItems : [UIAction] = []
+        if let nonRecurringExpenseTemplate = nonRecurringExpensesTemplates.first {
+            if(nonRecurringExpenseTemplate.isQuickBookable()) {
+                
+                nonRecurringSectionMenuItems.append(
+                    UIAction(title: "\(nonRecurringExpenseTemplate.text!) (\(String (format: "%.2f", nonRecurringExpenseTemplate.amount)))",
+                             image: nil,
+                             handler: { _ in
+                                 self.templateConvenienceMenuButtonPressed(transactionTemplate: nonRecurringExpenseTemplate)
+                             }))
+            }
+        }
+        let nonRecurringSection = UIMenu(title: "", options: .displayInline, children: nonRecurringSectionMenuItems)
+        
+        
+        if (nonRecurringSectionMenuItems.count == 0 && recurringSectionMenuItems.count == 0) {
+            expenseTemplatesButton.menu = nil
+        } else {
+            if(nonRecurringSectionMenuItems.count == 0) {
+                expenseTemplatesButton.menu = UIMenu(title: "", children: [ recurringSection ])
+            } else if (recurringSectionMenuItems.count == 0) {
+                expenseTemplatesButton.menu  = UIMenu(title: "", children: [ nonRecurringSection ])
+            } else {
+                expenseTemplatesButton.menu = UIMenu(title: "", children: [ recurringSection, nonRecurringSection ])
+            }
+        }
+    }
+    
+    private func setupIncomeConvenienceMenu() {
+        let nonRecurringIncomesTemplates = achievementsDataModel.nonRecurringIncomeTemplates
+        let recurringIncomesTemplates = achievementsDataModel.recurringIncomeTemplates
+        
+        var recurringSectionMenuItems : [UIAction] = []
+        for i in 0...4 {
+            if(i >= recurringIncomesTemplates.count) { break }
+            
+            let currentTemplate = recurringIncomesTemplates[i]
+            
+            if(currentTemplate.isQuickBookable()) {
+                recurringSectionMenuItems.append(
+                    UIAction(title: "\(currentTemplate.text!) (\(String (format: "%.2f", currentTemplate.amount)))",
+                             image: nil,
+                             handler: { _ in
+                                 self.templateConvenienceMenuButtonPressed(transactionTemplate: currentTemplate)
+                             }))
+            }
+        }
+        let recurringSection = UIMenu(title: "", options: .displayInline, children:recurringSectionMenuItems)
+        
+        var nonRecurringSectionMenuItems : [UIAction] = []
+        if let nonRecurringIncomeTemplate = nonRecurringIncomesTemplates.first {
+            if(nonRecurringIncomeTemplate.isQuickBookable()) {
+                
+                nonRecurringSectionMenuItems.append(
+                    UIAction(title: "\(nonRecurringIncomeTemplate.text!) (\(String (format: "%.2f", nonRecurringIncomeTemplate.amount)))",
+                             image: nil,
+                             handler: { _ in
+                                 self.templateConvenienceMenuButtonPressed(transactionTemplate: nonRecurringIncomeTemplate)
+                             }))
+            }
+        }
+        let nonRecurringSection = UIMenu(title: "", options: .displayInline, children: nonRecurringSectionMenuItems)
+        
+        
+        if (nonRecurringSectionMenuItems.count == 0 && recurringSectionMenuItems.count == 0) {
+            incomeTemplatesButton.menu = nil
+        } else {
+            if(nonRecurringSectionMenuItems.count == 0) {
+                incomeTemplatesButton.menu = UIMenu(title: "", children: [ recurringSection ])
+            } else if (recurringSectionMenuItems.count == 0) {
+                incomeTemplatesButton.menu  = UIMenu(title: "", children: [ nonRecurringSection ])
+            } else {
+                incomeTemplatesButton.menu = UIMenu(title: "", children: [ recurringSection, nonRecurringSection ])
+            }
+        }
+        
+    }
+    
     private func setupMainMenu() {
         let mainMenuDestruct = UIAction(title: NSLocalizedString("Reset", comment: "Set something back to initial state."), image: UIImage(systemName: "trash.circle"), attributes: .destructive) { _ in
             self.mainMenuResetButtonPressed() }
@@ -380,5 +500,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         
         updateViewFromModel()
         setupMainMenu()
+        setupExpenseConvenienceMenu()
+        setupIncomeConvenienceMenu()
     }
 }

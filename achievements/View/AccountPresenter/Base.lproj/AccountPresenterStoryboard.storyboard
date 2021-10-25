@@ -120,6 +120,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Dashboard" id="9Zd-MP-RNW"/>
                     <connections>
+                        <outlet property="expenseTemplatesButton" destination="8iy-rC-9zu" id="lKb-xL-dDg"/>
+                        <outlet property="incomeTemplatesButton" destination="MHP-u2-p94" id="IgM-ML-2P0"/>
                         <outlet property="menuButton" destination="YPi-FL-MVe" id="Ecr-2b-Q6T"/>
                         <outlet property="progressWheel" destination="ylL-L5-AZR" id="oHi-sm-kDu"/>
                         <outlet property="recentTransactionsTableView" destination="p47-nM-Nw2" id="54d-Ig-g8d"/>

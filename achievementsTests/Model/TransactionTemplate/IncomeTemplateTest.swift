@@ -83,7 +83,7 @@ class IncomeTemplateTest: XCTestCase {
         }
         
         // Sort
-        dataModel.sortPlannedIncomes(by: [ NSSortDescriptor(key: "text", ascending: true) ])
+        dataModel.sortIncomeTemplates(by: [ NSSortDescriptor(key: "text", ascending: true) ])
         
         // Check alphabetical order
         let storedTemplates = dataModel.incomeTemplates
@@ -110,7 +110,7 @@ class IncomeTemplateTest: XCTestCase {
         }
         
         // Sort
-        dataModel.sortPlannedIncomes(by: [ NSSortDescriptor(key: "text", ascending: true) ])
+        dataModel.sortIncomeTemplates(by: [ NSSortDescriptor(key: "text", ascending: true) ])
         
         // Check alphabetical order
         let storedTemplates = dataModel.incomeTemplates

@@ -266,7 +266,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         
         // Update Progress Wheel
         if(balance >= 0) {
-            if let plannedExpense = achievementsDataModel.plannedExpenses.first {
+            if let plannedExpense = achievementsDataModel.expenseTemplates.first {
                 progressWheel.inactiveColor = UIColor.systemGray
                 progressWheel.activeColor = UIColor.systemGreen
                 let percentage = (achievementsDataModel.totalRecentIncomes / plannedExpense.amount) * -100
@@ -304,9 +304,9 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         if achievementsDataModel.recentExpenses.first != nil {
             // Redeemable Recent Expense
             percentage = (achievementsDataModel.totalRecentIncomes / achievementsDataModel.recentExpenses.first!.amount) * -100
-        } else if achievementsDataModel.plannedExpenses.first != nil {
+        } else if achievementsDataModel.expenseTemplates.first != nil {
             // Planned Expense
-            percentage = (achievementsDataModel.totalRecentIncomes / achievementsDataModel.plannedExpenses.first!.amount) * -100
+            percentage = (achievementsDataModel.totalRecentIncomes / achievementsDataModel.expenseTemplates.first!.amount) * -100
         }
         
         progressWheel.text = "\(String (format: "%.2f", percentage)) %"
@@ -336,9 +336,9 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         if achievementsDataModel.recentExpenses.count > 0 {
             // Redeemable Recent Expense
             remainingAmount = (achievementsDataModel.recentExpenses.first?.amount ?? 0.0 ) + achievementsDataModel.totalRecentIncomes
-        } else if achievementsDataModel.plannedExpenses.count > 0 {
+        } else if achievementsDataModel.expenseTemplates.count > 0 {
             // Planned Expense
-            remainingAmount = (achievementsDataModel.plannedExpenses.first?.amount ?? 0.0) + achievementsDataModel.totalRecentIncomes
+            remainingAmount = (achievementsDataModel.expenseTemplates.first?.amount ?? 0.0) + achievementsDataModel.totalRecentIncomes
         }
         
         if remainingAmount < 0 {

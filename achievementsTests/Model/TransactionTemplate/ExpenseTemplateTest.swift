@@ -50,10 +50,10 @@ class ExpenseTemplateTest: XCTestCase {
         dataModel.save()
         
         dataModel.rearrangeTransactionTemplates(template: appendedTemplate, destinationIndex: 0)
-        XCTAssertEqual(dataModel.plannedExpenses[0].text, "delta")
-        XCTAssertEqual(dataModel.plannedExpenses[1].text, "alpha")
-        XCTAssertEqual(dataModel.plannedExpenses[2].text, "beta")
-        XCTAssertEqual(dataModel.plannedExpenses[3].text, "gamma")
+        XCTAssertEqual(dataModel.expenseTemplates[0].text, "delta")
+        XCTAssertEqual(dataModel.expenseTemplates[1].text, "alpha")
+        XCTAssertEqual(dataModel.expenseTemplates[2].text, "beta")
+        XCTAssertEqual(dataModel.expenseTemplates[3].text, "gamma")
     }
     
     func testAddingIntoTheMiddle() throws {
@@ -82,10 +82,10 @@ class ExpenseTemplateTest: XCTestCase {
         dataModel.save()
         
         dataModel.rearrangeTransactionTemplates(template: appendedTemplate, destinationIndex: 2)
-        XCTAssertEqual(dataModel.plannedExpenses[0].text, "alpha")
-        XCTAssertEqual(dataModel.plannedExpenses[1].text, "delta")
-        XCTAssertEqual(dataModel.plannedExpenses[2].text, "beta")
-        XCTAssertEqual(dataModel.plannedExpenses[3].text, "gamma")
+        XCTAssertEqual(dataModel.expenseTemplates[0].text, "alpha")
+        XCTAssertEqual(dataModel.expenseTemplates[1].text, "delta")
+        XCTAssertEqual(dataModel.expenseTemplates[2].text, "beta")
+        XCTAssertEqual(dataModel.expenseTemplates[3].text, "gamma")
     }
     
     func testAddingToEnd() throws {
@@ -114,9 +114,9 @@ class ExpenseTemplateTest: XCTestCase {
         dataModel.save()
         
         dataModel.rearrangeTransactionTemplates(template: appendedTemplate, destinationIndex: 4)
-        XCTAssertEqual(dataModel.plannedExpenses[0].text, "alpha")
-        XCTAssertEqual(dataModel.plannedExpenses[1].text, "beta")
-        XCTAssertEqual(dataModel.plannedExpenses[2].text, "gamma")
-        XCTAssertEqual(dataModel.plannedExpenses[3].text, "delta")
+        XCTAssertEqual(dataModel.expenseTemplates[0].text, "alpha")
+        XCTAssertEqual(dataModel.expenseTemplates[1].text, "beta")
+        XCTAssertEqual(dataModel.expenseTemplates[2].text, "gamma")
+        XCTAssertEqual(dataModel.expenseTemplates[3].text, "delta")
     }
 }

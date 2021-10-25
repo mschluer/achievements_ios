@@ -22,6 +22,12 @@ class AchievementsDataModel {
         request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
         return try! viewContext.fetch(request)
     }
+    var expenseTemplates: [TransactionTemplate] {
+        let request : NSFetchRequest<TransactionTemplate> = TransactionTemplate.fetchRequest()
+        request.predicate = NSPredicate(format: "amount < 0")
+        request.sortDescriptors = [NSSortDescriptor(key: "orderIndex", ascending: true)]
+        return try! self.viewContext.fetch(request)
+    }
     var groupedAchievementTransactions : [Date: [AchievementTransaction]] {
         let transactions = achievementTransactions
         
@@ -80,15 +86,15 @@ class AchievementsDataModel {
         request.predicate = NSPredicate(format: "amount >= 0")
         return try! self.viewContext.fetch(request)
     }
-    var nonRecurringIncomeTemplates: [TransactionTemplate] {
+    var nonRecurringExpenseTemplates: [TransactionTemplate] {
         let request : NSFetchRequest<TransactionTemplate> = TransactionTemplate.fetchRequest()
-        request.predicate = NSPredicate(format: "recurring = false && amount >= 0")
+        request.predicate = NSPredicate(format: "recurring = false && amount < 0")
         request.sortDescriptors = [NSSortDescriptor(key: "orderIndex", ascending: true)]
         return try! self.viewContext.fetch(request)
     }
-    var plannedExpenses: [TransactionTemplate] {
+    var nonRecurringIncomeTemplates: [TransactionTemplate] {
         let request : NSFetchRequest<TransactionTemplate> = TransactionTemplate.fetchRequest()
-        request.predicate = NSPredicate(format: "amount < 0")
+        request.predicate = NSPredicate(format: "recurring = false && amount >= 0")
         request.sortDescriptors = [NSSortDescriptor(key: "orderIndex", ascending: true)]
         return try! self.viewContext.fetch(request)
     }
@@ -103,6 +109,12 @@ class AchievementsDataModel {
         fetchRequest.predicate = NSPredicate(format: "amount >= 0")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
         return try! self.viewContext.fetch(fetchRequest)
+    }
+    var recurringExpenseTemplates: [TransactionTemplate] {
+        let request : NSFetchRequest<TransactionTemplate> = TransactionTemplate.fetchRequest()
+        request.predicate = NSPredicate(format: "recurring = true && amount < 0")
+        request.sortDescriptors = [NSSortDescriptor(key: "orderIndex", ascending: true)]
+        return try! self.viewContext.fetch(request)
     }
     var recurringIncomeTemplates: [TransactionTemplate] {
         let request : NSFetchRequest<TransactionTemplate> = TransactionTemplate.fetchRequest()
@@ -229,12 +241,22 @@ class AchievementsDataModel {
     
     public func rearrangeTransactionTemplates(template: TransactionTemplate, destinationIndex: Int) {
         reindexPlannedExpenses()
+        reindexPlannedIncomes()
         
         // Push forward
-        let expenses = plannedExpenses
-        if destinationIndex < plannedExpenses.count {
-            for i in destinationIndex...(expenses.count - 1) {
-                expenses[i].orderIndex += 1
+        if template.amount < 0 {
+            let expenses = expenseTemplates
+            if destinationIndex < expenseTemplates.count {
+                for i in destinationIndex...(expenses.count - 1) {
+                    expenses[i].orderIndex += 1
+                }
+            }
+        } else {
+            let incomes = transactionTemplates
+            if destinationIndex < transactionTemplates.count {
+                for i in destinationIndex...(incomes.count - 1) {
+                    incomes[i].orderIndex += 1
+                }
             }
         }
         
@@ -271,7 +293,10 @@ class AchievementsDataModel {
     }
     
     public func reindexPlannedExpenses() {
-        let expenses = plannedExpenses
+        let expenses = expenseTemplates
+        if expenses.count < 1 {
+            return
+        }
         
         for i in 0...expenses.count - 1 {
             expenses[i].orderIndex = Int16(i)
@@ -282,6 +307,9 @@ class AchievementsDataModel {
     
     public func reindexPlannedIncomes() {
         let incomes = incomeTemplates
+        if incomes.count < 1 {
+            return
+        }
         
         for i in 0...incomes.count - 1 {
             incomes[i].orderIndex = Int16(i)
@@ -337,7 +365,7 @@ class AchievementsDataModel {
         }
     }
     
-    public func sortPlannedExpenses(by sortDescriptors : [NSSortDescriptor]) {
+    public func sortExpenseTemplates(by sortDescriptors : [NSSortDescriptor]) {
         // Fetch
         let request : NSFetchRequest<TransactionTemplate> = TransactionTemplate.fetchRequest()
         request.sortDescriptors = sortDescriptors
@@ -358,7 +386,7 @@ class AchievementsDataModel {
         self.save()
     }
     
-    public func sortPlannedIncomes(by sortDescriptors : [NSSortDescriptor]) {
+    public func sortIncomeTemplates(by sortDescriptors : [NSSortDescriptor]) {
         // Fetch
         let request : NSFetchRequest<TransactionTemplate> = TransactionTemplate.fetchRequest()
         request.sortDescriptors = sortDescriptors

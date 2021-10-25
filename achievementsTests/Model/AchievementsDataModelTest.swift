@@ -110,11 +110,11 @@ class AchievementsDataModelTest: XCTestCase {
     
     // MARK: Sorting
     func testSortingWithNoPlannedExpenses() throws {
-        subject.sortPlannedIncomes(by: [ NSSortDescriptor(key: "text", ascending: true)])
+        subject.sortIncomeTemplates(by: [ NSSortDescriptor(key: "text", ascending: true)])
     }
     
     func testSortingWithNoPlannedIncomes() throws {
-        subject.sortPlannedExpenses(by: [ NSSortDescriptor(key: "text", ascending: true)])
+        subject.sortExpenseTemplates(by: [ NSSortDescriptor(key: "text", ascending: true)])
     }
 
     // MARK: Destructive Operations

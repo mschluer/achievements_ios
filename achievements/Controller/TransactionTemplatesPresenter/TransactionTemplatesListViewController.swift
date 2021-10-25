@@ -181,36 +181,36 @@ class TransactionTemplatesListViewController: UIViewController, UITableViewDeleg
     // MARK: Action Handlers
     private func sortMenuSortAlphabeticallyButtonPressed() {
         if(displayMode == .incomes) {
-            achievementsDataModel?.sortPlannedIncomes(by: [ NSSortDescriptor(key: "text", ascending: true) ])
+            achievementsDataModel?.sortIncomeTemplates(by: [ NSSortDescriptor(key: "text", ascending: true) ])
         } else {
-            achievementsDataModel?.sortPlannedExpenses(by: [ NSSortDescriptor(key: "text", ascending: true) ])
+            achievementsDataModel?.sortExpenseTemplates(by: [ NSSortDescriptor(key: "text", ascending: true) ])
         }
         updateViewFromModel()
     }
     
     private func sortMenuSortAlphabeticallyDescendingButtonPressed() {
         if(displayMode == .incomes) {
-            achievementsDataModel?.sortPlannedIncomes(by: [ NSSortDescriptor(key: "text", ascending: false) ])
+            achievementsDataModel?.sortIncomeTemplates(by: [ NSSortDescriptor(key: "text", ascending: false) ])
         } else {
-            achievementsDataModel?.sortPlannedExpenses(by: [ NSSortDescriptor(key: "text", ascending: false) ])
+            achievementsDataModel?.sortExpenseTemplates(by: [ NSSortDescriptor(key: "text", ascending: false) ])
         }
         updateViewFromModel()
     }
     
     private func sortMenuSortByAmountButtonPressed() {
         if(displayMode == .incomes) {
-            achievementsDataModel?.sortPlannedIncomes(by: [ NSSortDescriptor(key: "amount", ascending: true) ])
+            achievementsDataModel?.sortIncomeTemplates(by: [ NSSortDescriptor(key: "amount", ascending: true) ])
         } else {
-            achievementsDataModel?.sortPlannedExpenses(by: [ NSSortDescriptor(key: "amount", ascending: false) ])
+            achievementsDataModel?.sortExpenseTemplates(by: [ NSSortDescriptor(key: "amount", ascending: false) ])
         }
         updateViewFromModel()
     }
     
     private func sortMenuSortByAmountDescendingButtonPressed() {
         if(displayMode == .incomes) {
-            achievementsDataModel?.sortPlannedIncomes(by: [ NSSortDescriptor(key: "amount", ascending: false) ])
+            achievementsDataModel?.sortIncomeTemplates(by: [ NSSortDescriptor(key: "amount", ascending: false) ])
         } else {
-            achievementsDataModel?.sortPlannedExpenses(by: [ NSSortDescriptor(key: "amount", ascending: true) ])
+            achievementsDataModel?.sortExpenseTemplates(by: [ NSSortDescriptor(key: "amount", ascending: true) ])
         }
         updateViewFromModel()
     }
@@ -351,7 +351,7 @@ class TransactionTemplatesListViewController: UIViewController, UITableViewDeleg
                 ]
             } else {
                 templatesTableData =  [
-                    "Templates" : achievementsDataModel!.plannedExpenses
+                    "Templates" : achievementsDataModel!.expenseTemplates
                 ]
             }
         }

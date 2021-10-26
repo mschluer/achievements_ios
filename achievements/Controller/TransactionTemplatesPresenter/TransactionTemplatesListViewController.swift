@@ -368,7 +368,6 @@ class TransactionTemplatesListViewController: UIViewController, UITableViewDeleg
     }
     
     private func updateEmptyScreenState() {
-        print("Updating Empty Screen State")
         var empty = true
         for section in self.templatesTableSections {
             if(!templatesTableData[section]!.isEmpty) {
@@ -408,7 +407,6 @@ class TransactionTemplatesListViewController: UIViewController, UITableViewDeleg
             self.emptyScreenLabel = label
         } else {
             if let label = self.emptyScreenLabel {
-                print("Removing the Label now")
                 label.removeFromSuperview()
                 self.emptyScreenLabel = nil
             }

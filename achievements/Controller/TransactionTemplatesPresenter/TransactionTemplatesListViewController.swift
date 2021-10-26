@@ -14,6 +14,7 @@ class TransactionTemplatesListViewController: UIViewController, UITableViewDeleg
     public var displayMode : TransactionTemplatesListMode = .incomes // TODO: Remove this default
     
     // MARK: Variables
+    private var emptyScreenLabel : UILabel?
     private var templatesTableData : [String : [TransactionTemplate]] = [:]
     private var templatesTableSections : [String] = []
 
@@ -234,6 +235,7 @@ class TransactionTemplatesListViewController: UIViewController, UITableViewDeleg
         achievementsDataModel?.remove(transactionTemplate: transactionTemplateFor(indexPath: indexPath))
         refreshData()
         self.templatesTable.deleteRows(at: [indexPath], with: .automatic)
+        updateEmptyScreenState()
     }
     
     private func swipeRightQuickBook(at indexPath: IndexPath) {
@@ -322,7 +324,7 @@ class TransactionTemplatesListViewController: UIViewController, UITableViewDeleg
         refreshSections()
         templatesTable.reloadData()
         
-        applyEmptyScreenState()
+        updateEmptyScreenState()
     }
     
     private func transactionTemplateFor(indexPath: IndexPath) -> TransactionTemplate {
@@ -365,39 +367,52 @@ class TransactionTemplatesListViewController: UIViewController, UITableViewDeleg
         templatesTableSections.sort(by: <)
     }
     
-    private func applyEmptyScreenState() {
-        if((self.displayMode == .expenses && self.achievementsDataModel?.expenseTemplates.count ?? 0 > 0) ||
-           (self.displayMode == .incomes && self.achievementsDataModel?.incomeTemplates.count ?? 0 > 0)) {
-            return
+    private func updateEmptyScreenState() {
+        print("Updating Empty Screen State")
+        var empty = true
+        for section in self.templatesTableSections {
+            if(!templatesTableData[section]!.isEmpty) {
+                empty = false
+            }
         }
         
-        let label = UILabel()
-        label.text = NSLocalizedString("There are no Templates yet.\n\nTemplates can be added with the + Button in the bottom left hand corner.", comment: "Empty Screen Text for Transaction Templates")
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.addConstraints([
-            NSLayoutConstraint(
-                item: label,
-                attribute: NSLayoutConstraint.Attribute.width,
-                relatedBy: NSLayoutConstraint.Relation.equal,
-                toItem: nil,
-                attribute: NSLayoutConstraint.Attribute.notAnAttribute,
-                multiplier: 1,
-                constant: 200),
-            NSLayoutConstraint(
-                item: label,
-                attribute: NSLayoutConstraint.Attribute.height,
-                relatedBy: NSLayoutConstraint.Relation.greaterThanOrEqual,
-                toItem: nil,
-                attribute: NSLayoutConstraint.Attribute.notAnAttribute,
-                multiplier: 1,
-                constant: 200)
-        ])
-        self.templatesTable.addSubview(label)
-        
-        label.centerXAnchor.constraint(equalTo: templatesTable.centerXAnchor).isActive = true
-        label.centerYAnchor.constraint(equalTo: templatesTable.centerYAnchor).isActive = true
+        if(empty) {
+            let label = UILabel()
+            label.text = NSLocalizedString("There are no Templates yet.\n\nTemplates can be added with the + Button in the bottom left hand corner.", comment: "Empty Screen Text for Transaction Templates")
+            label.numberOfLines = 0
+            label.textAlignment = .center
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.addConstraints([
+                NSLayoutConstraint(
+                    item: label,
+                    attribute: NSLayoutConstraint.Attribute.width,
+                    relatedBy: NSLayoutConstraint.Relation.equal,
+                    toItem: nil,
+                    attribute: NSLayoutConstraint.Attribute.notAnAttribute,
+                    multiplier: 1,
+                    constant: 200),
+                NSLayoutConstraint(
+                    item: label,
+                    attribute: NSLayoutConstraint.Attribute.height,
+                    relatedBy: NSLayoutConstraint.Relation.greaterThanOrEqual,
+                    toItem: nil,
+                    attribute: NSLayoutConstraint.Attribute.notAnAttribute,
+                    multiplier: 1,
+                    constant: 200)
+            ])
+            self.templatesTable.addSubview(label)
+            
+            label.centerXAnchor.constraint(equalTo: templatesTable.centerXAnchor).isActive = true
+            label.centerYAnchor.constraint(equalTo: templatesTable.centerYAnchor).isActive = true
+            
+            self.emptyScreenLabel = label
+        } else {
+            if let label = self.emptyScreenLabel {
+                print("Removing the Label now")
+                label.removeFromSuperview()
+                self.emptyScreenLabel = nil
+            }
+        }
     }
 }
 

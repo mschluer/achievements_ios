@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ESU-iE-Qyq">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="774"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ylL-L5-AZR" customClass="ProgressWheel" customModule="achievements" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
@@ -48,6 +48,13 @@
                                                 <exclude reference="K30-iU-Np5"/>
                                             </mask>
                                         </variation>
+                                        <variation key="heightClass=compact-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="C3m-IQ-0GE"/>
+                                                <include reference="K30-iU-Np5"/>
+                                                <exclude reference="jtN-An-27p"/>
+                                            </mask>
+                                        </variation>
                                         <variation key="heightClass=compact-widthClass=regular">
                                             <mask key="constraints">
                                                 <include reference="C3m-IQ-0GE"/>
@@ -60,7 +67,7 @@
                                         </connections>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="p47-nM-Nw2">
-                                        <rect key="frame" x="0.0" y="200" width="414" height="569"/>
+                                        <rect key="frame" x="0.0" y="200" width="414" height="574"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <gestureRecognizers/>
                                         <prototypes>
@@ -104,6 +111,15 @@
                                         <exclude reference="qir-nu-aTf"/>
                                     </mask>
                                 </variation>
+                                <variation key="heightClass=compact-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="guw-L8-LJe"/>
+                                        <exclude reference="obi-6c-CjZ"/>
+                                        <exclude reference="Ppq-sV-m0b"/>
+                                        <exclude reference="d4p-OF-ABv"/>
+                                        <include reference="qir-nu-aTf"/>
+                                    </mask>
+                                </variation>
                                 <variation key="heightClass=compact-widthClass=regular">
                                     <mask key="constraints">
                                         <include reference="UFf-nR-prN"/>
@@ -121,7 +137,7 @@
                                 </variation>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pJ0-MX-y9q">
-                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
                                 <items>
                                     <barButtonItem systemItem="add" id="g9P-G5-iWy">
                                         <connections>

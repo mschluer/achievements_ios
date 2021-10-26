@@ -21,6 +21,6 @@ public class AchievementTransaction: NSManagedObject {
         
         let dateString = formatter.string(for: date)
         
-        return "\(dateString!): \(String (format: "%.2f", amount)) \(text ?? "n/a")"
+        return "\(dateString!): \(NumberHelper.formattedString(for: amount)) \(text ?? "n/a")"
     }
 }

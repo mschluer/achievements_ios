@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class TransactionTemplatesListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITableViewDragDelegate {
     // MARK: Persistence Models
@@ -25,7 +26,7 @@ class TransactionTemplatesListViewController: UIViewController, UITableViewDeleg
         super.viewDidLoad()
         
         setupSortMenu()
-        setupTemplateTable()
+        setupTemplatesTable()
         
         templatesTable.dragInteractionEnabled = true
         templatesTable.dragDelegate = self
@@ -74,10 +75,10 @@ class TransactionTemplatesListViewController: UIViewController, UITableViewDeleg
             cell.textLabel?.text = template.text
             if template.amount < 0 {
                 cell.detailTextLabel?.textColor = UIColor.systemRed
-                cell.detailTextLabel?.text = String (format: "%.2f", template.amount)
+                cell.detailTextLabel?.text = NumberHelper.formattedString(for: template.amount)
             } else if template.amount > 0 {
                 cell.detailTextLabel?.textColor = UIColor.systemGreen
-                cell.detailTextLabel?.text = String (format: "%.2f", template.amount)
+                cell.detailTextLabel?.text = NumberHelper.formattedString(for: template.amount)
             } else {
                 cell.detailTextLabel?.text = ""
             }
@@ -256,7 +257,7 @@ class TransactionTemplatesListViewController: UIViewController, UITableViewDeleg
     }
     
     // MARK: Setup Steps
-    private func setupTemplateTable() {
+    private func setupTemplatesTable() {
         self.templatesTable.dataSource = self
         self.templatesTable.delegate = self
         
@@ -320,6 +321,8 @@ class TransactionTemplatesListViewController: UIViewController, UITableViewDeleg
         refreshData()
         refreshSections()
         templatesTable.reloadData()
+        
+        applyEmptyScreenState()
     }
     
     private func transactionTemplateFor(indexPath: IndexPath) -> TransactionTemplate {
@@ -360,6 +363,41 @@ class TransactionTemplatesListViewController: UIViewController, UITableViewDeleg
     private func refreshSections() {
         templatesTableSections = Array(templatesTableData.keys)
         templatesTableSections.sort(by: <)
+    }
+    
+    private func applyEmptyScreenState() {
+        if((self.displayMode == .expenses && self.achievementsDataModel?.expenseTemplates.count ?? 0 > 0) ||
+           (self.displayMode == .incomes && self.achievementsDataModel?.incomeTemplates.count ?? 0 > 0)) {
+            return
+        }
+        
+        let label = UILabel()
+        label.text = NSLocalizedString("There are no Templates yet.\n\nTemplates can be added with the + Button in the bottom left hand corner.", comment: "Empty Screen Text for Transaction Templates")
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.addConstraints([
+            NSLayoutConstraint(
+                item: label,
+                attribute: NSLayoutConstraint.Attribute.width,
+                relatedBy: NSLayoutConstraint.Relation.equal,
+                toItem: nil,
+                attribute: NSLayoutConstraint.Attribute.notAnAttribute,
+                multiplier: 1,
+                constant: 200),
+            NSLayoutConstraint(
+                item: label,
+                attribute: NSLayoutConstraint.Attribute.height,
+                relatedBy: NSLayoutConstraint.Relation.greaterThanOrEqual,
+                toItem: nil,
+                attribute: NSLayoutConstraint.Attribute.notAnAttribute,
+                multiplier: 1,
+                constant: 200)
+        ])
+        self.templatesTable.addSubview(label)
+        
+        label.centerXAnchor.constraint(equalTo: templatesTable.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: templatesTable.centerYAnchor).isActive = true
     }
 }
 

@@ -40,12 +40,12 @@ class AchievementTransactionTest: XCTestCase {
         app.buttons["submitButton"].tap()
         
         // Dashboard
-        XCTAssert(app.staticTexts["+5.50"].exists)
+        XCTAssert(app.staticTexts["+5,50"].exists)
         app.tables.cells["transactionCell"].tap()
         
         // Transaction Detail View
-        XCTAssert(app.staticTexts["+5.50"].exists)
-        XCTAssert(app.staticTexts["( +5.50 )"].exists)
+        XCTAssert(app.staticTexts["+5,50"].exists)
+        XCTAssert(app.staticTexts["( +5,50 )"].exists)
         XCTAssert(app.staticTexts["Test-Text"].exists)
         app.navigationBars["Details"].buttons["Dashboard"].tap()
         
@@ -58,9 +58,9 @@ class AchievementTransactionTest: XCTestCase {
         app.buttons["submitButton"].tap()
         
         // Dashboard
-        XCTAssert(app.staticTexts["-5.50"].exists)
+        XCTAssert(app.staticTexts["-5,50"].exists)
         app.tables.cells["transactionCell"].swipeLeft()
         app.staticTexts["Delete"].tap()
-        XCTAssert(app.staticTexts["+/- 0.00"].exists)
+        XCTAssert(app.staticTexts["+/- 0,00"].exists)
     }
 }

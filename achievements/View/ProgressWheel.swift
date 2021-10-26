@@ -74,6 +74,11 @@ class ProgressWheel : UIView {
                 activeColor.setStroke()
             }
             
+            // Fix for the 50 % - Case
+            if(percentage == 50 && i == 25) {
+                activeColor.setStroke()
+            }
+            
             // Move away from center
             let firstPoint = CGPoint(x: bounds.size.width / CGFloat(2.0) + CGFloat(50.0 * sin(angle)), y: bounds.size.height / CGFloat(2.0) + CGFloat(50.0 * cos(angle)))
             let secondPoint = CGPoint(x: bounds.size.width / CGFloat(2.0) + CGFloat(80.0 * sin(angle)), y: bounds.size.height / CGFloat(2.0) + CGFloat(80.0 * cos(angle)))

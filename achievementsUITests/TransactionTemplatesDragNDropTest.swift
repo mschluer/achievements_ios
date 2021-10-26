@@ -23,58 +23,6 @@ class TransactionTemplatesDragNDropTest: XCTestCase {
     override func tearDownWithError() throws {
     }
     
-    func testReorder() throws {
-        let app = XCUIApplication()
-        
-        // Dashboard
-        app.toolbars["Toolbar"].buttons["expenseTemplates"].tap()
-        
-        // Transaction Templates List (Expenses)
-        app.toolbars.buttons["Sort"].tap()
-        app.collectionViews.buttons["Split Unique/Recurring"].tap()
-        app.toolbars["Toolbar"].buttons["Add"].tap()
-        
-        // Transaction Template Form (Create)
-        app.textFields["amountInputField"].typeText("1")
-        app.textFields["textInputField"].tap()
-        app.textFields["textInputField"].typeText("1st")
-        
-        app.buttons["submitButton"].tap()
-        
-        // Transaction Templates List (Expenses)
-        app.toolbars["Toolbar"].buttons["Add"].tap()
-        
-        // Transaction Template Form (Create)
-        app.textFields["amountInputField"].typeText("3")
-        app.textFields["textInputField"].tap()
-        app.textFields["textInputField"].typeText("3rd")
-        
-        app.buttons["submitButton"].tap()
-        
-        // Transaction Templates List (Expenses)
-        app.toolbars["Toolbar"].buttons["Add"].tap()
-        
-        // Transaction Template Form (Create)
-        app.textFields["amountInputField"].typeText("2")
-        app.textFields["textInputField"].tap()
-        app.textFields["textInputField"].typeText("2nd")
-        
-        app.buttons["submitButton"].tap()
-        
-        // Transaction Templates List (Expenses)
-        app.tables.staticTexts["3rd"].press(forDuration: 1, thenDragTo: app.tables.staticTexts["2nd"], withVelocity: .slow, thenHoldForDuration: 1)
-        _ = app.wait(for: .unknown, timeout: 1)
-        app.navigationBars.buttons["Dashboard"].tap()
-        
-        // Dashboard
-        app.toolbars["Toolbar"].buttons["expenseTemplates"].tap()
-        
-        // Transaction Templates List (Expenses)
-        XCTAssert(app.tables.cells.element(boundBy: 0).staticTexts["3rd"].exists)
-        XCTAssert(app.tables.cells.element(boundBy: 1).staticTexts["2nd"].exists)
-        XCTAssert(app.tables.cells.element(boundBy: 2).staticTexts["1st"].exists)
-    }
-    
     func testDroppingRecurringTemplateIntoNonRecurring() throws {
         let app = XCUIApplication()
         

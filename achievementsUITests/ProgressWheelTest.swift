@@ -46,17 +46,17 @@ class ProgressWheelTest: XCTestCase {
         app.navigationBars.buttons["Dashboard"].tap()
         
         // Dashboard
-        XCTAssertTrue(app.staticTexts["+/- 0.00"].exists)
+        XCTAssertTrue(app.staticTexts["+/- 0,00"].exists)
         app.otherElements["progressWheel"].tap()
-        XCTAssertTrue(app.staticTexts["(+0.00)"].exists)
+        XCTAssertTrue(app.staticTexts["(+0,00)"].exists)
         app.otherElements["progressWheel"].tap()
-        XCTAssertTrue(app.staticTexts["(-100.00)"].exists)
+        XCTAssertTrue(app.staticTexts["(-100,00)"].exists)
         app.otherElements["progressWheel"].tap()
-        XCTAssertTrue(app.staticTexts["0.00 %"].exists)
+        XCTAssertTrue(app.staticTexts["0,00 %"].exists)
         app.toolbars["Toolbar"].buttons["Add"].tap()
         
         // Achievement Transaction Form (Create)
-        app.textFields["amountInputField"].typeText("55.20")
+        app.textFields["amountInputField"].typeText("55,20")
         
         titleTextField.tap()
         titleTextField.typeText("Progress Wheel Test Income")
@@ -64,12 +64,12 @@ class ProgressWheelTest: XCTestCase {
         app.buttons["submitButton"].tap()
         
         // Dashboard
-        XCTAssertTrue(app.staticTexts["+55.20"].exists)
+        XCTAssertTrue(app.staticTexts["+55,20"].exists)
         app.otherElements["progressWheel"].tap()
-        XCTAssertTrue(app.staticTexts["(+55.20)"].exists)
+        XCTAssertTrue(app.staticTexts["(+55,20)"].exists)
         app.otherElements["progressWheel"].tap()
-        XCTAssertTrue(app.staticTexts["(-44.80)"].exists)
+        XCTAssertTrue(app.staticTexts["(-44,80)"].exists)
         app.otherElements["progressWheel"].tap()
-        XCTAssertTrue(app.staticTexts["55.20 %"].exists)
+        XCTAssertTrue(app.staticTexts["55,20 %"].exists)
     }
 }

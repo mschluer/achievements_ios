@@ -25,6 +25,9 @@
                                         <accessibility key="accessibilityConfiguration" identifier="progressWheel"/>
                                         <gestureRecognizers/>
                                         <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="C3m-IQ-0GE"/>
+                                            <constraint firstAttribute="width" constant="200" id="K30-iU-Np5"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="R0f-OW-RGf"/>
                                             <constraint firstAttribute="height" constant="200" id="jtN-An-27p"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
@@ -39,12 +42,25 @@
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="string" keyPath="text" value="+ 35.00"/>
                                         </userDefinedRuntimeAttributes>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="C3m-IQ-0GE"/>
+                                                <exclude reference="K30-iU-Np5"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=compact-widthClass=regular">
+                                            <mask key="constraints">
+                                                <include reference="C3m-IQ-0GE"/>
+                                                <include reference="K30-iU-Np5"/>
+                                                <exclude reference="jtN-An-27p"/>
+                                            </mask>
+                                        </variation>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="PDQ-wh-pew" appends="YES" id="jbF-oX-kDJ"/>
                                         </connections>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="p47-nM-Nw2">
-                                        <rect key="frame" x="0.0" y="208" width="414" height="561"/>
+                                        <rect key="frame" x="0.0" y="200" width="414" height="569"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <gestureRecognizers/>
                                         <prototypes>
@@ -72,13 +88,37 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="ylL-L5-AZR" firstAttribute="top" secondItem="ESU-iE-Qyq" secondAttribute="top" id="Lvm-0g-5jT"/>
+                                    <constraint firstItem="p47-nM-Nw2" firstAttribute="leading" secondItem="ylL-L5-AZR" secondAttribute="trailing" id="Pbt-aU-NOJ"/>
                                     <constraint firstItem="p47-nM-Nw2" firstAttribute="leading" secondItem="ESU-iE-Qyq" secondAttribute="leading" id="Ppq-sV-m0b"/>
                                     <constraint firstAttribute="trailing" secondItem="p47-nM-Nw2" secondAttribute="trailing" id="RKP-cu-azw"/>
                                     <constraint firstItem="ylL-L5-AZR" firstAttribute="leading" secondItem="ESU-iE-Qyq" secondAttribute="leading" id="UFf-nR-prN"/>
-                                    <constraint firstItem="p47-nM-Nw2" firstAttribute="top" secondItem="ylL-L5-AZR" secondAttribute="bottom" constant="8" symbolic="YES" id="XhV-lh-hQM"/>
+                                    <constraint firstItem="p47-nM-Nw2" firstAttribute="top" secondItem="ylL-L5-AZR" secondAttribute="bottom" id="d4p-OF-ABv"/>
+                                    <constraint firstAttribute="bottom" secondItem="ylL-L5-AZR" secondAttribute="bottom" id="guw-L8-LJe"/>
                                     <constraint firstAttribute="bottom" secondItem="p47-nM-Nw2" secondAttribute="bottom" id="lcx-zB-MDo"/>
                                     <constraint firstAttribute="trailing" secondItem="ylL-L5-AZR" secondAttribute="trailing" id="obi-6c-CjZ"/>
+                                    <constraint firstItem="p47-nM-Nw2" firstAttribute="top" secondItem="ESU-iE-Qyq" secondAttribute="top" id="qir-nu-aTf"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="guw-L8-LJe"/>
+                                        <exclude reference="qir-nu-aTf"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact-widthClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="UFf-nR-prN"/>
+                                        <include reference="guw-L8-LJe"/>
+                                        <exclude reference="obi-6c-CjZ"/>
+                                        <exclude reference="Ppq-sV-m0b"/>
+                                        <exclude reference="d4p-OF-ABv"/>
+                                        <include reference="qir-nu-aTf"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="Lvm-0g-5jT"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pJ0-MX-y9q">
                                 <rect key="frame" x="0.0" y="813" width="414" height="49"/>
@@ -135,7 +175,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1008.6956521739131" y="136.60714285714286"/>
+            <point key="canvasLocation" x="1007.1428571428571" y="134.78260869565219"/>
         </scene>
         <!--History-->
         <scene sceneID="hqg-WN-OMp">

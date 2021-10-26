@@ -44,14 +44,14 @@ class IncomeConvenienceMenuTest: XCTestCase {
         app.navigationBars.buttons["Dashboard"].tap()
         
         // Dashboard
-        XCTAssert(app.staticTexts["+/- 0.00"].exists)
+        XCTAssert(app.staticTexts["+/- 0,00"].exists)
         app.toolbars["Toolbar"].buttons["incomeTemplates"].press(forDuration: 1)
-        app.collectionViews.buttons["Convenience (2.00)"].tap()
-        XCTAssert(app.staticTexts["+2.00"].exists)
+        app.collectionViews.buttons["Convenience (2,00)"].tap()
+        XCTAssert(app.staticTexts["+2,00"].exists)
         app.toolbars["Toolbar"].buttons["incomeTemplates"].press(forDuration: 1)
         
         //Transaction Templates List (Incomes)
-        XCTAssertFalse(app.staticTexts["Convenience (2.00)"].exists)
+        XCTAssertFalse(app.staticTexts["Convenience (2,00)"].exists)
     }
     
     func testBookingRecurringIncomeFromIncomesMenu() throws {
@@ -74,12 +74,12 @@ class IncomeConvenienceMenuTest: XCTestCase {
         app.navigationBars.buttons["Dashboard"].tap()
         
         // Dashboard
-        XCTAssert(app.staticTexts["+/- 0.00"].exists)
+        XCTAssert(app.staticTexts["+/- 0,00"].exists)
         app.toolbars["Toolbar"].buttons["incomeTemplates"].press(forDuration: 1)
-        app.collectionViews.buttons["Convenience (3.00)"].tap()
-        XCTAssert(app.staticTexts["+3.00"].exists)
+        app.collectionViews.buttons["Convenience (3,00)"].tap()
+        XCTAssert(app.staticTexts["+3,00"].exists)
         
         app.toolbars["Toolbar"].buttons["incomeTemplates"].press(forDuration: 1)
-        XCTAssert(app.collectionViews.buttons["Convenience (3.00)"].exists)
+        XCTAssert(app.collectionViews.buttons["Convenience (3,00)"].exists)
     }
 }

@@ -45,7 +45,7 @@ class HistoricalTransactionTest: XCTestCase {
         
         XCTAssertEqual(
             achievementTransaction.historicalTransaction?.toString(),
-            "\(expectedDateString ?? ""): 2.00 Test")
+            "\(expectedDateString ?? ""): 2,00 Test")
     }
     
     // MARK: Tests for the DataModel

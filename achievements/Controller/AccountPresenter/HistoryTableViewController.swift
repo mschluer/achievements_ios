@@ -49,7 +49,7 @@ class HistoryTableViewController: UITableViewController {
                     amountLabel.textColor = UIColor.systemGreen
                 }
                 
-                amountLabel.text = String (format: "%.2f", transaction.amount)
+                amountLabel.text = NumberHelper.formattedString(for: transaction.amount)
             }
             
             if let historicalBalanceLabel = cell.historicalBalanceLabel {
@@ -59,7 +59,7 @@ class HistoryTableViewController: UITableViewController {
                     historicalBalanceLabel.textColor = UIColor.systemGreen
                 }
                 
-                historicalBalanceLabel.text = "(\(String (format: "%.2f", transaction.balance)))"
+                historicalBalanceLabel.text = "(\(NumberHelper.formattedString(for: transaction.balance)))"
             }
             
             if let timeLabel = cell.timeLabel {
@@ -102,7 +102,7 @@ class HistoryTableViewController: UITableViewController {
         // Balance Part
         let dictionaryItem = historicalTransactions[date]!
         let balance = calculateBalanceFor(array: dictionaryItem)
-        let balancePart = "( \(String (format: "%.2f", balance)) )"
+        let balancePart = "( \(NumberHelper.formattedString(for: balance)) )"
         
         return "\(datePart) - \(balancePart)"
     }

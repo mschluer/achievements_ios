@@ -103,7 +103,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         let dictionaryItem = recentTransactionsTableViewData[date] ?? []
         let balance = calculateBalanceFor(array: dictionaryItem)
         
-        return "\(datePart!) - ( \(String (format: "%.2f", balance)) )"
+        return "\(datePart!) - ( \(NumberHelper.formattedString(for: balance)) )"
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -231,7 +231,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             
             if(currentTemplate.isQuickBookable()) {
                 recurringSectionMenuItems.append(
-                    UIAction(title: "\(currentTemplate.text!) (\(String (format: "%.2f", currentTemplate.amount)))",
+                    UIAction(title: "\(currentTemplate.text!) (\(NumberHelper.formattedString(for: currentTemplate.amount)))",
                              image: nil,
                              handler: { _ in
                                  self.templateConvenienceMenuButtonPressed(transactionTemplate: currentTemplate)
@@ -245,7 +245,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             if(nonRecurringExpenseTemplate.isQuickBookable()) {
                 
                 nonRecurringSectionMenuItems.append(
-                    UIAction(title: "\(nonRecurringExpenseTemplate.text!) (\(String (format: "%.2f", nonRecurringExpenseTemplate.amount)))",
+                    UIAction(title: "\(nonRecurringExpenseTemplate.text!) (\(NumberHelper.formattedString(for: nonRecurringExpenseTemplate.amount)))",
                              image: nil,
                              handler: { _ in
                                  self.templateConvenienceMenuButtonPressed(transactionTemplate: nonRecurringExpenseTemplate)
@@ -280,7 +280,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             
             if(currentTemplate.isQuickBookable()) {
                 recurringSectionMenuItems.append(
-                    UIAction(title: "\(currentTemplate.text!) (\(String (format: "%.2f", currentTemplate.amount)))",
+                    UIAction(title: "\(currentTemplate.text!) (\(NumberHelper.formattedString(for: currentTemplate.amount)))",
                              image: nil,
                              handler: { _ in
                                  self.templateConvenienceMenuButtonPressed(transactionTemplate: currentTemplate)
@@ -294,7 +294,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             if(nonRecurringIncomeTemplate.isQuickBookable()) {
                 
                 nonRecurringSectionMenuItems.append(
-                    UIAction(title: "\(nonRecurringIncomeTemplate.text!) (\(String (format: "%.2f", nonRecurringIncomeTemplate.amount)))",
+                    UIAction(title: "\(nonRecurringIncomeTemplate.text!) (\(NumberHelper.formattedString(for: nonRecurringIncomeTemplate.amount)))",
                              image: nil,
                              handler: { _ in
                                  self.templateConvenienceMenuButtonPressed(transactionTemplate: nonRecurringIncomeTemplate)
@@ -429,25 +429,25 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             percentage = (achievementsDataModel.totalRecentIncomes / achievementsDataModel.expenseTemplates.first!.amount) * -100
         }
         
-        progressWheel.text = "\(String (format: "%.2f", percentage)) %"
+        progressWheel.text = "\(NumberHelper.formattedString(for: percentage)) %"
         progressWheel.textColor = .systemGray
     }
     
     private func showTotalBalanceInProgressWheelLabel() {
         if balance < 0 {
-            progressWheel.text = "\(String (format: "%.2f", balance))"
+            progressWheel.text = "\(NumberHelper.formattedString(for: balance))"
             progressWheel.textColor = .systemRed
         } else if balance == 0 {
-            progressWheel.text = "+/- \(String (format: "%.2f", balance))"
+            progressWheel.text = "+/- \(NumberHelper.formattedString(for: balance))"
             progressWheel.textColor = .systemGray
         } else {
-            progressWheel.text = "+\(String (format: "%.2f", balance))"
+            progressWheel.text = "+\(NumberHelper.formattedString(for: balance))"
             progressWheel.textColor = .systemGreen
         }
     }
     
     private func showTotalRecentIncomesInProgressWheelLabel() {
-        progressWheel.text = "(+\(String (format: "%.2f", achievementsDataModel.totalRecentIncomes)))"
+        progressWheel.text = "(+\(NumberHelper.formattedString(for: achievementsDataModel.totalRecentIncomes)))"
         progressWheel.textColor = .systemGreen
     }
     
@@ -462,13 +462,13 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         }
         
         if remainingAmount < 0 {
-            progressWheel.text = "(\(String (format: "%.2f", remainingAmount)))"
+            progressWheel.text = "(\(NumberHelper.formattedString(for: remainingAmount)))"
             progressWheel.textColor = .systemRed
         } else if remainingAmount == 0 {
-            progressWheel.text = "(+/- \(String (format: "%.2f", remainingAmount)))"
+            progressWheel.text = "(+/- \(NumberHelper.formattedString(for: remainingAmount)))"
             progressWheel.textColor = .systemGray
         } else {
-            progressWheel.text = "(+\(String (format: "%.2f", remainingAmount)))"
+            progressWheel.text = "(+\(NumberHelper.formattedString(for: remainingAmount)))"
             progressWheel.textColor = .systemGreen
         }
     }

@@ -75,10 +75,10 @@ class TransactionTemplatesListViewController: UIViewController, UITableViewDeleg
             cell.textLabel?.text = template.text
             if template.amount < 0 {
                 cell.detailTextLabel?.textColor = UIColor.systemRed
-                cell.detailTextLabel?.text = String (format: "%.2f", template.amount)
+                cell.detailTextLabel?.text = NumberHelper.formattedString(for: template.amount)
             } else if template.amount > 0 {
                 cell.detailTextLabel?.textColor = UIColor.systemGreen
-                cell.detailTextLabel?.text = String (format: "%.2f", template.amount)
+                cell.detailTextLabel?.text = NumberHelper.formattedString(for: template.amount)
             } else {
                 cell.detailTextLabel?.text = ""
             }

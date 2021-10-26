@@ -48,14 +48,14 @@ class StatisticsTableViewController: UITableViewController {
             let c = tableView.dequeueReusableCell(withIdentifier: "statisticsTableViewDataCell", for: indexPath) as! StatisticsTableViewDataCell
             
             if(indexPath.item == 0) {
-                c.lhsLabel.text = String(format: "%.2f", model.totalRecentIncomes)
+                c.lhsLabel.text = NumberHelper.formattedString(for: model.totalRecentIncomes)
                 c.lhsLabel.textColor = .green
                 
-                c.rhsLabel.text = String(format: "%.2f", model.totalRecentExpenses)
+                c.rhsLabel.text = NumberHelper.formattedString(for: model.totalRecentExpenses)
                 c.rhsLabel.textColor = .red
             } else {
-                c.lhsLabel.text = "\(model.recentIncomes.count)"
-                c.rhsLabel.text = "\(model.recentExpenses.count)"
+                c.lhsLabel.text = "\(NumberHelper.formattedString(for: model.recentIncomes.count))"
+                c.rhsLabel.text = "\(NumberHelper.formattedString(for: model.recentExpenses.count))"
             }
             
             cell = c
@@ -64,14 +64,14 @@ class StatisticsTableViewController: UITableViewController {
             let c = tableView.dequeueReusableCell(withIdentifier: "statisticsTableViewDataCell", for: indexPath) as! StatisticsTableViewDataCell
             
             if(indexPath.item == 0) {
-                c.lhsLabel.text = String(format: "%.2f", model.totalHistoricalIncomes)
+                c.lhsLabel.text = NumberHelper.formattedString(for: model.totalHistoricalIncomes)
                 c.lhsLabel.textColor = .green
                 
-                c.rhsLabel.text = String(format: "%.2f", model.totalHistoricalExpenses)
+                c.rhsLabel.text = NumberHelper.formattedString(for: model.totalHistoricalExpenses)
                 c.rhsLabel.textColor = .red
             } else {
-                c.lhsLabel.text = "\(model.historicalIncomes.count)"
-                c.rhsLabel.text = "\(model.historicalExpenses.count)"
+                c.lhsLabel.text = "\(NumberHelper.formattedString(for: model.historicalIncomes.count))"
+                c.rhsLabel.text = "\(NumberHelper.formattedString(for: model.historicalExpenses.count))"
             }
             
             cell = c

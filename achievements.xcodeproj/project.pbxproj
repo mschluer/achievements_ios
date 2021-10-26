@@ -61,7 +61,6 @@
 		B393D83E2718AC1300232482 /* AchievementTransactionsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B393D83D2718AC1300232482 /* AchievementTransactionsPresenter.swift */; };
 		B3C5C4AF26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4AD26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift */; };
 		B3C5C4B026E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */; };
-		B3C5C4B226E5267600A52CBC /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4B126E5267600A52CBC /* StatisticsViewController.swift */; };
 		B3E7475427199E8F006C92C5 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E7475327199E8F006C92C5 /* SettingsPresenter.swift */; };
 		B3E7475A27199F54006C92C5 /* SettingsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E7475927199F54006C92C5 /* SettingsListTableViewController.swift */; };
 		B3E7475E2719D21B006C92C5 /* BackupAndRestoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E7475D2719D21B006C92C5 /* BackupAndRestoreViewController.swift */; };
@@ -155,7 +154,6 @@
 		B393D83D2718AC1300232482 /* AchievementTransactionsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTransactionsPresenter.swift; sourceTree = "<group>"; };
 		B3C5C4AD26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionTemplate+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionTemplate+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		B3C5C4B126E5267600A52CBC /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		B3E7475327199E8F006C92C5 /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
 		B3E7475927199F54006C92C5 /* SettingsListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListTableViewController.swift; sourceTree = "<group>"; };
 		B3E7475D2719D21B006C92C5 /* BackupAndRestoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackupAndRestoreViewController.swift; sourceTree = "<group>"; };
@@ -436,7 +434,6 @@
 		B393D82C2715B69700232482 /* StatisticsPresenter */ = {
 			isa = PBXGroup;
 			children = (
-				B3C5C4B126E5267600A52CBC /* StatisticsViewController.swift */,
 				B382BCCA2728004E005872BE /* StatisticsTableViewController.swift */,
 			);
 			path = StatisticsPresenter;
@@ -782,7 +779,6 @@
 				B3C5C4B026E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift in Sources */,
 				B328327326DC2D02007CAD2A /* AchievementTransactionFormController.swift in Sources */,
 				B328326C26DBD253007CAD2A /* AchievementTransaction+CoreDataClass.swift in Sources */,
-				B3C5C4B226E5267600A52CBC /* StatisticsViewController.swift in Sources */,
 				B349499726E3D31100829A5F /* TransactionTemplatesListViewController.swift in Sources */,
 				B382BCCE27282739005872BE /* NumberHelper.swift in Sources */,
 				B393D83E2718AC1300232482 /* AchievementTransactionsPresenter.swift in Sources */,

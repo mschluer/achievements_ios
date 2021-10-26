@@ -27,24 +27,24 @@ class TransactionDetailViewController: UIViewController {
     // MARK: Private Functions
     private func populateViewWith(_ transaction: HistoricalTransaction) {
         if transaction.amount < 0 {
-            amountLabel.text = "\(String (format: "%.2f", transaction.amount))"
+            amountLabel.text = "\(NumberHelper.formattedString(for: transaction.amount))"
             amountLabel.textColor = .systemRed
         } else if transaction.amount == 0 {
-            amountLabel.text = "+/- \(String (format: "%.2f", transaction.amount))"
+            amountLabel.text = "+/- 0,00"
             amountLabel.textColor = .none
         } else {
-            amountLabel.text = "+\(String (format: "%.2f", transaction.amount))"
+            amountLabel.text = "+\(NumberHelper.formattedString(for: transaction.amount))"
             amountLabel.textColor = .systemGreen
         }
         
         if transaction.balance < 0 {
-            historicalBalanceLabel.text = "( \(String (format: "%.2f", transaction.balance)) )"
+            historicalBalanceLabel.text = "( \(NumberHelper.formattedString(for: transaction.balance)) )"
             historicalBalanceLabel.textColor = .systemRed
         } else if transaction.balance == 0 {
-            historicalBalanceLabel.text = "( +/- \(String (format: "%.2f", transaction.balance)) )"
+            historicalBalanceLabel.text = "( +/- 0,00 )"
             historicalBalanceLabel.textColor = .none
         } else {
-            historicalBalanceLabel.text = "( +\(String (format: "%.2f", transaction.balance)) )"
+            historicalBalanceLabel.text = "( +\(NumberHelper.formattedString(for: transaction.balance)) )"
             historicalBalanceLabel.textColor = .systemGreen
         }
         

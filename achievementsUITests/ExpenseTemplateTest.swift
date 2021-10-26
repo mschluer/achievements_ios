@@ -34,7 +34,7 @@ class ExpenseTemplateTest: XCTestCase {
         app.toolbars["Toolbar"].buttons["Add"].tap()
         
         // Transaction Template Form (Create)
-        app.textFields["amountInputField"].typeText("5.00")
+        app.textFields["amountInputField"].typeText("5")
         
         let titleTextField = app.textFields["textInputField"]
         titleTextField.tap()
@@ -44,7 +44,7 @@ class ExpenseTemplateTest: XCTestCase {
         
         // Transaction Templates List
         XCTAssert(app.staticTexts["Test Expense Template"].exists)
-        XCTAssert(app.staticTexts["-5.00"].exists)
+        XCTAssert(app.staticTexts["-5,00"].exists)
         
         app.tables.staticTexts["Test Expense Template"].swipeLeft()
         app.staticTexts["Edit"].tap()
@@ -53,18 +53,18 @@ class ExpenseTemplateTest: XCTestCase {
         for _ in 0...3 {
             app.textFields["amountInputField"].typeText(XCUIKeyboardKey.delete.rawValue)
         }
-        app.textFields["amountInputField"].typeText("7.00")
+        app.textFields["amountInputField"].typeText("7")
         app.buttons["submitButton"].tap()
         
         // Transaction Templates List
         XCTAssert(app.staticTexts["Test Expense Template"].exists)
-        XCTAssert(app.staticTexts["-7.00"].exists)
+        XCTAssert(app.staticTexts["-7,00"].exists)
         
         app.tables.staticTexts["Test Expense Template"].swipeLeft()
         app.staticTexts["Delete"].tap()
         
         XCTAssertFalse(app.staticTexts["Test Expense Template"].exists)
-        XCTAssertFalse(app.staticTexts["-7.00"].exists)
+        XCTAssertFalse(app.staticTexts["-7,00"].exists)
     }
 
     // MARK: Use Cases
@@ -79,14 +79,14 @@ class ExpenseTemplateTest: XCTestCase {
         app.toolbars["Toolbar"].buttons["Add"].tap()
         
         // Transaction Template Form (Create)
-        app.textFields["amountInputField"].typeText("5.00")
+        app.textFields["amountInputField"].typeText("5")
         
         app.buttons["submitButton"].tap()
         
         // Transaction Templates List
-        XCTAssert(app.staticTexts["-5.00"].exists)
+        XCTAssert(app.staticTexts["-5,00"].exists)
         
-        app.tables.staticTexts["-5.00"].swipeRight()
+        app.tables.staticTexts["-5,00"].swipeRight()
         XCTAssertFalse(app.staticTexts["Book"].exists)
     }
     
@@ -100,7 +100,7 @@ class ExpenseTemplateTest: XCTestCase {
         app.toolbars["Toolbar"].buttons["Add"].tap()
         
         // Transaction Template Form (Create)
-        app.textFields["amountInputField"].typeText("9.00")
+        app.textFields["amountInputField"].typeText("9")
         
         let titleTextField = app.textFields["textInputField"]
         titleTextField.tap()
@@ -110,7 +110,7 @@ class ExpenseTemplateTest: XCTestCase {
         
         // Transaction Templates List
         XCTAssert(app.staticTexts["Extended Test Template"].exists)
-        XCTAssert(app.staticTexts["-9.00"].exists)
+        XCTAssert(app.staticTexts["-9,00"].exists)
         app.tables.staticTexts["Extended Test Template"].tap()
         
         // Achievement Transaction Form
@@ -120,12 +120,12 @@ class ExpenseTemplateTest: XCTestCase {
         app.navigationBars.buttons["Dashboard"].tap()
         
         // Dashboard
-        XCTAssert(app.staticTexts["-9.00"].exists)
+        XCTAssert(app.staticTexts["-9,00"].exists)
         app.tables.cells["transactionCell"].tap()
         
         // Transaction Detail View
-        XCTAssert(app.staticTexts["-9.00"].exists)
-        XCTAssert(app.staticTexts["( -9.00 )"].exists)
+        XCTAssert(app.staticTexts["-9,00"].exists)
+        XCTAssert(app.staticTexts["( -9,00 )"].exists)
         XCTAssert(app.staticTexts["Extended Test Template"].exists)
     }
     
@@ -139,7 +139,7 @@ class ExpenseTemplateTest: XCTestCase {
         app.toolbars["Toolbar"].buttons["Add"].tap()
         
         // Transaction Template Form (Create)
-        app.textFields["amountInputField"].typeText("10.00")
+        app.textFields["amountInputField"].typeText("10")
         
         let titleTextField = app.textFields["textInputField"]
         titleTextField.tap()
@@ -150,19 +150,19 @@ class ExpenseTemplateTest: XCTestCase {
         
         // Transaction Templates List
         XCTAssert(app.staticTexts["Non Recurring Test Template"].exists)
-        XCTAssert(app.staticTexts["-10.00"].exists)
+        XCTAssert(app.staticTexts["-10,00"].exists)
         
         app.tables.staticTexts["Non Recurring Test Template"].swipeRight()
         app.staticTexts["Book"].tap()
         app.navigationBars.buttons["Dashboard"].tap()
         
         // Dashboard
-        XCTAssert(app.staticTexts["-10.00"].exists)
+        XCTAssert(app.staticTexts["-10,00"].exists)
         app.tables.cells["transactionCell"].tap()
         
         // Transaction Detail View
-        XCTAssert(app.staticTexts["-10.00"].exists)
-        XCTAssert(app.staticTexts["( -10.00 )"].exists)
+        XCTAssert(app.staticTexts["-10,00"].exists)
+        XCTAssert(app.staticTexts["( -10,00 )"].exists)
         XCTAssert(app.staticTexts["Non Recurring Test Template"].exists)
     }
 }

@@ -376,6 +376,8 @@ class TransactionTemplatesListViewController: UIViewController, UITableViewDeleg
         }
         
         if(empty) {
+            if(self.emptyScreenLabel != nil) { return }
+            
             let label = UILabel()
             label.text = NSLocalizedString("There are no Templates yet.\n\nTemplates can be added with the + Button in the bottom left hand corner.", comment: "Empty Screen Text for Transaction Templates")
             label.numberOfLines = 0

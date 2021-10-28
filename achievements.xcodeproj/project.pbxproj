@@ -18,6 +18,7 @@
 		B307CE892714A31100FB7E8C /* ProgressWheelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B307CE882714A31100FB7E8C /* ProgressWheelTest.swift */; };
 		B307CE902714E56C00FB7E8C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B307CE8E2714E56C00FB7E8C /* Localizable.strings */; };
 		B307CE942715AD3500FB7E8C /* StatisticsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B307CE932715AD3500FB7E8C /* StatisticsPresenter.swift */; };
+		B30B86A5272ADB470075C392 /* EmptyScreenTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30B86A4272ADB470075C392 /* EmptyScreenTest.swift */; };
 		B30CA4A62721D3120032E646 /* achievements-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B30CA4A52721D3120032E646 /* achievements-logo.png */; };
 		B30CA4A82725DF2F0032E646 /* TransactionTemplatesDragNDropTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30CA4A72725DF2F0032E646 /* TransactionTemplatesDragNDropTest.swift */; };
 		B30CA4AA2725DFCA0032E646 /* TransactionTemplatesSortingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30CA4A92725DFCA0032E646 /* TransactionTemplatesSortingTest.swift */; };
@@ -101,6 +102,7 @@
 		B307CE8D2714DC3500FB7E8C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		B307CE8F2714E56C00FB7E8C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B307CE932715AD3500FB7E8C /* StatisticsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsPresenter.swift; sourceTree = "<group>"; };
+		B30B86A4272ADB470075C392 /* EmptyScreenTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyScreenTest.swift; sourceTree = "<group>"; };
 		B30CA4A52721D3120032E646 /* achievements-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "achievements-logo.png"; sourceTree = "<group>"; };
 		B30CA4A72725DF2F0032E646 /* TransactionTemplatesDragNDropTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTemplatesDragNDropTest.swift; sourceTree = "<group>"; };
 		B30CA4A92725DFCA0032E646 /* TransactionTemplatesSortingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTemplatesSortingTest.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 				B30CA4A92725DFCA0032E646 /* TransactionTemplatesSortingTest.swift */,
 				B30CA4AB27271BE30032E646 /* IncomeConvenienceMenuTest.swift */,
 				B30CA4AD27272DE80032E646 /* ExpenseConvenienceMenuTest.swift */,
+				B30B86A4272ADB470075C392 /* EmptyScreenTest.swift */,
 			);
 			path = achievementsUITests;
 			sourceTree = "<group>";
@@ -533,6 +536,7 @@
 				B328322626D93F22007CAD2A /* Frameworks */,
 				B328322726D93F22007CAD2A /* Resources */,
 				0F1A4D6900A6EC6CD14A658C /* [CP] Embed Pods Frameworks */,
+				B30B86A327297C950075C392 /* Automatically Increment Build Number */,
 			);
 			buildRules = (
 			);
@@ -743,6 +747,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		B30B86A327297C950075C392 /* Automatically Increment Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Automatically Increment Build Number";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Increment Build Number\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n";
+		};
 		BE3587A268CB7B0244DEE222 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -826,6 +848,7 @@
 				B30CA4A82725DF2F0032E646 /* TransactionTemplatesDragNDropTest.swift in Sources */,
 				B307CE892714A31100FB7E8C /* ProgressWheelTest.swift in Sources */,
 				B30CA4AA2725DFCA0032E646 /* TransactionTemplatesSortingTest.swift in Sources */,
+				B30B86A5272ADB470075C392 /* EmptyScreenTest.swift in Sources */,
 				B361478027218C7400941051 /* SettingsTest.swift in Sources */,
 				B30CA4AE27272DE80032E646 /* ExpenseConvenienceMenuTest.swift in Sources */,
 				B307CE8727147EEE00FB7E8C /* AutomaticPurgeTest.swift in Sources */,
@@ -1045,7 +1068,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.6;
+				MARKETING_VERSION = 0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = de.max.schluer.achievements;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1067,7 +1090,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.6;
+				MARKETING_VERSION = 0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = de.max.schluer.achievements;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

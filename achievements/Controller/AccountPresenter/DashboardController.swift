@@ -17,6 +17,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             populateProgressWheel()
         }
     }
+    private var emptyScreenLabel : UILabel?
     private var progressWheelState = 0
     private var recentTransactions: [AchievementTransaction] = []
     private var recentTransactionsTableViewData: [Date: [AchievementTransaction]] = [:]
@@ -216,6 +217,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         
         self.recentTransactionsTableView.deleteRows(at: [indexPath], with: .automatic)
         self.recalculateBalance()
+        self.updateEmptyScreenState()
     }
     
     // MARK: Setup Steps
@@ -473,6 +475,48 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
     
+    private func updateEmptyScreenState() {
+        if(recentTransactionsTableViewData.isEmpty) {
+            if(emptyScreenLabel != nil) { return }
+            
+            let label = UILabel()
+            label.text = NSLocalizedString("Nothing to show.\n\nAdd Transactions with the + button in the bottom left hand corner or by using Templates, which can accessed with the folder-buttons.", comment: "Description for empty Dashboard")
+            label.numberOfLines = 0
+            label.textAlignment = .center
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.addConstraints([
+                NSLayoutConstraint(
+                    item: label,
+                    attribute: NSLayoutConstraint.Attribute.width,
+                    relatedBy: NSLayoutConstraint.Relation.equal,
+                    toItem: nil,
+                    attribute: NSLayoutConstraint.Attribute.notAnAttribute,
+                    multiplier: 1,
+                    constant: 200),
+                NSLayoutConstraint(
+                    item: label,
+                    attribute: NSLayoutConstraint.Attribute.height,
+                    relatedBy: NSLayoutConstraint.Relation.equal,
+                    toItem: nil,
+                    attribute: NSLayoutConstraint.Attribute.notAnAttribute,
+                    multiplier: 1,
+                    constant: 200),
+            ])
+            
+            self.recentTransactionsTableView.addSubview(label)
+            
+            label.centerXAnchor.constraint(equalTo: recentTransactionsTableView.centerXAnchor).isActive = true
+            label.centerYAnchor.constraint(equalTo: recentTransactionsTableView.centerYAnchor).isActive = true
+            
+            self.emptyScreenLabel = label
+        } else {
+            if let label = self.emptyScreenLabel {
+                label.removeFromSuperview()
+                self.emptyScreenLabel = nil
+            }
+        }
+    }
+    
     private func updateSections() {
         var result = Array(recentTransactionsTableViewData.keys)
         result.sort(by: >)
@@ -486,6 +530,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         updateSections()
         recentTransactionsTableView.reloadData()
         recalculateBalance()
+        updateEmptyScreenState()
     }
     
     // MARK: Destructive Actions

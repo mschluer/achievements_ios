@@ -222,6 +222,8 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     
     // MARK: Setup Steps
     private func setupExpenseConvenienceMenu() {
+        guard let expenseTemplatesButton = self.expenseTemplatesButton else { return }
+        
         let nonRecurringExpensesTemplates = achievementsDataModel.nonRecurringExpenseTemplates
         let recurringExpensesTemplates = achievementsDataModel.recurringExpenseTemplates
         
@@ -271,6 +273,8 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     private func setupIncomeConvenienceMenu() {
+        guard let incomeTemplatesButton = self.incomeTemplatesButton else { return }
+        
         let nonRecurringIncomesTemplates = achievementsDataModel.nonRecurringIncomeTemplates
         let recurringIncomesTemplates = achievementsDataModel.recurringIncomeTemplates
         
@@ -321,6 +325,8 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     private func setupMainMenu() {
+        guard let menuButton = self.menuButton else { return }
+        
         let mainMenuDestruct = UIAction(title: NSLocalizedString("Reset", comment: "Set something back to initial state."), image: UIImage(systemName: "trash.circle"), attributes: .destructive) { _ in
             self.mainMenuResetButtonPressed() }
             

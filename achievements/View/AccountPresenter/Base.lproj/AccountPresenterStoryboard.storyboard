@@ -44,22 +44,25 @@
                                         </userDefinedRuntimeAttributes>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="C3m-IQ-0GE"/>
                                                 <exclude reference="K30-iU-Np5"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=compact-widthClass=compact">
                                             <mask key="constraints">
-                                                <include reference="C3m-IQ-0GE"/>
                                                 <include reference="K30-iU-Np5"/>
+                                                <exclude reference="R0f-OW-RGf"/>
                                                 <exclude reference="jtN-An-27p"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=compact-widthClass=regular">
                                             <mask key="constraints">
-                                                <include reference="C3m-IQ-0GE"/>
                                                 <include reference="K30-iU-Np5"/>
                                                 <exclude reference="jtN-An-27p"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <exclude reference="R0f-OW-RGf"/>
                                             </mask>
                                         </variation>
                                         <connections>
@@ -108,6 +111,7 @@
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="guw-L8-LJe"/>
+                                        <exclude reference="Pbt-aU-NOJ"/>
                                         <exclude reference="qir-nu-aTf"/>
                                     </mask>
                                 </variation>
@@ -115,6 +119,7 @@
                                     <mask key="constraints">
                                         <include reference="guw-L8-LJe"/>
                                         <exclude reference="obi-6c-CjZ"/>
+                                        <include reference="Pbt-aU-NOJ"/>
                                         <exclude reference="Ppq-sV-m0b"/>
                                         <exclude reference="d4p-OF-ABv"/>
                                         <include reference="qir-nu-aTf"/>
@@ -122,9 +127,9 @@
                                 </variation>
                                 <variation key="heightClass=compact-widthClass=regular">
                                     <mask key="constraints">
-                                        <include reference="UFf-nR-prN"/>
                                         <include reference="guw-L8-LJe"/>
                                         <exclude reference="obi-6c-CjZ"/>
+                                        <include reference="Pbt-aU-NOJ"/>
                                         <exclude reference="Ppq-sV-m0b"/>
                                         <exclude reference="d4p-OF-ABv"/>
                                         <include reference="qir-nu-aTf"/>

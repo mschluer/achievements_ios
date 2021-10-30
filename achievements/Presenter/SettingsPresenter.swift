@@ -45,7 +45,7 @@ class SettingsPresenter {
             achievementsDataModel.duplicateDatabase(to: unencryptedBackupFilePath)
             
             // Encrypt Data
-            let iv = "achievementsdmiv".bytes
+            let iv = getIvStringFrom(password: password).bytes
             let key = try PKCS5.PBKDF2(
                 password: Array(password.utf8),
                 salt: Array("saltsalt".utf8),
@@ -90,7 +90,7 @@ class SettingsPresenter {
         
         do {
             // Decrypt
-            let iv = "achievementsdmiv".bytes
+            let iv = getIvStringFrom(password: password).bytes
             let key = try PKCS5.PBKDF2(
                 password: Array(password.utf8),
                 salt: Array("saltsalt".utf8),
@@ -130,6 +130,18 @@ class SettingsPresenter {
             failAlert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Message of approval."), style: .default, handler: nil))
             initiator.present(failAlert, animated: true)
         }
+    }
+    
+    // MARK: Private Functions
+    private func getIvStringFrom(password: String) -> String {
+        var result = ""
+        
+        let characters = Array(password)
+        for i in 0...15 {
+            result += String(characters[i % characters.count])
+        }
+        
+        return result
     }
     
     // MARK: Destructive Actions

@@ -77,9 +77,9 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             }
             
             return cell
+        } else {
+            return UITableViewCell();
         }
-        
-        return UITableViewCell();
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

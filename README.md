@@ -20,5 +20,7 @@ Do not forget to backup your data in the Backup / Restore Section within the Set
 
 ## Dependencies
 
-- Charts: Visualize the course of the balance in the statistics view accessible from the main menu.
-- CryptoSwift: Encrypt and Decrypt Backups with AES.
+This Application makes use of the following third party libraries:
+
+- Charts: Visualize the course of the balance in the statistics view accessible from the main menu. https://github.com/danielgindi/Charts
+- CryptoSwift: Encrypt and Decrypt Backups with AES. https://github.com/krzyzanowskim/CryptoSwift

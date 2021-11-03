@@ -94,4 +94,34 @@ class EmptyScreenTest: XCTestCase {
         app.staticTexts["Delete"].tap()
         XCTAssert(app.staticTexts.containing(emptyScreenTextPredicate).count > 0)
     }
+    
+    func testEmptyScreenForHistory() throws {
+        let app = XCUIApplication()
+        let emptyScreenTextPredicate = NSPredicate(format: "label CONTAINS[c] %@", "Nothing to show.")
+        
+        // Dashboard
+        app.toolbars["Toolbar"].buttons["Menu"].tap()
+        app.collectionViews.buttons["History"].tap()
+        
+        // History
+        XCTAssert(app.staticTexts.containing(emptyScreenTextPredicate).count > 0)
+        app.navigationBars.buttons["Dashboard"].tap()
+        
+        // Dashboard
+        app.toolbars["Toolbar"].buttons["Add"].tap()
+        
+        // Transaction Template Form (Create)
+        app.textFields["amountInputField"].typeText("3")
+        app.textFields["textInputField"].tap()
+        app.textFields["textInputField"].typeText("h")
+        app.buttons["Submit"].tap()
+        
+        // Dashboard
+        app.toolbars["Toolbar"].buttons["Menu"].tap()
+        app.collectionViews.buttons["History"].tap()
+        
+        // History
+        XCTAssertFalse(app.staticTexts.containing(emptyScreenTextPredicate).count > 0)
+        app.navigationBars.buttons["Dashboard"].tap()
+    }
 }

@@ -43,7 +43,13 @@ class BackupAndRestoreViewController: UIViewController, UIDocumentPickerDelegate
             guard let password = passwordAlert?.textFields?.first?.text else {
                 return
             }
-            self.replaceDatabaseWith(url: pickedURL, password: password)
+            
+            if password.count < 1 {
+                self.toggleLoadingState()
+                return
+            } else {
+                self.replaceDatabaseWith(url: pickedURL, password: password)
+            }
         }))
         
         self.present(passwordAlert, animated: true)
@@ -71,7 +77,13 @@ class BackupAndRestoreViewController: UIViewController, UIDocumentPickerDelegate
             guard let password = passwordAlert?.textFields?.first?.text else {
                 return
             }
-            self.exportDatabaseFileEncryptedWith(password: password)
+            
+            if password.count < 1 {
+                self.toggleLoadingState()
+                return
+            } else {
+                self.exportDatabaseFileEncryptedWith(password: password)
+            }
         }))
         
         self.present(passwordAlert, animated: true)
@@ -79,7 +91,8 @@ class BackupAndRestoreViewController: UIViewController, UIDocumentPickerDelegate
     
     @IBAction func restoreDataButtonPressed(_ sender: Any) {
         toggleLoadingState()
-        let documentPickerController = UIDocumentPickerViewController(documentTypes: [ "public.data" ], in: .import )
+        let documentPickerController = UIDocumentPickerViewController(forOpeningContentTypes: [ UTType.data ], asCopy: false)
+        // let documentPickerController = UIDocumentPickerViewController(documentTypes: [ "public.data" ], in: .import )
         documentPickerController.delegate = self
         self.present(documentPickerController, animated: true)
     }

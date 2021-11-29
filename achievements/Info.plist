@@ -32,7 +32,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>62</string>
+	<string>70</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>LSSupportsOpeningDocumentsInPlace</key>
@@ -92,7 +92,7 @@
 			<dict>
 				<key>public.filename-extension</key>
 				<array>
-					<string>.adbackup</string>
+					<string>adbackup</string>
 				</array>
 			</dict>
 		</dict>

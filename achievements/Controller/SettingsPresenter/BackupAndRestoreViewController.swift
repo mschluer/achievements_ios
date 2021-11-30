@@ -92,7 +92,6 @@ class BackupAndRestoreViewController: UIViewController, UIDocumentPickerDelegate
     @IBAction func restoreDataButtonPressed(_ sender: Any) {
         toggleLoadingState()
         let documentPickerController = UIDocumentPickerViewController(forOpeningContentTypes: [ UTType.data ], asCopy: false)
-        // let documentPickerController = UIDocumentPickerViewController(documentTypes: [ "public.data" ], in: .import )
         documentPickerController.delegate = self
         self.present(documentPickerController, animated: true)
     }

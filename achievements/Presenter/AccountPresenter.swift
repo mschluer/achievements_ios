@@ -26,4 +26,12 @@ class AccountPresenter {
         
         initiator.show(viewController, sender: self)
     }
+    
+    public func showAccountDashboard(from initiator: UIViewController, url: URL) {
+        let viewController = storyboard.instantiateViewController(withIdentifier: "DashboardController") as! DashboardController
+        viewController.achievementsDataModel = achievementsDataModel
+        
+        initiator.show(viewController, sender: self)
+        viewController.showImportDialogue()
+    }
 }

@@ -11,7 +11,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
@@ -26,6 +25,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.makeKeyAndVisible()
         
         AccountPresenter(accountIdentifier: "AchievementsDataModel").showAccountDashboard(from: navigationController)
+    }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        guard let urlContext = URLContexts.first else {
+            return
+        }
+        
+        let window = UIWindow(windowScene: windowScene)
+        let navigationController = UINavigationController()
+        window.rootViewController = navigationController
+        
+        self.window = window
+        window.makeKeyAndVisible()
+        
+        AccountPresenter(accountIdentifier: "AchievementsDataModel").showAccountDashboard(from: navigationController, url: urlContext.url)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -108,7 +108,7 @@ class SettingsPresenter {
             try plaintext.write(to: URL(string: "file://\(unencryptedBackupFilePath)")!)
 
             // Restore in Model
-            achievementsDataModel.replaceDatabase(from: unencryptedBackupFilePath)
+            try achievementsDataModel.replaceDatabase(from: unencryptedBackupFilePath)
             
             // Delete unencrypted File
             try! FileManager.default.removeItem(atPath: unencryptedBackupFilePath)

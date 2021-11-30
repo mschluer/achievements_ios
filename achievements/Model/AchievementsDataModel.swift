@@ -318,41 +318,37 @@ class AchievementsDataModel {
         save()
     }
     
-    public func replaceDatabase(from path: String) {
-        do {
-            let persistentStoreCoordinator = self.persistentContainer.persistentStoreCoordinator
-            let originalStore = persistentStoreCoordinator.persistentStores[0]
-            let originalUrl = originalStore.url!
-            let backupStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: persistentStoreCoordinator.managedObjectModel)
-            
-            // Prepare Restore Database
-            let restoreOptions = originalStore.options
-            let intermediateStore = try backupStoreCoordinator.addPersistentStore(
-                ofType: originalStore.type,
-                configurationName: originalStore.configurationName,
-                at: URL(string: "file://\(path)"),
-                options: restoreOptions)
-            
-            // Destroy Original One
-            try persistentStoreCoordinator.destroyPersistentStore(at: originalUrl,
-                                                                 type: NSPersistentStore.StoreType(rawValue: NSSQLiteStoreType),
-                                                                 options: nil)
-            
-            // Install Restored One
-            _ = try backupStoreCoordinator.migratePersistentStore(
-                intermediateStore,
-                to: originalUrl,
-                options: restoreOptions,
-                type: .sqlite)
-            
-            // Refresh Data
-            self.persistentContainer.loadPersistentStores { storeDescription, error in
-                if let error = error {
-                    print("Database cannot be loaded due to unresolved error: \(error)")
-                }
+    public func replaceDatabase(from path: String) throws {
+        let persistentStoreCoordinator = self.persistentContainer.persistentStoreCoordinator
+        let originalStore = persistentStoreCoordinator.persistentStores[0]
+        let originalUrl = originalStore.url!
+        let backupStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: persistentStoreCoordinator.managedObjectModel)
+        
+        // Prepare Restore Database
+        let restoreOptions = originalStore.options
+        let intermediateStore = try backupStoreCoordinator.addPersistentStore(
+            ofType: originalStore.type,
+            configurationName: originalStore.configurationName,
+            at: URL(string: "file://\(path)"),
+            options: restoreOptions)
+        
+        // Destroy Original One
+        try persistentStoreCoordinator.destroyPersistentStore(at: originalUrl,
+                                                             type: NSPersistentStore.StoreType(rawValue: NSSQLiteStoreType),
+                                                             options: nil)
+        
+        // Install Restored One
+        _ = try backupStoreCoordinator.migratePersistentStore(
+            intermediateStore,
+            to: originalUrl,
+            options: restoreOptions,
+            type: .sqlite)
+        
+        // Refresh Data
+        self.persistentContainer.loadPersistentStores { storeDescription, error in
+            if let error = error {
+                print("Database cannot be loaded due to unresolved error: \(error)")
             }
-        } catch let error {
-            print("Replacing Database was not possible due to error: \(error.localizedDescription)")
         }
     }
     

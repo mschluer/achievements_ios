@@ -17,6 +17,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             populateProgressWheel()
         }
     }
+    private var emptyScreenLabel : UILabel?
     private var progressWheelState = 0
     private var recentTransactions: [AchievementTransaction] = []
     private var recentTransactionsTableViewData: [Date: [AchievementTransaction]] = [:]
@@ -76,9 +77,9 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             }
             
             return cell
+        } else {
+            return UITableViewCell();
         }
-        
-        return UITableViewCell();
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -216,10 +217,13 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         
         self.recentTransactionsTableView.deleteRows(at: [indexPath], with: .automatic)
         self.recalculateBalance()
+        self.updateEmptyScreenState()
     }
     
     // MARK: Setup Steps
     private func setupExpenseConvenienceMenu() {
+        guard let expenseTemplatesButton = self.expenseTemplatesButton else { return }
+        
         let nonRecurringExpensesTemplates = achievementsDataModel.nonRecurringExpenseTemplates
         let recurringExpensesTemplates = achievementsDataModel.recurringExpenseTemplates
         
@@ -269,6 +273,8 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     private func setupIncomeConvenienceMenu() {
+        guard let incomeTemplatesButton = self.incomeTemplatesButton else { return }
+        
         let nonRecurringIncomesTemplates = achievementsDataModel.nonRecurringIncomeTemplates
         let recurringIncomesTemplates = achievementsDataModel.recurringIncomeTemplates
         
@@ -319,6 +325,8 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     private func setupMainMenu() {
+        guard let menuButton = self.menuButton else { return }
+        
         let mainMenuDestruct = UIAction(title: NSLocalizedString("Reset", comment: "Set something back to initial state."), image: UIImage(systemName: "trash.circle"), attributes: .destructive) { _ in
             self.mainMenuResetButtonPressed() }
             
@@ -353,6 +361,23 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         
         recentTransactions = achievementsDataModel.achievementTransactions
         recentTransactionsTableViewData = achievementsDataModel.groupedAchievementTransactions
+    }
+    
+    // MARK: Public Functions
+    public func showImportDialogue() {
+        // TODO: Instead guiding the user ask for confirmation and trigger restore directly.
+        let restoreAlert = UIAlertController(
+            title: NSLocalizedString("Restore", comment: "Headline for Alert leading the User to the Backup / Restore Screen"),
+            message: NSLocalizedString("In order to Restore from this Backup, go to Settings -> Backup / Restore and import your data. Keep in mind that this will overwrite all data currently shown in the app.", comment: "Description for the user about how to restore from a backup."),
+            preferredStyle: .alert
+        )
+        
+        restoreAlert.addAction(UIAlertAction(
+            title: NSLocalizedString("Okay", comment: "Message of Approval"),
+            style: .default,
+            handler: nil))
+        
+        self.present(restoreAlert, animated: true)
     }
     
     // MARK: Private Functions
@@ -473,6 +498,48 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
     
+    private func updateEmptyScreenState() {
+        if(recentTransactionsTableViewData.isEmpty) {
+            if(emptyScreenLabel != nil) { return }
+            
+            let label = UILabel()
+            label.text = NSLocalizedString("Nothing to show.\n\nAdd Transactions with the + button in the bottom left hand corner or by using Templates, which can accessed with the folder-buttons.", comment: "Description for empty Dashboard")
+            label.numberOfLines = 0
+            label.textAlignment = .center
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.addConstraints([
+                NSLayoutConstraint(
+                    item: label,
+                    attribute: NSLayoutConstraint.Attribute.width,
+                    relatedBy: NSLayoutConstraint.Relation.equal,
+                    toItem: nil,
+                    attribute: NSLayoutConstraint.Attribute.notAnAttribute,
+                    multiplier: 1,
+                    constant: 200),
+                NSLayoutConstraint(
+                    item: label,
+                    attribute: NSLayoutConstraint.Attribute.height,
+                    relatedBy: NSLayoutConstraint.Relation.equal,
+                    toItem: nil,
+                    attribute: NSLayoutConstraint.Attribute.notAnAttribute,
+                    multiplier: 1,
+                    constant: 200),
+            ])
+            
+            self.recentTransactionsTableView.addSubview(label)
+            
+            label.centerXAnchor.constraint(equalTo: recentTransactionsTableView.centerXAnchor).isActive = true
+            label.centerYAnchor.constraint(equalTo: recentTransactionsTableView.centerYAnchor).isActive = true
+            
+            self.emptyScreenLabel = label
+        } else {
+            if let label = self.emptyScreenLabel {
+                label.removeFromSuperview()
+                self.emptyScreenLabel = nil
+            }
+        }
+    }
+    
     private func updateSections() {
         var result = Array(recentTransactionsTableViewData.keys)
         result.sort(by: >)
@@ -486,6 +553,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         updateSections()
         recentTransactionsTableView.reloadData()
         recalculateBalance()
+        updateEmptyScreenState()
     }
     
     // MARK: Destructive Actions

@@ -14,6 +14,7 @@ class HistoryTableViewController: UITableViewController {
     // MARK: Variables
     private var historicalTransactions : [Date : [HistoricalTransaction]] = [:]
     private var historicalTransactionsDates : [Date] = []
+    private var emptyScreenLabel : UILabel?
     
     
     // MARK: Outlets
@@ -129,11 +130,55 @@ class HistoryTableViewController: UITableViewController {
         return dictionaryEntry[indexPath.item]
     }
     
+    private func updateEmptyScreenState() {
+        if(historicalTransactions.isEmpty) {
+            if(emptyScreenLabel != nil) { return }
+            
+            let label = UILabel()
+            label.text = NSLocalizedString("Nothing to show.\n\nCurrently, there are no history items to display. This will change, once you add Transactions.", comment: "Description for empty History")
+            label.numberOfLines = 0
+            label.textAlignment = .center
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.addConstraints([
+                NSLayoutConstraint(
+                    item: label,
+                    attribute: NSLayoutConstraint.Attribute.width,
+                    relatedBy: NSLayoutConstraint.Relation.equal,
+                    toItem: nil,
+                    attribute: NSLayoutConstraint.Attribute.notAnAttribute,
+                    multiplier: 1,
+                    constant: 200),
+                NSLayoutConstraint(
+                    item: label,
+                    attribute: NSLayoutConstraint.Attribute.height,
+                    relatedBy: NSLayoutConstraint.Relation.equal,
+                    toItem: nil,
+                    attribute: NSLayoutConstraint.Attribute.notAnAttribute,
+                    multiplier: 1,
+                    constant: 200),
+            ])
+            
+            self.historyTableView.addSubview(label)
+            
+            label.centerXAnchor.constraint(equalTo: historyTableView.centerXAnchor).isActive = true
+            label.centerYAnchor.constraint(equalTo: historyTableView.centerYAnchor).isActive = true
+            
+            self.emptyScreenLabel = label
+        } else {
+            if let label = self.emptyScreenLabel {
+                label.removeFromSuperview()
+                self.emptyScreenLabel = nil
+            }
+        }
+    }
+    
     private func updateViewFromModel() {
         historicalTransactions = self.achievementsDataModel?.groupedHistoricalTransactions ?? [:]
         updateSections()
         
         historyTableView.reloadData()
+        
+        updateEmptyScreenState()
     }
     
     private func updateSections() {

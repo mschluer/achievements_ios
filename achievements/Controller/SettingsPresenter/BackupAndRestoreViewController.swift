@@ -46,6 +46,7 @@ class BackupAndRestoreViewController: UIViewController, UIDocumentPickerDelegate
             
             if password.count < 1 {
                 self.toggleLoadingState()
+                self.showPasswordMustNotBeEmptyAlert()
                 return
             } else {
                 self.replaceDatabaseWith(url: pickedURL, password: password)
@@ -80,6 +81,7 @@ class BackupAndRestoreViewController: UIViewController, UIDocumentPickerDelegate
             
             if password.count < 1 {
                 self.toggleLoadingState()
+                self.showPasswordMustNotBeEmptyAlert()
                 return
             } else {
                 self.exportDatabaseFileEncryptedWith(password: password)
@@ -134,6 +136,20 @@ class BackupAndRestoreViewController: UIViewController, UIDocumentPickerDelegate
     private func replaceDatabaseWith(url: URL, password: String) {
         settingsPresenter.replaceDatabaseWith(url: url, password: password, initiator: self)
         toggleLoadingState()
+    }
+    
+    private func showPasswordMustNotBeEmptyAlert() {
+        let emptyPasswordAlert = UIAlertController(
+            title: NSLocalizedString("Password empty", comment: "Alert Headline for when user tries to encrypt or decrypt a backup with an empty password"),
+            message: NSLocalizedString("Achievements Database Backups are encrypted by default, hence the password must not be empty.", comment: "Explanatory text why backup passwords must not be empty."),
+            preferredStyle: .alert)
+        
+        emptyPasswordAlert.addAction(UIAlertAction(
+            title: NSLocalizedString("Okay", comment: "Message of Approval"),
+            style: .default,
+            handler: nil))
+        
+        self.present(emptyPasswordAlert, animated: true)
     }
 }
 

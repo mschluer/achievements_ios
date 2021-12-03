@@ -217,6 +217,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         
         self.recentTransactionsTableView.deleteRows(at: [indexPath], with: .automatic)
         self.recalculateBalance()
+        self.updateViewFromModel()
         self.updateEmptyScreenState()
     }
     

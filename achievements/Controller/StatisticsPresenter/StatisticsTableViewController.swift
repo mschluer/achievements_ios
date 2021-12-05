@@ -104,8 +104,8 @@ class StatisticsTableViewController: UITableViewController {
         
         let maximumEntries, offset : Int
         let totalHistoricalTransactions = model.historicalTransactions.count
-        if  totalHistoricalTransactions > 500 {
-            maximumEntries = 500
+        if  totalHistoricalTransactions > Settings.statisticsSettings.lineChartMaxAmountRecords {
+            maximumEntries = Settings.statisticsSettings.lineChartMaxAmountRecords
             offset = totalHistoricalTransactions - maximumEntries
         } else {
             maximumEntries = totalHistoricalTransactions

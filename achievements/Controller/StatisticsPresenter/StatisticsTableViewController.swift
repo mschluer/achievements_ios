@@ -91,6 +91,7 @@ class StatisticsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if(indexPath == IndexPath(item: 0, section: 2)) {
+            // Balance History Line Chart
             return 220.0
         } else{
             return UITableView.automaticDimension
@@ -100,8 +101,19 @@ class StatisticsTableViewController: UITableViewController {
     // MARK: Private Functions
     private func prepare(_ chartView: LineChartView, with model: AchievementsDataModel) {
         var chartEntries = [ChartDataEntry]()
-        for i in 0..<model.historicalTransactions.count {
-            chartEntries.append(ChartDataEntry(x: Double(i), y: Double(model.historicalTransactionsReverse[i].balance)))
+        
+        let maximumEntries, offset : Int
+        let totalHistoricalTransactions = model.historicalTransactions.count
+        if  totalHistoricalTransactions > 500 {
+            maximumEntries = 500
+            offset = totalHistoricalTransactions - maximumEntries
+        } else {
+            maximumEntries = totalHistoricalTransactions
+            offset = 0
+        }
+        
+        for i in 0..<maximumEntries {
+            chartEntries.append(ChartDataEntry(x: Double(i), y: Double(model.historicalTransactionsReverse[i + offset].balance)))
         }
         let balanceLine = LineChartDataSet(entries: chartEntries)
         balanceLine.colors = [NSUIColor.blue]
@@ -109,7 +121,7 @@ class StatisticsTableViewController: UITableViewController {
         balanceLine.drawValuesEnabled = false
         
         var zeroLineEntries = [ChartDataEntry]()
-        for i in 0..<model.historicalTransactions.count {
+        for i in 0...maximumEntries {
             zeroLineEntries.append(ChartDataEntry(x: Double(i), y: 0.0))
         }
         let zeroLine = LineChartDataSet(entries: zeroLineEntries)

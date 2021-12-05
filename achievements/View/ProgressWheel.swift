@@ -37,11 +37,24 @@ class ProgressWheel : UIView {
     }
     
     private func drawLabel() {
+        let centerLabel : UILabel
         if(!labelAdded) {
             centerLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+        } else {
+            centerLabel = self.centerLabel
         }
         
         centerLabel.center = self.center
+        centerLabel.translatesAutoresizingMaskIntoConstraints = false
+        centerLabel.addConstraints([
+            NSLayoutConstraint(item: centerLabel,
+                               attribute: NSLayoutConstraint.Attribute.width,
+                               relatedBy: NSLayoutConstraint.Relation.lessThanOrEqual,
+                               toItem: nil,
+                               attribute: NSLayoutConstraint.Attribute.notAnAttribute,
+                               multiplier: 1,
+                               constant: 95)])
+        
         centerLabel.textAlignment = NSTextAlignment.center
         centerLabel.font = centerLabel.font.withSize(21)
         
@@ -50,6 +63,7 @@ class ProgressWheel : UIView {
         
         if(!labelAdded) {
             self.addSubview(centerLabel)
+            self.centerLabel = centerLabel
             labelAdded = true
         } else {
             centerLabel.setNeedsLayout()

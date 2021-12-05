@@ -123,6 +123,9 @@
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ajd-Lx-Q5B">
                                                         <rect key="frame" x="336" y="0.0" width="38" height="36"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="38" id="itf-wA-8NP"/>
+                                                        </constraints>
                                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
                                                         <state key="normal" title="+ / -"/>
                                                         <connections>

@@ -217,6 +217,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         
         self.recentTransactionsTableView.deleteRows(at: [indexPath], with: .automatic)
         self.recalculateBalance()
+        self.updateViewFromModel()
         self.updateEmptyScreenState()
     }
     
@@ -414,7 +415,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             if let plannedExpense = achievementsDataModel.expenseTemplates.first {
                 progressWheel.inactiveColor = UIColor.systemGray
                 progressWheel.activeColor = UIColor.systemGreen
-                let percentage = (achievementsDataModel.totalRecentIncomes / plannedExpense.amount) * -100
+                let percentage = (balance / plannedExpense.amount) * -100
                 
                 if percentage <= 100 {
                     progressWheel.percentage = percentage

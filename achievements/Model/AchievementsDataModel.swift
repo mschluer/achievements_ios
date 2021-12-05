@@ -186,12 +186,13 @@ class AchievementsDataModel {
         historicalTransaction.text = text
         historicalTransaction.amount = amount
         historicalTransaction.date = date
+        let insertIndex = insertIndex(historicalTransaction)
         
         // Establish Link
         transaction.historicalTransaction = historicalTransaction
         historicalTransaction.recentTransaction = transaction
         
-        self.recalculateHistoricalBalances(from: historicalTransaction)
+        self.recalculateHistoricalBalances(from: insertIndex)
         
         // Save
         self.save()
@@ -266,14 +267,12 @@ class AchievementsDataModel {
     }
     
     public func recalculateHistoricalBalances(from beginIndex: Int?) {
-        var i = 0
-        if beginIndex != nil {
-            i = beginIndex!
-        }
+        var i = beginIndex ?? 0
+        let historicalTransactions = historicalTransactionsReverse
         
         var currentBalance : Float = 0
         if i > 0 {
-            currentBalance = historicalTransactionsReverse[i - 1].balance
+            currentBalance = historicalTransactions[i - 1].balance
         }
         
         while i < historicalTransactions.count {
@@ -403,6 +402,22 @@ class AchievementsDataModel {
         self.save()
     }
     
+    // MARK: Private Functions
+    private func insertIndex(_ historicalTransaction: HistoricalTransaction) -> Int {
+        let historicalTransactions = self.historicalTransactionsReverse
+        var index = historicalTransactions.count - 1
+        
+        while(index > 0) {
+            if(historicalTransaction.date! > historicalTransactions[index].date!) {
+                return index
+            } else {
+                index -= 1
+            }
+        }
+        
+        return 0
+    }
+    
     // MARK: Destructive Transactions
     public func clear() {
         guard let url = persistentContainer.persistentStoreDescriptions.first?.url else { return }
@@ -465,7 +480,7 @@ class AchievementsDataModel {
             self.viewContext.delete(recentTransaction)
         }
         
-        let index = historicalTransactions.firstIndex(of: transaction)
+        let index = historicalTransactionsReverse.firstIndex(of: transaction)
         
         self.viewContext.delete(transaction)
         

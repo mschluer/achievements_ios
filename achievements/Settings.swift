@@ -13,18 +13,35 @@ public class Settings {
         FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("settings.plist")
     }
     
-    // MARK: Properties
-    static var applicationSettings = ApplicationSettings() {
+    private static var settingsObject = SettingsObject() {
         didSet {
             let encoder = PropertyListEncoder()
             encoder.outputFormat = .xml
             
             do {
-                let data = try encoder.encode(applicationSettings)
+                let data = try encoder.encode(settingsObject)
                 try data.write(to: plistURL)
             } catch {
                 print(error)
             }
+        }
+    }
+    
+    // MARK: Properties
+    static var applicationSettings : ApplicationSettings {
+        get {
+            self.settingsObject.applicationSettings
+        }
+        set(new) {
+            self.settingsObject.applicationSettings = new
+        }
+    }
+    static var statisticsSettings : StatisticsSettings {
+        get {
+            self.settingsObject.statisticsSettings
+        }
+        set(new) {
+            self.settingsObject.statisticsSettings = new
         }
     }
     
@@ -34,14 +51,12 @@ public class Settings {
         else { return }
         
         let decoder = PropertyListDecoder()
-        let loadedApplicationSettings = try? decoder.decode(ApplicationSettings.self, from: data)
-        
-        self.applicationSettings = loadedApplicationSettings ?? ApplicationSettings()
+        self.settingsObject = (try? decoder.decode(SettingsObject.self, from: data)) ?? SettingsObject()
     }
     
     // MARK: Destructive Actions
     public static func resetApplicationSettings() {
-        self.applicationSettings = ApplicationSettings()
+        self.settingsObject = SettingsObject()
     }
 }
 
@@ -50,4 +65,13 @@ struct ApplicationSettings : Codable {
     var automaticPurge : Bool = false
     var divideIncomeTemplatesByRecurrence : Bool = true
     var divideExpenseTemplatesByRecurrence : Bool = true
+}
+
+struct SettingsObject : Codable {
+    var applicationSettings : ApplicationSettings = ApplicationSettings()
+    var statisticsSettings : StatisticsSettings = StatisticsSettings()
+}
+
+struct StatisticsSettings : Codable {
+    var lineChartMaxAmountRecords : Int = 100
 }

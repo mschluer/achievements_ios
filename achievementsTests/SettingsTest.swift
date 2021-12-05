@@ -22,4 +22,26 @@ class SettingsTest: XCTestCase {
         Settings.applicationSettings.automaticPurge = true
         XCTAssertTrue(Settings.applicationSettings.automaticPurge)
     }
+    
+    func testChangingDivideIncomeTemplatesByRecurrence() {
+        XCTAssertTrue(Settings.applicationSettings.divideIncomeTemplatesByRecurrence)
+        
+        Settings.applicationSettings.divideIncomeTemplatesByRecurrence = false
+        XCTAssertFalse(Settings.applicationSettings.divideIncomeTemplatesByRecurrence)
+        
+    }
+    
+    func testChangingDivideExpenseTempaltesByRecurrence() {
+        XCTAssertTrue(Settings.applicationSettings.divideExpenseTemplatesByRecurrence)
+        
+        Settings.applicationSettings.divideExpenseTemplatesByRecurrence = false
+        XCTAssertFalse(Settings.applicationSettings.divideExpenseTemplatesByRecurrence)
+    }
+    
+    func testChangingLineChartMaxAmountRecords() {
+        XCTAssertEqual(Settings.statisticsSettings.lineChartMaxAmountRecords, 100)
+        
+        Settings.statisticsSettings.lineChartMaxAmountRecords = 101
+        XCTAssertEqual(Settings.statisticsSettings.lineChartMaxAmountRecords, 101)
+    }
 }

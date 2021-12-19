@@ -91,6 +91,7 @@ class StatisticsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if(indexPath == IndexPath(item: 0, section: 2)) {
+            // Balance History Line Chart
             return 220.0
         } else{
             return UITableView.automaticDimension
@@ -98,10 +99,61 @@ class StatisticsTableViewController: UITableViewController {
     }
     
     // MARK: Private Functions
+    private func calculateEndOfDayBalances(from dictionary: [Date : [HistoricalTransaction]]) -> [Date : Float] {
+        var result : [Date : Float] = [:]
+        
+        // Verify Presence
+        guard let groupedTransactions = achievementsDataModel?.groupedHistoricalTransactions else {
+            return result
+        }
+        
+        // Prepare Keys
+        var groupedTransactionsKeys = Array(groupedTransactions.keys)
+        groupedTransactionsKeys.sort(by: >)
+        
+        let dateArray = DateHelper.createDayArray(
+            from: groupedTransactionsKeys.first!,
+            to: groupedTransactionsKeys.last!)
+        
+        var currentBalance : Float = 0.0
+        
+        for date in dateArray {
+            if var currentGroup = groupedTransactions[Calendar.current.date(from: date)!] {
+                currentGroup.sort(by: {a, b in
+                    a.date! > b.date!
+                })
+                
+                currentBalance = currentGroup.last!.balance
+            }
+            result[Calendar.current.date(from: date)!] = currentBalance
+        }
+        
+        return result
+    }
+    
     private func prepare(_ chartView: LineChartView, with model: AchievementsDataModel) {
         var chartEntries = [ChartDataEntry]()
-        for i in 0..<model.historicalTransactions.count {
-            chartEntries.append(ChartDataEntry(x: Double(i), y: Double(model.historicalTransactionsReverse[i].balance)))
+        
+        let maximumEntries, offset : Int
+        
+        // Process End-of-Day Balances
+        let endOfDayBalances = calculateEndOfDayBalances(from: model.groupedHistoricalTransactions)
+        
+        let totalChartItems = endOfDayBalances.count
+        if  totalChartItems > Settings.statisticsSettings.lineChartMaxAmountRecords {
+            maximumEntries = Settings.statisticsSettings.lineChartMaxAmountRecords
+            offset = totalChartItems - maximumEntries
+        } else {
+            maximumEntries = totalChartItems
+            offset = 0
+        }
+        
+        var keys = Array(endOfDayBalances.keys)
+        keys.sort(by: <)
+        
+        for i in 0..<maximumEntries {
+            let key = keys[i + offset]
+            chartEntries.append(ChartDataEntry(x: Double(i), y: Double(endOfDayBalances[key]!)))
         }
         let balanceLine = LineChartDataSet(entries: chartEntries)
         balanceLine.colors = [NSUIColor.blue]
@@ -109,7 +161,7 @@ class StatisticsTableViewController: UITableViewController {
         balanceLine.drawValuesEnabled = false
         
         var zeroLineEntries = [ChartDataEntry]()
-        for i in 0..<model.historicalTransactions.count {
+        for i in 0...maximumEntries {
             zeroLineEntries.append(ChartDataEntry(x: Double(i), y: 0.0))
         }
         let zeroLine = LineChartDataSet(entries: zeroLineEntries)

@@ -50,6 +50,8 @@
 		B382BCCB2728004E005872BE /* StatisticsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B382BCCA2728004E005872BE /* StatisticsTableViewController.swift */; };
 		B382BCCE27282739005872BE /* NumberHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B382BCCD27282739005872BE /* NumberHelper.swift */; };
 		B382BCD127282814005872BE /* NumberHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B382BCD027282814005872BE /* NumberHelperTest.swift */; };
+		B384E15D276F4C3700C0B007 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B384E15C276F4C3700C0B007 /* DateHelper.swift */; };
+		B384E15F276F4CCD00C0B007 /* DayHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B384E15E276F4CCD00C0B007 /* DayHelperTest.swift */; };
 		B3939ABD2704797C005D243B /* AchievementTransactionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939ABC2704797C005D243B /* AchievementTransactionTest.swift */; };
 		B3939AC0270481FC005D243B /* HistoricalTransactionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939ABF270481FC005D243B /* HistoricalTransactionTest.swift */; };
 		B3939AC927049F51005D243B /* AchievementTransactionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939AC827049F51005D243B /* AchievementTransactionTest.swift */; };
@@ -142,6 +144,8 @@
 		B382BCCA2728004E005872BE /* StatisticsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsTableViewController.swift; sourceTree = "<group>"; };
 		B382BCCD27282739005872BE /* NumberHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberHelper.swift; sourceTree = "<group>"; };
 		B382BCD027282814005872BE /* NumberHelperTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberHelperTest.swift; sourceTree = "<group>"; };
+		B384E15C276F4C3700C0B007 /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
+		B384E15E276F4CCD00C0B007 /* DayHelperTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayHelperTest.swift; sourceTree = "<group>"; };
 		B3939ABC2704797C005D243B /* AchievementTransactionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTransactionTest.swift; sourceTree = "<group>"; };
 		B3939ABF270481FC005D243B /* HistoricalTransactionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalTransactionTest.swift; sourceTree = "<group>"; };
 		B3939AC827049F51005D243B /* AchievementTransactionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTransactionTest.swift; sourceTree = "<group>"; };
@@ -406,6 +410,7 @@
 			isa = PBXGroup;
 			children = (
 				B382BCCD27282739005872BE /* NumberHelper.swift */,
+				B384E15C276F4C3700C0B007 /* DateHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -414,6 +419,7 @@
 			isa = PBXGroup;
 			children = (
 				B382BCD027282814005872BE /* NumberHelperTest.swift */,
+				B384E15E276F4CCD00C0B007 /* DayHelperTest.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -794,6 +800,7 @@
 				B307CE83271456EB00FB7E8C /* Settings.swift in Sources */,
 				B3C5C4AF26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift in Sources */,
 				B349499326E1483E00829A5F /* HistoryTableViewController.swift in Sources */,
+				B384E15D276F4C3700C0B007 /* DateHelper.swift in Sources */,
 				B382BCCB2728004E005872BE /* StatisticsTableViewController.swift in Sources */,
 				B3E7475427199E8F006C92C5 /* SettingsPresenter.swift in Sources */,
 				B349499926E3DB6E00829A5F /* TransactionTemplateFormController.swift in Sources */,
@@ -825,6 +832,7 @@
 			files = (
 				B3939ABD2704797C005D243B /* AchievementTransactionTest.swift in Sources */,
 				B307CE8527147DCE00FB7E8C /* SettingsTest.swift in Sources */,
+				B384E15F276F4CCD00C0B007 /* DayHelperTest.swift in Sources */,
 				B307CE7D271075C200FB7E8C /* TransactionTemplateTest.swift in Sources */,
 				B307CE812713886200FB7E8C /* ExpenseTemplateTest.swift in Sources */,
 				B361477C2721852E00941051 /* BackupRestoreTest.swift in Sources */,

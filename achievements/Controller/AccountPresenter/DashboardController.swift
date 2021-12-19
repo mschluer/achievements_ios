@@ -455,6 +455,11 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
             percentage = (achievementsDataModel.totalRecentIncomes / achievementsDataModel.expenseTemplates.first!.amount) * -100
         }
         
+        // Make sure not to show more than 100 %
+        if percentage > 100 {
+            percentage = 100
+        }
+        
         progressWheel.text = "\(NumberHelper.formattedString(for: percentage)) %"
         progressWheel.textColor = .systemGray
     }

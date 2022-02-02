@@ -79,7 +79,9 @@ class StatisticsTableViewController: UITableViewController {
             // Balance Chart
             let c = tableView.dequeueReusableCell(withIdentifier: "statisticsTableViewChartCell", for: indexPath) as! StatisticsTableViewChartCell
             
-            prepare(c.lineChartView, with: model)
+            DispatchQueue.main.async {
+                self.prepare(c.lineChartView, with: model)
+            }
             
             cell = c
         }
@@ -132,6 +134,15 @@ class StatisticsTableViewController: UITableViewController {
     }
     
     private func prepare(_ chartView: LineChartView, with model: AchievementsDataModel) {
+        // Turn on Loading State
+        let spinnerView = SpinnerViewController()
+        if let chartViewController = chartView.inputViewController {
+            chartViewController.addChild(spinnerView)
+            spinnerView.view.frame = chartView.frame
+            chartView.addSubview(spinnerView.view)
+            spinnerView.didMove(toParent: chartViewController)
+        }
+        
         var chartEntries = [ChartDataEntry]()
         
         let maximumEntries, offset : Int
@@ -173,7 +184,7 @@ class StatisticsTableViewController: UITableViewController {
         data.addDataSet(balanceLine)
         data.addDataSet(zeroLine)
         
-    chartView.data = data
+        chartView.data = data
             
         chartView.rightAxis.enabled = false
         chartView.drawGridBackgroundEnabled = false
@@ -184,6 +195,11 @@ class StatisticsTableViewController: UITableViewController {
         chartView.doubleTapToZoomEnabled = false
         chartView.highlightPerTapEnabled = false
         chartView.highlightPerDragEnabled = false
+        
+        // Turn Loading State off
+        spinnerView.willMove(toParent: nil)
+        spinnerView.view.removeFromSuperview()
+        spinnerView.removeFromParent()
     }
 }
 

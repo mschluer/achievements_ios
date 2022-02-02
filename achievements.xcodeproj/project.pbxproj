@@ -52,6 +52,7 @@
 		B382BCD127282814005872BE /* NumberHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B382BCD027282814005872BE /* NumberHelperTest.swift */; };
 		B384E15D276F4C3700C0B007 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B384E15C276F4C3700C0B007 /* DateHelper.swift */; };
 		B384E15F276F4CCD00C0B007 /* DayHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B384E15E276F4CCD00C0B007 /* DayHelperTest.swift */; };
+		B38AB01427A2B4E6005893DE /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38AB01327A2B4E6005893DE /* SpinnerViewController.swift */; };
 		B3939ABD2704797C005D243B /* AchievementTransactionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939ABC2704797C005D243B /* AchievementTransactionTest.swift */; };
 		B3939AC0270481FC005D243B /* HistoricalTransactionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939ABF270481FC005D243B /* HistoricalTransactionTest.swift */; };
 		B3939AC927049F51005D243B /* AchievementTransactionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3939AC827049F51005D243B /* AchievementTransactionTest.swift */; };
@@ -146,6 +147,7 @@
 		B382BCD027282814005872BE /* NumberHelperTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberHelperTest.swift; sourceTree = "<group>"; };
 		B384E15C276F4C3700C0B007 /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		B384E15E276F4CCD00C0B007 /* DayHelperTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayHelperTest.swift; sourceTree = "<group>"; };
+		B38AB01327A2B4E6005893DE /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		B3939ABC2704797C005D243B /* AchievementTransactionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTransactionTest.swift; sourceTree = "<group>"; };
 		B3939ABF270481FC005D243B /* HistoricalTransactionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalTransactionTest.swift; sourceTree = "<group>"; };
 		B3939AC827049F51005D243B /* AchievementTransactionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTransactionTest.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 		B328327626DF90AB007CAD2A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B38AB01227A2B4D2005893DE /* Commons */,
 				B3E7475627199EAD006C92C5 /* SettingsPresenter */,
 				B32F880C2718B9F0004D0960 /* AccountPresenter */,
 				B393D83F2718AD3C00232482 /* AchievementTransactionsPresenter */,
@@ -422,6 +425,14 @@
 				B384E15E276F4CCD00C0B007 /* DayHelperTest.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		B38AB01227A2B4D2005893DE /* Commons */ = {
+			isa = PBXGroup;
+			children = (
+				B38AB01327A2B4E6005893DE /* SpinnerViewController.swift */,
+			);
+			path = Commons;
 			sourceTree = "<group>";
 		};
 		B3939ABB2704796A005D243B /* AchievementTransaction */ = {
@@ -809,6 +820,7 @@
 				B328327326DC2D02007CAD2A /* AchievementTransactionFormController.swift in Sources */,
 				B328326C26DBD253007CAD2A /* AchievementTransaction+CoreDataClass.swift in Sources */,
 				B349499726E3D31100829A5F /* TransactionTemplatesListViewController.swift in Sources */,
+				B38AB01427A2B4E6005893DE /* SpinnerViewController.swift in Sources */,
 				B382BCCE27282739005872BE /* NumberHelper.swift in Sources */,
 				B393D83E2718AC1300232482 /* AchievementTransactionsPresenter.swift in Sources */,
 				B307CE942715AD3500FB7E8C /* StatisticsPresenter.swift in Sources */,

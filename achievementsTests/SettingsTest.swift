@@ -44,4 +44,11 @@ class SettingsTest: XCTestCase {
         Settings.statisticsSettings.lineChartMaxAmountRecords = 101
         XCTAssertEqual(Settings.statisticsSettings.lineChartMaxAmountRecords, 101)
     }
+    
+    func testChangingDayDeltaChartMaxAmountEntries() {
+        XCTAssertEqual(Settings.statisticsSettings.lineChartMaxAmountRecords, 100)
+        
+        Settings.statisticsSettings.lineChartMaxAmountRecords = 20
+        XCTAssertEqual(Settings.statisticsSettings.lineChartMaxAmountRecords, 20)
+    }
 }

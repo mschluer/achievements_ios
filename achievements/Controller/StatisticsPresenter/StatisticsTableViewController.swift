@@ -9,9 +9,32 @@ import UIKit
 import Charts
 
 class StatisticsTableViewController: UITableViewController {
-    // MARK: Persistence Model
-    public var achievementsDataModel : AchievementsDataModel?
-
+    // MARK: Public Variables
+    public var totalRecentIncomes : Float = 0.0
+    public var totalRecentExpenses : Float = 0.0
+    public var amountRecentIncomes : Int = 0
+    public var amountRecentExpenses : Int = 0
+    
+    public var totalIncomes : Float = 0.0
+    public var totalExpenses : Float = 0.0
+    public var amountIncomes : Int = 0
+    public var amountExpenses : Int = 0
+    
+    public var endOfDayBalances : [Date : Float] = [:] {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadRows(at: [ IndexPath(item: 0, section: 2) ], with: .automatic)
+            }
+        }
+    }
+    public var endOfDayBalanceDeltas : [Date : Float] = [:] {
+        didSet{
+            DispatchQueue.main.async {
+                self.tableView.reloadRows(at: [ IndexPath(item: 0, section: 3) ], with: .automatic)
+            }
+        }
+    }
+    
     // MARK: View Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,27 +42,29 @@ class StatisticsTableViewController: UITableViewController {
 
     // MARK: Table View Data Source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch(section) {
             case 0: return NSLocalizedString("Recent", comment: "Statistics Headline for Recent Transactions.")
             case 1: return NSLocalizedString("Total", comment: "Statistics Headline for Historical Transactions.")
-            case 2: return NSLocalizedString("Balance History", comment: "Headline for the Balance History Line Chart in Statistics View ")
+            case 2: return NSLocalizedString("Balance History", comment: "Headline for the Balance History Line Chart in Statistics View.")
+            case 3: return NSLocalizedString("Day Delta", comment: "Headline for the Day Delta Chart.")
             default: return nil
         }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 2 ? 1 : 2
+        switch(section) {
+            case 0: return 2
+            case 1: return 2
+            case 2: return 1
+            default: return 1
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let model = achievementsDataModel else {
-            return UITableViewCell()
-        }
-        
         let cell : UITableViewCell
 
         switch(indexPath.section) {
@@ -48,14 +73,14 @@ class StatisticsTableViewController: UITableViewController {
             let c = tableView.dequeueReusableCell(withIdentifier: "statisticsTableViewDataCell", for: indexPath) as! StatisticsTableViewDataCell
             
             if(indexPath.item == 0) {
-                c.lhsLabel.text = NumberHelper.formattedString(for: model.totalRecentIncomes)
+                c.lhsLabel.text = NumberHelper.formattedString(for: totalRecentIncomes)
                 c.lhsLabel.textColor = .green
                 
-                c.rhsLabel.text = NumberHelper.formattedString(for: model.totalRecentExpenses)
+                c.rhsLabel.text = NumberHelper.formattedString(for: totalRecentExpenses)
                 c.rhsLabel.textColor = .red
             } else {
-                c.lhsLabel.text = "\(NumberHelper.formattedString(for: model.recentIncomes.count))"
-                c.rhsLabel.text = "\(NumberHelper.formattedString(for: model.recentExpenses.count))"
+                c.lhsLabel.text = "\(NumberHelper.formattedString(for: amountRecentIncomes))"
+                c.rhsLabel.text = "\(NumberHelper.formattedString(for: amountRecentExpenses))"
             }
             
             cell = c
@@ -64,23 +89,36 @@ class StatisticsTableViewController: UITableViewController {
             let c = tableView.dequeueReusableCell(withIdentifier: "statisticsTableViewDataCell", for: indexPath) as! StatisticsTableViewDataCell
             
             if(indexPath.item == 0) {
-                c.lhsLabel.text = NumberHelper.formattedString(for: model.totalHistoricalIncomes)
+                c.lhsLabel.text = NumberHelper.formattedString(for: totalIncomes)
                 c.lhsLabel.textColor = .green
                 
-                c.rhsLabel.text = NumberHelper.formattedString(for: model.totalHistoricalExpenses)
+                c.rhsLabel.text = NumberHelper.formattedString(for: totalExpenses)
                 c.rhsLabel.textColor = .red
             } else {
-                c.lhsLabel.text = "\(NumberHelper.formattedString(for: model.historicalIncomes.count))"
-                c.rhsLabel.text = "\(NumberHelper.formattedString(for: model.historicalExpenses.count))"
+                c.lhsLabel.text = "\(NumberHelper.formattedString(for: amountIncomes))"
+                c.rhsLabel.text = "\(NumberHelper.formattedString(for: amountExpenses))"
+            }
+            
+            cell = c
+        case 2:
+            // Balance Chart
+            let c = tableView.dequeueReusableCell(withIdentifier: "statisticsTableViewChartCell", for: indexPath) as! StatisticsTableViewChartCell
+            
+            if(endOfDayBalances.isEmpty) {
+                SpinnerViewController().showOn(c.contentView)
+            } else {
+                self.refresh(balanceLineChartView: c.lineChartView)
             }
             
             cell = c
         default:
-            // Balance Chart
-            let c = tableView.dequeueReusableCell(withIdentifier: "statisticsTableViewChartCell", for: indexPath) as! StatisticsTableViewChartCell
+            // Day Delta Bar Chart
+            let c = tableView.dequeueReusableCell(withIdentifier: "statisticsTableViewBarChartCell", for: indexPath) as! StatisticsTableViewBarChartCell
             
-            DispatchQueue.main.async {
-                self.prepare(c.lineChartView, with: model)
+            if(endOfDayBalanceDeltas.isEmpty) {
+                SpinnerViewController().showOn(c.contentView)
+            } else {
+                self.refresh(dayDeltaBarChartView: c.barChartView)
             }
             
             cell = c
@@ -92,63 +130,23 @@ class StatisticsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if(indexPath == IndexPath(item: 0, section: 2)) {
+        if indexPath == IndexPath(item: 0, section: 2) {
             // Balance History Line Chart
             return 220.0
-        } else{
+        } else if indexPath == IndexPath(item: 0, section: 3) {
+            // Day Delta Bar Chart
+            return 220.0
+        } else {
             return UITableView.automaticDimension
         }
     }
     
     // MARK: Private Functions
-    private func calculateEndOfDayBalances(from dictionary: [Date : [HistoricalTransaction]]) -> [Date : Float] {
-        var result : [Date : Float] = [:]
-        
-        // Verify Presence
-        guard let groupedTransactions = achievementsDataModel?.groupedHistoricalTransactions else {
-            return result
-        }
-        
-        // Prepare Keys
-        var groupedTransactionsKeys = Array(groupedTransactions.keys)
-        groupedTransactionsKeys.sort(by: >)
-        
-        let dateArray = DateHelper.createDayArray(
-            from: groupedTransactionsKeys.first!,
-            to: groupedTransactionsKeys.last!)
-        
-        var currentBalance : Float = 0.0
-        
-        for date in dateArray {
-            if var currentGroup = groupedTransactions[Calendar.current.date(from: date)!] {
-                currentGroup.sort(by: {a, b in
-                    a.date! > b.date!
-                })
-                
-                currentBalance = currentGroup.last!.balance
-            }
-            result[Calendar.current.date(from: date)!] = currentBalance
-        }
-        
-        return result
-    }
-    
-    private func prepare(_ chartView: LineChartView, with model: AchievementsDataModel) {
-        // Turn on Loading State
-        let spinnerView = SpinnerViewController()
-        if let chartViewController = chartView.inputViewController {
-            chartViewController.addChild(spinnerView)
-            spinnerView.view.frame = chartView.frame
-            chartView.addSubview(spinnerView.view)
-            spinnerView.didMove(toParent: chartViewController)
-        }
+    private func refresh(balanceLineChartView: LineChartView) {
+        if endOfDayBalances.isEmpty { return }
         
         var chartEntries = [ChartDataEntry]()
-        
         let maximumEntries, offset : Int
-        
-        // Process End-of-Day Balances
-        let endOfDayBalances = calculateEndOfDayBalances(from: model.groupedHistoricalTransactions)
         
         let totalChartItems = endOfDayBalances.count
         if  totalChartItems > Settings.statisticsSettings.lineChartMaxAmountRecords {
@@ -184,23 +182,82 @@ class StatisticsTableViewController: UITableViewController {
         data.addDataSet(balanceLine)
         data.addDataSet(zeroLine)
         
-        chartView.data = data
+        balanceLineChartView.data = data
             
-        chartView.rightAxis.enabled = false
-        chartView.drawGridBackgroundEnabled = false
+        balanceLineChartView.rightAxis.enabled = false
+        balanceLineChartView.drawGridBackgroundEnabled = false
             
-        chartView.leftAxis.enabled = false
-        chartView.xAxis.enabled = false
-        chartView.legend.enabled = false
-        chartView.doubleTapToZoomEnabled = false
-        chartView.highlightPerTapEnabled = false
-        chartView.highlightPerDragEnabled = false
-        
-        // Turn Loading State off
-        spinnerView.willMove(toParent: nil)
-        spinnerView.view.removeFromSuperview()
-        spinnerView.removeFromParent()
+        balanceLineChartView.leftAxis.enabled = false
+        balanceLineChartView.xAxis.enabled = false
+        balanceLineChartView.legend.enabled = false
+        balanceLineChartView.doubleTapToZoomEnabled = false
+        balanceLineChartView.highlightPerTapEnabled = false
+        balanceLineChartView.highlightPerDragEnabled = false
     }
+    
+    private func refresh(dayDeltaBarChartView: BarChartView) {
+        if endOfDayBalanceDeltas.isEmpty { return }
+        
+        var positiveChartEntries = [ChartDataEntry]()
+        var negativeChartEntries = [ChartDataEntry]()
+        let maximumEntries, offset : Int
+        let totalChartItems = endOfDayBalanceDeltas.count
+        
+        // Calculate the offset
+        if  totalChartItems > Settings.statisticsSettings.dayDeltaChartMaxAmountEntries {
+            maximumEntries = Settings.statisticsSettings.dayDeltaChartMaxAmountEntries
+            offset = totalChartItems - maximumEntries
+        } else {
+            maximumEntries = totalChartItems
+            offset = 0
+        }
+        
+        // Prepare Keys
+        var keys = Array(endOfDayBalanceDeltas.keys)
+        keys.sort(by: <)
+        
+        // Compile With Values
+        for i in 0..<maximumEntries {
+            let key = keys[i + offset]
+            let value = Double(endOfDayBalanceDeltas[key]!)
+            
+            if value >= 0 {
+                positiveChartEntries.append(BarChartDataEntry(x: Double(i), y: value))
+            } else {
+                negativeChartEntries.append(BarChartDataEntry(x: Double(i), y: value))
+            }
+        }
+        
+        let positiveDataset = BarChartDataSet(entries: positiveChartEntries)
+        positiveDataset.colors = [ UIColor.green ]
+        let negativeDataset = BarChartDataSet(entries: negativeChartEntries)
+        negativeDataset.colors = [ UIColor.red ]
+        let data = BarChartData(dataSets: [ positiveDataset, negativeDataset ])
+        
+        // Hide or Show
+        if Settings.statisticsSettings.dayDeltaChartMaxAmountEntries > 10 {
+            positiveDataset.drawValuesEnabled = false
+            negativeDataset.drawValuesEnabled = false
+        } else {
+            positiveDataset.valueFont = UIFont.systemFont(ofSize: 15.0)
+            negativeDataset.valueFont = UIFont.systemFont(ofSize: 15.0)
+        }
+        
+        dayDeltaBarChartView.data = data
+        
+        dayDeltaBarChartView.leftAxis.enabled = false
+        dayDeltaBarChartView.rightAxis.enabled = false
+        dayDeltaBarChartView.drawGridBackgroundEnabled = false
+        dayDeltaBarChartView.xAxis.enabled = false
+        dayDeltaBarChartView.legend.enabled = false
+        dayDeltaBarChartView.doubleTapToZoomEnabled = false
+        dayDeltaBarChartView.highlightPerDragEnabled = false
+    }
+}
+
+class StatisticsTableViewBarChartCell: UITableViewCell {
+    // MARK: Outlets
+    @IBOutlet weak var barChartView: BarChartView!
 }
 
 class StatisticsTableViewChartCell : UITableViewCell {
@@ -213,4 +270,3 @@ class StatisticsTableViewDataCell : UITableViewCell {
     @IBOutlet weak var lhsLabel: UILabel!
     @IBOutlet weak var rhsLabel: UILabel!
 }
-

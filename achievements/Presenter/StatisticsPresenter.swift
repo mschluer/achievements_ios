@@ -19,11 +19,76 @@ class StatisticsPresenter {
         self.achievementsDataModel = achievementsDataModel
     }
     
-    // MARK: Public Functions
+    // MARK: Take Over Functions
     public func takeOver(from initiator : UIViewController) {
         let viewController = storyboard.instantiateViewController(withIdentifier: "StatisticsTableViewController") as! StatisticsTableViewController
-        viewController.achievementsDataModel = achievementsDataModel
         
+        // Set Data
+        viewController.totalRecentIncomes = achievementsDataModel.totalRecentIncomes
+        viewController.totalRecentExpenses = achievementsDataModel.totalRecentExpenses
+        viewController.amountRecentIncomes = achievementsDataModel.recentIncomes.count
+        viewController.amountRecentExpenses = achievementsDataModel.recentExpenses.count
+        
+        viewController.totalIncomes = achievementsDataModel.totalHistoricalIncomes
+        viewController.totalExpenses = achievementsDataModel.totalHistoricalExpenses
+        viewController.amountIncomes = achievementsDataModel.historicalIncomes.count
+        viewController.amountExpenses = achievementsDataModel.historicalExpenses.count
+        
+        DispatchQueue.global().async {
+            let endOfDayBalances = self.calculateEndOfDayBalances(from: self.achievementsDataModel.groupedHistoricalTransactions)
+            
+            viewController.endOfDayBalances = endOfDayBalances
+            viewController.endOfDayBalanceDeltas = self.calculateEndOfDayBalanceDeltas(from: endOfDayBalances)
+        }
+        
+        // Show
         initiator.show(viewController, sender: self)
+    }
+    
+    // MARK: Public Functions
+    public func calculateEndOfDayBalances(from dictionary: [Date: [HistoricalTransaction]]) -> [Date : Float] {
+        var result : [Date : Float] = [:]
+        
+        // Prepare Keys
+        var groupedTransactionsKeys = Array(dictionary.keys)
+        groupedTransactionsKeys.sort(by: >)
+        
+        let dateArray = DateHelper.createDayArray(
+            from: groupedTransactionsKeys.first!,
+            to: groupedTransactionsKeys.last!)
+        
+        var currentBalance : Float = 0.0
+        
+        for date in dateArray {
+            if var currentGroup = dictionary[Calendar.current.date(from: date)!] {
+                currentGroup.sort(by: {a, b in
+                    a.date! > b.date!
+                })
+                
+                currentBalance = currentGroup.last!.balance
+            }
+            result[Calendar.current.date(from: date)!] = currentBalance
+        }
+        
+        return result
+    }
+    
+    public func calculateEndOfDayBalanceDeltas(from endOfDayBalances: [Date : Float]) -> [Date : Float] {
+        var result : [Date : Float] = [:]
+        
+        if endOfDayBalances.isEmpty {
+            return result
+        }
+        
+        var groupedTransactionsKeys = Array(endOfDayBalances.keys)
+        groupedTransactionsKeys.sort(by: <)
+        var dayBeforeBalance : Float = endOfDayBalances[groupedTransactionsKeys.first!]!
+        
+        for date in groupedTransactionsKeys {
+            result[date] = endOfDayBalances[date]! - dayBeforeBalance
+            dayBeforeBalance = endOfDayBalances[date]!
+        }
+        
+        return result
     }
 }

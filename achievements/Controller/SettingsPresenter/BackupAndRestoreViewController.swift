@@ -101,23 +101,14 @@ class BackupAndRestoreViewController: UIViewController, UIDocumentPickerDelegate
     // MARK: Public Functions
     public func toggleLoadingState() {
         if let spinnerView = self.spinner {
-            spinnerView.willMove(toParent: nil)
-            spinnerView.view.removeFromSuperview()
-            spinnerView.removeFromParent()
-            
+            spinnerView.vanish()
             self.spinner = nil
         } else {
             let spinnerView = SpinnerViewController()
-            
-            addChild(spinnerView)
-            spinnerView.view.frame = view.frame
-            view.addSubview(spinnerView.view)
-            spinnerView.didMove(toParent: self)
+            spinnerView.showOn(self)
             
             self.spinner = spinnerView
         }
-        
-        self.view.setNeedsDisplay()
     }
     
     // MARK: Private Functions

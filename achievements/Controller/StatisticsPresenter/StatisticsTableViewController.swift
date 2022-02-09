@@ -234,6 +234,15 @@ class StatisticsTableViewController: UITableViewController {
         negativeDataset.colors = [ UIColor.red ]
         let data = BarChartData(dataSets: [ positiveDataset, negativeDataset ])
         
+        // Hide or Show
+        if Settings.statisticsSettings.dayDeltaChartMaxAmountEntries > 10 {
+            positiveDataset.drawValuesEnabled = false
+            negativeDataset.drawValuesEnabled = false
+        } else {
+            positiveDataset.valueFont = UIFont.systemFont(ofSize: 15.0)
+            negativeDataset.valueFont = UIFont.systemFont(ofSize: 15.0)
+        }
+        
         dayDeltaBarChartView.data = data
         
         dayDeltaBarChartView.leftAxis.enabled = false

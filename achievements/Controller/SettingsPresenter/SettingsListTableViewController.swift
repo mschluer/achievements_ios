@@ -35,11 +35,16 @@ class SettingsListTableViewController: UITableViewController {
         switch(indexPath.section) {
         case 0:
             switch(indexPath.item) {
-            default:
+            case 0:
                 // Amount Records in Balance Line Chart
                 cell = tableView.dequeueReusableCell(withIdentifier: "settingsCellWithData", for: indexPath)
                 cell.textLabel?.text = NSLocalizedString("Amount Records in Balance-Chart", comment: "Settings Item for the Amount of Records to be Displayed in the Balance-Line-Chart")
                 cell.detailTextLabel?.text = NumberHelper.formattedString(for: Settings.statisticsSettings.lineChartMaxAmountRecords)
+            default:
+                // Amount of Entires in Day Delta Chart
+                cell = tableView.dequeueReusableCell(withIdentifier: "settingsCellWithData", for: indexPath)
+                cell.textLabel?.text = NSLocalizedString("Amount Entries in Day Delta Chart", comment: "Settings Item for the Amount of Entries to be Disyplayed in the Day Delta Chart")
+                cell.detailTextLabel?.text = NumberHelper.formattedString(for: Settings.statisticsSettings.dayDeltaChartMaxAmountEntries)
             }
         default:
             cell = tableView.dequeueReusableCell(withIdentifier: "settingsCell", for: indexPath)
@@ -54,7 +59,8 @@ class SettingsListTableViewController: UITableViewController {
         switch(indexPath.section) {
         case 0 :    switch(indexPath.item) {
                     // Amount of Datapoints to display
-                    default: statisticsAmountDataPointsPressed(); self.tableView.deselectRow(at: indexPath, animated: true)
+                    case 0: statisticsAmountDataPointsPressed(); self.tableView.deselectRow(at: indexPath, animated: true)
+                    default: statisticsAmountDataPointsInDayDeltaChartPressed(); self.tableView.deselectRow(at: indexPath, animated: true)
         }
         default :   switch(indexPath.item) {
                     // Backup and Restore
@@ -69,7 +75,7 @@ class SettingsListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch(section) {
-        case 0: return 1
+        case 0: return 2
         default: return databaseMenuItems.count
         }
     }
@@ -126,6 +132,38 @@ class SettingsListTableViewController: UITableViewController {
                 Settings.statisticsSettings.lineChartMaxAmountRecords = 1000
             } else {
                 Settings.statisticsSettings.lineChartMaxAmountRecords = intValue
+            }
+            
+            self.updateViewFromModel()
+        }))
+        
+        self.present(updateIntValueAlert, animated: true, completion: nil)
+    }
+    
+    private func statisticsAmountDataPointsInDayDeltaChartPressed() {
+        let updateIntValueAlert = UIAlertController(
+            title: NSLocalizedString("Amount Entries in Day Delta Chart", comment: "Settings Item for the Amount of Entries to be Disyplayed in the Day Delta Chart"),
+            message: NSLocalizedString("Please enter a new (numeric) value.", comment: "Ask for a new nummeric Value"),
+            preferredStyle: .alert)
+        
+        updateIntValueAlert.addTextField { textField in
+            textField.text = String(Settings.statisticsSettings.dayDeltaChartMaxAmountEntries)
+        }
+        
+        updateIntValueAlert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Abort current action."), style: .cancel, handler: nil))
+        updateIntValueAlert.addAction(UIAlertAction(title: NSLocalizedString("Confirm", comment: "Confirm Action"), style: .default, handler: { [weak updateIntValueAlert] _ in
+            guard let text = updateIntValueAlert?.textFields?.first?.text else {
+                return
+            }
+            
+            let intValue = (text as NSString).integerValue
+            
+            if intValue < 5 {
+                Settings.statisticsSettings.dayDeltaChartMaxAmountEntries = 5
+            } else if intValue > 50 {
+                Settings.statisticsSettings.dayDeltaChartMaxAmountEntries = 50
+            } else {
+                Settings.statisticsSettings.dayDeltaChartMaxAmountEntries = intValue
             }
             
             self.updateViewFromModel()

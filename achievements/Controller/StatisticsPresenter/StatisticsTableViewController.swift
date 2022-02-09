@@ -9,10 +9,17 @@ import UIKit
 import Charts
 
 class StatisticsTableViewController: UITableViewController {
-    // MARK: Persistence Model
-    public var achievementsDataModel : AchievementsDataModel?
-    
     // MARK: Public Variables
+    public var totalRecentIncomes : Float = 0.0
+    public var totalRecentExpenses : Float = 0.0
+    public var amountRecentIncomes : Int = 0
+    public var amountRecentExpenses : Int = 0
+    
+    public var totalIncomes : Float = 0.0
+    public var totalExpenses : Float = 0.0
+    public var amountIncomes : Int = 0
+    public var amountExpenses : Int = 0
+    
     public var endOfDayBalances : [Date : Float] = [:]
     public var endOfDayBalanceDeltas : [Date : Float] = [:]
     
@@ -46,10 +53,6 @@ class StatisticsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let model = achievementsDataModel else {
-            return UITableViewCell()
-        }
-        
         let cell : UITableViewCell
 
         switch(indexPath.section) {
@@ -58,14 +61,14 @@ class StatisticsTableViewController: UITableViewController {
             let c = tableView.dequeueReusableCell(withIdentifier: "statisticsTableViewDataCell", for: indexPath) as! StatisticsTableViewDataCell
             
             if(indexPath.item == 0) {
-                c.lhsLabel.text = NumberHelper.formattedString(for: model.totalRecentIncomes)
+                c.lhsLabel.text = NumberHelper.formattedString(for: totalRecentIncomes)
                 c.lhsLabel.textColor = .green
                 
-                c.rhsLabel.text = NumberHelper.formattedString(for: model.totalRecentExpenses)
+                c.rhsLabel.text = NumberHelper.formattedString(for: totalRecentExpenses)
                 c.rhsLabel.textColor = .red
             } else {
-                c.lhsLabel.text = "\(NumberHelper.formattedString(for: model.recentIncomes.count))"
-                c.rhsLabel.text = "\(NumberHelper.formattedString(for: model.recentExpenses.count))"
+                c.lhsLabel.text = "\(NumberHelper.formattedString(for: amountRecentIncomes))"
+                c.rhsLabel.text = "\(NumberHelper.formattedString(for: amountRecentExpenses))"
             }
             
             cell = c
@@ -74,14 +77,14 @@ class StatisticsTableViewController: UITableViewController {
             let c = tableView.dequeueReusableCell(withIdentifier: "statisticsTableViewDataCell", for: indexPath) as! StatisticsTableViewDataCell
             
             if(indexPath.item == 0) {
-                c.lhsLabel.text = NumberHelper.formattedString(for: model.totalHistoricalIncomes)
+                c.lhsLabel.text = NumberHelper.formattedString(for: totalIncomes)
                 c.lhsLabel.textColor = .green
                 
-                c.rhsLabel.text = NumberHelper.formattedString(for: model.totalHistoricalExpenses)
+                c.rhsLabel.text = NumberHelper.formattedString(for: totalExpenses)
                 c.rhsLabel.textColor = .red
             } else {
-                c.lhsLabel.text = "\(NumberHelper.formattedString(for: model.historicalIncomes.count))"
-                c.rhsLabel.text = "\(NumberHelper.formattedString(for: model.historicalExpenses.count))"
+                c.lhsLabel.text = "\(NumberHelper.formattedString(for: amountIncomes))"
+                c.rhsLabel.text = "\(NumberHelper.formattedString(for: amountExpenses))"
             }
             
             cell = c

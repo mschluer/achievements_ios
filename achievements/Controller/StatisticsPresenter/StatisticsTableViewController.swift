@@ -104,16 +104,20 @@ class StatisticsTableViewController: UITableViewController {
             // Balance Chart
             let c = tableView.dequeueReusableCell(withIdentifier: "statisticsTableViewChartCell", for: indexPath) as! StatisticsTableViewChartCell
             
-            //DispatchQueue.main.async {
+            if(endOfDayBalances.isEmpty) {
+                SpinnerViewController().showOn(c.contentView)
+            } else {
                 self.refresh(balanceLineChartView: c.lineChartView)
-            //}
+            }
             
             cell = c
         default:
             // Day Delta Bar Chart
             let c = tableView.dequeueReusableCell(withIdentifier: "statisticsTableViewBarChartCell", for: indexPath) as! StatisticsTableViewBarChartCell
             
-            DispatchQueue.main.async {
+            if(endOfDayBalanceDeltas.isEmpty) {
+                SpinnerViewController().showOn(c.contentView)
+            } else {
                 self.refresh(dayDeltaBarChartView: c.barChartView)
             }
             
@@ -139,10 +143,6 @@ class StatisticsTableViewController: UITableViewController {
     
     // MARK: Private Functions
     private func refresh(balanceLineChartView: LineChartView) {
-        // Turn on Loading State
-        let spinnerView = SpinnerViewController()
-        spinnerView.showOn(balanceLineChartView, parentViewController: self)
-        
         if endOfDayBalances.isEmpty { return }
         
         var chartEntries = [ChartDataEntry]()
@@ -193,16 +193,9 @@ class StatisticsTableViewController: UITableViewController {
         balanceLineChartView.doubleTapToZoomEnabled = false
         balanceLineChartView.highlightPerTapEnabled = false
         balanceLineChartView.highlightPerDragEnabled = false
-        
-        // Turn Loading State off
-        // spinnerView.vanish()
     }
     
     private func refresh(dayDeltaBarChartView: BarChartView) {
-        // Turn on Loading State
-        let spinnerView = SpinnerViewController()
-        spinnerView.showOn(dayDeltaBarChartView, parentViewController: self)
-        
         if endOfDayBalanceDeltas.isEmpty { return }
         
         var positiveChartEntries = [ChartDataEntry]()
@@ -259,9 +252,6 @@ class StatisticsTableViewController: UITableViewController {
         dayDeltaBarChartView.legend.enabled = false
         dayDeltaBarChartView.doubleTapToZoomEnabled = false
         dayDeltaBarChartView.highlightPerDragEnabled = false
-        
-        // Turn Loading State off
-        // spinnerView.vanish()
     }
 }
 

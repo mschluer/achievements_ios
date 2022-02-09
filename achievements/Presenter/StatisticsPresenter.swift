@@ -23,10 +23,6 @@ class StatisticsPresenter {
     public func takeOver(from initiator : UIViewController) {
         let viewController = storyboard.instantiateViewController(withIdentifier: "StatisticsTableViewController") as! StatisticsTableViewController
         
-        // Prepare Data
-        let endOfDayBalances = calculateEndOfDayBalances(from: achievementsDataModel.groupedHistoricalTransactions)
-        let endOfDayBalanceDeltas = calculateEndOfDayBalanceDeltas(from: endOfDayBalances)
-        
         // Set Data
         viewController.totalRecentIncomes = achievementsDataModel.totalRecentIncomes
         viewController.totalRecentExpenses = achievementsDataModel.totalRecentExpenses
@@ -38,8 +34,12 @@ class StatisticsPresenter {
         viewController.amountIncomes = achievementsDataModel.historicalIncomes.count
         viewController.amountExpenses = achievementsDataModel.historicalExpenses.count
         
-        viewController.endOfDayBalances = endOfDayBalances
-        viewController.endOfDayBalanceDeltas = endOfDayBalanceDeltas
+        DispatchQueue.global().async {
+            let endOfDayBalances = self.calculateEndOfDayBalances(from: self.achievementsDataModel.groupedHistoricalTransactions)
+            
+            viewController.endOfDayBalances = endOfDayBalances
+            viewController.endOfDayBalanceDeltas = self.calculateEndOfDayBalanceDeltas(from: endOfDayBalances)
+        }
         
         // Show
         initiator.show(viewController, sender: self)

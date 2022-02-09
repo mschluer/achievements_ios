@@ -46,4 +46,18 @@ class SpinnerViewController : UIViewController {
         
         parentInputViewController?.view.setNeedsDisplay()
     }
+    
+    public func showOn(_ parentView: UIView, parentViewController: UIViewController?) {
+        vanish()
+        guard let viewController = parentInputViewController else { return }
+        
+        viewController.addChild(self)
+        view.frame = parentView.frame
+        parentView.addSubview(view)
+        parentView.bringSubviewToFront(view)
+        view.backgroundColor = .green
+        didMove(toParent: viewController)
+        
+        parentView.setNeedsDisplay()
+    }
 }

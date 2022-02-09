@@ -14,7 +14,8 @@ class StatisticsTableViewController: UITableViewController {
     
     // MARK: Public Variables
     public var endOfDayBalances : [Date : Float] = [:]
-
+    public var endOfDayBalanceDeltas : [Date : Float] = [:]
+    
     // MARK: View Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,20 +23,26 @@ class StatisticsTableViewController: UITableViewController {
 
     // MARK: Table View Data Source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch(section) {
             case 0: return NSLocalizedString("Recent", comment: "Statistics Headline for Recent Transactions.")
             case 1: return NSLocalizedString("Total", comment: "Statistics Headline for Historical Transactions.")
-            case 2: return NSLocalizedString("Balance History", comment: "Headline for the Balance History Line Chart in Statistics View ")
+            case 2: return NSLocalizedString("Balance History", comment: "Headline for the Balance History Line Chart in Statistics View.")
+            case 3: return NSLocalizedString("Day Delta", comment: "Headline for the Day Delta Chart.")
             default: return nil
         }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 2 ? 1 : 2
+        switch(section) {
+            case 0: return 2
+            case 1: return 2
+            case 2: return 1
+            default: return 1
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -78,12 +85,21 @@ class StatisticsTableViewController: UITableViewController {
             }
             
             cell = c
-        default:
+        case 2:
             // Balance Chart
             let c = tableView.dequeueReusableCell(withIdentifier: "statisticsTableViewChartCell", for: indexPath) as! StatisticsTableViewChartCell
             
             DispatchQueue.main.async {
                 self.refresh(balanceLineChartView: c.lineChartView)
+            }
+            
+            cell = c
+        default:
+            // Day Delta Bar Chart
+            let c = tableView.dequeueReusableCell(withIdentifier: "statisticsTableViewBarChartCell", for: indexPath) as! StatisticsTableViewBarChartCell
+            
+            DispatchQueue.main.async {
+                self.refresh(dayDeltaBarChartView: c.barChartView)
             }
             
             cell = c
@@ -95,10 +111,13 @@ class StatisticsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if(indexPath == IndexPath(item: 0, section: 2)) {
+        if indexPath == IndexPath(item: 0, section: 2) {
             // Balance History Line Chart
             return 220.0
-        } else{
+        } else if indexPath == IndexPath(item: 0, section: 3) {
+            // Day Delta Bar Chart
+            return 220.0
+        } else {
             return UITableView.automaticDimension
         }
     }
@@ -168,6 +187,73 @@ class StatisticsTableViewController: UITableViewController {
         spinnerView.view.removeFromSuperview()
         spinnerView.removeFromParent()
     }
+    
+    private func refresh(dayDeltaBarChartView: BarChartView) {
+        // Turn on Loading State
+        let spinnerView = SpinnerViewController()
+        if let chartViewController = dayDeltaBarChartView.inputViewController {
+            chartViewController.addChild(spinnerView)
+            spinnerView.view.frame = dayDeltaBarChartView.frame
+            dayDeltaBarChartView.addSubview(spinnerView.view)
+            spinnerView.didMove(toParent: chartViewController)
+        }
+        
+        var positiveChartEntries = [ChartDataEntry]()
+        var negativeChartEntries = [ChartDataEntry]()
+        let maximumEntries, offset : Int
+        let totalChartItems = endOfDayBalanceDeltas.count
+        
+        // Calculate the offset
+        if  totalChartItems > Settings.statisticsSettings.dayDeltaChartMaxAmountEntries {
+            maximumEntries = Settings.statisticsSettings.dayDeltaChartMaxAmountEntries
+            offset = totalChartItems - maximumEntries
+        } else {
+            maximumEntries = totalChartItems
+            offset = 0
+        }
+        
+        // Prepare Keys
+        var keys = Array(endOfDayBalanceDeltas.keys)
+        keys.sort(by: <)
+        
+        // Compile With Values
+        for i in 0..<maximumEntries {
+            let key = keys[i + offset]
+            let value = Double(endOfDayBalanceDeltas[key]!)
+            
+            if value >= 0 {
+                positiveChartEntries.append(BarChartDataEntry(x: Double(i), y: value))
+            } else {
+                negativeChartEntries.append(BarChartDataEntry(x: Double(i), y: value))
+            }
+        }
+        
+        let positiveDataset = BarChartDataSet(entries: positiveChartEntries)
+        positiveDataset.colors = [ UIColor.green ]
+        let negativeDataset = BarChartDataSet(entries: negativeChartEntries)
+        negativeDataset.colors = [ UIColor.red ]
+        let data = BarChartData(dataSets: [ positiveDataset, negativeDataset ])
+        
+        dayDeltaBarChartView.data = data
+        
+        dayDeltaBarChartView.leftAxis.enabled = false
+        dayDeltaBarChartView.rightAxis.enabled = false
+        dayDeltaBarChartView.drawGridBackgroundEnabled = false
+        dayDeltaBarChartView.xAxis.enabled = false
+        dayDeltaBarChartView.legend.enabled = false
+        dayDeltaBarChartView.doubleTapToZoomEnabled = false
+        dayDeltaBarChartView.highlightPerDragEnabled = false
+        
+        // Turn Loading State off
+        spinnerView.willMove(toParent: nil)
+        spinnerView.view.removeFromSuperview()
+        spinnerView.removeFromParent()
+    }
+}
+
+class StatisticsTableViewBarChartCell: UITableViewCell {
+    // MARK: Outlets
+    @IBOutlet weak var barChartView: BarChartView!
 }
 
 class StatisticsTableViewChartCell : UITableViewCell {
@@ -180,4 +266,3 @@ class StatisticsTableViewDataCell : UITableViewCell {
     @IBOutlet weak var lhsLabel: UILabel!
     @IBOutlet weak var rhsLabel: UILabel!
 }
-

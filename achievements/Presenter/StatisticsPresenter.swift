@@ -23,7 +23,14 @@ class StatisticsPresenter {
     public func takeOver(from initiator : UIViewController) {
         let viewController = storyboard.instantiateViewController(withIdentifier: "StatisticsTableViewController") as! StatisticsTableViewController
         viewController.achievementsDataModel = achievementsDataModel
-        viewController.endOfDayBalances = calculateEndOfDayBalances(from: achievementsDataModel.groupedHistoricalTransactions)
+        
+        // Prepare Data
+        let endOfDayBalances = calculateEndOfDayBalances(from: achievementsDataModel.groupedHistoricalTransactions)
+        let endOfDayBalanceDeltas = calculateEndOfDayBalanceDeltas(from: endOfDayBalances)
+        
+        // Set Data
+        viewController.endOfDayBalances = endOfDayBalances
+        viewController.endOfDayBalanceDeltas = endOfDayBalanceDeltas
         
         initiator.show(viewController, sender: self)
     }
@@ -51,6 +58,25 @@ class StatisticsPresenter {
                 currentBalance = currentGroup.last!.balance
             }
             result[Calendar.current.date(from: date)!] = currentBalance
+        }
+        
+        return result
+    }
+    
+    public func calculateEndOfDayBalanceDeltas(from endOfDayBalances: [Date : Float]) -> [Date : Float] {
+        var result : [Date : Float] = [:]
+        
+        if endOfDayBalances.isEmpty {
+            return result
+        }
+        
+        var groupedTransactionsKeys = Array(endOfDayBalances.keys)
+        groupedTransactionsKeys.sort(by: <)
+        var dayBeforeBalance : Float = endOfDayBalances[groupedTransactionsKeys.first!]!
+        
+        for date in groupedTransactionsKeys {
+            result[date] = endOfDayBalances[date]! - dayBeforeBalance
+            dayBeforeBalance = endOfDayBalances[date]!
         }
         
         return result

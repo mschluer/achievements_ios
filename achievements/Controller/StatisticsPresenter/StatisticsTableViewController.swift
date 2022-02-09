@@ -129,12 +129,7 @@ class StatisticsTableViewController: UITableViewController {
     private func refresh(balanceLineChartView: LineChartView) {
         // Turn on Loading State
         let spinnerView = SpinnerViewController()
-        if let chartViewController = balanceLineChartView.inputViewController {
-            chartViewController.addChild(spinnerView)
-            spinnerView.view.frame = balanceLineChartView.frame
-            balanceLineChartView.addSubview(spinnerView.view)
-            spinnerView.didMove(toParent: chartViewController)
-        }
+        spinnerView.showOn(balanceLineChartView.inputViewController)
         
         var chartEntries = [ChartDataEntry]()
         let maximumEntries, offset : Int
@@ -186,20 +181,13 @@ class StatisticsTableViewController: UITableViewController {
         balanceLineChartView.highlightPerDragEnabled = false
         
         // Turn Loading State off
-        spinnerView.willMove(toParent: nil)
-        spinnerView.view.removeFromSuperview()
-        spinnerView.removeFromParent()
+        spinnerView.vanish()
     }
     
     private func refresh(dayDeltaBarChartView: BarChartView) {
         // Turn on Loading State
         let spinnerView = SpinnerViewController()
-        if let chartViewController = dayDeltaBarChartView.inputViewController {
-            chartViewController.addChild(spinnerView)
-            spinnerView.view.frame = dayDeltaBarChartView.frame
-            dayDeltaBarChartView.addSubview(spinnerView.view)
-            spinnerView.didMove(toParent: chartViewController)
-        }
+        spinnerView.showOn(dayDeltaBarChartView.inputViewController)
         
         var positiveChartEntries = [ChartDataEntry]()
         var negativeChartEntries = [ChartDataEntry]()
@@ -257,9 +245,7 @@ class StatisticsTableViewController: UITableViewController {
         dayDeltaBarChartView.highlightPerDragEnabled = false
         
         // Turn Loading State off
-        spinnerView.willMove(toParent: nil)
-        spinnerView.view.removeFromSuperview()
-        spinnerView.removeFromParent()
+        spinnerView.vanish()
     }
 }
 

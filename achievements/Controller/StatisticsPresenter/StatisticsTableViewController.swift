@@ -11,6 +11,9 @@ import Charts
 class StatisticsTableViewController: UITableViewController {
     // MARK: Persistence Model
     public var achievementsDataModel : AchievementsDataModel?
+    
+    // MARK: Public Variables
+    public var endOfDayBalances : [Date : Float] = [:]
 
     // MARK: View Lifecycle Methods
     override func viewDidLoad() {
@@ -80,7 +83,7 @@ class StatisticsTableViewController: UITableViewController {
             let c = tableView.dequeueReusableCell(withIdentifier: "statisticsTableViewChartCell", for: indexPath) as! StatisticsTableViewChartCell
             
             DispatchQueue.main.async {
-                self.prepare(c.lineChartView, with: model)
+                self.refresh(balanceLineChartView: c.lineChartView)
             }
             
             cell = c
@@ -101,54 +104,18 @@ class StatisticsTableViewController: UITableViewController {
     }
     
     // MARK: Private Functions
-    private func calculateEndOfDayBalances(from dictionary: [Date : [HistoricalTransaction]]) -> [Date : Float] {
-        var result : [Date : Float] = [:]
-        
-        // Verify Presence
-        guard let groupedTransactions = achievementsDataModel?.groupedHistoricalTransactions else {
-            return result
-        }
-        
-        // Prepare Keys
-        var groupedTransactionsKeys = Array(groupedTransactions.keys)
-        groupedTransactionsKeys.sort(by: >)
-        
-        let dateArray = DateHelper.createDayArray(
-            from: groupedTransactionsKeys.first!,
-            to: groupedTransactionsKeys.last!)
-        
-        var currentBalance : Float = 0.0
-        
-        for date in dateArray {
-            if var currentGroup = groupedTransactions[Calendar.current.date(from: date)!] {
-                currentGroup.sort(by: {a, b in
-                    a.date! > b.date!
-                })
-                
-                currentBalance = currentGroup.last!.balance
-            }
-            result[Calendar.current.date(from: date)!] = currentBalance
-        }
-        
-        return result
-    }
-    
-    private func prepare(_ chartView: LineChartView, with model: AchievementsDataModel) {
+    private func refresh(balanceLineChartView: LineChartView) {
         // Turn on Loading State
         let spinnerView = SpinnerViewController()
-        if let chartViewController = chartView.inputViewController {
+        if let chartViewController = balanceLineChartView.inputViewController {
             chartViewController.addChild(spinnerView)
-            spinnerView.view.frame = chartView.frame
-            chartView.addSubview(spinnerView.view)
+            spinnerView.view.frame = balanceLineChartView.frame
+            balanceLineChartView.addSubview(spinnerView.view)
             spinnerView.didMove(toParent: chartViewController)
         }
         
         var chartEntries = [ChartDataEntry]()
-        
         let maximumEntries, offset : Int
-        
-        // Process End-of-Day Balances
-        let endOfDayBalances = calculateEndOfDayBalances(from: model.groupedHistoricalTransactions)
         
         let totalChartItems = endOfDayBalances.count
         if  totalChartItems > Settings.statisticsSettings.lineChartMaxAmountRecords {
@@ -184,17 +151,17 @@ class StatisticsTableViewController: UITableViewController {
         data.addDataSet(balanceLine)
         data.addDataSet(zeroLine)
         
-        chartView.data = data
+        balanceLineChartView.data = data
             
-        chartView.rightAxis.enabled = false
-        chartView.drawGridBackgroundEnabled = false
+        balanceLineChartView.rightAxis.enabled = false
+        balanceLineChartView.drawGridBackgroundEnabled = false
             
-        chartView.leftAxis.enabled = false
-        chartView.xAxis.enabled = false
-        chartView.legend.enabled = false
-        chartView.doubleTapToZoomEnabled = false
-        chartView.highlightPerTapEnabled = false
-        chartView.highlightPerDragEnabled = false
+        balanceLineChartView.leftAxis.enabled = false
+        balanceLineChartView.xAxis.enabled = false
+        balanceLineChartView.legend.enabled = false
+        balanceLineChartView.doubleTapToZoomEnabled = false
+        balanceLineChartView.highlightPerTapEnabled = false
+        balanceLineChartView.highlightPerDragEnabled = false
         
         // Turn Loading State off
         spinnerView.willMove(toParent: nil)

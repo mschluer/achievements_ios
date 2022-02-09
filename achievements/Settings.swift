@@ -74,4 +74,5 @@ struct SettingsObject : Codable {
 
 struct StatisticsSettings : Codable {
     var lineChartMaxAmountRecords : Int = 100
+    var dayDeltaChartMaxAmountEntries : Int = 10
 }

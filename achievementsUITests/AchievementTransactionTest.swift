@@ -51,7 +51,7 @@ class AchievementTransactionTest: XCTestCase {
         
         // Dashboard
         app.tables.cells["transactionCell"].swipeLeft()
-        app.staticTexts["Edit"].tap()
+        app.tables.buttons["Edit"].tap()
     
         // Transaction Form (Edit)
         app.buttons["+ / -"].tap()
@@ -60,7 +60,7 @@ class AchievementTransactionTest: XCTestCase {
         // Dashboard
         XCTAssert(app.staticTexts["-5,50"].exists)
         app.tables.cells["transactionCell"].swipeLeft()
-        app.staticTexts["Delete"].tap()
+        app.tables/*@START_MENU_TOKEN@*/.buttons["Delete"]/*[[".cells[\"transactionCell\"].buttons[\"Delete\"]",".buttons[\"Delete\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         XCTAssert(app.staticTexts["+/- 0,00"].exists)
     }
 }

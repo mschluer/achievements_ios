@@ -41,7 +41,7 @@ class EmptyScreenTest: XCTestCase {
         // Dashboard
         XCTAssertFalse(app.staticTexts.containing(emptyScreenTextPredicate).count > 0)
         app.tables.cells["transactionCell"].swipeLeft()
-        app.staticTexts["Delete"].tap()
+        app.tables/*@START_MENU_TOKEN@*/.buttons["Delete"]/*[[".cells[\"transactionCell\"].buttons[\"Delete\"]",".buttons[\"Delete\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         XCTAssert(app.staticTexts.containing(emptyScreenTextPredicate).count > 0)
     }
     
@@ -66,7 +66,7 @@ class EmptyScreenTest: XCTestCase {
         // Transaction Templates (Incomes)
         XCTAssertFalse(app.staticTexts.containing(emptyScreenTextPredicate).count > 0)
         app.tables.cells["templateCell"].swipeLeft()
-        app.staticTexts["Delete"].tap()
+        app.tables/*@START_MENU_TOKEN@*/.buttons["Delete"]/*[[".cells[\"transactionCell\"].buttons[\"Delete\"]",".buttons[\"Delete\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         XCTAssert(app.staticTexts.containing(emptyScreenTextPredicate).count > 0)
     }
     
@@ -91,7 +91,7 @@ class EmptyScreenTest: XCTestCase {
         // Transaction Templates (Expenses)
         XCTAssertFalse(app.staticTexts.containing(emptyScreenTextPredicate).count > 0)
         app.tables.cells["templateCell"].swipeLeft()
-        app.staticTexts["Delete"].tap()
+        app.tables/*@START_MENU_TOKEN@*/.buttons["Delete"]/*[[".cells[\"transactionCell\"].buttons[\"Delete\"]",".buttons[\"Delete\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         XCTAssert(app.staticTexts.containing(emptyScreenTextPredicate).count > 0)
     }
     

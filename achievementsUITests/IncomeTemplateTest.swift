@@ -47,7 +47,7 @@ class IncomeTemplateTest: XCTestCase {
         XCTAssert(app.staticTexts["5,00"].exists)
         
         app.tables/*@START_MENU_TOKEN@*/.staticTexts["Test-Template"]/*[[".cells.staticTexts[\"Test-Template\"]",".staticTexts[\"Test-Template\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.swipeLeft()
-        app.staticTexts["Edit"].tap()
+        app.tables.buttons["Edit"].tap()
         
         // Transaction Tempalte Form (Edit)
         for _ in 0...4 {
@@ -61,7 +61,7 @@ class IncomeTemplateTest: XCTestCase {
         XCTAssert(app.staticTexts["7,00"].exists)
         
         app.tables/*@START_MENU_TOKEN@*/.staticTexts["Test-Template"]/*[[".cells.staticTexts[\"Test-Template\"]",".staticTexts[\"Test-Template\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.swipeLeft()
-        app.staticTexts["Delete"].tap()
+        app.tables/*@START_MENU_TOKEN@*/.buttons["Delete"]/*[[".cells[\"transactionCell\"].buttons[\"Delete\"]",".buttons[\"Delete\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         
         XCTAssertFalse(app.staticTexts["Test-Template"].exists)
         XCTAssertFalse(app.staticTexts["7,00"].exists)
@@ -91,7 +91,7 @@ class IncomeTemplateTest: XCTestCase {
         XCTAssert(app.staticTexts["5,00"].exists)
         
         app.tables/*@START_MENU_TOKEN@*/.staticTexts["Test-Template"]/*[[".cells.staticTexts[\"Test-Template\"]",".staticTexts[\"Test-Template\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.swipeRight()
-        app.staticTexts["Book"].tap()
+        app.tables.buttons["Book"].tap()
         app.navigationBars.buttons["Dashboard"].tap()
         
         // Dashboard
@@ -127,7 +127,7 @@ class IncomeTemplateTest: XCTestCase {
         XCTAssert(app.staticTexts["5,00"].exists)
         
         app.tables.staticTexts["Test Template"].swipeRight()
-        app.staticTexts["Book"].tap()
+        app.tables.buttons["Book"].tap()
         app.navigationBars.buttons["Dashboard"].tap()
         
         // Dashboard
@@ -164,7 +164,7 @@ class IncomeTemplateTest: XCTestCase {
         XCTAssert(app.staticTexts["6,75"].exists)
         
         app.tables.staticTexts["Test-Template"].swipeRight()
-        app.staticTexts["Book"].tap()
+        app.tables.buttons["Book"].tap()
         
         XCTAssertFalse(app.staticTexts["6,75"].exists)
         

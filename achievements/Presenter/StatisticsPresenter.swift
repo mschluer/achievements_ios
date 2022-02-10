@@ -34,8 +34,10 @@ class StatisticsPresenter {
         viewController.amountIncomes = achievementsDataModel.historicalIncomes.count
         viewController.amountExpenses = achievementsDataModel.historicalExpenses.count
         
+        let groupedHistoricalTransactions = achievementsDataModel.groupedHistoricalTransactions
+        
         DispatchQueue.global().async {
-            let endOfDayBalances = self.calculateEndOfDayBalances(from: self.achievementsDataModel.groupedHistoricalTransactions)
+            let endOfDayBalances = self.calculateEndOfDayBalances(from: groupedHistoricalTransactions)
             
             viewController.endOfDayBalances = endOfDayBalances
             viewController.endOfDayBalanceDeltas = self.calculateEndOfDayBalanceDeltas(from: endOfDayBalances)

@@ -20,14 +20,14 @@ class StatisticsTableViewController: UITableViewController {
     public var amountIncomes : Int = 0
     public var amountExpenses : Int = 0
     
-    public var endOfDayBalances : [Date : Float] = [:] {
+    public var endOfDayBalances : [Date : Float]? {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadRows(at: [ IndexPath(item: 0, section: 2) ], with: .automatic)
             }
         }
     }
-    public var endOfDayBalanceDeltas : [Date : Float] = [:] {
+    public var endOfDayBalanceDeltas : [Date : Float]? {
         didSet{
             DispatchQueue.main.async {
                 self.tableView.reloadRows(at: [ IndexPath(item: 0, section: 3) ], with: .automatic)
@@ -104,8 +104,10 @@ class StatisticsTableViewController: UITableViewController {
             // Balance Chart
             let c = tableView.dequeueReusableCell(withIdentifier: "statisticsTableViewChartCell", for: indexPath) as! StatisticsTableViewChartCell
             
-            if(endOfDayBalances.isEmpty) {
+            if(endOfDayBalances == nil) {
                 SpinnerViewController().showOn(c.contentView)
+            } else if(endOfDayBalances!.isEmpty) {
+                self.tableView.reloadRows(at: [ IndexPath(item: 0, section: 2) ], with: .automatic)
             } else {
                 self.refresh(balanceLineChartView: c.lineChartView)
             }
@@ -115,8 +117,10 @@ class StatisticsTableViewController: UITableViewController {
             // Day Delta Bar Chart
             let c = tableView.dequeueReusableCell(withIdentifier: "statisticsTableViewBarChartCell", for: indexPath) as! StatisticsTableViewBarChartCell
             
-            if(endOfDayBalanceDeltas.isEmpty) {
+            if(endOfDayBalanceDeltas == nil) {
                 SpinnerViewController().showOn(c.contentView)
+            } else if(endOfDayBalanceDeltas!.isEmpty) {
+                self.tableView.reloadRows(at: [ IndexPath(item: 0, section: 3) ], with: .automatic)
             } else {
                 self.refresh(dayDeltaBarChartView: c.barChartView)
             }
@@ -143,6 +147,9 @@ class StatisticsTableViewController: UITableViewController {
     
     // MARK: Private Functions
     private func refresh(balanceLineChartView: LineChartView) {
+        guard let endOfDayBalances = endOfDayBalances else {
+            return
+        }
         if endOfDayBalances.isEmpty { return }
         
         var chartEntries = [ChartDataEntry]()
@@ -196,6 +203,9 @@ class StatisticsTableViewController: UITableViewController {
     }
     
     private func refresh(dayDeltaBarChartView: BarChartView) {
+        guard let endOfDayBalanceDeltas = endOfDayBalanceDeltas else {
+            return
+        }
         if endOfDayBalanceDeltas.isEmpty { return }
         
         var positiveChartEntries = [ChartDataEntry]()

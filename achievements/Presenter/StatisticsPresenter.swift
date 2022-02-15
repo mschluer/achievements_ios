@@ -50,6 +50,9 @@ class StatisticsPresenter {
     // MARK: Public Functions
     public func calculateEndOfDayBalances(from dictionary: [Date: [HistoricalTransaction]]) -> [Date : Float] {
         var result : [Date : Float] = [:]
+        if dictionary.isEmpty {
+            return result
+        }
         
         // Prepare Keys
         var groupedTransactionsKeys = Array(dictionary.keys)

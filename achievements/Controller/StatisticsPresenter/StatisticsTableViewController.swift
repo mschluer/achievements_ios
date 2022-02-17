@@ -104,6 +104,8 @@ class StatisticsTableViewController: UITableViewController {
             // Balance Chart
             let c = tableView.dequeueReusableCell(withIdentifier: "statisticsTableViewChartCell", for: indexPath) as! StatisticsTableViewChartCell
             
+            c.lineChartView.noDataText = NSLocalizedString("No Data.", comment: "Explanation for Empty Charts.")
+            
             if(endOfDayBalances == nil) {
                 SpinnerViewController().showOn(c.contentView)
             } else if(endOfDayBalances!.isEmpty) {
@@ -116,6 +118,8 @@ class StatisticsTableViewController: UITableViewController {
         default:
             // Day Delta Bar Chart
             let c = tableView.dequeueReusableCell(withIdentifier: "statisticsTableViewBarChartCell", for: indexPath) as! StatisticsTableViewBarChartCell
+            
+            c.barChartView.noDataText = NSLocalizedString("No Data.", comment: "Explanation for Empty Charts.")
             
             if(endOfDayBalanceDeltas == nil) {
                 SpinnerViewController().showOn(c.contentView)
@@ -252,6 +256,11 @@ class StatisticsTableViewController: UITableViewController {
             positiveDataset.valueFont = UIFont.systemFont(ofSize: 15.0)
             negativeDataset.valueFont = UIFont.systemFont(ofSize: 15.0)
         }
+        
+        let numberFormatter = NumberFormatter()
+        numberFormatter.maximumFractionDigits = 2
+        numberFormatter.minimumFractionDigits = 2
+        data.setValueFormatter(DefaultValueFormatter(formatter: numberFormatter))
         
         dayDeltaBarChartView.data = data
         

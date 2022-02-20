@@ -248,8 +248,8 @@ class StatisticsTableViewController: UITableViewController {
         negativeDataset.colors = [ UIColor.red ]
         let data = BarChartData(dataSets: [ positiveDataset, negativeDataset ])
         
-        // Hide or Show
-        if Settings.statisticsSettings.dayDeltaChartMaxAmountEntries > 10 {
+        // Hide or Show Labels for Bars only if up to one week is shown
+        if Settings.statisticsSettings.dayDeltaChartMaxAmountEntries > 7 {
             positiveDataset.drawValuesEnabled = false
             negativeDataset.drawValuesEnabled = false
         } else {
@@ -257,6 +257,7 @@ class StatisticsTableViewController: UITableViewController {
             negativeDataset.valueFont = UIFont.systemFont(ofSize: 15.0)
         }
         
+        // Make sure to show two decimals
         let numberFormatter = NumberFormatter()
         numberFormatter.maximumFractionDigits = 2
         numberFormatter.minimumFractionDigits = 2

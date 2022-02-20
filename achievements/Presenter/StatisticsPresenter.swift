@@ -48,15 +48,15 @@ class StatisticsPresenter {
     }
     
     // MARK: Public Functions
-    public func calculateEndOfDayBalances(from dictionary: [Date: [HistoricalTransaction]]) -> [Date : Float] {
-        var result : [Date : Float] = [:]
+    public func calculateEndOfDayBalances(from dictionary: [DateComponents: [HistoricalTransaction]]) -> [DateComponents : Float] {
+        var result : [DateComponents : Float] = [:]
         if dictionary.isEmpty {
             return result
         }
         
         // Prepare Keys
         var groupedTransactionsKeys = Array(dictionary.keys)
-        groupedTransactionsKeys.sort(by: >)
+        groupedTransactionsKeys.sort(by: { Calendar.current.date(from: $0)! > Calendar.current.date(from: $1)! })
         
         let dateArray = DateHelper.createDayArray(
             from: groupedTransactionsKeys.first!,
@@ -65,28 +65,28 @@ class StatisticsPresenter {
         var currentBalance : Float = 0.0
         
         for date in dateArray {
-            if var currentGroup = dictionary[Calendar.current.date(from: date)!] {
+            if var currentGroup = dictionary[date] {
                 currentGroup.sort(by: {a, b in
                     a.date! > b.date!
                 })
                 
                 currentBalance = currentGroup.last!.balance
             }
-            result[Calendar.current.date(from: date)!] = currentBalance
+            result[date] = currentBalance
         }
         
         return result
     }
     
-    public func calculateEndOfDayBalanceDeltas(from endOfDayBalances: [Date : Float]) -> [Date : Float] {
-        var result : [Date : Float] = [:]
+    public func calculateEndOfDayBalanceDeltas(from endOfDayBalances: [DateComponents : Float]) -> [DateComponents : Float] {
+        var result : [DateComponents : Float] = [:]
         
         if endOfDayBalances.isEmpty {
             return result
         }
         
         var groupedTransactionsKeys = Array(endOfDayBalances.keys)
-        groupedTransactionsKeys.sort(by: <)
+        groupedTransactionsKeys.sort(by: { Calendar.current.date(from: $0)! < Calendar.current.date(from: $1)! })
         var dayBeforeBalance : Float = endOfDayBalances[groupedTransactionsKeys.first!]!
         
         for date in groupedTransactionsKeys {

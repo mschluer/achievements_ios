@@ -20,14 +20,14 @@ class StatisticsTableViewController: UITableViewController {
     public var amountIncomes : Int = 0
     public var amountExpenses : Int = 0
     
-    public var endOfDayBalances : [Date : Float]? {
+    public var endOfDayBalances : [DateComponents : Float]? {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadRows(at: [ IndexPath(item: 0, section: 2) ], with: .automatic)
             }
         }
     }
-    public var endOfDayBalanceDeltas : [Date : Float]? {
+    public var endOfDayBalanceDeltas : [DateComponents : Float]? {
         didSet{
             DispatchQueue.main.async {
                 self.tableView.reloadRows(at: [ IndexPath(item: 0, section: 3) ], with: .automatic)
@@ -169,7 +169,7 @@ class StatisticsTableViewController: UITableViewController {
         }
         
         var keys = Array(endOfDayBalances.keys)
-        keys.sort(by: <)
+        keys.sort(by: { Calendar.current.date(from: $0)! < Calendar.current.date(from: $1)! })
         
         for i in 0..<maximumEntries {
             let key = keys[i + offset]
@@ -228,7 +228,7 @@ class StatisticsTableViewController: UITableViewController {
         
         // Prepare Keys
         var keys = Array(endOfDayBalanceDeltas.keys)
-        keys.sort(by: <)
+        keys.sort(by: { Calendar.current.date(from: $0)! < Calendar.current.date(from: $1)! })
         
         // Compile With Values
         for i in 0..<maximumEntries {

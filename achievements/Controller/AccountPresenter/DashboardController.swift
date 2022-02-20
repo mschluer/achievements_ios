@@ -20,8 +20,8 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     private var emptyScreenLabel : UILabel?
     private var progressWheelState = 0
     private var recentTransactions: [AchievementTransaction] = []
-    private var recentTransactionsTableViewData: [Date: [AchievementTransaction]] = [:]
-    private var recentTransactionsDates : [Date] = []
+    private var recentTransactionsTableViewData: [DateComponents: [AchievementTransaction]] = [:]
+    private var recentTransactionsDates : [DateComponents] = []
     
     // MARK: Outlets
     @IBOutlet weak var expenseTemplatesButton: UIBarButtonItem!
@@ -87,8 +87,8 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let date = recentTransactionsDates[section]
-        let dictionaryEntry = recentTransactionsTableViewData[date]
+        let dateComponents = recentTransactionsDates[section]
+        let dictionaryEntry = recentTransactionsTableViewData[dateComponents]
         
         return dictionaryEntry?.count ?? 0
     }
@@ -97,11 +97,12 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         // Date Part
         let formatter = DateFormatter()
         formatter.dateStyle = .short
-        let date = recentTransactionsDates[section]
+        let date = Calendar.current.date(from: recentTransactionsDates[section])!
+        let dateComponents = recentTransactionsDates[section]
         let datePart = formatter.string(for: date)
         
         // Balance Part
-        let dictionaryItem = recentTransactionsTableViewData[date] ?? []
+        let dictionaryItem = recentTransactionsTableViewData[dateComponents] ?? []
         let balance = calculateBalanceFor(array: dictionaryItem)
         
         return "\(datePart!) - ( \(NumberHelper.formattedString(for: balance)) )"
@@ -393,8 +394,8 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     private func getRecentTransactionFor(indexPath: IndexPath) -> AchievementTransaction {
-        let date = recentTransactionsDates[indexPath.section]
-        let dictionaryEntry = recentTransactionsTableViewData[date]!
+        let dateComponents = recentTransactionsDates[indexPath.section]
+        let dictionaryEntry = recentTransactionsTableViewData[dateComponents]!
         return dictionaryEntry[indexPath.item]
     }
     
@@ -548,7 +549,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     
     private func updateSections() {
         var result = Array(recentTransactionsTableViewData.keys)
-        result.sort(by: >)
+        result.sort(by: { Calendar.current.date(from: $0)! > Calendar.current.date(from: $1)! })
         
         self.recentTransactionsDates = result
     }

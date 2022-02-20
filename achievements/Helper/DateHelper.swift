@@ -37,4 +37,8 @@ class DateHelper {
     static func createDayArray(from beginDate: Date, to endDate: Date) -> [DateComponents] {
         return createDayArray(from: Calendar.current.dateComponents([.year, .month, .day], from: beginDate), to: Calendar.current.dateComponents([.year, .month, .day], from: endDate))
     }
+    
+    static func dateComponentsForDay(from date: Date) -> DateComponents {
+        return Calendar.current.dateComponents([.year, .month, .day], from: date)
+    }
 }

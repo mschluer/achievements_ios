@@ -122,7 +122,7 @@ class AchievementTransactionTest: XCTestCase {
         // Check Grouping
         let groupedTransactions = dataModel.groupedAchievementTransactions
         var keys = Array(groupedTransactions.keys)
-        keys.sort()
+        keys.sort(by: { Calendar.current.date(from: $0)! < Calendar.current.date(from: $1)! })
         
         XCTAssertEqual(groupedTransactions.count, 2)
         XCTAssertEqual(groupedTransactions[keys[0]]!.count, 2)

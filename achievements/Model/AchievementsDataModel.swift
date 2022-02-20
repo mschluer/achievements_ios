@@ -28,34 +28,32 @@ class AchievementsDataModel {
         request.sortDescriptors = [NSSortDescriptor(key: "orderIndex", ascending: true)]
         return try! self.viewContext.fetch(request)
     }
-    var groupedAchievementTransactions : [Date: [AchievementTransaction]] {
+    var groupedAchievementTransactions : [DateComponents: [AchievementTransaction]] {
         let transactions = achievementTransactions
         
-        var result = [Date: [AchievementTransaction]]()
+        var result = [DateComponents: [AchievementTransaction]]()
         
         for transaction in transactions {
-            let components = Calendar.current.dateComponents([.year, .month, .day], from: transaction.date!)
-            let date = Calendar.current.date(from: components)
+            let dateComponents = DateHelper.dateComponentsForDay(from: transaction.date!)
             
-            var dateEntry = result[date!] ?? []
+            var dateEntry = result[dateComponents] ?? []
             dateEntry.append(transaction)
-            result[date!] = dateEntry
+            result[dateComponents] = dateEntry
         }
         
         return result
     }
-    var groupedHistoricalTransactions : [Date: [HistoricalTransaction]] {
+    var groupedHistoricalTransactions : [DateComponents: [HistoricalTransaction]] {
         let transactions = historicalTransactions
         
-        var result = [Date: [HistoricalTransaction]]()
+        var result = [DateComponents: [HistoricalTransaction]]()
         
         for transaction in transactions {
-            let components = Calendar.current.dateComponents([.year, .month, .day], from: transaction.date!)
-            let date = Calendar.current.date(from: components)
+            let dateComponents = DateHelper.dateComponentsForDay(from: transaction.date!)
             
-            var dateEntry = result[date!] ?? []
+            var dateEntry = result[dateComponents] ?? []
             dateEntry.append(transaction)
-            result[date!] = dateEntry
+            result[dateComponents] = dateEntry
         }
         
         return result

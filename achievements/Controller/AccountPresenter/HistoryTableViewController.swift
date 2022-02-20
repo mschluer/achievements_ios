@@ -12,8 +12,8 @@ class HistoryTableViewController: UITableViewController {
     public var achievementsDataModel : AchievementsDataModel?
     
     // MARK: Variables
-    private var historicalTransactions : [Date : [HistoricalTransaction]] = [:]
-    private var historicalTransactionsDates : [Date] = []
+    private var historicalTransactions : [DateComponents : [HistoricalTransaction]] = [:]
+    private var historicalTransactionsDates : [DateComponents] = []
     private var emptyScreenLabel : UILabel?
     
     
@@ -93,15 +93,15 @@ class HistoryTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let date = historicalTransactionsDates[section]
+        let dateComponents = historicalTransactionsDates[section]
         
         // Date Part
         let formatter = DateFormatter()
         formatter.dateStyle = .short
-        let datePart = formatter.string(for: date)!
+        let datePart = formatter.string(for: Calendar.current.date(from: dateComponents))!
         
         // Balance Part
-        let dictionaryItem = historicalTransactions[date]!
+        let dictionaryItem = historicalTransactions[dateComponents]!
         let balance = calculateBalanceFor(array: dictionaryItem)
         let balancePart = "( \(NumberHelper.formattedString(for: balance)) )"
         
@@ -183,7 +183,7 @@ class HistoryTableViewController: UITableViewController {
     
     private func updateSections() {
         var result = Array(historicalTransactions.keys)
-        result.sort(by: >)
+        result.sort(by: { Calendar.current.date(from: $0)! > Calendar.current.date(from: $1)! })
         
         self.historicalTransactionsDates = result
     }

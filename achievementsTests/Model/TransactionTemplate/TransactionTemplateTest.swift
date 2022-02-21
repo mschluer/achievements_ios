@@ -10,7 +10,6 @@ import XCTest
 import CoreData
 
 class TransactionTemplateTest: XCTestCase {
-    private var subject : TransactionTemplate!
     private var dataModel : AchievementsDataModel!
     
     override func setUpWithError() throws {
@@ -95,5 +94,39 @@ class TransactionTemplateTest: XCTestCase {
         XCTAssertEqual(dataModel.transactionTemplates.count, 2)
         XCTAssertEqual(dataModel.transactionTemplates[0].text, "alpha")
         XCTAssertEqual(dataModel.transactionTemplates[1].text, "delta")
+    }
+    
+    // MARK: Test for JSON (de)serialization
+    func testJSONSerialization() throws {
+        // Create Template
+        let transactionTemplate = dataModel.createTransactionTemplate()
+        transactionTemplate.text = "alpha"
+        transactionTemplate.amount = 6
+        transactionTemplate.recurring = false
+        transactionTemplate.orderIndex = 15
+        
+        // Serialize
+        let jsonEncoder = JSONEncoder()
+        let data = try! String(bytes: jsonEncoder.encode(transactionTemplate), encoding: .utf8)
+        
+        XCTAssertEqual(data!, "{\"amount\":6,\"recurring\":false,\"orderIndex\":15,\"text\":\"alpha\"}")
+    }
+    
+    func testJSONDeserialization() throws {
+        // Verify Environment
+        XCTAssertEqual(dataModel.transactionTemplates.count, 0)
+        
+        // Decode JSON
+        let data = "{\"amount\":12,\"recurring\":true,\"orderIndex\":12,\"text\":\"beta\"}".data(using: .utf8)
+        let jsonDecoder = JSONDecoder()
+        jsonDecoder.userInfo[CodingUserInfoKey.managedObjectContext] = dataModel.viewContext
+        let transactionTemplate = try jsonDecoder.decode(TransactionTemplate.self, from: data!)
+        
+        // Verify
+        XCTAssertEqual(dataModel.transactionTemplates.count, 1)
+        XCTAssertEqual(transactionTemplate.amount, 12.0)
+        XCTAssertEqual(transactionTemplate.recurring, true)
+        XCTAssertEqual(transactionTemplate.orderIndex, 12)
+        XCTAssertEqual(transactionTemplate.text, "beta")
     }
 }

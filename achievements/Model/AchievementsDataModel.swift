@@ -491,3 +491,12 @@ class AchievementsDataModel {
         self.viewContext.delete(template)
     }
 }
+
+// https://www.donnywals.com/using-codable-with-core-data-and-nsmanagedobject/
+extension CodingUserInfoKey {
+    static let managedObjectContext = CodingUserInfoKey(rawValue: "managedObjectContext")!
+}
+
+enum DecoderConfigurationError : Error {
+    case MissingManagedObjectContext
+}

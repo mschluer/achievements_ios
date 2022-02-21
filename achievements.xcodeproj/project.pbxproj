@@ -63,6 +63,7 @@
 		B393D8332715D17600232482 /* TransactionTemplatesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B393D8322715D17600232482 /* TransactionTemplatesPresenter.swift */; };
 		B393D8382718A9E500232482 /* TransactionTemplatesPresenterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B393D83A2718A9E500232482 /* TransactionTemplatesPresenterStoryboard.storyboard */; };
 		B393D83E2718AC1300232482 /* AchievementTransactionsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B393D83D2718AC1300232482 /* AchievementTransactionsPresenter.swift */; };
+		B3B6D74727C2E5C7007DE0E8 /* HistoricalTransactionSerializationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B6D74627C2E5C7007DE0E8 /* HistoricalTransactionSerializationTest.swift */; };
 		B3C5C4AF26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4AD26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift */; };
 		B3C5C4B026E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */; };
 		B3E7475427199E8F006C92C5 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E7475327199E8F006C92C5 /* SettingsPresenter.swift */; };
@@ -160,6 +161,7 @@
 		B393D8392718A9E500232482 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TransactionTemplatesPresenterStoryboard.storyboard; sourceTree = "<group>"; };
 		B393D83C2718A9E700232482 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/TransactionTemplatesPresenterStoryboard.strings; sourceTree = "<group>"; };
 		B393D83D2718AC1300232482 /* AchievementTransactionsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTransactionsPresenter.swift; sourceTree = "<group>"; };
+		B3B6D74627C2E5C7007DE0E8 /* HistoricalTransactionSerializationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalTransactionSerializationTest.swift; sourceTree = "<group>"; };
 		B3C5C4AD26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionTemplate+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionTemplate+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B3E7475327199E8F006C92C5 /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
@@ -447,6 +449,7 @@
 			isa = PBXGroup;
 			children = (
 				B3939ABF270481FC005D243B /* HistoricalTransactionTest.swift */,
+				B3B6D74627C2E5C7007DE0E8 /* HistoricalTransactionSerializationTest.swift */,
 			);
 			path = HistoricalTransaction;
 			sourceTree = "<group>";
@@ -842,6 +845,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3B6D74727C2E5C7007DE0E8 /* HistoricalTransactionSerializationTest.swift in Sources */,
 				B3939ABD2704797C005D243B /* AchievementTransactionTest.swift in Sources */,
 				B307CE8527147DCE00FB7E8C /* SettingsTest.swift in Sources */,
 				B384E15F276F4CCD00C0B007 /* DayHelperTest.swift in Sources */,

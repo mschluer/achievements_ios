@@ -44,7 +44,7 @@ class BackupRestoreTest: XCTestCase {
         XCTAssertEqual(0, achievementsDataModel.transactionTemplates.count)
         
         // Restore
-        subject.replaceDatabaseWith(url: backup! as URL, password: ".test.", initiator: UIViewController())
+        subject.restoreFrom(backup: backup! as URL, password: ".test.", initiator: UIViewController())
         XCTAssertEqual(1, achievementsDataModel.achievementTransactions.count)
         XCTAssertEqual(1, achievementsDataModel.historicalTransactions.count)
         XCTAssertEqual(1, achievementsDataModel.transactionTemplates.count)

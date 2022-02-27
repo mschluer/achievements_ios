@@ -431,6 +431,7 @@ class AchievementsDataModel {
                                                              at: url,
                                                              options: nil)
             
+            self.viewContext.refreshAllObjects()
         } catch let error {
             print("Clearing database resulted in error: \(error.localizedDescription)")
         }
@@ -490,4 +491,13 @@ class AchievementsDataModel {
     func remove(transactionTemplate template: TransactionTemplate) {
         self.viewContext.delete(template)
     }
+}
+
+// https://www.donnywals.com/using-codable-with-core-data-and-nsmanagedobject/
+extension CodingUserInfoKey {
+    static let managedObjectContext = CodingUserInfoKey(rawValue: "managedObjectContext")!
+}
+
+enum DecoderConfigurationError : Error {
+    case MissingManagedObjectContext
 }

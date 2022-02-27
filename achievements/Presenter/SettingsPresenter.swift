@@ -38,49 +38,33 @@ class SettingsPresenter {
     
     // MARK: Public Functions
     public func exportDatabaseBackupWith(password: String, initiator: UIViewController) -> NSURL? {
-        let unencryptedBackupFilePath = "\(NSTemporaryDirectory())backup.sqlite"
+        // Assemble Backup
+        let achievementsDatabaseBackup = AchievementsDatabaseBackup(
+            accounts: [ Account(
+                historicalTransactions: achievementsDataModel.historicalTransactions,
+                transactionTemplate: achievementsDataModel.transactionTemplates)
+                      ])
         
         do {
-            // Create Backup File
-            achievementsDataModel.duplicateDatabase(to: unencryptedBackupFilePath)
+            // Convert to JSON
+            let jsonEncoder = JSONEncoder()
+            let plaintext = try jsonEncoder.encode(achievementsDatabaseBackup)
             
-            // Encrypt Data
-            let iv = getIvStringFrom(password: password).bytes
-            let key = try PKCS5.PBKDF2(
-                password: Array(password.utf8),
-                salt: Array("saltsalt".utf8),
-                iterations: 4096,
-                keyLength: 32,
-                variant: .sha2(.sha512)
-            ).calculate()
+            // TODO: Encrypt Data
             
-            let plaintext = try Data(contentsOf: URL(string: "file://\(unencryptedBackupFilePath)")!)
-            let aes = try AES(key: key, blockMode: CBC(iv: iv), padding: .pkcs7)
-            let ciphertext = try aes.encrypt(Array(plaintext))
+            // Save Data to Disk
+            let temporaryLocation = URL(string: "file://\(NSTemporaryDirectory())backup.adbackup")!
+            try plaintext.write(to: temporaryLocation)
             
-            // Save temporarily
-            let temporaryLocation = ("\(NSTemporaryDirectory())backup.adbackup")
-            let pointer = UnsafeBufferPointer(start: ciphertext, count: ciphertext.count)
-            try Data(buffer: pointer).write(to: URL(string: "file://\(temporaryLocation)")!)
-            
-            // Remove Unencrypted File
-            try FileManager.default.removeItem(atPath: unencryptedBackupFilePath)
-            
-            // Ask for Location to Store
-            return NSURL(fileURLWithPath: temporaryLocation)
+            return temporaryLocation as NSURL
         } catch let error {
             print("Export failed due to error: \(error.localizedDescription)")
-            
-            // Make sure that there is no unencrypted backup file left in case of a crash
-            if FileManager().fileExists(atPath: unencryptedBackupFilePath) {
-                try! FileManager.default.removeItem(atPath: unencryptedBackupFilePath)
-            }
-            
+
             // Notify User that creating the Backup failed
             let failAlert = UIAlertController(title: NSLocalizedString("Error", comment: "Headline of an Error Message."), message: NSLocalizedString("Creating backup failed.", comment: "Error message to notify that creating a Backup failed."), preferredStyle: .alert)
             failAlert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Message of approval."), style: .default, handler: nil))
             initiator.present(failAlert, animated: true)
-            
+
             return nil
         }
     }
@@ -129,6 +113,32 @@ class SettingsPresenter {
             let failAlert = UIAlertController(title: NSLocalizedString("Error", comment: "Headline of an Error Message."), message: NSLocalizedString("Restoring to backup failed.", comment: "Error message for restoring to a Backup failed."), preferredStyle: .alert)
             failAlert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Message of approval."), style: .default, handler: nil))
             initiator.present(failAlert, animated: true)
+        }
+    }
+    
+    public func restoreFrom(backup url: URL, password: String, initiator: UIViewController) {
+        do {
+            // Retrieve Data
+            let ciphertext = try Data(contentsOf: url)
+            
+            // TODO: Decrypt
+            let plaintext = ciphertext
+            
+            // Wipe and repopulate Database
+            self.achievementsDataModel.clear()
+            let jsonDecoder = JSONDecoder()
+            jsonDecoder.userInfo[CodingUserInfoKey.managedObjectContext] = achievementsDataModel.viewContext
+            _ = try jsonDecoder.decode(AchievementsDatabaseBackup.self, from: plaintext)
+            
+            // Refresh Historical Balances
+            achievementsDataModel.recalculateHistoricalBalances(from: 0)
+            
+            // Save
+            achievementsDataModel.save()
+        } catch let error {
+            print("Import with regular backup process failed, trying to fall back to legacy backup process. Error: \(error.localizedDescription)")
+            
+            replaceDatabaseWith(url: url, password: password, initiator: initiator)
         }
     }
     

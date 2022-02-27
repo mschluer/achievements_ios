@@ -49,7 +49,7 @@ class BackupAndRestoreViewController: UIViewController, UIDocumentPickerDelegate
                 self.showPasswordMustNotBeEmptyAlert()
                 return
             } else {
-                self.replaceDatabaseWith(url: pickedURL, password: password)
+                self.restoreFrom(url: pickedURL, password: password)
             }
         }))
         
@@ -124,8 +124,8 @@ class BackupAndRestoreViewController: UIViewController, UIDocumentPickerDelegate
         toggleLoadingState()
     }
     
-    private func replaceDatabaseWith(url: URL, password: String) {
-        settingsPresenter.replaceDatabaseWith(url: url, password: password, initiator: self)
+    private func restoreFrom(url: URL, password: String) {
+        settingsPresenter.restoreFrom(backup: url, password: password, initiator: self)
         toggleLoadingState()
     }
     

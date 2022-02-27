@@ -431,6 +431,7 @@ class AchievementsDataModel {
                                                              at: url,
                                                              options: nil)
             
+            self.viewContext.refreshAllObjects()
         } catch let error {
             print("Clearing database resulted in error: \(error.localizedDescription)")
         }

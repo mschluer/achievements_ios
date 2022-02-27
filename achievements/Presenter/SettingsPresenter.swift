@@ -51,10 +51,20 @@ class SettingsPresenter {
             let plaintext = try jsonEncoder.encode(achievementsDatabaseBackup)
             
             // TODO: Encrypt Data
+            let initializationVector = getIvStringFrom(password: password).bytes
+            let key = try PKCS5.PBKDF2(
+                password: Array(password.utf8),
+                salt: Array("saltsalt".utf8),
+                iterations: 4096,
+                keyLength: 32,
+                variant: .sha2(.sha512)
+            ).calculate()
+            let aes = try AES(key: key, blockMode: CBC(iv: initializationVector), padding: .pkcs7)
+            let ciphertext = try aes.encrypt(Array(plaintext))
             
             // Save Data to Disk
             let temporaryLocation = URL(string: "file://\(NSTemporaryDirectory())backup.adbackup")!
-            try plaintext.write(to: temporaryLocation)
+            try Data(ciphertext).write(to: temporaryLocation)
             
             return temporaryLocation as NSURL
         } catch let error {
@@ -121,8 +131,18 @@ class SettingsPresenter {
             // Retrieve Data
             let ciphertext = try Data(contentsOf: url)
             
-            // TODO: Decrypt
-            let plaintext = ciphertext
+            // Decrypt
+            let iv = getIvStringFrom(password: password).bytes
+            let key = try PKCS5.PBKDF2(
+                password: Array(password.utf8),
+                salt: Array("saltsalt".utf8),
+                iterations: 4096,
+                keyLength: 32,
+                variant: .sha2(.sha512)
+            ).calculate()
+
+            let aes = try AES(key: key, blockMode: CBC(iv: iv), padding: .pkcs7)
+            let plaintext = Data(try aes.decrypt(ciphertext.bytes))
             
             // Wipe and repopulate Database
             self.achievementsDataModel.clear()

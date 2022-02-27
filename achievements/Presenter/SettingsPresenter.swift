@@ -50,7 +50,7 @@ class SettingsPresenter {
             let jsonEncoder = JSONEncoder()
             let plaintext = try jsonEncoder.encode(achievementsDatabaseBackup)
             
-            // TODO: Encrypt Data
+            // Encrypt Data
             let initializationVector = getIvStringFrom(password: password).bytes
             let key = try PKCS5.PBKDF2(
                 password: Array(password.utf8),
@@ -108,7 +108,7 @@ class SettingsPresenter {
             try! FileManager.default.removeItem(atPath: unencryptedBackupFilePath)
             
             // Show Success Message
-            let successAlert = UIAlertController(title: NSLocalizedString("Success", comment: "Headline to tell the user that restoring to a backup was completed."), message: NSLocalizedString("Successfully restored from Backup.", comment: "Success Message for when user successfully restored to a backup."), preferredStyle: .alert)
+            let successAlert = UIAlertController(title: NSLocalizedString("Success", comment: "Headline to tell the user that restoring to a backup was completed."), message: NSLocalizedString("Successfully restored from Backup.\n\nWARNING: The backup you just used has a deprecated schema. Please create a new backup soon.", comment: "Success Message for when user successfully restored to a backup with a deprecation warning."), preferredStyle: .alert)
             successAlert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Message of approval."), style: .default, handler: nil))
             initiator.present(successAlert, animated: true)
         } catch let error {
@@ -155,6 +155,11 @@ class SettingsPresenter {
             
             // Save
             achievementsDataModel.save()
+            
+            // Show Success Message
+            let successAlert = UIAlertController(title: NSLocalizedString("Success", comment: "Headline to tell the user that restoring to a backup was completed."), message: NSLocalizedString("Successfully restored from Backup.", comment: "Success Message for when user successfully restored to a backup."), preferredStyle: .alert)
+            successAlert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Message of approval."), style: .default, handler: nil))
+            initiator.present(successAlert, animated: true)
         } catch let error {
             print("Import with regular backup process failed, trying to fall back to legacy backup process. Error: \(error.localizedDescription)")
             

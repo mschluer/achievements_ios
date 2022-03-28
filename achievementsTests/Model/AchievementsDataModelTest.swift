@@ -136,6 +136,77 @@ class AchievementsDataModelTest: XCTestCase {
         XCTAssertEqual(subject.recentExpenses.first?.text, "epsilon")
     }
     
+    func testSplitWhenPurging() throws {
+        _ = subject.createAchievementTransactionWith(text: "alpha", amount: 75, date: Date())
+        _ = subject.createAchievementTransactionWith(text: "beta", amount: -50, date: Date())
+        
+        subject.purgeRecent()
+        
+        // Test Amount of Items
+        XCTAssertEqual(subject.achievementTransactions.count, 1)
+        XCTAssertEqual(subject.historicalTransactions.count, 3)
+        
+        // Test for the split
+        XCTAssertEqual(subject.historicalTransactions[0].text!, "beta")
+        XCTAssertEqual(subject.historicalTransactions[1].text!, "alpha")
+        XCTAssertEqual(subject.historicalTransactions[2].text!, "alpha (Split)")
+        
+        // Check splitted transaction
+        XCTAssertEqual(subject.historicalTransactions[1].amount, 25)
+        
+        // Check split transaction
+        XCTAssertEqual(subject.historicalTransactions[2].amount, 50)
+    }
+    
+    func testMultipleSplitWhenPurging() throws {
+        _ = subject.createAchievementTransactionWith(text: "alpha", amount: 75, date: Date())
+        _ = subject.createAchievementTransactionWith(text: "beta", amount: -50, date: Date())
+        
+        subject.purgeRecent()
+        
+        // Test Amount of Items
+        XCTAssertEqual(subject.achievementTransactions.count, 1)
+        XCTAssertEqual(subject.historicalTransactions.count, 3)
+        
+        // Test for the split
+        
+        // Check splitted transaction
+        XCTAssertEqual(subject.historicalTransactions[1].amount, 25)
+        
+        // Check split transaction
+        XCTAssertEqual(subject.historicalTransactions[2].amount, 50)
+        
+        // Book next Transaction and Purge again
+        _ = subject.createAchievementTransactionWith(text: "gamma", amount: -10.0, date: Date())
+        subject.purgeRecent()
+        
+        // Test Amount of Items
+        XCTAssertEqual(subject.achievementTransactions.count, 1)
+        XCTAssertEqual(subject.historicalTransactions.count, 5)
+        
+        // Test Items
+        XCTAssertEqual(subject.historicalTransactions[0].text!, "gamma")
+        XCTAssertEqual(subject.historicalTransactions[1].text!, "beta")
+        XCTAssertEqual(subject.historicalTransactions[2].text!, "alpha")
+        XCTAssertEqual(subject.historicalTransactions[3].text!, "alpha (Split)")
+        XCTAssertEqual(subject.historicalTransactions[4].text!, "alpha (Split)")
+    }
+    
+    func testPurgingWithoutSplit() throws {
+        _ = subject.createAchievementTransactionWith(text: "alpha", amount: 50, date: Date())
+        _ = subject.createAchievementTransactionWith(text: "beta", amount: -50, date: Date())
+        
+        subject.purgeRecent()
+        
+        // Test Amount of Items
+        XCTAssertEqual(subject.achievementTransactions.count, 0)
+        XCTAssertEqual(subject.historicalTransactions.count, 2)
+        
+        // Test for the split
+        XCTAssertEqual(subject.historicalTransactions[0].text!, "beta")
+        XCTAssertEqual(subject.historicalTransactions[1].text!, "alpha")
+    }
+    
     func testClear() throws {
         // Create Achievement Transaction
         _ = subject.createAchievementTransactionWith(text: "transaction", amount: 1.0, date: Date())

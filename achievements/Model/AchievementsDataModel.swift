@@ -458,7 +458,23 @@ class AchievementsDataModel {
                 remainingAmount -= recentIncomes[0].amount
                 
                 if remainingAmount < 0 {
-                    recentIncomes[0].amount = -1 * remainingAmount
+                    // Recalculate Amount of last Recent Income
+                    let amountOfLastIncome = recentIncomes[0].amount
+                    let newAmount = -1 * remainingAmount
+                    recentIncomes[0].amount = newAmount
+                    recentIncomes[0].historicalTransaction?.amount = newAmount
+                    
+                    if remainingAmount != 0 {
+                        // Add Split
+                        let splitTransaction     = self.createHistoricalTransaction()
+                        splitTransaction.text    = "\(recentIncomes[0].text ?? "") (Split)"
+                        splitTransaction.amount  = amountOfLastIncome + remainingAmount
+                        splitTransaction.date    = recentIncomes[0].date
+                        splitTransaction.balance = 0.0
+                        
+                        // Make sure to have the history consistent
+                        self.recalculateHistoricalBalances(from: splitTransaction)
+                    }
                 } else {
                     self.remove(achievementTransaction: recentIncomes[0])
                     recentIncomes.remove(at: 0)

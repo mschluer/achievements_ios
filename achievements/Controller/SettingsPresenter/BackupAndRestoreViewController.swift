@@ -13,10 +13,18 @@ class BackupAndRestoreViewController: UIViewController, UIDocumentPickerDelegate
     // MARK: Variables
     var settingsPresenter : SettingsPresenter!
     var spinner : SpinnerViewController?
+    var providedBackupUrl : URL?
     
     // MARK: View Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let backupUrl = providedBackupUrl {
+            self.toggleLoadingState()
+            
+            // Ask for password and decrypt
+            self.showDecryptionPasswordAlert(for: backupUrl, extraHint: true)
+        }
     }
     
     // MARK: Document Picker Delegate
@@ -29,31 +37,8 @@ class BackupAndRestoreViewController: UIViewController, UIDocumentPickerDelegate
             
             return
         }
-
-        let passwordAlert = UIAlertController(title: NSLocalizedString("Password", comment: "Dialogue Headline asking the user to enter an encryption / decryption Password"), message: NSLocalizedString("Please enter a Password to decrypt your Backup", comment: "Description of the dialogue asking the user to provide a passphrase to decrypt the backup"), preferredStyle: .alert)
         
-        passwordAlert.addTextField { (textField) in
-            textField.isSecureTextEntry = true
-            textField.placeholder = NSLocalizedString("Password", comment: "Dialogue Headline asking the user to enter an encryption / decryption Password")
-        }
-        
-        passwordAlert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Abort Action."), style: .cancel, handler: nil))
-        
-        passwordAlert.addAction(UIAlertAction(title: NSLocalizedString("Confirm", comment: "Confirm that this is the password the user wants to use to encrypt / decrypt the backup."), style: .default, handler:  { [weak passwordAlert] _ in
-            guard let password = passwordAlert?.textFields?.first?.text else {
-                return
-            }
-            
-            if password.count < 1 {
-                self.toggleLoadingState()
-                self.showPasswordMustNotBeEmptyAlert()
-                return
-            } else {
-                self.restoreFrom(url: pickedURL, password: password)
-            }
-        }))
-        
-        self.present(passwordAlert, animated: true)
+        self.showDecryptionPasswordAlert(for: pickedURL)
     }
     
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
@@ -111,6 +96,20 @@ class BackupAndRestoreViewController: UIViewController, UIDocumentPickerDelegate
         }
     }
     
+    public func showPasswordMustNotBeEmptyAlert() {
+        let emptyPasswordAlert = UIAlertController(
+            title: NSLocalizedString("Password empty", comment: "Alert Headline for when user tries to encrypt or decrypt a backup with an empty password"),
+            message: NSLocalizedString("Achievements Database Backups are encrypted by default, hence the password must not be empty.", comment: "Explanatory text why backup passwords must not be empty."),
+            preferredStyle: .alert)
+        
+        emptyPasswordAlert.addAction(UIAlertAction(
+            title: NSLocalizedString("Okay", comment: "Message of Approval"),
+            style: .default,
+            handler: nil))
+        
+        self.present(emptyPasswordAlert, animated: true)
+    }
+    
     // MARK: Private Functions
     private func exportDatabaseFileEncryptedWith(password: String) {
         guard let backupFile = settingsPresenter.exportDatabaseBackupWith(password: password, initiator: self) else {
@@ -129,17 +128,39 @@ class BackupAndRestoreViewController: UIViewController, UIDocumentPickerDelegate
         toggleLoadingState()
     }
     
-    private func showPasswordMustNotBeEmptyAlert() {
-        let emptyPasswordAlert = UIAlertController(
-            title: NSLocalizedString("Password empty", comment: "Alert Headline for when user tries to encrypt or decrypt a backup with an empty password"),
-            message: NSLocalizedString("Achievements Database Backups are encrypted by default, hence the password must not be empty.", comment: "Explanatory text why backup passwords must not be empty."),
-            preferredStyle: .alert)
+    private func showDecryptionPasswordAlert(for backupUrl: URL, extraHint: Bool = false) {
+        let message : String
+        if extraHint {
+            message = NSLocalizedString("Please enter a Password to decrypt your Backup.\n\nNote: The backup date will replace all Data currently in the app!", comment: "Description of the dialogue asking the user to provide a passphrase to decrypt the backup with extra hint")
+        } else {
+            message = NSLocalizedString("Please enter a Password to decrypt your Backup", comment: "Description of the dialogue asking the user to provide a passphrase to decrypt the backup")
+        }
         
-        emptyPasswordAlert.addAction(UIAlertAction(
-            title: NSLocalizedString("Okay", comment: "Message of Approval"),
-            style: .default,
-            handler: nil))
+        let passwordAlert = UIAlertController(title: NSLocalizedString("Password", comment: "Dialogue Headline asking the user to enter an encryption / decryption Password"), message: message, preferredStyle: .alert)
         
-        self.present(emptyPasswordAlert, animated: true)
+        passwordAlert.addTextField { (textField) in
+            textField.isSecureTextEntry = true
+            textField.placeholder = NSLocalizedString("Password", comment: "Dialogue Headline asking the user to enter an encryption / decryption Password")
+        }
+        
+        passwordAlert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Abort Action."), style: .cancel, handler: { _ in
+            self.toggleLoadingState()
+        }))
+        
+        passwordAlert.addAction(UIAlertAction(title: NSLocalizedString("Confirm", comment: "Confirm that this is the password the user wants to use to encrypt / decrypt the backup."), style: .default, handler:  { [weak passwordAlert] _ in
+            guard let password = passwordAlert?.textFields?.first?.text else {
+                return
+            }
+            
+            if password.count < 1 {
+                self.toggleLoadingState()
+                self.showPasswordMustNotBeEmptyAlert()
+                return
+            } else {
+                self.restoreFrom(url: backupUrl, password: password)
+            }
+        }))
+        
+        self.present(passwordAlert, animated: true)
     }
 }

@@ -365,23 +365,6 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         recentTransactionsTableViewData = achievementsDataModel.groupedAchievementTransactions
     }
     
-    // MARK: Public Functions
-    public func showImportDialogue() {
-        // TODO: Instead guiding the user ask for confirmation and trigger restore directly.
-        let restoreAlert = UIAlertController(
-            title: NSLocalizedString("Restore", comment: "Headline for Alert leading the User to the Backup / Restore Screen"),
-            message: NSLocalizedString("In order to Restore from this Backup, go to Settings -> Backup / Restore and import your data. Keep in mind that this will overwrite all data currently shown in the app.", comment: "Description for the user about how to restore from a backup."),
-            preferredStyle: .alert
-        )
-        
-        restoreAlert.addAction(UIAlertAction(
-            title: NSLocalizedString("Okay", comment: "Message of Approval"),
-            style: .default,
-            handler: nil))
-        
-        self.present(restoreAlert, animated: true)
-    }
-    
     // MARK: Private Functions
     private func calculateBalanceFor(array: [AchievementTransaction]) -> Float {
         var result : Float = 0.0

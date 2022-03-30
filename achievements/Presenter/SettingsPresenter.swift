@@ -29,6 +29,14 @@ class SettingsPresenter {
         initiator.show(viewController, sender: self)
     }
     
+    public func showBackupAndRestoreScreen(from initiator: UIViewController, toImport backupUrl: URL) {
+        let viewController = storyboard.instantiateViewController(withIdentifier: "BackupAndRestoreViewController") as! BackupAndRestoreViewController
+        viewController.settingsPresenter = self
+        
+        viewController.providedBackupUrl = backupUrl
+        initiator.show(viewController, sender: self)
+    }
+    
     public func showSettingsList(from initiator: UIViewController) {
         let viewController = storyboard.instantiateViewController(withIdentifier: "SettingsListTableViewController") as! SettingsListTableViewController
         viewController.settingsPresenter = self

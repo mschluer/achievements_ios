@@ -23,7 +23,7 @@ class BackupAndRestoreViewController: UIViewController, UIDocumentPickerDelegate
             self.toggleLoadingState()
             
             // Ask for password and decrypt
-            self.showDecryptionPasswordAlert(for: backupUrl)
+            self.showDecryptionPasswordAlert(for: backupUrl, extraHint: true)
         }
     }
     
@@ -128,8 +128,15 @@ class BackupAndRestoreViewController: UIViewController, UIDocumentPickerDelegate
         toggleLoadingState()
     }
     
-    private func showDecryptionPasswordAlert(for backupUrl: URL) {
-        let passwordAlert = UIAlertController(title: NSLocalizedString("Password", comment: "Dialogue Headline asking the user to enter an encryption / decryption Password"), message: NSLocalizedString("Please enter a Password to decrypt your Backup", comment: "Description of the dialogue asking the user to provide a passphrase to decrypt the backup"), preferredStyle: .alert)
+    private func showDecryptionPasswordAlert(for backupUrl: URL, extraHint: Bool = false) {
+        let message : String
+        if extraHint {
+            message = NSLocalizedString("Please enter a Password to decrypt your Backup.\n\nNote: The backup date will replace all Data currently in the app!", comment: "Description of the dialogue asking the user to provide a passphrase to decrypt the backup with extra hint")
+        } else {
+            message = NSLocalizedString("Please enter a Password to decrypt your Backup", comment: "Description of the dialogue asking the user to provide a passphrase to decrypt the backup")
+        }
+        
+        let passwordAlert = UIAlertController(title: NSLocalizedString("Password", comment: "Dialogue Headline asking the user to enter an encryption / decryption Password"), message: message, preferredStyle: .alert)
         
         passwordAlert.addTextField { (textField) in
             textField.isSecureTextEntry = true

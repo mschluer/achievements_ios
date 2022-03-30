@@ -136,7 +136,9 @@ class BackupAndRestoreViewController: UIViewController, UIDocumentPickerDelegate
             textField.placeholder = NSLocalizedString("Password", comment: "Dialogue Headline asking the user to enter an encryption / decryption Password")
         }
         
-        passwordAlert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Abort Action."), style: .cancel, handler: nil))
+        passwordAlert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Abort Action."), style: .cancel, handler: { _ in
+            self.toggleLoadingState()
+        }))
         
         passwordAlert.addAction(UIAlertAction(title: NSLocalizedString("Confirm", comment: "Confirm that this is the password the user wants to use to encrypt / decrypt the backup."), style: .default, handler:  { [weak passwordAlert] _ in
             guard let password = passwordAlert?.textFields?.first?.text else {

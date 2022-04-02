@@ -28,10 +28,13 @@ class AccountPresenter {
     }
     
     public func showAccountDashboard(from initiator: UIViewController, url: URL) {
-        let viewController = storyboard.instantiateViewController(withIdentifier: "DashboardController") as! DashboardController
-        viewController.achievementsDataModel = achievementsDataModel
+        let dashboardViewController = storyboard.instantiateViewController(withIdentifier: "DashboardController") as! DashboardController
+        dashboardViewController.achievementsDataModel = achievementsDataModel
         
-        initiator.show(viewController, sender: self)
-        viewController.showImportDialogue()
+        initiator.show(dashboardViewController, sender: self)
+        
+        // Put Backup and Restore Screen onto it
+        let settingsPresenter = SettingsPresenter(achievementsDataModel: achievementsDataModel)
+        settingsPresenter.showBackupAndRestoreScreen(from: dashboardViewController, toImport: url)
     }
 }

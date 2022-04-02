@@ -20,8 +20,8 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     private var emptyScreenLabel : UILabel?
     private var progressWheelState = 0
     private var recentTransactions: [AchievementTransaction] = []
-    private var recentTransactionsTableViewData: [Date: [AchievementTransaction]] = [:]
-    private var recentTransactionsDates : [Date] = []
+    private var recentTransactionsTableViewData: [DateComponents: [AchievementTransaction]] = [:]
+    private var recentTransactionsDates : [DateComponents] = []
     
     // MARK: Outlets
     @IBOutlet weak var expenseTemplatesButton: UIBarButtonItem!
@@ -87,8 +87,8 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let date = recentTransactionsDates[section]
-        let dictionaryEntry = recentTransactionsTableViewData[date]
+        let dateComponents = recentTransactionsDates[section]
+        let dictionaryEntry = recentTransactionsTableViewData[dateComponents]
         
         return dictionaryEntry?.count ?? 0
     }
@@ -97,11 +97,12 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         // Date Part
         let formatter = DateFormatter()
         formatter.dateStyle = .short
-        let date = recentTransactionsDates[section]
+        let date = Calendar.current.date(from: recentTransactionsDates[section])!
+        let dateComponents = recentTransactionsDates[section]
         let datePart = formatter.string(for: date)
         
         // Balance Part
-        let dictionaryItem = recentTransactionsTableViewData[date] ?? []
+        let dictionaryItem = recentTransactionsTableViewData[dateComponents] ?? []
         let balance = calculateBalanceFor(array: dictionaryItem)
         
         return "\(datePart!) - ( \(NumberHelper.formattedString(for: balance)) )"
@@ -364,23 +365,6 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         recentTransactionsTableViewData = achievementsDataModel.groupedAchievementTransactions
     }
     
-    // MARK: Public Functions
-    public func showImportDialogue() {
-        // TODO: Instead guiding the user ask for confirmation and trigger restore directly.
-        let restoreAlert = UIAlertController(
-            title: NSLocalizedString("Restore", comment: "Headline for Alert leading the User to the Backup / Restore Screen"),
-            message: NSLocalizedString("In order to Restore from this Backup, go to Settings -> Backup / Restore and import your data. Keep in mind that this will overwrite all data currently shown in the app.", comment: "Description for the user about how to restore from a backup."),
-            preferredStyle: .alert
-        )
-        
-        restoreAlert.addAction(UIAlertAction(
-            title: NSLocalizedString("Okay", comment: "Message of Approval"),
-            style: .default,
-            handler: nil))
-        
-        self.present(restoreAlert, animated: true)
-    }
-    
     // MARK: Private Functions
     private func calculateBalanceFor(array: [AchievementTransaction]) -> Float {
         var result : Float = 0.0
@@ -393,8 +377,8 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     private func getRecentTransactionFor(indexPath: IndexPath) -> AchievementTransaction {
-        let date = recentTransactionsDates[indexPath.section]
-        let dictionaryEntry = recentTransactionsTableViewData[date]!
+        let dateComponents = recentTransactionsDates[indexPath.section]
+        let dictionaryEntry = recentTransactionsTableViewData[dateComponents]!
         return dictionaryEntry[indexPath.item]
     }
     
@@ -453,6 +437,11 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         } else if achievementsDataModel.expenseTemplates.first != nil {
             // Planned Expense
             percentage = (achievementsDataModel.totalRecentIncomes / achievementsDataModel.expenseTemplates.first!.amount) * -100
+        }
+        
+        // Make sure not to show more than 100 %
+        if percentage > 100 {
+            percentage = 100
         }
         
         progressWheel.text = "\(NumberHelper.formattedString(for: percentage)) %"
@@ -543,7 +532,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     
     private func updateSections() {
         var result = Array(recentTransactionsTableViewData.keys)
-        result.sort(by: >)
+        result.sort(by: { Calendar.current.date(from: $0)! > Calendar.current.date(from: $1)! })
         
         self.recentTransactionsDates = result
     }

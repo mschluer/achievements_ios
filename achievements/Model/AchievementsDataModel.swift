@@ -28,34 +28,32 @@ class AchievementsDataModel {
         request.sortDescriptors = [NSSortDescriptor(key: "orderIndex", ascending: true)]
         return try! self.viewContext.fetch(request)
     }
-    var groupedAchievementTransactions : [Date: [AchievementTransaction]] {
+    var groupedAchievementTransactions : [DateComponents: [AchievementTransaction]] {
         let transactions = achievementTransactions
         
-        var result = [Date: [AchievementTransaction]]()
+        var result = [DateComponents: [AchievementTransaction]]()
         
         for transaction in transactions {
-            let components = Calendar.current.dateComponents([.year, .month, .day], from: transaction.date!)
-            let date = Calendar.current.date(from: components)
+            let dateComponents = DateHelper.dateComponentsForDay(from: transaction.date!)
             
-            var dateEntry = result[date!] ?? []
+            var dateEntry = result[dateComponents] ?? []
             dateEntry.append(transaction)
-            result[date!] = dateEntry
+            result[dateComponents] = dateEntry
         }
         
         return result
     }
-    var groupedHistoricalTransactions : [Date: [HistoricalTransaction]] {
+    var groupedHistoricalTransactions : [DateComponents: [HistoricalTransaction]] {
         let transactions = historicalTransactions
         
-        var result = [Date: [HistoricalTransaction]]()
+        var result = [DateComponents: [HistoricalTransaction]]()
         
         for transaction in transactions {
-            let components = Calendar.current.dateComponents([.year, .month, .day], from: transaction.date!)
-            let date = Calendar.current.date(from: components)
+            let dateComponents = DateHelper.dateComponentsForDay(from: transaction.date!)
             
-            var dateEntry = result[date!] ?? []
+            var dateEntry = result[dateComponents] ?? []
             dateEntry.append(transaction)
-            result[date!] = dateEntry
+            result[dateComponents] = dateEntry
         }
         
         return result
@@ -433,6 +431,7 @@ class AchievementsDataModel {
                                                              at: url,
                                                              options: nil)
             
+            self.viewContext.refreshAllObjects()
         } catch let error {
             print("Clearing database resulted in error: \(error.localizedDescription)")
         }
@@ -459,7 +458,23 @@ class AchievementsDataModel {
                 remainingAmount -= recentIncomes[0].amount
                 
                 if remainingAmount < 0 {
-                    recentIncomes[0].amount = -1 * remainingAmount
+                    // Recalculate Amount of last Recent Income
+                    let amountOfLastIncome = recentIncomes[0].amount
+                    let newAmount = -1 * remainingAmount
+                    recentIncomes[0].amount = newAmount
+                    recentIncomes[0].historicalTransaction?.amount = newAmount
+                    
+                    if remainingAmount != 0 {
+                        // Add Split
+                        let splitTransaction     = self.createHistoricalTransaction()
+                        splitTransaction.text    = "\(recentIncomes[0].text ?? "") (Split)"
+                        splitTransaction.amount  = amountOfLastIncome + remainingAmount
+                        splitTransaction.date    = recentIncomes[0].date
+                        splitTransaction.balance = 0.0
+                        
+                        // Make sure to have the history consistent
+                        self.recalculateHistoricalBalances(from: splitTransaction)
+                    }
                 } else {
                     self.remove(achievementTransaction: recentIncomes[0])
                     recentIncomes.remove(at: 0)
@@ -492,4 +507,13 @@ class AchievementsDataModel {
     func remove(transactionTemplate template: TransactionTemplate) {
         self.viewContext.delete(template)
     }
+}
+
+// https://www.donnywals.com/using-codable-with-core-data-and-nsmanagedobject/
+extension CodingUserInfoKey {
+    static let managedObjectContext = CodingUserInfoKey(rawValue: "managedObjectContext")!
+}
+
+enum DecoderConfigurationError : Error {
+    case MissingManagedObjectContext
 }

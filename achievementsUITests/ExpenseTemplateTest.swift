@@ -47,7 +47,7 @@ class ExpenseTemplateTest: XCTestCase {
         XCTAssert(app.staticTexts["-5,00"].exists)
         
         app.tables.staticTexts["Test Expense Template"].swipeLeft()
-        app.staticTexts["Edit"].tap()
+        app.tables.buttons["Edit"].tap()
         
         // Transaction Tempalte Form (Edit)
         for _ in 0...3 {
@@ -61,7 +61,7 @@ class ExpenseTemplateTest: XCTestCase {
         XCTAssert(app.staticTexts["-7,00"].exists)
         
         app.tables.staticTexts["Test Expense Template"].swipeLeft()
-        app.staticTexts["Delete"].tap()
+        app.tables.buttons["Delete"].tap()
         
         XCTAssertFalse(app.staticTexts["Test Expense Template"].exists)
         XCTAssertFalse(app.staticTexts["-7,00"].exists)
@@ -153,7 +153,7 @@ class ExpenseTemplateTest: XCTestCase {
         XCTAssert(app.staticTexts["-10,00"].exists)
         
         app.tables.staticTexts["Non Recurring Test Template"].swipeRight()
-        app.staticTexts["Book"].tap()
+        app.tables.buttons["Book"].tap()
         app.navigationBars.buttons["Dashboard"].tap()
         
         // Dashboard

@@ -26,6 +26,12 @@ class TransactionTemplatesListViewController: UIViewController, UITableViewDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if displayMode == .incomes {
+            self.navigationItem.title = NSLocalizedString("Planned Incomes", comment: "Navigation Item Title for Planned Incomes")
+        } else {
+            self.navigationItem.title = NSLocalizedString("Planned Expenses", comment: "Navigation Item Title for Planned Expenses")
+        }
+        
         setupSortMenu()
         setupTemplatesTable()
         

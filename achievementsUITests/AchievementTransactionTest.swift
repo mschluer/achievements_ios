@@ -63,4 +63,27 @@ class AchievementTransactionTest: XCTestCase {
         app.tables/*@START_MENU_TOKEN@*/.buttons["Delete"]/*[[".cells[\"transactionCell\"].buttons[\"Delete\"]",".buttons[\"Delete\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         XCTAssert(app.staticTexts["+/- 0,00"].exists)
     }
+    
+    // MARK: Swipe Right Test
+    func testSwipeRightDuplication() throws {
+        let app = XCUIApplication()
+        
+        // Dashboard
+        app.toolbars["Toolbar"].buttons["Add"].tap()
+        
+        // Transaction Form (Create)
+        app.textFields["amountInputField"].typeText("5,50")
+        
+        let titleTextField = app.textFields["textInputField"]
+        titleTextField.tap()
+        titleTextField.typeText("dup")
+        
+        app.buttons["submitButton"].tap()
+        
+        // Dashboard
+        XCTAssert(app.staticTexts["+5,50"].exists)
+        app.tables.cells["transactionCell"].swipeRight()
+        app.tables.buttons["Duplicate"].tap()
+        XCTAssert(app.staticTexts["+11,00"].exists)
+    }
 }

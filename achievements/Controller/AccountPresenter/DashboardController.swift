@@ -108,6 +108,19 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         return "\(datePart!) - ( \(NumberHelper.formattedString(for: balance)) )"
     }
     
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let duplicate = UIContextualAction(style: .normal, title: NSLocalizedString("Duplicate", comment: "Duplicate transaction")) { (action, view, completion) in
+            self.transactionCellSwipeRightDuplicate(indexPath)
+            completion(false)
+        }
+        duplicate.backgroundColor = .systemTeal
+        
+        let config = UISwipeActionsConfiguration(actions: [duplicate])
+        config.performsFirstActionWithFullSwipe = true
+        
+        return config
+    }
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let edit = UIContextualAction(style: .normal, title: NSLocalizedString("Edit", comment: "Change Something")) { (action, view, completion) in
             self.transactionCellSwipeLeftEdit(indexPath)
@@ -220,6 +233,13 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         self.recalculateBalance()
         self.updateViewFromModel()
         self.updateEmptyScreenState()
+    }
+    
+    private func transactionCellSwipeRightDuplicate(_ indexPath: IndexPath) {
+        let achievementTransaction = achievementTransactionFor(indexPath)
+        
+        _ = achievementsDataModel.createAchievementTransactionWith(text: achievementTransaction.text!, amount: achievementTransaction.amount, date: Date())
+        updateViewFromModel()
     }
     
     // MARK: Setup Steps
@@ -366,6 +386,13 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     // MARK: Private Functions
+    private func achievementTransactionFor(_ indexPath: IndexPath) -> AchievementTransaction {
+        let key = recentTransactionsDates[indexPath.section]
+        let dictionaryEntry = recentTransactionsTableViewData[key]!
+        
+        return dictionaryEntry[indexPath.item]
+    }
+    
     private func calculateBalanceFor(array: [AchievementTransaction]) -> Float {
         var result : Float = 0.0
         

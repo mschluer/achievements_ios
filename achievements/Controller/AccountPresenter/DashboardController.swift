@@ -50,9 +50,6 @@ class DashboardController: OnboardingViewController, UITableViewDataSource, UITa
         
         setupExpenseConvenienceMenu()
         setupIncomeConvenienceMenu()
-        
-        // Onboarding
-        
     }
     
     // MARK: - Navigation
@@ -476,8 +473,6 @@ class DashboardController: OnboardingViewController, UITableViewDataSource, UITa
         progressWheel.text = "\(NumberHelper.formattedString(for: percentage)) %"
         progressWheel.textColor = .systemGray
     }
-    
-    
     
     private func showTotalBalanceInProgressWheelLabel() {
         if balance < 0 {

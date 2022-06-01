@@ -25,12 +25,16 @@ class OnboardingViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+#if DEBUG
+        // Do not display the onboarding automatically when in debug mode
+#else
         if(onboardingKey != nil) {
             if(!(Settings.onboardingsShown[onboardingKey!] ?? false)) {
                 Settings.onboardingsShown[onboardingKey!] = true
                 showOnboarding()
             }
         }
+#endif
     }
     
     // MARK: Private Functions

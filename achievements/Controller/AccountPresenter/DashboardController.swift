@@ -33,7 +33,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     
     // MARK: Onboarding
     var onboardingKey = "dashboard"
-    var onboardingText = NSLocalizedString("Welcome to the Achievements App!\n\nThis is the central view of the app, showing the progress wheel on top, the most recent turnovers grouped by day and controls at the bottom.\n\nSwiping right on a turnover duplicates it.\nBy swiping left they can be edited or deleted.\n\nBelow, the +-icon leads to the 'new Turnover'-dialogue. The folder icons lead to the templates for incomes and expenses. The three lines icon lead to the menu.", comment: "Onboarding for the Dashboard")
+    var onboardingText = NSLocalizedString("dashboard", tableName: "Onboardings", bundle: .main, value: "Welcome to the Achievements App!\n\nThis is the central view of the app, showing the progress wheel on top, the most recent turnovers grouped by day and controls at the bottom.\n\nSwiping right on a turnover duplicates it.\nBy swiping left they can be edited or deleted.\n\nBelow, the +-icon leads to the 'new Turnover'-dialogue. The folder icons lead to the templates for incomes and expenses. The three lines icon lead to the menu.", comment: "Onboarding for the Dashboard")
     
     // MARK: View Lifecycle Methods
     override func viewDidLoad() {

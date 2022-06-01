@@ -13,7 +13,6 @@ class TextOverlayViewController : UIViewController {
     private var parentInputViewController : UIInputViewController?
     private var label = UILabel()
     
-    
     // MARK: Actions
     @IBAction func didTapView(_ sender: UITapGestureRecognizer) {
         self.vanish()

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DashboardController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class DashboardController: OnboardingViewController, UITableViewDataSource, UITableViewDelegate {
     
     // MARK: Persistence Models
     public var achievementsDataModel : AchievementsDataModel!
@@ -32,8 +32,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
     // MARK: Onboarding
-    var onboardingKey = "dashboard"
-    var onboardingText = NSLocalizedString("dashboard", tableName: "Onboardings", bundle: .main, value: "Welcome to the Achievements App!\n\nThis is the central view of the app, showing the progress wheel on top, the most recent turnovers grouped by day and controls at the bottom.\n\nSwiping right on a turnover duplicates it.\nBy swiping left they can be edited or deleted.\n\nBelow, the +-icon leads to the 'new Turnover'-dialogue. The folder icons lead to the templates for incomes and expenses. The three lines icon lead to the menu.", comment: "Onboarding for the Dashboard")
+    override var onboardingKey : String? { "dashboard" }
     
     // MARK: View Lifecycle Methods
     override func viewDidLoad() {
@@ -41,9 +40,6 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         
         setupMainMenu()
         setupTransactionTable()
-        
-        // Onboarding
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"), style: .plain, target: self, action: Selector(("showOnboarding")))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,10 +52,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         setupIncomeConvenienceMenu()
         
         // Onboarding
-        if(!(Settings.onboardingsShown[onboardingKey] ?? false)) {
-            Settings.onboardingsShown[onboardingKey] = true
-            showOnboarding()
-        }
+        
     }
     
     // MARK: - Navigation
@@ -484,9 +477,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         progressWheel.textColor = .systemGray
     }
     
-    @objc private func showOnboarding() {
-        TextOverlayViewController().showOn(self.parent, text: onboardingText)
-    }
+    
     
     private func showTotalBalanceInProgressWheelLabel() {
         if balance < 0 {

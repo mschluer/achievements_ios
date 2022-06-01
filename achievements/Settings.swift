@@ -36,6 +36,14 @@ public class Settings {
             self.settingsObject.applicationSettings = new
         }
     }
+    static var onboardingsShown : [ String:Bool ] {
+        get {
+            self.settingsObject.onboardingsShown
+        }
+        set(new) {
+            self.settingsObject.onboardingsShown = new
+        }
+    }
     static var statisticsSettings : StatisticsSettings {
         get {
             self.settingsObject.statisticsSettings
@@ -69,6 +77,7 @@ struct ApplicationSettings : Codable {
 
 struct SettingsObject : Codable {
     var applicationSettings : ApplicationSettings = ApplicationSettings()
+    var onboardingsShown : [ String:Bool ] = [:]
     var statisticsSettings : StatisticsSettings = StatisticsSettings()
 }
 

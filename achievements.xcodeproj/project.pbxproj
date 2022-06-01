@@ -65,6 +65,7 @@
 		B393D83E2718AC1300232482 /* AchievementTransactionsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B393D83D2718AC1300232482 /* AchievementTransactionsPresenter.swift */; };
 		B396BAA127CBC35500FD78AC /* AchievementsDatabaseBackup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B396BAA027CBC35500FD78AC /* AchievementsDatabaseBackup.swift */; };
 		B396BAA327CBC46800FD78AC /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = B396BAA227CBC46800FD78AC /* Account.swift */; };
+		B3A6FB4D2829551800213FA6 /* TextOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A6FB4C2829551800213FA6 /* TextOverlayViewController.swift */; };
 		B3B6D74727C2E5C7007DE0E8 /* HistoricalTransactionSerializationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B6D74627C2E5C7007DE0E8 /* HistoricalTransactionSerializationTest.swift */; };
 		B3C5C4AF26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4AD26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift */; };
 		B3C5C4B026E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */; };
@@ -165,6 +166,7 @@
 		B393D83D2718AC1300232482 /* AchievementTransactionsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTransactionsPresenter.swift; sourceTree = "<group>"; };
 		B396BAA027CBC35500FD78AC /* AchievementsDatabaseBackup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsDatabaseBackup.swift; sourceTree = "<group>"; };
 		B396BAA227CBC46800FD78AC /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		B3A6FB4C2829551800213FA6 /* TextOverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextOverlayViewController.swift; sourceTree = "<group>"; };
 		B3B6D74627C2E5C7007DE0E8 /* HistoricalTransactionSerializationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalTransactionSerializationTest.swift; sourceTree = "<group>"; };
 		B3C5C4AD26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionTemplate+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionTemplate+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -439,6 +441,7 @@
 			isa = PBXGroup;
 			children = (
 				B38AB01327A2B4E6005893DE /* SpinnerViewController.swift */,
+				B3A6FB4C2829551800213FA6 /* TextOverlayViewController.swift */,
 			);
 			path = Commons;
 			sourceTree = "<group>";
@@ -819,6 +822,7 @@
 				B381160526E10B130090029D /* HistoricalTransaction+CoreDataClass.swift in Sources */,
 				B307CE83271456EB00FB7E8C /* Settings.swift in Sources */,
 				B3C5C4AF26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift in Sources */,
+				B3A6FB4D2829551800213FA6 /* TextOverlayViewController.swift in Sources */,
 				B349499326E1483E00829A5F /* HistoryTableViewController.swift in Sources */,
 				B384E15D276F4C3700C0B007 /* DateHelper.swift in Sources */,
 				B382BCCB2728004E005872BE /* StatisticsTableViewController.swift in Sources */,

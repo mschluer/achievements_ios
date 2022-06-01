@@ -8,6 +8,7 @@
 import UIKit
 
 class DashboardController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
     // MARK: Persistence Models
     public var achievementsDataModel : AchievementsDataModel!
     
@@ -30,6 +31,10 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet weak var recentTransactionsTableView: UITableView!
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
+    // MARK: Onboarding
+    var onboardingKey = "dashboard"
+    var onboardingText = NSLocalizedString("Welcome to the Achievements App!\n\nThis is the central view of the app, showing the progress wheel on top, the most recent turnovers grouped by day and controls at the bottom.\n\nSwiping right on a turnover duplicates it.\nBy swiping left they can be edited or deleted.\n\nBelow, the +-icon leads to the 'new Turnover'-dialogue. The folder icons lead to the templates for incomes and expenses. The three lines icon lead to the menu.", comment: "Onboarding for the Dashboard")
+    
     // MARK: View Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,11 +44,19 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         progressWheelState = 0
         updateViewFromModel()
         
         setupExpenseConvenienceMenu()
         setupIncomeConvenienceMenu()
+        
+        // Onboarding
+        if(!(Settings.onboardingsShown[onboardingKey] ?? false)) {
+            // Settings.onboardingsShown[onboardingKey] = true
+            TextOverlayViewController().showOn(self, text: onboardingText)
+        }
     }
     
     // MARK: - Navigation
@@ -236,7 +249,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     private func transactionCellSwipeRightDuplicate(_ indexPath: IndexPath) {
-        let achievementTransaction = achievementTransactionFor(indexPath)
+        let achievementTransaction = getRecentTransactionFor(indexPath: indexPath)
         
         _ = achievementsDataModel.createAchievementTransactionWith(text: achievementTransaction.text!, amount: achievementTransaction.amount, date: Date())
         updateViewFromModel()
@@ -386,13 +399,6 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     // MARK: Private Functions
-    private func achievementTransactionFor(_ indexPath: IndexPath) -> AchievementTransaction {
-        let key = recentTransactionsDates[indexPath.section]
-        let dictionaryEntry = recentTransactionsTableViewData[key]!
-        
-        return dictionaryEntry[indexPath.item]
-    }
-    
     private func calculateBalanceFor(array: [AchievementTransaction]) -> Float {
         var result : Float = 0.0
         

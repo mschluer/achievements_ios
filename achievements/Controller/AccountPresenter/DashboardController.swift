@@ -41,6 +41,9 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         
         setupMainMenu()
         setupTransactionTable()
+        
+        // Onboarding
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"), style: .plain, target: self, action: Selector(("showOnboarding")))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,8 +57,8 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         
         // Onboarding
         if(!(Settings.onboardingsShown[onboardingKey] ?? false)) {
-            // Settings.onboardingsShown[onboardingKey] = true
-            TextOverlayViewController().showOn(self, text: onboardingText)
+            Settings.onboardingsShown[onboardingKey] = true
+            showOnboarding()
         }
     }
     
@@ -479,6 +482,10 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
         
         progressWheel.text = "\(NumberHelper.formattedString(for: percentage)) %"
         progressWheel.textColor = .systemGray
+    }
+    
+    @objc private func showOnboarding() {
+        TextOverlayViewController().showOn(self.parent, text: onboardingText)
     }
     
     private func showTotalBalanceInProgressWheelLabel() {

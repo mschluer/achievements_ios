@@ -69,6 +69,7 @@
 		B3B6D74727C2E5C7007DE0E8 /* HistoricalTransactionSerializationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B6D74627C2E5C7007DE0E8 /* HistoricalTransactionSerializationTest.swift */; };
 		B3C059882847AB6400227A90 /* Onboardings.strings in Resources */ = {isa = PBXBuildFile; fileRef = B3C0598A2847AB6400227A90 /* Onboardings.strings */; };
 		B3C0598D2847B39D00227A90 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C0598C2847B39D00227A90 /* OnboardingViewController.swift */; };
+		B3C059902847C13500227A90 /* OnboardingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C0598F2847C13500227A90 /* OnboardingTest.swift */; };
 		B3C5C4AF26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4AD26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift */; };
 		B3C5C4B026E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */; };
 		B3E7475427199E8F006C92C5 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E7475327199E8F006C92C5 /* SettingsPresenter.swift */; };
@@ -173,6 +174,7 @@
 		B3C059892847AB6400227A90 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Onboardings.strings; sourceTree = "<group>"; };
 		B3C0598C2847B39D00227A90 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		B3C0598E2847B40000227A90 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Onboardings.strings; sourceTree = "<group>"; };
+		B3C0598F2847C13500227A90 /* OnboardingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTest.swift; sourceTree = "<group>"; };
 		B3C5C4AD26E3E20800A52CBC /* TransactionTemplate+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionTemplate+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B3C5C4AE26E3E20800A52CBC /* TransactionTemplate+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionTemplate+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B3E7475327199E8F006C92C5 /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 				B30CA4AB27271BE30032E646 /* IncomeConvenienceMenuTest.swift */,
 				B30CA4AD27272DE80032E646 /* ExpenseConvenienceMenuTest.swift */,
 				B30B86A4272ADB470075C392 /* EmptyScreenTest.swift */,
+				B3C0598F2847C13500227A90 /* OnboardingTest.swift */,
 			);
 			path = achievementsUITests;
 			sourceTree = "<group>";
@@ -886,6 +889,7 @@
 			files = (
 				B30CA4AC27271BE30032E646 /* IncomeConvenienceMenuTest.swift in Sources */,
 				B307CE7F271083A600FB7E8C /* ExpenseTemplateTest.swift in Sources */,
+				B3C059902847C13500227A90 /* OnboardingTest.swift in Sources */,
 				B3939ACD2705FE44005D243B /* MultiplteTransactionsAndPurgeTest.swift in Sources */,
 				B3939ACB2705F627005D243B /* IncomeTemplateTest.swift in Sources */,
 				B3939ACF2706048D005D243B /* HistoricalTransactionTest.swift in Sources */,

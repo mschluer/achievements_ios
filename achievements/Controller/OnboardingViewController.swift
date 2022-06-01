@@ -16,7 +16,10 @@ class OnboardingViewController: UIViewController {
         super.viewDidLoad()
 
         if(onboardingKey != nil) {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"), style: .plain, target: self, action: Selector(("showOnboarding")))
+            let barButtonItem = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"), style: .plain, target: self, action: Selector(("showOnboarding")))
+            barButtonItem.accessibilityLabel = "onboardingButton"
+            
+            self.navigationItem.rightBarButtonItem = barButtonItem
         } else {
             print("WARNING: Onboarding key for view is not set although class \(String(describing: self)) is an OnboardingViewController")
         }

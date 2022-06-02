@@ -8,6 +8,9 @@
 import UIKit
 
 class TransactionDetailViewController: BaseViewController {
+    // MARK: Presenter
+    public var achievementTransactionPresenter : AchievementTransactionsPresenter?
+    
     // MARK: Variables
     public var transaction: HistoricalTransaction?
     
@@ -21,7 +24,28 @@ class TransactionDetailViewController: BaseViewController {
     // MARK: View Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        populateViewWith(transaction!)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        guard let transaction = transaction else { return }
+
+        super.viewWillAppear(animated)
+        
+        if transaction.recentTransaction != nil && achievementTransactionPresenter != nil {
+            let barButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: self, action: Selector(("editButtonPressed")))
+            barButtonItem.accessibilityLabel = "editButton"
+            
+            self.navigationItem.rightBarButtonItem = barButtonItem
+        }
+        
+        populateViewWith(transaction)
+    }
+    
+    // MARK: Action Handlers
+    @objc private func editButtonPressed() {
+        guard let achievementTransactionPresenter = achievementTransactionPresenter else { return }
+
+        achievementTransactionPresenter.editTransaction(from: self, transaction: transaction!.recentTransaction!)
     }
 
     // MARK: Private Functions

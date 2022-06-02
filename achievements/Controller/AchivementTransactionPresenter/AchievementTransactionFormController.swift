@@ -14,6 +14,7 @@ class AchievementTransactionFormController: BaseViewController, UITextFieldDeleg
     // MARK: Variables
     public var achievementTransaction: AchievementTransaction?
     public var transactionTemplate : TransactionTemplate?
+    public var detailViewController : TransactionDetailViewController?
 
     // MARK: Outlets
     @IBOutlet weak var amountInputField: UITextField!
@@ -64,10 +65,15 @@ class AchievementTransactionFormController: BaseViewController, UITextFieldDeleg
             }
             
             // Insert New Item
-            _ = achievementsDataModel?.createAchievementTransactionWith(
+            let newAchievementTransaction = achievementsDataModel?.createAchievementTransactionWith(
                 text: titleInputField.text!,
                 amount: (amountInputField.text as NSString?)?.floatValue ?? 0.0,
                 date: datePicker.date)
+            
+            // Detail View Repopulation
+            if let detailViewController = self.detailViewController {
+                detailViewController.transaction = newAchievementTransaction!.historicalTransaction
+            }
             
             // Remove Template if not recurring
             if let template = self.transactionTemplate {

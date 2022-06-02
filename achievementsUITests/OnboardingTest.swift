@@ -25,9 +25,44 @@ class OnboardingTest: XCTestCase {
         XCTAssert(app.navigationBars.buttons["onboardingButton"].exists)
         app.navigationBars.buttons["onboardingButton"].tap()
         
-        XCTAssert(app.staticTexts.containing(onboardingTextPredicate).count > 0)
+        XCTAssert(app.textViews.containing(onboardingTextPredicate).count > 0)
         app.tap()
         
-        XCTAssert(app.staticTexts.containing(onboardingTextPredicate).count == 0)
+        XCTAssert(app.textViews.containing(onboardingTextPredicate).count == 0)
+    }
+    
+    func testOnboardingForExpenseTemplates() throws {
+        let app = XCUIApplication()
+        let onboardingTextPredicate = NSPredicate(format: "label CONTAINS[c] %@", "Planned Expenses")
+        
+        // Dashboard
+        app.toolbars["Toolbar"].buttons["expenseTemplates"].tap()
+
+        // Expense Templates
+        XCTAssert(app.navigationBars.buttons["onboardingButton"].exists)
+        app.navigationBars.buttons["onboardingButton"].tap()
+        
+        XCTAssert(app.textViews.containing(onboardingTextPredicate).count > 0)
+        app.tap()
+        
+        XCTAssert(app.textViews.containing(onboardingTextPredicate).count == 0)
+    }
+    
+    func testOnboardingForIncomeTemplates() throws {
+        let app = XCUIApplication()
+        let onboardingTextPredicate = NSPredicate(format: "label CONTAINS[c] %@", "Planned Incomes")
+        
+        // Dashboard
+        app.toolbars["Toolbar"].buttons["incomeTemplates"].tap()
+
+        // Expense Templates
+        XCTAssert(app.navigationBars.buttons["onboardingButton"].exists)
+        app.navigationBars.buttons["onboardingButton"].tap()
+        
+        XCTAssert(app.textViews.containing(onboardingTextPredicate).count > 0)
+        app.tap()
+        
+        XCTAssert(app.textViews.containing(onboardingTextPredicate).count == 0)
+        
     }
 }

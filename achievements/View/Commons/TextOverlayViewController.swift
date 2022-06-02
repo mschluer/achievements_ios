@@ -72,6 +72,7 @@ class TextOverlayViewController : UIViewController {
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapView(_:)))
         view.addGestureRecognizer(tapGestureRecognizer)
+        textView.addGestureRecognizer(tapGestureRecognizer)
         
         viewController.addChild(self)
         view.frame = viewController.view.frame

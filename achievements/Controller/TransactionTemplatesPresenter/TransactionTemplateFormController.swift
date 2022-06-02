@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TransactionTemplateFormController: UIViewController, UITextFieldDelegate {
+class TransactionTemplateFormController: BaseViewController, UITextFieldDelegate {
     // MARK: Persistence Models
     public var achievementsDataModel : AchievementsDataModel?
     

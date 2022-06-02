@@ -60,6 +60,7 @@ class TextOverlayViewController : UIViewController {
         
         textView.text = text
         textView.font = .systemFont(ofSize: 15)
+        textView.layer.cornerRadius = 5
         textView.isEditable = false
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapView(_:)))

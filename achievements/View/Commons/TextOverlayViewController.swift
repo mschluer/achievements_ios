@@ -11,7 +11,7 @@ import UIKit
 class TextOverlayViewController : UIViewController {
     // MARK: Private Variables
     private var parentInputViewController : UIInputViewController?
-    private var label = UILabel()
+    private var textView = UITextView()
     
     // MARK: Actions
     @IBAction func didTapView(_ sender: UITapGestureRecognizer) {
@@ -23,11 +23,11 @@ class TextOverlayViewController : UIViewController {
         view = UIView()
         view.backgroundColor = UIColor(white: 0.5, alpha: 0.9)
         
-        label.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(label)
-        label.addConstraints([
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(textView)
+        textView.addConstraints([
             NSLayoutConstraint(
-                item: label,
+                item: textView,
                 attribute: NSLayoutConstraint.Attribute.width,
                 relatedBy: NSLayoutConstraint.Relation.equal,
                 toItem: nil,
@@ -35,17 +35,17 @@ class TextOverlayViewController : UIViewController {
                 multiplier: 1,
                 constant: 300),
             NSLayoutConstraint(
-                item: label,
+                item: textView,
                 attribute: NSLayoutConstraint.Attribute.height,
                 relatedBy: NSLayoutConstraint.Relation.equal,
                 toItem: nil,
                 attribute: NSLayoutConstraint.Attribute.notAnAttribute,
                 multiplier: 1,
-                constant: 500),
+                constant: 300),
         ])
         
-        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        textView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        textView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
     
     public func vanish() {
@@ -58,8 +58,9 @@ class TextOverlayViewController : UIViewController {
         vanish()
         guard let viewController = parentInputViewController else { return }
         
-        label.text = text
-        label.numberOfLines = 0
+        textView.text = text
+        textView.font = .systemFont(ofSize: 15)
+        textView.isEditable = false
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapView(_:)))
         view.addGestureRecognizer(tapGestureRecognizer)

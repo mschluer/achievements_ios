@@ -7,7 +7,8 @@
 
 import UIKit
 
-class DashboardController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class DashboardController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
+    
     // MARK: Persistence Models
     public var achievementsDataModel : AchievementsDataModel!
     
@@ -30,6 +31,9 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet weak var recentTransactionsTableView: UITableView!
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
+    // MARK: Onboarding
+    override var onboardingKey : String? { "dashboard" }
+    
     // MARK: View Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +43,8 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         progressWheelState = 0
         updateViewFromModel()
         
@@ -236,7 +242,7 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     private func transactionCellSwipeRightDuplicate(_ indexPath: IndexPath) {
-        let achievementTransaction = achievementTransactionFor(indexPath)
+        let achievementTransaction = getRecentTransactionFor(indexPath: indexPath)
         
         _ = achievementsDataModel.createAchievementTransactionWith(text: achievementTransaction.text!, amount: achievementTransaction.amount, date: Date())
         updateViewFromModel()
@@ -386,13 +392,6 @@ class DashboardController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     // MARK: Private Functions
-    private func achievementTransactionFor(_ indexPath: IndexPath) -> AchievementTransaction {
-        let key = recentTransactionsDates[indexPath.section]
-        let dictionaryEntry = recentTransactionsTableViewData[key]!
-        
-        return dictionaryEntry[indexPath.item]
-    }
-    
     private func calculateBalanceFor(array: [AchievementTransaction]) -> Float {
         var result : Float = 0.0
         

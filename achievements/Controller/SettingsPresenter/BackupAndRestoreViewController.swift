@@ -9,7 +9,7 @@ import UIKit
 import MobileCoreServices
 import UniformTypeIdentifiers
 
-class BackupAndRestoreViewController: UIViewController, UIDocumentPickerDelegate {
+class BackupAndRestoreViewController: BaseViewController, UIDocumentPickerDelegate {
     // MARK: Variables
     var settingsPresenter : SettingsPresenter!
     var spinner : SpinnerViewController?

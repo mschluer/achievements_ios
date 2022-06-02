@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HistoryTableViewController: UITableViewController {
+class HistoryTableViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     // MARK: Persistence Models
     public var achievementsDataModel : AchievementsDataModel?
     
@@ -16,9 +16,11 @@ class HistoryTableViewController: UITableViewController {
     private var historicalTransactionsDates : [DateComponents] = []
     private var emptyScreenLabel : UILabel?
     
-    
     // MARK: Outlets
     @IBOutlet var historyTableView: UITableView!
+    
+    // MARK: Onboarding
+    override var onboardingKey: String? { "history" }
     
     // MARK: View Lifecycle Methods
     override func viewDidLoad() {
@@ -36,11 +38,11 @@ class HistoryTableViewController: UITableViewController {
     }
 
     // MARK: Table View Data Source
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return historicalTransactionsDates.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let transaction = historicalTransactionFor(indexPath: indexPath)
         if let cell = tableView.dequeueReusableCell(withIdentifier: "historyItemCell") as! HistoryItemTableViewCell? {
             if let amountLabel = cell.amountLabel {
@@ -81,18 +83,18 @@ class HistoryTableViewController: UITableViewController {
         return UITableViewCell();
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         transactionCellPressed(indexPath)
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let date = historicalTransactionsDates[section]
         let dictionaryEntry = historicalTransactions[date]
         
         return dictionaryEntry?.count ?? 0
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let dateComponents = historicalTransactionsDates[section]
         
         // Date Part

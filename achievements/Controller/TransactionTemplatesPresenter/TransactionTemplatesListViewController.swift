@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class TransactionTemplatesListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITableViewDragDelegate {
+class TransactionTemplatesListViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UITableViewDragDelegate {
     // MARK: Persistence Models
     public var achievementsDataModel : AchievementsDataModel?
     public var displayMode : TransactionTemplatesListMode = .incomes // TODO: Remove this default
@@ -21,6 +21,16 @@ class TransactionTemplatesListViewController: UIViewController, UITableViewDeleg
     // MARK: Outlets
     @IBOutlet weak var sortButton: UIBarButtonItem!
     @IBOutlet weak var templatesTable: UITableView!
+    
+    // MARK: Onboarding
+    override var onboardingKey : String? {
+        switch displayMode {
+        case .incomes:
+            return "transactionTemplates.incomes"
+        case .expenses:
+            return "transactionTemplates.expenses"
+        }
+    }
     
     // MARK: View Lifecycle Methods
     override func viewDidLoad() {

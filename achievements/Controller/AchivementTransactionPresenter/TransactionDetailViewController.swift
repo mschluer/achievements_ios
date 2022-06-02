@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TransactionDetailViewController: UIViewController {
+class TransactionDetailViewController: BaseViewController {
     // MARK: Variables
     public var transaction: HistoricalTransaction?
     

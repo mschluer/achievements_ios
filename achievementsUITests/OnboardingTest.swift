@@ -63,6 +63,22 @@ class OnboardingTest: XCTestCase {
         app.tap()
         
         XCTAssert(app.textViews.containing(onboardingTextPredicate).count == 0)
+    }
+    
+    func testOnboardingForAchievementTransactionForm() throws {
+        let app = XCUIApplication()
+        let onboardingTextPredicate = NSPredicate(format: "label CONTAINS[c] %@", "Achievement Transaction Form")
         
+        // Dashboard
+        app.toolbars["Toolbar"].buttons["Add"].tap()
+
+        // Expense Templates
+        XCTAssert(app.navigationBars.buttons["onboardingButton"].exists)
+        app.navigationBars.buttons["onboardingButton"].tap()
+        
+        XCTAssert(app.textViews.containing(onboardingTextPredicate).count > 0)
+        app.tap()
+        
+        XCTAssert(app.textViews.containing(onboardingTextPredicate).count == 0)
     }
 }

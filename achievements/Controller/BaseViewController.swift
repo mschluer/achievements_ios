@@ -21,8 +21,6 @@ class BaseViewController: UIViewController {
             barButtonItem.accessibilityLabel = "onboardingButton"
             
             self.navigationItem.rightBarButtonItem = barButtonItem
-        } else {
-            print("WARNING: Onboarding key for view is not set although class \(String(describing: self)) is an OnboardingViewController")
         }
         // -- End of Onboarding
     }

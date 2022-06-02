@@ -10,8 +10,15 @@ import UIKit
 
 class TextOverlayViewController : UIViewController {
     // MARK: Private Variables
-    private var parentInputViewController : UIInputViewController?
+    private var text : String = ""
     private var textView = UITextView()
+
+    // MARK: View Lifecycle Methods
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        redisplay(to: size)
+    }
     
     // MARK: Actions
     @IBAction func didTapView(_ sender: UITapGestureRecognizer) {
@@ -54,9 +61,9 @@ class TextOverlayViewController : UIViewController {
         removeFromParent()
     }
     
-    public func showOn(_ parentInputViewController: UIViewController?, text: String) {
+    public func showOn(_ parentViewController: UIViewController?, text: String) {
         vanish()
-        guard let viewController = parentInputViewController else { return }
+        guard let viewController = parentViewController else { return }
         
         textView.text = text
         textView.font = .systemFont(ofSize: 15)
@@ -72,5 +79,11 @@ class TextOverlayViewController : UIViewController {
         didMove(toParent: viewController)
         
         viewController.view.setNeedsDisplay()
+    }
+    
+    // MARK: Private Functions
+    private func redisplay(to size: CGSize) {
+        self.view.frame.size = size
+        self.view.setNeedsDisplay()
     }
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DashboardController: OnboardingViewController, UITableViewDataSource, UITableViewDelegate {
+class DashboardController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
     
     // MARK: Persistence Models
     public var achievementsDataModel : AchievementsDataModel!

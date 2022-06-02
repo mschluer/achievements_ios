@@ -1,5 +1,5 @@
 //
-//  OnboardingViewController.swift
+//  BaseViewController.swift
 //  achievements
 //
 //  Created by Maximilian Schluer on 01.06.22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OnboardingViewController: UIViewController {
+class BaseViewController: UIViewController {
     // MARK: Properties
     var onboardingKey : String? { return nil }
 
@@ -15,6 +15,7 @@ class OnboardingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // -- Onboarding
         if(onboardingKey != nil) {
             let barButtonItem = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"), style: .plain, target: self, action: Selector(("showOnboarding")))
             barButtonItem.accessibilityLabel = "onboardingButton"
@@ -23,11 +24,13 @@ class OnboardingViewController: UIViewController {
         } else {
             print("WARNING: Onboarding key for view is not set although class \(String(describing: self)) is an OnboardingViewController")
         }
+        // -- End of Onboarding
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // -- Onboarding
 #if DEBUG
         // Do not display the onboarding automatically when in debug mode
 #else
@@ -38,6 +41,7 @@ class OnboardingViewController: UIViewController {
             }
         }
 #endif
+        // -- End of Onboarding
     }
     
     // MARK: Private Functions

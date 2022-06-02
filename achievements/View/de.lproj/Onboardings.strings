@@ -4,6 +4,9 @@
 /* Onboarding for the Dashboard */
 "dashboard" = "Willkommen in der Achievements-App!\n\nDies ist die zentrale Ansicht der App. Unter dem Fortschrittsrad oben befinden sich die aktuellen Umsätze nach Tagen gruppiert, unten die Toolbar.\n\nUmsätze können per Swipe-Rechts dupliziert werden.\nDurch Swipe-Links können sie bearbeitet und gelöscht werden.\n\nAus der Toolbar kann mit dem +-Button ein neuer Umsatz angelegt werden. Die Order beinhalten die Transaktionsvorlagen. Daneben geht es ins Menü.\nDie Verrechung, die dort manuell wie auch automatisch aktiviert werden kann, sorgt dafür, dass auf dem Dashboard die Einnahmen gegen die Ausagaben aufgerechnet werden. Wenn die automatische Verrechnung aktiviert ist, geschieht dies automatisch.";
 
+/* Onboarding for the History */
+"history" = "Historie\n\nDiese Ansicht zeigt historische Umsätze, die möglicherweise kein Äquivalent auf dem Dashboard mehr haben. Während solche Transaktionen noch bearbeitet werden können, sind verrechnete unveränderlich.";
+
 /* Onboarding for the Statistics Screen*/
 "statistics" = "Statistiken\n\nDieser Screen zeigt Statistiken zu den eingetragenen Transaktionen.\n\nDie Diagramme können im Screen Einstellungen angepasst werden. Dieser kann vom Dashboard aus erreicht werden.";
 

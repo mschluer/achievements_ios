@@ -99,4 +99,22 @@ class OnboardingTest: XCTestCase {
         
         XCTAssert(app.textViews.containing(onboardingTextPredicate).count == 0)
     }
+    
+    func testOnboardingForHistory() throws {
+        let app = XCUIApplication()
+        let onboardingTextPredicate = NSPredicate(format: "label CONTAINS[c] %@", "History")
+        
+        // Dashboard
+        app.toolbars["Toolbar"].buttons["Menu"].tap()
+        app.collectionViews.buttons["History"].tap()
+        
+        // Histoy
+        XCTAssert(app.navigationBars.buttons["onboardingButton"].exists)
+        app.navigationBars.buttons["onboardingButton"].tap()
+        
+        XCTAssert(app.textViews.containing(onboardingTextPredicate).count > 0)
+        app.tap()
+        
+        XCTAssert(app.textViews.containing(onboardingTextPredicate).count == 0)
+    }
 }

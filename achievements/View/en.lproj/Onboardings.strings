@@ -4,6 +4,9 @@
 /* Onboarding for the Dashboard */
 "dashboard" = "Welcome to the Achievements App!\n\nThis is the central view of the app, showing the progress wheel on top, the most recent turnovers grouped by day and controls at the bottom.\n\nSwiping right on a turnover duplicates it.\nBy swiping left they can be edited or deleted.\n\nBelow, the +-icon leads to the 'new Turnover'-dialogue. The folder icons lead to the templates for incomes and expenses. The three lines icon lead to the menu.\nThe here mentioned purge means that expenses and incomes are cleared against each other. If activated this happens automatically.";
 
+/* Onboarding for the History */
+"history" = "History\n\nThis Screens show historical transactions which might not have an equivalent on the dashboard anymore. While Transactions present on the Dashboard can be edited from there, already settled transactions are immutable.";
+
 /* Onboarding for the Statistics Screen*/
 "statistics" = "Statistics\n\nThis screen shows the statistics as calculated from your Achievements so far.\n\nNote that you can configure the diagrams in the Settings screen. That one is reachable from the Dashboards' main menu.";
 

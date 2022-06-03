@@ -45,9 +45,11 @@ class BaseViewController: UIViewController {
     // MARK: Private Functions
     @objc private func showOnboarding() {
         // -- Onboarding
-        // Make sure Statistics are properly displayed  
+        // Exceptions for Refactored TableViewControllers on which the Onboarding did not properly work
         let onboardingParentController : UIViewController?
         if self is StatisticsTableViewController {
+            onboardingParentController = self.parent
+        } else if self is HistoryTableViewController {
             onboardingParentController = self.parent
         } else {
             onboardingParentController = self

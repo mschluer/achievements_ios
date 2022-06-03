@@ -36,7 +36,9 @@ class AchievementTransactionFormController: BaseViewController, UITextFieldDeleg
             populateFormWith(transactionTemplate!)
         }
         
-        amountInputField.becomeFirstResponder()
+        if Settings.onboardingsShown[onboardingKey!] ?? false {
+            amountInputField.becomeFirstResponder()
+        }
     }
     
     // MARK: TextFieldDelegate

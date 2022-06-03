@@ -24,7 +24,6 @@ class StatisticsTableViewController: BaseViewController, UITableViewDelegate, UI
         didSet {
             DispatchQueue.main.async {
                 guard let tableView = self.tableView else { return }
-                
                 tableView.reloadRows(at: [ IndexPath(item: 0, section: 2) ], with: .automatic)
             }
         }
@@ -33,7 +32,6 @@ class StatisticsTableViewController: BaseViewController, UITableViewDelegate, UI
         didSet{
             DispatchQueue.main.async {
                 guard let tableView = self.tableView else { return }
-                
                 tableView.reloadRows(at: [ IndexPath(item: 0, section: 3) ], with: .automatic)
             }
         }

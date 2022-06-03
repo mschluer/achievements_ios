@@ -44,6 +44,16 @@ class BaseViewController: UIViewController {
     
     // MARK: Private Functions
     @objc private func showOnboarding() {
-        TextOverlayViewController().showOn(self.parent, text: NSLocalizedString(onboardingKey!, tableName: "Onboardings", bundle: .main, comment: "Onboarding for View"))
+        // -- Onboarding
+        // Make sure Statistics are properly displayed  
+        let onboardingParentController : UIViewController?
+        if self is StatisticsTableViewController {
+            onboardingParentController = self.parent
+        } else {
+            onboardingParentController = self
+        }
+        
+        TextOverlayViewController().showOn(onboardingParentController, text: NSLocalizedString(onboardingKey!, tableName: "Onboardings", bundle: .main, comment: "Onboarding for View"))
+        // -- End of Onboarding
     }
 }

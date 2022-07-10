@@ -1,8 +1,10 @@
 PODS:
-  - Charts (3.6.0):
-    - Charts/Core (= 3.6.0)
-  - Charts/Core (3.6.0)
-  - CryptoSwift (1.4.2)
+  - Charts (4.0.3):
+    - Charts/Core (= 4.0.3)
+  - Charts/Core (4.0.3):
+    - SwiftAlgorithms (~> 1.0)
+  - CryptoSwift (1.4.3)
+  - SwiftAlgorithms (1.0.0)
 
 DEPENDENCIES:
   - Charts
@@ -12,10 +14,12 @@ SPEC REPOS:
   trunk:
     - Charts
     - CryptoSwift
+    - SwiftAlgorithms
 
 SPEC CHECKSUMS:
-  Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
-  CryptoSwift: a532e74ed010f8c95f611d00b8bbae42e9fe7c17
+  Charts: d959d6723c8eedfdd0735dfc28cb0a71762ac4d9
+  CryptoSwift: a0799ee936271bd2253a006f1e4523df21845000
+  SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
 
 PODFILE CHECKSUM: d5536f95349eb8aa5483fe9e2a545cea7469e44b
 

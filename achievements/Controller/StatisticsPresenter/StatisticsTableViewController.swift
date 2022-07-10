@@ -201,8 +201,8 @@ class StatisticsTableViewController: BaseViewController, UITableViewDelegate, UI
         zeroLine.drawValuesEnabled = false
         
         let data = LineChartData()
-        data.addDataSet(balanceLine)
-        data.addDataSet(zeroLine)
+        data.append(balanceLine)
+        data.append(zeroLine)
         
         balanceLineChartView.data = data
             

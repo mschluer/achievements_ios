@@ -11,7 +11,7 @@ import CoreData
 class TransactionTemplatesListViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UITableViewDragDelegate {
     // MARK: Persistence Models
     public var achievementsDataModel : AchievementsDataModel?
-    public var displayMode : TransactionTemplatesListMode = .incomes // TODO: Remove this default
+    public var displayMode : TransactionTemplatesListMode = .incomes
     
     // MARK: Variables
     private var emptyScreenLabel : UILabel?

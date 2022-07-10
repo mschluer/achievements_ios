@@ -511,7 +511,9 @@ class DashboardController: BaseViewController, UITableViewDataSource, UITableVie
     
     private func updateEmptyScreenState() {
         if(recentTransactionsTableViewData.isEmpty) {
-            if(emptyScreenLabel != nil) { return }
+            if(emptyScreenLabel != nil) {
+                return
+            }
             
             let label = UILabel()
             label.text = NSLocalizedString("Nothing to show.\n\nAdd Transactions with the + button in the bottom left hand corner or by using Templates, which can accessed with the folder-buttons.", comment: "Description for empty Dashboard")

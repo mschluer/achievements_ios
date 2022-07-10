@@ -186,24 +186,23 @@ class StatisticsTableViewController: BaseViewController, UITableViewDelegate, UI
             let key = keys[i + offset]
             chartEntries.append(ChartDataEntry(x: Double(i), y: Double(endOfDayBalances[key]!)))
         }
-        let balanceLine = LineChartDataSet(entries: chartEntries)
+        let balanceLine = LineChartDataSet(entries: chartEntries, label: "Balance")
         balanceLine.colors = [NSUIColor.blue]
+        balanceLine.lineWidth = 2
         balanceLine.drawCirclesEnabled = false
         balanceLine.drawValuesEnabled = false
         
         var zeroLineEntries = [ChartDataEntry]()
-        for i in 0...maximumEntries {
+        for i in 0..<maximumEntries {
             zeroLineEntries.append(ChartDataEntry(x: Double(i), y: 0.0))
         }
-        let zeroLine = LineChartDataSet(entries: zeroLineEntries)
+        let zeroLine = LineChartDataSet(entries: zeroLineEntries, label: "0")
         zeroLine.colors = [UIColor.systemGray]
+        zeroLine.lineWidth = 2
         zeroLine.drawCirclesEnabled = false
         zeroLine.drawValuesEnabled = false
         
-        let data = LineChartData()
-        data.append(balanceLine)
-        data.append(zeroLine)
-        
+        let data = LineChartData(dataSets: [ balanceLine, zeroLine ])
         balanceLineChartView.data = data
             
         balanceLineChartView.rightAxis.enabled = false
@@ -215,6 +214,8 @@ class StatisticsTableViewController: BaseViewController, UITableViewDelegate, UI
         balanceLineChartView.doubleTapToZoomEnabled = false
         balanceLineChartView.highlightPerTapEnabled = false
         balanceLineChartView.highlightPerDragEnabled = false
+        
+        balanceLineChartView.animate(xAxisDuration: 1)
     }
     
     private func refresh(dayDeltaBarChartView: BarChartView) {
@@ -286,6 +287,8 @@ class StatisticsTableViewController: BaseViewController, UITableViewDelegate, UI
         dayDeltaBarChartView.legend.enabled = false
         dayDeltaBarChartView.doubleTapToZoomEnabled = false
         dayDeltaBarChartView.highlightPerDragEnabled = false
+        
+        dayDeltaBarChartView.animate(xAxisDuration: 1)
     }
 }
 

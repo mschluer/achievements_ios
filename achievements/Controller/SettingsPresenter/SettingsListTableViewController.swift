@@ -22,6 +22,10 @@ class SettingsListTableViewController: BaseViewController, UITableViewDelegate, 
     // MARK: Outlets
     @IBOutlet var tableView: UITableView!
     
+    // MARK: Strings
+    let cancelButtonTitle = NSLocalizedString("Cancel", comment: "Abort current action.")
+    let confirmButtonTitle = NSLocalizedString("Confirm", comment: "Confirm Action")
+    
     // MARK: View Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,21 +39,19 @@ class SettingsListTableViewController: BaseViewController, UITableViewDelegate, 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell : UITableViewCell
         
-        switch(indexPath.section) {
-        case 0:
-            switch(indexPath.item) {
-            case 0:
+        if indexPath.section == 0 {
+            if indexPath.item == 0 {
                 // Amount Records in Balance Line Chart
                 cell = tableView.dequeueReusableCell(withIdentifier: "settingsCellWithData", for: indexPath)
                 cell.textLabel?.text = NSLocalizedString("Amount Records in Balance-Chart", comment: "Settings Item for the Amount of Records to be Displayed in the Balance-Line-Chart")
                 cell.detailTextLabel?.text = NumberHelper.formattedString(for: Settings.statisticsSettings.lineChartMaxAmountRecords)
-            default:
+            } else {
                 // Amount of Entires in Day Delta Chart
                 cell = tableView.dequeueReusableCell(withIdentifier: "settingsCellWithData", for: indexPath)
                 cell.textLabel?.text = NSLocalizedString("Amount Entries in Day Delta Chart", comment: "Settings Item for the Amount of Entries to be Disyplayed in the Day Delta Chart")
                 cell.detailTextLabel?.text = NumberHelper.formattedString(for: Settings.statisticsSettings.dayDeltaChartMaxAmountEntries)
             }
-        default:
+        } else {
             cell = tableView.dequeueReusableCell(withIdentifier: "settingsCell", for: indexPath)
             cell.textLabel?.text = databaseMenuItems[indexPath.item]
             return cell
@@ -59,13 +61,15 @@ class SettingsListTableViewController: BaseViewController, UITableViewDelegate, 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch(indexPath.section) {
-        case 0 :    switch(indexPath.item) {
-                    // Amount of Datapoints to display
-                    case 0: statisticsAmountDataPointsPressed()
-                    default: statisticsAmountDataPointsInDayDeltaChartPressed()
-        }
-        default :   switch(indexPath.item) {
+        if indexPath.section == 0 {
+            if indexPath.item == 0 {
+                // Amount of Datapoints to display
+                statisticsAmountDataPointsPressed()
+            } else {
+                statisticsAmountDataPointsInDayDeltaChartPressed()
+            }
+        } else {
+            switch(indexPath.item) {
                     // Backup and Restore
                     case 0: settingsPresenter.showBackupAndRestoreScreen(from: self)
                     // Reset Settings
@@ -79,16 +83,18 @@ class SettingsListTableViewController: BaseViewController, UITableViewDelegate, 
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch(section) {
-        case 0: return 2
-        default: return databaseMenuItems.count
+        if section == 0 {
+            return 2
+        } else {
+            return databaseMenuItems.count
         }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch(section) {
-        case 0 :    return NSLocalizedString("Statistics", comment: "Settings Menu Header for Settings Regarding Statistics")
-        default :   return NSLocalizedString("Data", comment: "Settings Menu Header for Settings Regarding the Stored Data")
+        if section == 0 {
+            return NSLocalizedString("Statistics", comment: "Settings Menu Header for Settings Regarding Statistics")
+        } else {
+            return NSLocalizedString("Data", comment: "Settings Menu Header for Settings Regarding the Stored Data")
         }
     }
     
@@ -98,7 +104,7 @@ class SettingsListTableViewController: BaseViewController, UITableViewDelegate, 
         deletionAlert.addAction(UIAlertAction(title: NSLocalizedString("Reset Application", comment: "Action to set all data back to standard values."), style: .destructive, handler: { _ in
             self.settingsPresenter.resetApplication()
         }))
-        deletionAlert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Abort current action."), style: .cancel, handler: nil))
+        deletionAlert.addAction(UIAlertAction(title: cancelButtonTitle, style: .cancel, handler: nil))
         
         self.present(deletionAlert, animated: true)
     }
@@ -108,7 +114,7 @@ class SettingsListTableViewController: BaseViewController, UITableViewDelegate, 
         deletionAlert.addAction(UIAlertAction(title: NSLocalizedString("Reset Settings", comment: "Action to set all Settings back to standard values."), style: .destructive, handler: { _ in
             self.settingsPresenter.resetSettings()
         }))
-        deletionAlert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Abort current action."), style: .cancel, handler: nil))
+        deletionAlert.addAction(UIAlertAction(title: cancelButtonTitle, style: .cancel, handler: nil))
         
         self.present(deletionAlert, animated: true)
     }
@@ -123,8 +129,8 @@ class SettingsListTableViewController: BaseViewController, UITableViewDelegate, 
             textField.text = String(Settings.statisticsSettings.lineChartMaxAmountRecords)
         }
         
-        updateIntValueAlert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Abort current action."), style: .cancel, handler: nil))
-        updateIntValueAlert.addAction(UIAlertAction(title: NSLocalizedString("Confirm", comment: "Confirm Action"), style: .default, handler: { [weak updateIntValueAlert] _ in
+        updateIntValueAlert.addAction(UIAlertAction(title: cancelButtonTitle, style: .cancel, handler: nil))
+        updateIntValueAlert.addAction(UIAlertAction(title: confirmButtonTitle, style: .default, handler: { [weak updateIntValueAlert] _ in
             guard let text = updateIntValueAlert?.textFields?.first?.text else {
                 return
             }
@@ -155,8 +161,8 @@ class SettingsListTableViewController: BaseViewController, UITableViewDelegate, 
             textField.text = String(Settings.statisticsSettings.dayDeltaChartMaxAmountEntries)
         }
         
-        updateIntValueAlert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Abort current action."), style: .cancel, handler: nil))
-        updateIntValueAlert.addAction(UIAlertAction(title: NSLocalizedString("Confirm", comment: "Confirm Action"), style: .default, handler: { [weak updateIntValueAlert] _ in
+        updateIntValueAlert.addAction(UIAlertAction(title: cancelButtonTitle, style: .cancel, handler: nil))
+        updateIntValueAlert.addAction(UIAlertAction(title: confirmButtonTitle, style: .default, handler: { [weak updateIntValueAlert] _ in
             guard let text = updateIntValueAlert?.textFields?.first?.text else {
                 return
             }

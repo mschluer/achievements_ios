@@ -70,7 +70,6 @@ class BackupAndRestoreViewController: BaseViewController, UIDocumentPickerDelega
             if password.count < 1 {
                 self.toggleLoadingState()
                 self.showPasswordMustNotBeEmptyAlert()
-                return
             } else {
                 self.exportDatabaseFileEncryptedWith(password: password)
             }
@@ -158,7 +157,6 @@ class BackupAndRestoreViewController: BaseViewController, UIDocumentPickerDelega
             if password.count < 1 {
                 self.toggleLoadingState()
                 self.showPasswordMustNotBeEmptyAlert()
-                return
             } else {
                 self.restoreFrom(url: backupUrl, password: password)
             }

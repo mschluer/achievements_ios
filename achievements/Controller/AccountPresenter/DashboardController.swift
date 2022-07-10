@@ -54,12 +54,9 @@ class DashboardController: BaseViewController, UITableViewDataSource, UITableVie
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case "ShowHistorySegue":
+        if segue.identifier == "ShowHistorySegue" {
             let destination = segue.destination as! HistoryTableViewController
             destination.achievementsDataModel = achievementsDataModel
-        default:
-            break
         }
     }
 
@@ -109,9 +106,9 @@ class DashboardController: BaseViewController, UITableViewDataSource, UITableVie
         
         // Balance Part
         let dictionaryItem = recentTransactionsTableViewData[dateComponents] ?? []
-        let balance = calculateBalanceFor(array: dictionaryItem)
+        let balanceForItem = calculateBalanceFor(array: dictionaryItem)
         
-        return "\(datePart!) - ( \(NumberHelper.formattedString(for: balance)) )"
+        return "\(datePart!) - ( \(NumberHelper.formattedString(for: balanceForItem)) )"
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -257,7 +254,9 @@ class DashboardController: BaseViewController, UITableViewDataSource, UITableVie
         
         var recurringSectionMenuItems : [UIAction] = []
         for i in 0...4 {
-            if(i >= recurringExpensesTemplates.count) { break }
+            if(i >= recurringExpensesTemplates.count) {
+                break
+            }
             
             let currentTemplate = recurringExpensesTemplates[i]
             
@@ -273,16 +272,13 @@ class DashboardController: BaseViewController, UITableViewDataSource, UITableVie
         let recurringSection = UIMenu(title: "", options: .displayInline, children:recurringSectionMenuItems)
         
         var nonRecurringSectionMenuItems : [UIAction] = []
-        if let nonRecurringExpenseTemplate = nonRecurringExpensesTemplates.first {
-            if(nonRecurringExpenseTemplate.isQuickBookable()) {
-                
-                nonRecurringSectionMenuItems.append(
-                    UIAction(title: "\(nonRecurringExpenseTemplate.text!) (\(NumberHelper.formattedString(for: nonRecurringExpenseTemplate.amount)))",
-                             image: nil,
-                             handler: { _ in
-                                 self.templateConvenienceMenuButtonPressed(transactionTemplate: nonRecurringExpenseTemplate)
-                             }))
-            }
+        if let nonRecurringExpenseTemplate = nonRecurringExpensesTemplates.first, nonRecurringExpenseTemplate.isQuickBookable() {
+            nonRecurringSectionMenuItems.append(
+                UIAction(title: "\(nonRecurringExpenseTemplate.text!) (\(NumberHelper.formattedString(for: nonRecurringExpenseTemplate.amount)))",
+                         image: nil,
+                         handler: { _ in
+                             self.templateConvenienceMenuButtonPressed(transactionTemplate: nonRecurringExpenseTemplate)
+                         }))
         }
         let nonRecurringSection = UIMenu(title: "", options: .displayInline, children: nonRecurringSectionMenuItems)
         
@@ -308,7 +304,9 @@ class DashboardController: BaseViewController, UITableViewDataSource, UITableVie
         
         var recurringSectionMenuItems : [UIAction] = []
         for i in 0...4 {
-            if(i >= recurringIncomesTemplates.count) { break }
+            if(i >= recurringIncomesTemplates.count) {
+                break
+            }
             
             let currentTemplate = recurringIncomesTemplates[i]
             
@@ -324,16 +322,13 @@ class DashboardController: BaseViewController, UITableViewDataSource, UITableVie
         let recurringSection = UIMenu(title: "", options: .displayInline, children:recurringSectionMenuItems)
         
         var nonRecurringSectionMenuItems : [UIAction] = []
-        if let nonRecurringIncomeTemplate = nonRecurringIncomesTemplates.first {
-            if(nonRecurringIncomeTemplate.isQuickBookable()) {
-                
-                nonRecurringSectionMenuItems.append(
-                    UIAction(title: "\(nonRecurringIncomeTemplate.text!) (\(NumberHelper.formattedString(for: nonRecurringIncomeTemplate.amount)))",
-                             image: nil,
-                             handler: { _ in
-                                 self.templateConvenienceMenuButtonPressed(transactionTemplate: nonRecurringIncomeTemplate)
-                             }))
-            }
+        if let nonRecurringIncomeTemplate = nonRecurringIncomesTemplates.first, nonRecurringIncomeTemplate.isQuickBookable() {
+            nonRecurringSectionMenuItems.append(
+                UIAction(title: "\(nonRecurringIncomeTemplate.text!) (\(NumberHelper.formattedString(for: nonRecurringIncomeTemplate.amount)))",
+                         image: nil,
+                         handler: { _ in
+                             self.templateConvenienceMenuButtonPressed(transactionTemplate: nonRecurringIncomeTemplate)
+                         }))
         }
         let nonRecurringSection = UIMenu(title: "", options: .displayInline, children: nonRecurringSectionMenuItems)
         
@@ -358,7 +353,7 @@ class DashboardController: BaseViewController, UITableViewDataSource, UITableVie
         let mainMenuDestruct = UIAction(title: NSLocalizedString("Reset", comment: "Set something back to initial state."), image: UIImage(systemName: "trash.circle"), attributes: .destructive) { _ in
             self.mainMenuResetButtonPressed() }
             
-        var mainMenuItems = UIMenu(title: "mainMenu", options: .displayInline, children: [
+        let mainMenuItems = UIMenu(title: "mainMenu", options: .displayInline, children: [
             UIAction(title: NSLocalizedString("Settings", comment: "Menu item to get to the Configuration Menu"), image: UIImage(systemName: "gear"), handler: { _ in
                 self.mainMenuSettingsButtonPressed()
             }),

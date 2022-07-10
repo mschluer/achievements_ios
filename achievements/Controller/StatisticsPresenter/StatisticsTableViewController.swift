@@ -162,10 +162,13 @@ class StatisticsTableViewController: BaseViewController, UITableViewDelegate, UI
         guard let endOfDayBalances = endOfDayBalances else {
             return
         }
-        if endOfDayBalances.isEmpty { return }
+        if endOfDayBalances.isEmpty {
+            return
+        }
         
         var chartEntries = [ChartDataEntry]()
-        let maximumEntries, offset : Int
+        let maximumEntries : Int
+        let offset : Int
         
         let totalChartItems = endOfDayBalances.count
         if  totalChartItems > Settings.statisticsSettings.lineChartMaxAmountRecords {
@@ -218,11 +221,14 @@ class StatisticsTableViewController: BaseViewController, UITableViewDelegate, UI
         guard let endOfDayBalanceDeltas = endOfDayBalanceDeltas else {
             return
         }
-        if endOfDayBalanceDeltas.isEmpty { return }
+        if endOfDayBalanceDeltas.isEmpty {
+            return
+        }
         
         var positiveChartEntries = [ChartDataEntry]()
         var negativeChartEntries = [ChartDataEntry]()
-        let maximumEntries, offset : Int
+        let maximumEntries : Int
+        let offset : Int
         let totalChartItems = endOfDayBalanceDeltas.count
         
         // Calculate the offset

@@ -29,6 +29,7 @@ class HistoricalTransactionTest: XCTestCase {
         app.toolbars["Toolbar"].buttons["Add"].tap()
         
         // Transaction Form (Create)
+        app.textFields["amountInputField"].tap()
         app.textFields["amountInputField"].typeText("5")
         
         let titleTextField = app.textFields["textInputField"]
@@ -68,6 +69,7 @@ class HistoricalTransactionTest: XCTestCase {
         app.toolbars["Toolbar"].buttons["Add"].tap()
         
         // Transaction Form (Create)
+        app.textFields["amountInputField"].tap()
         app.textFields["amountInputField"].typeText("5")
         
         let titleTextField = app.textFields["textInputField"]
@@ -80,6 +82,7 @@ class HistoricalTransactionTest: XCTestCase {
         app.toolbars["Toolbar"].buttons["Add"].tap()
         
         // Transaction Form (Create)
+        app.textFields["amountInputField"].tap()
         app.textFields["amountInputField"].typeText("-5")
         
         titleTextField.tap()

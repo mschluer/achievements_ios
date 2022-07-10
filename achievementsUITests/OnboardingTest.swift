@@ -123,10 +123,10 @@ class OnboardingTest: XCTestCase {
         let onboardingTextPredicate = NSPredicate(format: "label CONTAINS[c] %@", "Transaction Template Form")
         
         // Dashboard
-        app.toolbars["Toolbar"].buttons["Add"].tap()
+        app.toolbars["Toolbar"].buttons["expenseTemplates"].tap()
 
         // Expense Templates
-        app.buttons["Add"].tap()
+        app.toolbars["Toolbar"].buttons["Add"].tap()
         
         // Transaction Template Form
         XCTAssert(app.navigationBars.buttons["onboardingButton"].exists)

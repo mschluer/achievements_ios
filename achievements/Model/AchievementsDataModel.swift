@@ -451,7 +451,11 @@ class AchievementsDataModel {
         let request : NSFetchRequest<TransactionTemplate> = TransactionTemplate.fetchRequest()
         request.sortDescriptors = sortDescriptors
         request.predicate = negativePredicate
-        let plannedExpenses = try! self.viewContext.fetch(request)
+        
+        guard let plannedExpenses = try? self.viewContext.fetch(request) else {
+            print("ERROR: Retrieving Expense Templates Failed.")
+            return
+        }
         
         // Check for emptiness
         if plannedExpenses.count == 0 {
@@ -472,7 +476,11 @@ class AchievementsDataModel {
         let request : NSFetchRequest<TransactionTemplate> = TransactionTemplate.fetchRequest()
         request.sortDescriptors = sortDescriptors
         request.predicate = positivePredicate
-        let plannedIncomes = try! self.viewContext.fetch(request)
+        
+        guard let plannedIncomes = try? self.viewContext.fetch(request) else {
+            print("ERROR: Retrieving Income Templates Failed.")
+            return
+        }
         
         // Check for emptiness
         if plannedIncomes.count == 0 {

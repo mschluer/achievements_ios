@@ -12,6 +12,10 @@ import UIKit
 class AchievementsDataModel {
     private let persistentContainer : NSPersistentContainer
     
+    // MARK: Predicates
+    let negativePredicate = NSPredicate(format: "amount < 0")
+    let positivePredicate = NSPredicate(format: "amount >= 0")
+    
     // MARK: Variables
     var achievementTransactions : [AchievementTransaction] {
         if(Settings.applicationSettings.automaticPurge) {
@@ -20,13 +24,25 @@ class AchievementsDataModel {
         
         let request : NSFetchRequest<AchievementTransaction> = AchievementTransaction.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
-        return try! viewContext.fetch(request)
+        
+        do {
+            return try viewContext.fetch(request)
+        } catch {
+            print("ERROR: Retrieving AchievementTransactions failed!")
+            return []
+        }
     }
     var expenseTemplates: [TransactionTemplate] {
         let request : NSFetchRequest<TransactionTemplate> = TransactionTemplate.fetchRequest()
-        request.predicate = NSPredicate(format: "amount < 0")
+        request.predicate = negativePredicate
         request.sortDescriptors = [NSSortDescriptor(key: "orderIndex", ascending: true)]
-        return try! self.viewContext.fetch(request)
+        
+        do {
+            return try self.viewContext.fetch(request)
+        } catch {
+            print("ERROR: Retrieving Expense Templates Failed.")
+            return []
+        }
     }
     var groupedAchievementTransactions : [DateComponents: [AchievementTransaction]] {
         let transactions = achievementTransactions
@@ -60,65 +76,131 @@ class AchievementsDataModel {
     }
     var historicalExpenses : [HistoricalTransaction] {
         let fetchRequest : NSFetchRequest<HistoricalTransaction> = HistoricalTransaction.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "amount < 0")
-        return try! self.viewContext.fetch(fetchRequest)
+        fetchRequest.predicate = negativePredicate
+        
+        do {
+            return try self.viewContext.fetch(fetchRequest)
+        } catch {
+            print("ERROR: Retrieving Historical Expenses Failed.")
+            return []
+        }
     }
     var historicalIncomes : [HistoricalTransaction] {
         let fetchRequest : NSFetchRequest<HistoricalTransaction> = HistoricalTransaction.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "amount >= 0")
-        return try! self.viewContext.fetch(fetchRequest)
+        fetchRequest.predicate = positivePredicate
+        
+        do {
+            return try self.viewContext.fetch(fetchRequest)
+        } catch {
+            print("ERROR: Retrieving Historical Incomes Failed.")
+            return []
+        }
     }
     var historicalTransactions : [HistoricalTransaction] {
         let request : NSFetchRequest<HistoricalTransaction> = HistoricalTransaction.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
-        return try! viewContext.fetch(request)
+        
+        do {
+            return try viewContext.fetch(request)
+        } catch {
+            print("ERROR: Retrieving Historical Transactions Failed.")
+            return []
+        }
     }
     var historicalTransactionsReverse: [HistoricalTransaction] {
         let request : NSFetchRequest<HistoricalTransaction> = HistoricalTransaction.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
-        return try! viewContext.fetch(request)
+        
+        do {
+            return try viewContext.fetch(request)
+        } catch {
+            print("ERROR: Retrieving Reversed Historical Transactions Failed.")
+            return []
+        }
     }
     var incomeTemplates: [TransactionTemplate] {
         let request : NSFetchRequest<TransactionTemplate> = TransactionTemplate.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "orderIndex", ascending: true)]
-        request.predicate = NSPredicate(format: "amount >= 0")
-        return try! self.viewContext.fetch(request)
+        request.predicate = positivePredicate
+        
+        do {
+            return try self.viewContext.fetch(request)
+        } catch {
+            print("ERROR: Retrieving Income Templates Failed.")
+            return []
+        }
     }
     var nonRecurringExpenseTemplates: [TransactionTemplate] {
         let request : NSFetchRequest<TransactionTemplate> = TransactionTemplate.fetchRequest()
         request.predicate = NSPredicate(format: "recurring = false && amount < 0")
         request.sortDescriptors = [NSSortDescriptor(key: "orderIndex", ascending: true)]
-        return try! self.viewContext.fetch(request)
+        
+        do {
+            return try self.viewContext.fetch(request)
+        } catch {
+            print("ERROR: Retrieving Non Recurring Expense Templates Failed.")
+            return []
+        }
     }
     var nonRecurringIncomeTemplates: [TransactionTemplate] {
         let request : NSFetchRequest<TransactionTemplate> = TransactionTemplate.fetchRequest()
         request.predicate = NSPredicate(format: "recurring = false && amount >= 0")
         request.sortDescriptors = [NSSortDescriptor(key: "orderIndex", ascending: true)]
-        return try! self.viewContext.fetch(request)
+        
+        do {
+            return try self.viewContext.fetch(request)
+        } catch {
+            print("ERROR: Retrieving Non Recurring Income Templates Failed.")
+            return []
+        }
     }
     var recentExpenses : [AchievementTransaction] {
         let fetchRequest : NSFetchRequest<AchievementTransaction> = AchievementTransaction.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "amount < 0")
+        fetchRequest.predicate = negativePredicate
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
-        return try! self.viewContext.fetch(fetchRequest)
+        
+        do {
+            return try self.viewContext.fetch(fetchRequest)
+        } catch {
+            print("ERROR: Retrieving Recent Expenses Failed.")
+            return []
+        }
     }
     var recentIncomes : [AchievementTransaction] {
         let fetchRequest : NSFetchRequest<AchievementTransaction> = AchievementTransaction.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "amount >= 0")
+        fetchRequest.predicate = positivePredicate
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
-        return try! self.viewContext.fetch(fetchRequest)
+        
+        do {
+            return try self.viewContext.fetch(fetchRequest)
+        } catch {
+            print("ERROR: Retrieving Recent Incomes Failed.")
+            return []
+        }
     }
     var recurringExpenseTemplates: [TransactionTemplate] {
         let request : NSFetchRequest<TransactionTemplate> = TransactionTemplate.fetchRequest()
         request.predicate = NSPredicate(format: "recurring = true && amount < 0")
         request.sortDescriptors = [NSSortDescriptor(key: "orderIndex", ascending: true)]
-        return try! self.viewContext.fetch(request)
+        
+        do {
+            return try self.viewContext.fetch(request)
+        } catch {
+            print("ERROR: Retreiving Recurring Expense Templates Failed.")
+            return []
+        }
     }
     var recurringIncomeTemplates: [TransactionTemplate] {
         let request : NSFetchRequest<TransactionTemplate> = TransactionTemplate.fetchRequest()
         request.predicate = NSPredicate(format: "recurring = true && amount >= 0")
         request.sortDescriptors = [NSSortDescriptor(key: "orderIndex", ascending: true)]
-        return try! self.viewContext.fetch(request)
+        
+        do {
+            return try self.viewContext.fetch(request)
+        } catch {
+            print("ERROR: Retrieving Recurring Income Templates Failed.")
+            return []
+        }
     }
     var totalHistoricalExpenses : Float {
         var result : Float = 0
@@ -151,7 +233,13 @@ class AchievementsDataModel {
     var transactionTemplates: [TransactionTemplate] {
         let request : NSFetchRequest<TransactionTemplate> = TransactionTemplate.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "text", ascending: true)]
-        return try! viewContext.fetch(request)
+        
+        do {
+            return try viewContext.fetch(request)
+        } catch {
+            print("ERROR: Retrieving Transaction Templates Failed.")
+            return []
+        }
     }
     var viewContext : NSManagedObjectContext {
         return self.persistentContainer.viewContext
@@ -266,14 +354,14 @@ class AchievementsDataModel {
     
     public func recalculateHistoricalBalances(from beginIndex: Int?) {
         var i = beginIndex ?? 0
-        let historicalTransactions = historicalTransactionsReverse
+        let transactions = historicalTransactionsReverse
         
         var currentBalance : Float = 0
         if i > 0 {
-            currentBalance = historicalTransactions[i - 1].balance
+            currentBalance = transactions[i - 1].balance
         }
         
-        while i < historicalTransactions.count {
+        while i < transactions.count {
             currentBalance = historicalTransactionsReverse[i].calculateHistoricalBalance(balanceBefore: currentBalance)
             historicalTransactionsReverse[i].balance = currentBalance
             
@@ -362,7 +450,7 @@ class AchievementsDataModel {
         // Fetch
         let request : NSFetchRequest<TransactionTemplate> = TransactionTemplate.fetchRequest()
         request.sortDescriptors = sortDescriptors
-        request.predicate = NSPredicate(format: "amount < 0")
+        request.predicate = negativePredicate
         let plannedExpenses = try! self.viewContext.fetch(request)
         
         // Check for emptiness
@@ -383,7 +471,7 @@ class AchievementsDataModel {
         // Fetch
         let request : NSFetchRequest<TransactionTemplate> = TransactionTemplate.fetchRequest()
         request.sortDescriptors = sortDescriptors
-        request.predicate = NSPredicate(format: "amount >= 0")
+        request.predicate = positivePredicate
         let plannedIncomes = try! self.viewContext.fetch(request)
         
         // Check for emptiness
@@ -402,11 +490,11 @@ class AchievementsDataModel {
     
     // MARK: Private Functions
     private func insertIndex(_ historicalTransaction: HistoricalTransaction) -> Int {
-        let historicalTransactions = self.historicalTransactionsReverse
-        var index = historicalTransactions.count - 1
+        let transactions = self.historicalTransactionsReverse
+        var index = transactions.count - 1
         
         while(index > 0) {
-            if(historicalTransaction.date! > historicalTransactions[index].date!) {
+            if(historicalTransaction.date! > transactions[index].date!) {
                 return index
             } else {
                 index -= 1
@@ -438,51 +526,56 @@ class AchievementsDataModel {
     }
     
     func purgeRecent() {
-        let fetchRequest : NSFetchRequest<AchievementTransaction> = AchievementTransaction.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
-        
-        fetchRequest.predicate = NSPredicate(format: "amount >= 0")
-        var recentIncomes = try! self.viewContext.fetch(fetchRequest)
-        var totalIncomes = totalRecentIncomes
-        
-        fetchRequest.predicate = NSPredicate(format: "amount < 0")
-        var recentExpenses = try! self.viewContext.fetch(fetchRequest)
-        
-        while recentExpenses.count > 0 && -1 * recentExpenses[0].amount <= totalIncomes {
-            var remainingAmount = -1 * recentExpenses[0].amount
-            self.remove(achievementTransaction: recentExpenses[0])
-            recentExpenses.remove(at: 0)
+        do {
+            let fetchRequest : NSFetchRequest<AchievementTransaction> = AchievementTransaction.fetchRequest()
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
             
-            while remainingAmount > 0 {
-                totalIncomes -= recentIncomes[0].amount
-                remainingAmount -= recentIncomes[0].amount
+            fetchRequest.predicate = positivePredicate
+            var incomes = try self.viewContext.fetch(fetchRequest)
+            var totalIncomes = totalRecentIncomes
+            
+            fetchRequest.predicate = negativePredicate
+            var expenses = try self.viewContext.fetch(fetchRequest)
+            
+            while expenses.count > 0 && -1 * expenses[0].amount <= totalIncomes {
+                var remainingAmount = -1 * expenses[0].amount
+                self.remove(achievementTransaction: expenses[0])
+                expenses.remove(at: 0)
                 
-                if remainingAmount < 0 {
-                    // Recalculate Amount of last Recent Income
-                    let amountOfLastIncome = recentIncomes[0].amount
-                    let newAmount = -1 * remainingAmount
-                    recentIncomes[0].amount = newAmount
-                    recentIncomes[0].historicalTransaction?.amount = newAmount
+                while remainingAmount > 0 {
+                    totalIncomes -= incomes[0].amount
+                    remainingAmount -= incomes[0].amount
                     
-                    if remainingAmount != 0 {
-                        // Add Split
-                        let splitTransaction     = self.createHistoricalTransaction()
-                        splitTransaction.text    = "\(recentIncomes[0].text ?? "") (Split)"
-                        splitTransaction.amount  = amountOfLastIncome + remainingAmount
-                        splitTransaction.date    = recentIncomes[0].date
-                        splitTransaction.balance = 0.0
+                    if remainingAmount < 0 {
+                        // Recalculate Amount of last Recent Income
+                        let amountOfLastIncome = incomes[0].amount
+                        let newAmount = -1 * remainingAmount
+                        incomes[0].amount = newAmount
+                        incomes[0].historicalTransaction?.amount = newAmount
                         
-                        // Make sure to have the history consistent
-                        self.recalculateHistoricalBalances(from: splitTransaction)
+                        if remainingAmount != 0 {
+                            // Add Split
+                            let splitTransaction     = self.createHistoricalTransaction()
+                            splitTransaction.text    = "\(incomes[0].text ?? "") (Split)"
+                            splitTransaction.amount  = amountOfLastIncome + remainingAmount
+                            splitTransaction.date    = incomes[0].date
+                            splitTransaction.balance = 0.0
+                            
+                            // Make sure to have the history consistent
+                            self.recalculateHistoricalBalances(from: splitTransaction)
+                        }
+                    } else {
+                        self.remove(achievementTransaction: incomes[0])
+                        incomes.remove(at: 0)
                     }
-                } else {
-                    self.remove(achievementTransaction: recentIncomes[0])
-                    recentIncomes.remove(at: 0)
                 }
             }
+            
+            self.save()
+            
+        } catch let error {
+            print("ERROR: Purging failed due to error: \(error.localizedDescription)")
         }
-        
-        self.save()
     }
     
     func remove(achievementTransaction transaction: AchievementTransaction) {

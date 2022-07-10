@@ -15,6 +15,9 @@ class BackupAndRestoreViewController: BaseViewController, UIDocumentPickerDelega
     var spinner : SpinnerViewController?
     var providedBackupUrl : URL?
     
+    // MARK: Strings
+    let passwordTitle = NSLocalizedString("Password", comment: "Dialogue Headline asking the user to enter an encryption / decryption Password")
+    
     // MARK: Onboarding
     override var onboardingKey: String? { "backupRestore" }
     
@@ -52,11 +55,11 @@ class BackupAndRestoreViewController: BaseViewController, UIDocumentPickerDelega
     // MARK: Action Handlers
     @IBAction func backupDataButtonPressed(_ sender: Any) {
         toggleLoadingState()
-        let passwordAlert = UIAlertController(title: NSLocalizedString("Password", comment: "Dialogue Headline asking the user to enter an encryption / decryption Password"), message: NSLocalizedString("Please enter a Password to encrypt your Backup.", comment: "Description of the dialogue asking the user to provide a passphrase to encrypt the backup"), preferredStyle: .alert)
+        let passwordAlert = UIAlertController(title: passwordTitle, message: NSLocalizedString("Please enter a Password to encrypt your Backup.", comment: "Description of the dialogue asking the user to provide a passphrase to encrypt the backup"), preferredStyle: .alert)
         
         passwordAlert.addTextField { (textField) in
             textField.isSecureTextEntry = true
-            textField.placeholder = NSLocalizedString("Password", comment: "Placeholder for Password input field.")
+            textField.placeholder = self.passwordTitle
         }
         
         passwordAlert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Abort Action."), style: .cancel, handler: { _ in
@@ -138,11 +141,11 @@ class BackupAndRestoreViewController: BaseViewController, UIDocumentPickerDelega
             message = NSLocalizedString("Please enter a Password to decrypt your Backup", comment: "Description of the dialogue asking the user to provide a passphrase to decrypt the backup")
         }
         
-        let passwordAlert = UIAlertController(title: NSLocalizedString("Password", comment: "Dialogue Headline asking the user to enter an encryption / decryption Password"), message: message, preferredStyle: .alert)
+        let passwordAlert = UIAlertController(title: passwordTitle, message: message, preferredStyle: .alert)
         
         passwordAlert.addTextField { (textField) in
             textField.isSecureTextEntry = true
-            textField.placeholder = NSLocalizedString("Password", comment: "Dialogue Headline asking the user to enter an encryption / decryption Password")
+            textField.placeholder = self.passwordTitle
         }
         
         passwordAlert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Abort Action."), style: .cancel, handler: { _ in

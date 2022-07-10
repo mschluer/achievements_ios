@@ -17,7 +17,7 @@ class BaseViewController: UIViewController {
 
         // -- Onboarding
         if(onboardingKey != nil) {
-            let barButtonItem = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"), style: .plain, target: self, action: Selector(("showOnboarding")))
+            let barButtonItem = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"), style: .plain, target: self, action: Selector("showOnboarding"))
             barButtonItem.accessibilityLabel = "onboardingButton"
             
             self.navigationItem.rightBarButtonItem = barButtonItem
@@ -32,11 +32,9 @@ class BaseViewController: UIViewController {
 #if DEBUG
         // Do not display the onboarding automatically when in debug mode
 #else
-        if(onboardingKey != nil) {
-            if(!(Settings.onboardingsShown[onboardingKey!] ?? false)) {
-                Settings.onboardingsShown[onboardingKey!] = true
-                showOnboarding()
-            }
+        if onboardingKey != nil && !(Settings.onboardingsShown[onboardingKey!] ?? false) {
+            Settings.onboardingsShown[onboardingKey!] = true
+            showOnboarding()
         }
 #endif
         // -- End of Onboarding

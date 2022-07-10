@@ -44,43 +44,40 @@ class HistoryTableViewController: BaseViewController, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let transaction = historicalTransactionFor(indexPath: indexPath)
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "historyItemCell") as! HistoryItemTableViewCell? {
-            if let amountLabel = cell.amountLabel {
-                if transaction.amount < 0 {
-                    amountLabel.textColor = UIColor.systemRed
-                } else {
-                    amountLabel.textColor = UIColor.systemGreen
-                }
-                
-                amountLabel.text = NumberHelper.formattedString(for: transaction.amount)
-            }
-            
-            if let historicalBalanceLabel = cell.historicalBalanceLabel {
-                if transaction.balance < 0 {
-                    historicalBalanceLabel.textColor = UIColor.systemRed
-                } else {
-                    historicalBalanceLabel.textColor = UIColor.systemGreen
-                }
-                
-                historicalBalanceLabel.text = "(\(NumberHelper.formattedString(for: transaction.balance)))"
-            }
-            
-            if let timeLabel = cell.timeLabel {
-                let formatter = DateFormatter()
-                formatter.timeStyle = .short
-                let dateString = formatter.string(for: transaction.date)
-                 
-                timeLabel.text = dateString!
-            }
-            
-            if let titleLabel = cell.titleLabel {
-                titleLabel.text = transaction.text
-            }
-            
-            return cell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "historyItemCell") as! HistoryItemTableViewCell? else { return UITableViewCell() }
+        
+        guard let amountLabel = cell.amountLabel,
+              let historicalBalanceLabel = cell.historicalBalanceLabel,
+              let timeLabel = cell.timeLabel,
+              let titleLabel = cell.titleLabel else { return UITableViewCell() }
+        
+        // Amount Label
+        if transaction.amount < 0 {
+            amountLabel.textColor = UIColor.systemRed
+        } else {
+            amountLabel.textColor = UIColor.systemGreen
+        }
+        amountLabel.text = NumberHelper.formattedString(for: transaction.amount)
+        
+        // Historical Balance Label
+        if transaction.balance < 0 {
+            historicalBalanceLabel.textColor = UIColor.systemRed
+        } else {
+            historicalBalanceLabel.textColor = UIColor.systemGreen
         }
         
-        return UITableViewCell();
+        historicalBalanceLabel.text = "(\(NumberHelper.formattedString(for: transaction.balance)))"
+        
+        // Time Label
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        let dateString = formatter.string(for: transaction.date)
+        timeLabel.text = dateString!
+        
+        // Title Label
+        titleLabel.text = transaction.text
+        
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -134,7 +131,9 @@ class HistoryTableViewController: BaseViewController, UITableViewDelegate, UITab
     
     private func updateEmptyScreenState() {
         if(historicalTransactions.isEmpty) {
-            if(emptyScreenLabel != nil) { return }
+            if(emptyScreenLabel != nil) {
+                return
+            }
             
             let label = UILabel()
             label.text = NSLocalizedString("Nothing to show.\n\nCurrently, there are no history items to display. This will change, once you add Transactions.", comment: "Description for empty History")

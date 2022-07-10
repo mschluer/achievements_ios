@@ -32,7 +32,7 @@ class TransactionDetailViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         if transaction.recentTransaction != nil && achievementTransactionPresenter != nil {
-            let barButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: self, action: Selector(("editButtonPressed")))
+            let barButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: self, action: Selector("editButtonPressed"))
             barButtonItem.accessibilityLabel = "editButton"
             
             self.navigationItem.rightBarButtonItem = barButtonItem

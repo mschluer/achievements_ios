@@ -78,10 +78,8 @@ class AchievementTransactionFormController: BaseViewController, UITextFieldDeleg
             }
             
             // Remove Template if not recurring
-            if let template = self.transactionTemplate {
-                if(!template.recurring) {
-                    achievementsDataModel?.remove(transactionTemplate: template)
-                }
+            if let template = self.transactionTemplate, !template.recurring {
+                achievementsDataModel?.remove(transactionTemplate: template)
             }
             
             self.navigationController!.popViewController(animated: true)

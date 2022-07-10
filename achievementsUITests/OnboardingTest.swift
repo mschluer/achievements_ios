@@ -137,4 +137,25 @@ class OnboardingTest: XCTestCase {
         
         XCTAssert(app.textViews.containing(onboardingTextPredicate).count == 0)
     }
+    
+    func testOnboardingForBackupRestoreScreen() throws {
+        let app = XCUIApplication()
+        let onboardingTextPredicate = NSPredicate(format: "label CONTAINS[c] %@", "Backup / Restore")
+        
+        // Dashboard
+        app.toolbars["Toolbar"].buttons["Menu"].tap()
+        app.collectionViews.buttons["Settings"].tap()
+
+        // Settings
+        app.staticTexts["Backup / Restore"].tap()
+        
+        // Backup & Restore
+        XCTAssert(app.navigationBars.buttons["onboardingButton"].exists)
+        app.navigationBars.buttons["onboardingButton"].tap()
+        
+        XCTAssert(app.textViews.containing(onboardingTextPredicate).count > 0)
+        app.tap()
+        
+        XCTAssert(app.textViews.containing(onboardingTextPredicate).count == 0)
+    }
 }

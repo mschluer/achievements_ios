@@ -16,3 +16,6 @@
 
 /* Onboardings for the Transaction Template Form */
 "transactionsTemplates.form" = "Transaktionsvorlage Erstellen / Bearbeiten\n\nDieser Bildschirm dient dem Erstellen oder Ändern von Transaktionsvorlagen.";
+
+/* Onboarding for the Backup / Restore Screen */
+"backupRestore" = "Datensicherung / -wiederherstellung\n\nAuf dieser Ansicht kann eine Datensicherung erstellt oder wieder eingespielt werden.\n\nDatensicherungen sind verschlüsselt, damit sie nicht in fremde Hände gelangen können. Sie können nur mit dem zugehörigen Passwort wieder eingespielt werden - ohne dies sind sie unbrauchbar.";

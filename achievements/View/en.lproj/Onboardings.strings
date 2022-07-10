@@ -14,5 +14,8 @@
 "transactionTemplates.expenses" = "Planned Expenses\n\nOn this screen templates for incomes can be maintained - for instance the next big investment. The uppermost template is as well displayed on the Progress-Wheel if your balance is positive.\n\nThe +-button allows you to add, the arrow-button to sort Templates.\n\nPer tap they can be booked by the dialogue-screen, per swipe-right without it (as long as name and amount are present). Swipe-Left allows you to edit or delete them.\n\nThe templates can be automatically re-ordered by Drag&Drop.";
 "transactionTemplates.incomes" = "Planned Incomes\n\nOn this screen templates for incomes can be maintained - for instance for regular household tasks.\n\nThe +-button allows you to add, the arrow-button to sort Templates.\n\nPer tap they can be booked by the dialogue-screen, per swipe-right without it (as long as name and amount are present). Swipe-Left allows you to edit or delete them.\n\nThe templates can be automatically re-ordered by Drag&Drop.";
 
-/* Onboardings for the Transaction Template Form */
+/* Onboarding for the Transaction Template Form */
 "transactionsTemplates.form" = "Transaction Template Form\n\nThis screen allows you to create or alter transaction templates.";
+
+/* Onboarding for the Backup / Restore Screen */
+"backupRestore" = "Backup / Restore\n\nThis screen allows you to backup or restore your data.\n\nBackups are encrypted so all data remains in your hands. It can only be restored with the corresponding password - if this is lost, the backup cannot be used.";

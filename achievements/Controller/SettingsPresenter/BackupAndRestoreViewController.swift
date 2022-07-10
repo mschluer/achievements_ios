@@ -15,6 +15,9 @@ class BackupAndRestoreViewController: BaseViewController, UIDocumentPickerDelega
     var spinner : SpinnerViewController?
     var providedBackupUrl : URL?
     
+    // MARK: Onboarding
+    override var onboardingKey: String? { "backupRestore" }
+    
     // MARK: View Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()

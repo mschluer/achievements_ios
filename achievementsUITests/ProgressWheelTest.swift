@@ -56,6 +56,7 @@ class ProgressWheelTest: XCTestCase {
         app.toolbars["Toolbar"].buttons["Add"].tap()
         
         // Achievement Transaction Form (Create)
+        app.textFields["amountInputField"].tap()
         app.textFields["amountInputField"].typeText("55,20")
         
         titleTextField.tap()

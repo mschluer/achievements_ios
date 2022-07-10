@@ -33,6 +33,7 @@ class SettingsTest: XCTestCase {
         app.toolbars["Toolbar"].buttons["Add"].tap()
         
         // Transaction Form (Create)
+        app.textFields["amountInputField"].tap()
         app.textFields["amountInputField"].typeText("5,00")
         app.textFields["textInputField"].tap()
         app.textFields["textInputField"].typeText("Test Income")
@@ -42,6 +43,7 @@ class SettingsTest: XCTestCase {
         app.toolbars["Toolbar"].buttons["Add"].tap()
         
         // Transaction Form (Create)
+        app.textFields["amountInputField"].tap()
         app.textFields["amountInputField"].typeText("1,00")
         app.buttons["+ / -"].tap()
         app.textFields["textInputField"].tap()
@@ -64,6 +66,7 @@ class SettingsTest: XCTestCase {
         app.toolbars["Toolbar"].buttons["Add"].tap()
         
         // Transaction Form (Create)
+        app.textFields["amountInputField"].tap()
         app.textFields["amountInputField"].typeText("4,00")
         app.buttons["+ / -"].tap()
         app.textFields["textInputField"].tap()
@@ -81,6 +84,7 @@ class SettingsTest: XCTestCase {
         app.toolbars["Toolbar"].buttons["Add"].tap()
         
         // Transaction Form (Create)
+        app.textFields["amountInputField"].tap()
         app.textFields["amountInputField"].typeText("5,00")
         app.textFields["textInputField"].tap()
         app.textFields["textInputField"].typeText("Test Income")

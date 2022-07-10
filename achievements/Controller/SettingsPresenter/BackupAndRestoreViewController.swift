@@ -9,11 +9,14 @@ import UIKit
 import MobileCoreServices
 import UniformTypeIdentifiers
 
-class BackupAndRestoreViewController: UIViewController, UIDocumentPickerDelegate {
+class BackupAndRestoreViewController: BaseViewController, UIDocumentPickerDelegate {
     // MARK: Variables
     var settingsPresenter : SettingsPresenter!
     var spinner : SpinnerViewController?
     var providedBackupUrl : URL?
+    
+    // MARK: Onboarding
+    override var onboardingKey: String? { "backupRestore" }
     
     // MARK: View Lifecycle Methods
     override func viewDidLoad() {

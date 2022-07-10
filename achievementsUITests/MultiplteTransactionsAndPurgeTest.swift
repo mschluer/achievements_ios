@@ -30,6 +30,7 @@ class MultiplteTransactionsAndPurgeTest: XCTestCase {
         app.toolbars["Toolbar"].buttons["Add"].tap()
         
         // Transaction Form (Create)
+        app.textFields["amountInputField"].tap()
         app.textFields["amountInputField"].typeText("3")
         app.textFields["textInputField"].tap()
         app.textFields["textInputField"].typeText("alpha")
@@ -39,6 +40,7 @@ class MultiplteTransactionsAndPurgeTest: XCTestCase {
         app.toolbars["Toolbar"].buttons["Add"].tap()
         
         // Transaction Form (Create)
+        app.textFields["amountInputField"].tap()
         app.textFields["amountInputField"].typeText("5")
         app.buttons["+ / -"].tap()
         app.textFields["textInputField"].tap()
@@ -49,6 +51,7 @@ class MultiplteTransactionsAndPurgeTest: XCTestCase {
         app.toolbars["Toolbar"].buttons["Add"].tap()
         
         // Transaction Form (Create)
+        app.textFields["amountInputField"].tap()
         app.textFields["amountInputField"].typeText("4")
         app.textFields["textInputField"].tap()
         app.textFields["textInputField"].typeText("gamma")

@@ -43,8 +43,18 @@ class AchievementTransactionsPresenter {
         initiator.show(viewController, sender: self)
     }
     
+    public func editTransaction(from initiator: TransactionDetailViewController, transaction: AchievementTransaction) {
+        let viewController = storyboard.instantiateViewController(withIdentifier: "AchievementTransactionFormController") as! AchievementTransactionFormController
+        viewController.achievementsDataModel = achievementsDataModel
+        viewController.achievementTransaction = transaction
+        viewController.detailViewController = initiator
+        
+        initiator.show(viewController, sender: self)
+    }
+    
     public func showTransactionDetails(from initiator: UIViewController, transaction achievementTransaction: AchievementTransaction) {
         let viewController = storyboard.instantiateViewController(withIdentifier: "TransactionDetailViewController") as! TransactionDetailViewController
+        viewController.achievementTransactionPresenter = self
         viewController.transaction = achievementTransaction.historicalTransaction
         
         initiator.show(viewController, sender: self)
@@ -52,6 +62,7 @@ class AchievementTransactionsPresenter {
     
     public func showTransactionDetails(from initiator: UIViewController, transaction historicalTransaction: HistoricalTransaction) {
         let viewController = storyboard.instantiateViewController(withIdentifier: "TransactionDetailViewController") as! TransactionDetailViewController
+        viewController.achievementTransactionPresenter = self
         viewController.transaction = historicalTransaction
         
         initiator.show(viewController, sender: self)

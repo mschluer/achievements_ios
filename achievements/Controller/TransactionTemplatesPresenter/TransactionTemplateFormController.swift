@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TransactionTemplateFormController: UIViewController, UITextFieldDelegate {
+class TransactionTemplateFormController: BaseViewController, UITextFieldDelegate {
     // MARK: Persistence Models
     public var achievementsDataModel : AchievementsDataModel?
     
@@ -19,6 +19,9 @@ class TransactionTemplateFormController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var amountInputField: UITextField!
     @IBOutlet weak var recurringSwitch: UISwitch!
     @IBOutlet weak var titleInputField: UITextField!
+    
+    // MARK: Onboarding
+    override var onboardingKey: String? { "transactionsTemplates.form" }
     
     // MARK: View Lifecycle Methods
     override func viewDidLoad() {

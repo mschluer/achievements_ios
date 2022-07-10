@@ -56,6 +56,7 @@ class AutomaticPurgeTest: XCTestCase {
         app.toolbars["Toolbar"].buttons["Add"].tap()
         
         // Transaction Form (Create)
+        app.textFields["amountInputField"].tap()
         app.textFields["amountInputField"].typeText("\(String (format: "%.2f", amount))")
         app.textFields["textInputField"].tap()
         app.textFields["textInputField"].typeText("t")

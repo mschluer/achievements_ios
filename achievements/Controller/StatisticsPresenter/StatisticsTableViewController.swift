@@ -8,7 +8,7 @@
 import UIKit
 import Charts
 
-class StatisticsTableViewController: UITableViewController {
+class StatisticsTableViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     // MARK: Public Variables
     public var totalRecentIncomes : Float = 0.0
     public var totalRecentExpenses : Float = 0.0
@@ -23,17 +23,25 @@ class StatisticsTableViewController: UITableViewController {
     public var endOfDayBalances : [DateComponents : Float]? {
         didSet {
             DispatchQueue.main.async {
-                self.tableView.reloadRows(at: [ IndexPath(item: 0, section: 2) ], with: .automatic)
+                guard let tableView = self.tableView else { return }
+                tableView.reloadRows(at: [ IndexPath(item: 0, section: 2) ], with: .automatic)
             }
         }
     }
     public var endOfDayBalanceDeltas : [DateComponents : Float]? {
         didSet{
             DispatchQueue.main.async {
-                self.tableView.reloadRows(at: [ IndexPath(item: 0, section: 3) ], with: .automatic)
+                guard let tableView = self.tableView else { return }
+                tableView.reloadRows(at: [ IndexPath(item: 0, section: 3) ], with: .automatic)
             }
         }
     }
+    
+    // MARK: Outlets
+    @IBOutlet var tableView: UITableView!
+    
+    // MARK: Onboarding
+    override var onboardingKey : String? { return "statistics" }
     
     // MARK: View Lifecycle Methods
     override func viewDidLoad() {
@@ -41,11 +49,11 @@ class StatisticsTableViewController: UITableViewController {
     }
 
     // MARK: Table View Data Source
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 4
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch(section) {
             case 0: return NSLocalizedString("Recent", comment: "Statistics Headline for Recent Transactions.")
             case 1: return NSLocalizedString("Total", comment: "Statistics Headline for Historical Transactions.")
@@ -55,7 +63,7 @@ class StatisticsTableViewController: UITableViewController {
         }
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch(section) {
             case 0: return 2
             case 1: return 2
@@ -64,7 +72,7 @@ class StatisticsTableViewController: UITableViewController {
         }
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell : UITableViewCell
 
         switch(indexPath.section) {
@@ -137,7 +145,7 @@ class StatisticsTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath == IndexPath(item: 0, section: 2) {
             // Balance History Line Chart
             return 220.0

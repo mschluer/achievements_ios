@@ -7,18 +7,22 @@
 
 import UIKit
 
-class AchievementTransactionFormController: UIViewController, UITextFieldDelegate {
+class AchievementTransactionFormController: BaseViewController, UITextFieldDelegate {
     // MARK: Persistence Models
     public var achievementsDataModel : AchievementsDataModel?
     
     // MARK: Variables
     public var achievementTransaction: AchievementTransaction?
     public var transactionTemplate : TransactionTemplate?
+    public var detailViewController : TransactionDetailViewController?
 
     // MARK: Outlets
     @IBOutlet weak var amountInputField: UITextField!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var titleInputField: UITextField!
+    
+    // MARK: Onboarding
+    override var onboardingKey: String? { return "achievementTransactionForm" }
     
     // MARK: View Lifecycle Methods
     override func viewDidLoad() {
@@ -32,7 +36,9 @@ class AchievementTransactionFormController: UIViewController, UITextFieldDelegat
             populateFormWith(transactionTemplate!)
         }
         
-        amountInputField.becomeFirstResponder()
+        if Settings.onboardingsShown[onboardingKey!] ?? false {
+            amountInputField.becomeFirstResponder()
+        }
     }
     
     // MARK: TextFieldDelegate
@@ -61,10 +67,15 @@ class AchievementTransactionFormController: UIViewController, UITextFieldDelegat
             }
             
             // Insert New Item
-            _ = achievementsDataModel?.createAchievementTransactionWith(
+            let newAchievementTransaction = achievementsDataModel?.createAchievementTransactionWith(
                 text: titleInputField.text!,
                 amount: (amountInputField.text as NSString?)?.floatValue ?? 0.0,
                 date: datePicker.date)
+            
+            // Detail View Repopulation
+            if let detailViewController = self.detailViewController {
+                detailViewController.transaction = newAchievementTransaction!.historicalTransaction
+            }
             
             // Remove Template if not recurring
             if let template = self.transactionTemplate {

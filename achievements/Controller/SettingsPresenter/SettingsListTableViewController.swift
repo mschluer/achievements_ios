@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingsListTableViewController: UITableViewController {
+class SettingsListTableViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     // MARK: Persistence Models
     public var achievementsDataModel : AchievementsDataModel!
     
@@ -19,17 +19,20 @@ class SettingsListTableViewController: UITableViewController {
         NSLocalizedString("Reset Application", comment: "Action to set all data back to standard values.")      // 2
     ]
     
+    // MARK: Outlets
+    @IBOutlet var tableView: UITableView!
+    
     // MARK: View Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
     // MARK: Table View Data Source
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell : UITableViewCell
         
         switch(indexPath.section) {
@@ -55,32 +58,34 @@ class SettingsListTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch(indexPath.section) {
         case 0 :    switch(indexPath.item) {
                     // Amount of Datapoints to display
-                    case 0: statisticsAmountDataPointsPressed(); self.tableView.deselectRow(at: indexPath, animated: true)
-                    default: statisticsAmountDataPointsInDayDeltaChartPressed(); self.tableView.deselectRow(at: indexPath, animated: true)
+                    case 0: statisticsAmountDataPointsPressed()
+                    default: statisticsAmountDataPointsInDayDeltaChartPressed()
         }
         default :   switch(indexPath.item) {
                     // Backup and Restore
                     case 0: settingsPresenter.showBackupAndRestoreScreen(from: self)
                     // Reset Settings
-                    case 1: resetSettingsPressed(); self.tableView.deselectRow(at: indexPath, animated: true)
+                    case 1: resetSettingsPressed()
                     // Reset Application
-                    default: resetApplicationPressed(); self.tableView.deselectRow(at: indexPath, animated: true)
+                    default: resetApplicationPressed()
             }
         }
+        
+        self.tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch(section) {
         case 0: return 2
         default: return databaseMenuItems.count
         }
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch(section) {
         case 0 :    return NSLocalizedString("Statistics", comment: "Settings Menu Header for Settings Regarding Statistics")
         default :   return NSLocalizedString("Data", comment: "Settings Menu Header for Settings Regarding the Stored Data")

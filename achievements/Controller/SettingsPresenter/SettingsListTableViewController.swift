@@ -62,18 +62,20 @@ class SettingsListTableViewController: BaseViewController, UITableViewDelegate, 
         switch(indexPath.section) {
         case 0 :    switch(indexPath.item) {
                     // Amount of Datapoints to display
-                    case 0: statisticsAmountDataPointsPressed(); self.tableView.deselectRow(at: indexPath, animated: true)
-                    default: statisticsAmountDataPointsInDayDeltaChartPressed(); self.tableView.deselectRow(at: indexPath, animated: true)
+                    case 0: statisticsAmountDataPointsPressed()
+                    default: statisticsAmountDataPointsInDayDeltaChartPressed()
         }
         default :   switch(indexPath.item) {
                     // Backup and Restore
                     case 0: settingsPresenter.showBackupAndRestoreScreen(from: self)
                     // Reset Settings
-                    case 1: resetSettingsPressed(); self.tableView.deselectRow(at: indexPath, animated: true)
+                    case 1: resetSettingsPressed()
                     // Reset Application
-                    default: resetApplicationPressed(); self.tableView.deselectRow(at: indexPath, animated: true)
+                    default: resetApplicationPressed()
             }
         }
+        
+        self.tableView.deselectRow(at: indexPath, animated: true)
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -31,6 +31,7 @@ class AchievementTransactionTest: XCTestCase {
         app.toolbars["Toolbar"].buttons["Add"].tap()
         
         // Transaction Form (Create)
+        app.textFields["amountInputField"].tap()
         app.textFields["amountInputField"].typeText("5,50")
         
         let titleTextField = app.textFields["textInputField"]
@@ -72,6 +73,7 @@ class AchievementTransactionTest: XCTestCase {
         app.toolbars["Toolbar"].buttons["Add"].tap()
         
         // Transaction Form (Create)
+        app.textFields["amountInputField"].tap()
         app.textFields["amountInputField"].typeText("5,50")
         
         let titleTextField = app.textFields["textInputField"]
@@ -95,6 +97,7 @@ class AchievementTransactionTest: XCTestCase {
         app.toolbars["Toolbar"].buttons["Add"].tap()
         
         // Transaction Form (Create)
+        app.textFields["amountInputField"].tap()
         app.textFields["amountInputField"].typeText("1")
         
         let titleTextField = app.textFields["textInputField"]
@@ -130,6 +133,7 @@ class AchievementTransactionTest: XCTestCase {
         app.toolbars["Toolbar"].buttons["Add"].tap()
         
         // Transaction Form (Create)
+        app.textFields["amountInputField"].tap()
         app.textFields["amountInputField"].typeText("1")
         
         let titleTextField = app.textFields["textInputField"]

@@ -67,6 +67,7 @@ class TextOverlayViewController : UIViewController {
         
         textView.text = text
         textView.font = .systemFont(ofSize: 15)
+        textView.textAlignment = .center
         textView.layer.cornerRadius = 5
         textView.isEditable = false
         

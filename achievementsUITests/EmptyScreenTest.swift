@@ -32,6 +32,7 @@ class EmptyScreenTest: XCTestCase {
         app.buttons["Add"].tap()
         
         // Achievement Transaction Form (Create)
+        app.textFields["amountInputField"].tap()
         app.textFields["amountInputField"].typeText("1")
         app.textFields["textInputField"].tap()
         app.textFields["textInputField"].typeText("Test")
@@ -111,6 +112,7 @@ class EmptyScreenTest: XCTestCase {
         app.toolbars["Toolbar"].buttons["Add"].tap()
         
         // Transaction Template Form (Create)
+        app.textFields["amountInputField"].tap()
         app.textFields["amountInputField"].typeText("3")
         app.textFields["textInputField"].tap()
         app.textFields["textInputField"].typeText("h")

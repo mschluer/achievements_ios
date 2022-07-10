@@ -20,6 +20,9 @@ class TransactionTemplateFormController: BaseViewController, UITextFieldDelegate
     @IBOutlet weak var recurringSwitch: UISwitch!
     @IBOutlet weak var titleInputField: UITextField!
     
+    // MARK: Onboarding
+    override var onboardingKey: String? { "transactionsTemplates.form" }
+    
     // MARK: View Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
